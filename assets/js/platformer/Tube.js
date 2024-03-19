@@ -3,7 +3,7 @@ import GameObject from './GameObject.js';
 
 export class Tube extends GameObject {
     constructor(canvas, image) {
-        super(canvas, image, 0);
+        super(canvas, image, 0, 0.5, 0.5);
     }
 
     // Required, but no update action

@@ -1,9 +1,10 @@
 import GameEnv from './GameEnv.js';
 import GameObject from './GameObject.js';
+import GameControl from './GameControl.js';
 
 export class Background extends GameObject {
-    constructor(canvas, image, speedRatio) {
-        super(canvas, image, speedRatio);
+    constructor(canvas, image, data) {
+        super(canvas, image, data);
     }
 
     /* Update uses modulo math to cycle to start at width extent
@@ -13,6 +14,10 @@ export class Background extends GameObject {
     */
     update() {
         this.x = (this.x - this.speed) % this.width;
+        if (GameControl.randomEventId === 1 && GameControl.randomEventState === 1) {
+            this.canvas.style.filter = "invert(100)";
+            GameControl.endRandomEvent();
+        }
     }
 
     /* To draws are used to capture primary frame and wrap around ot next frame
@@ -20,7 +25,13 @@ export class Background extends GameObject {
      * x + width to y is wrap around draw
     */
     draw() {
+        // Draw the primary segment
         this.ctx.drawImage(this.image, this.x, this.y);
+        
+        // Draw the wrap-around segment for the left side
+        this.ctx.drawImage(this.image, this.x - this.width, this.y);
+    
+        // Draw the wrap-around segment for the right side
         this.ctx.drawImage(this.image, this.x + this.width, this.y);
     }
 

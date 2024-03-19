@@ -1,199 +1,132 @@
 ---
 layout: base
-title: Course Outlines
-image: /images/mario_animation.png
-hide: true
+title: Platformer Game v3.0
+description: Incorporate student lessons. Gameplay includes enemies, platforms, parallax backgrounds, settings with local storage, etc.  This revision introduces Settings, Leaderboard and Multiplayer.
+image: /images/platformer/backgrounds/home.png
 ---
 
-<!-- Liquid:  statements -->
+<!-- Syle is now located, as of Jan 2024 v2.0, in _sass/minima/dracula/platformer-styles.scss -->
 
-<!-- Include submenu from _includes to top of pages -->
-{% include nav_home.html %}
-<!--- Concatenation of site URL to frontmatter image  --->
-{% assign sprite_file = site.baseurl | append: page.image %}
-<!--- Has is a list variable containing mario metadata for sprite --->
-{% assign hash = site.data.mario_metadata %}  
-<!--- Size width/height of Sprit images --->
-{% assign pixels = 256 %} 
-
-<!--- HTML for page contains <p> tag named "Mario" and class properties for a "sprite"  -->
-
-<p id="mario" class="sprite"></p>
+<!-- DOM Settings Panel (sidebar id and div), managed by SettingsContro.js -->
+<div id="sidebar" class="sidebar">
+    <a href="javascript:void(0)" id="sidebar-header">&times; Settings</a>
+  </div>
+  <div id="leaderboardDropDown" class="leaderboardDropDown">
+    <a href="javascript:void(0)" id="leaderboard-header">&times; Leaderboard</a>
+  </div>
   
-<!--- Embedded Cascading Style Sheet (CSS) rules, 
-        define how HTML elements look 
---->
-<style>
-
-  /*CSS style rules for the id and class of the sprite...
-  */
-  .sprite {
-    height: {{pixels}}px;
-    width: {{pixels}}px;
-    background-image: url('{{sprite_file}}');
-    background-repeat: no-repeat;
-  }
-
-  /*background position of sprite element
-  */
-  #mario {
-    background-position: calc({{animations[0].col}} * {{pixels}} * -1px) calc({{animations[0].row}} * {{pixels}}* -1px);
-  }
-</style>
-
-<!--- Embedded executable code--->
-<script>
-  ////////// convert YML hash to javascript key:value objects /////////
-
-  var mario_metadata = {}; //key, value object
-  {% for key in hash %}  
+  <!--Audio for Mushroom -->
+  <audio id="Mushroom" src="{{site.baseurl}}/assets/audio/Mushroom.mp3" preload="auto"></audio>
   
-  var key = "{{key | first}}"  //key
-  var values = {} //values object
-  values["row"] = {{key.row}}
-  values["col"] = {{key.col}}
-  values["frames"] = {{key.frames}}
-  mario_metadata[key] = values; //key with values added
-
-  {% endfor %}
-
-  ////////// game object for player /////////
-
-  class Mario {
-    constructor(meta_data) {
-      this.tID = null;  //capture setInterval() task ID
-      this.positionX = 0;  // current position of sprite in X direction
-      this.currentSpeed = 0;
-      this.marioElement = document.getElementById("mario"); //HTML element of sprite
-      this.pixels = {{pixels}}; //pixel offset of images in the sprite, set by liquid constant
-      this.interval = 100; //animation time interval
-      this.obj = meta_data;
-      this.marioElement.style.position = "absolute";
-    }
-
-    animate(obj, speed) {
-      let frame = 0;
-      const row = obj.row * this.pixels;
-      this.currentSpeed = speed;
-
-      this.tID = setInterval(() => {
-        const col = (frame + obj.col) * this.pixels;
-        this.marioElement.style.backgroundPosition = `-${col}px -${row}px`;
-        this.marioElement.style.left = `${this.positionX}px`;
-
-        this.positionX += speed;
-        frame = (frame + 1) % obj.frames;
-
-        const viewportWidth = window.innerWidth;
-        if (this.positionX > viewportWidth - this.pixels) {
-          document.documentElement.scrollLeft = this.positionX - viewportWidth + this.pixels;
-        }
-      }, this.interval);
-    }
-
-    startWalking() {
-      this.stopAnimate();
-      this.animate(this.obj["Walk"], 3);
-    }
-
-    startRunning() {
-      this.stopAnimate();
-      this.animate(this.obj["Run1"], 6);
-    }
-
-    startPuffing() {
-      this.stopAnimate();
-      this.animate(this.obj["Puff"], 0);
-    }
-
-    startCheering() {
-      this.stopAnimate();
-      this.animate(this.obj["Cheer"], 0);
-    }
-
-    startFlipping() {
-      this.stopAnimate();
-      this.animate(this.obj["Flip"], 0);
-    }
-
-    startResting() {
-      this.stopAnimate();
-      this.animate(this.obj["Rest"], 0);
-    }
-
-    stopAnimate() {
-      clearInterval(this.tID);
-    }
-  }
-
-  const mario = new Mario(mario_metadata);
-
-  ////////// event control /////////
-
-  window.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowRight") {
-      event.preventDefault();
-      if (event.repeat) {
-        mario.startCheering();
-      } else {
-        if (mario.currentSpeed === 0) {
-          mario.startWalking();
-        } else if (mario.currentSpeed === 3) {
-          mario.startRunning();
-        }
-      }
-    } else if (event.key === "ArrowLeft") {
-      event.preventDefault();
-      if (event.repeat) {
-        mario.stopAnimate();
-      } else {
-        mario.startPuffing();
-      }
-    }
-  });
-
-  //touch events that enable animations
-  window.addEventListener("touchstart", (event) => {
-    event.preventDefault(); // prevent default browser action
-    if (event.touches[0].clientX > window.innerWidth / 2) {
-      // move right
-      if (currentSpeed === 0) { // if at rest, go to walking
-        mario.startWalking();
-      } else if (currentSpeed === 3) { // if walking, go to running
-        mario.startRunning();
-      }
-    } else {
-      // move left
-      mario.startPuffing();
-    }
-  });
-
-  //stop animation on window blur
-  window.addEventListener("blur", () => {
-    mario.stopAnimate();
-  });
-
-  //start animation on window focus
-  window.addEventListener("focus", () => {
-     mario.startFlipping();
-  });
-
-  //start animation on page load or page refresh
-  document.addEventListener("DOMContentLoaded", () => {
-    // adjust sprite size for high pixel density devices
-    const scale = window.devicePixelRatio;
-    const sprite = document.querySelector(".sprite");
-    sprite.style.transform = `scale(${0.2 * scale})`;
-    mario.startResting();
-  });
-
-</script>
-Investing in Your Technical Future
-
-Explore the Computer Science Pathway at Del Norte High School. All Del Norte CompSci classes are designed to provide a real-world development experience. Grading is focused on time invested, analytics, participation with peers, and engagement in learning.
-
-- Project-based learning with teacher support
-- Tech Talks by teacher complimented with Student Teaching
-- Course learning includes Coding Languages, DevOps, GitHub, Research and Creativity
-- Student teams practice Agile Development Methodologies: planning, communication, collaboration
-- Class lab time provided and approximately 2-3 hours of homework per week
+  <!--Audio for Death of Goomba -->
+  <audio id="goombaDeath" src="{{site.baseurl}}/assets/audio/goomba-death.mp3" preload="auto"></audio>
+  
+  <!--Audio for Jump oF player -->
+  <audio id ="PlayerJump" src="{{site.baseurl}}/assets/audio/mario-jump.mp3" preload="auto"></audio>
+  
+  <!--Audio for death of player -->
+  <audio id ="PlayerDeath" src="{{site.baseurl}}/assets/audio/MarioDeath.mp3" preload="auto"></audio>
+  
+  <!--Audio for coin collection -->
+  <audio id ="coin" src="{{site.baseurl}}/assets/audio/coin.mp3" preload="auto"></audio>
+  
+  
+  <!-- Wrap both the controls and gameplay in a container div -->
+  <div id="canvasContainer">
+    <div class="submenu">
+      <div id="score">
+          Timer: <span id="timeScore">0</span>
+      </div>
+      <div id="gameBegin" hidden>
+          <button id="startGame">Start Game</button>
+      </div>
+      <div id="gameOver" hidden>
+          <button id="restartGame">Restart</button>
+      </div>
+      <div id="settings"> <!-- Controls -->
+          <!-- Background controls -->
+          <button id="settings-button">Settings</button>
+      </div>
+      <div id="leaderboard"> <!-- Controls -->
+          <button id="leaderboard-button">Leaderboard</button>
+      </div>
+    </div>
+    <!-- JavaScript-generated canvas items are inserted here -->
+  </div>
+  
+  <div id="container">
+      <header class="fun_facts">
+      <p id="num">Fun Fact #0</p>
+      <h3 id="fun_fact">Mario is named after frustrated landlord, Mario Segale, of the Nintendo of America building.</h3> <!-- want to access later so have id-->
+      </header>
+    </div>
+  
+  <footer id="cut-story"></footer>
+  
+  <script type="module">
+      // Imports to drive game
+      import GameSetup from '{{site.baseurl}}/assets/js/platformer/GameSetup.js';
+      import GameControl from '{{site.baseurl}}/assets/js/platformer/GameControl.js';
+      import SettingsControl from '{{site.baseurl}}/assets/js/platformer/SettingsControl.js';
+      import GameEnv from '{{site.baseurl}}/assets/js/platformer/GameEnv.js';
+      import Leaderboard from '{{site.baseurl}}/assets/js/platformer/Leaderboard.js';
+      import startCutstory from '{{site.baseurl}}/assets/js/platformer/Cutstory.js';;
+  
+      /* 
+       * ==========================================
+       * ========== Game Setup ====================
+       * ==========================================
+       * Game Setup prepares the Game Levels and Objects
+       * 1.) There are one-to-many GameLevels in a Game
+       * 2.) Each GameLevel has one-to-many GameObjects
+       * ==========================================
+      */
+  
+      // Setup game data, the objects and levels
+      GameSetup.initLevels("{{site.baseurl}}"); 
+  
+      /* 
+       * ==========================================
+       * ========== Game Control ==================
+       * ==========================================
+       * Game Control starts the game loop and activates game objects
+       * 1.) GameControl cycles through GameLevels
+       * 2.) Each GameLevel is on a looping timer, called within the game loop 
+       * 3.) The game loop allows the game player (user), to interact with the game objects 
+       * 4.) A timer (or score) tracks the time of user interaction within the game
+       * ==========================================
+      */
+  
+      // Start the PRIMARY game loop
+     GameControl.gameLoop();
+  
+      /* 
+      * ==========================================
+      * ========== Settings Control ==============
+      * ==========================================
+      * Settings Control provides the ability to select game level and change game settings
+      * 1.) SettingsControl must be after GameControl, it depends on GameLevels 
+      * 2.) GameControl extends and implements LocalStorage to support the persistence of user data
+      * 3.) Modifications can be made to User ID, GameSpeed, Gravity, and Invert(ing) screen color
+      * ==========================================
+      */
+  
+      // Construct settings sidebar, MVC variable paradigm, and async events to trigger user interaction
+      SettingsControl.sidebar();
+      Leaderboard.leaderboardDropDown();
+      startCutstory();
+  
+      /* 
+       * ==========================================
+       *  ========== Event / Listeners =============
+       *  ==========================================
+       * System Event listeners
+       * 1.) Window resize and GameEnv.resize trigger system updates
+       * 2.) Most event listeners remain near impacting functions
+       * ==========================================
+      */
+  
+      // Game refresh is required when the height and width of the screen are impacted
+      window.addEventListener('resize', GameEnv.resize);
+  
+  </script>

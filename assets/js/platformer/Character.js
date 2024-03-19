@@ -2,12 +2,15 @@ import GameEnv from './GameEnv.js';
 import GameObject from './GameObject.js';
 
 class Character extends GameObject {
-    constructor(canvas, image, speedRatio, spriteWidth, spriteHeight) {
-        super(canvas, image, speedRatio);
+    constructor(canvas, image, data, widthPercentage = 0.0, heightPercentage = 0.0) {
+        super(canvas, image, data, widthPercentage, heightPercentage);
 
         // sprite sizes
-        this.spriteWidth = spriteWidth;
-        this.spriteHeight = spriteHeight;
+        this.spriteWidth = data.width;
+        this.spriteHeight = data.height;
+
+        // scale size
+        this.scaleSize = data?.scaleSize || 80;
 
         // sprint frame management
         this.minFrame = 0;
@@ -51,6 +54,17 @@ class Character extends GameObject {
         this.frameY = frameY;
     }
 
+    updateInfo(json) {
+        super.updateInfo(json)
+        var element = this.canvas;
+        if (json.id === element.id) {
+            this.x = json.x * GameEnv.innerWidth;
+            this.y = (json.y * (GameEnv.bottom - GameEnv.top)) + GameEnv.top;
+            this.frameY = json.frameY
+        }
+        return json.id === element.id
+    }
+
     /* Draw character object
      * Canvas and Context
     */
@@ -75,6 +89,9 @@ class Character extends GameObject {
             this.canvas.width,
             this.canvas.height
         );
+        this.ctx.fillStyle = "black";
+        this.ctx.font = "10px Arial"
+        this.ctx.fillText(this.name,0,this.canvas.height/4);
     }
 
     /* Method should be called on initialization and resize events 
@@ -82,7 +99,7 @@ class Character extends GameObject {
     */
     size() {
         // set Canvas scale,  80 represents size of Character height when inner Height is 832px
-        var scaledCharacterHeight = GameEnv.innerHeight * (80 / 832);
+        var scaledCharacterHeight = GameEnv.innerHeight * (this.scaleSize / 832);
         var canvasScale = scaledCharacterHeight/this.spriteHeight;
         this.canvasHeight = this.spriteHeight * canvasScale;
         this.canvasWidth = this.spriteWidth * canvasScale;

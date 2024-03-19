@@ -1,9 +1,9 @@
-title: Teacher 2.0
-description: "August 2023 to June 2024"
-owner_name: John Mortensen
+title: Platformer 3.0
+description: "Spring 2024"
+owner_name: Nighthawk Coding 
 github_username: nighthawkcoders
-github_repo: "teacher_portfolio"
-baseurl: "/teacher_portfolio"
+github_repo: "platformer3x"
+baseurl: "/platformer3x"
 future: true
 remote_theme: jekyll/minima
 minima:
@@ -11,15 +11,9 @@ minima:
     - { platform: github, user_url: "https://github.com/nighthawkcoders/teacher_portfolio"}
     - { platform: x, user_url: "https://x.com/NighthawkCoding/" }
     - { platform: youtube, user_url: "https://www.youtube.com/@nighthawkcodingsociety2868" }      
-# remote_theme: pages-themes/dinky@v0.2.0
-# remote_theme: pages-themes/minimal@v0.2.0
-# remote_theme: pages-themes/hacker@v0.2.0
-# remote_theme: pages-themes/cayman@v0.2.0
-# remote_theme: pages-themes/time-machine@v0.2.0
 plugins:
 - jekyll-remote-theme
 header_pages:
   - navigation/blog.md
   - navigation/search.html
-
-
+  - navigation/about.md
