@@ -65,12 +65,12 @@ image: /images/platformer/backgrounds/home.png
   
   <script type="module">
       // Imports to drive game
-      import GameSetup from '{{site.baseurl}}/assets/js/platformer/GameSetup.js';
-      import GameControl from '{{site.baseurl}}/assets/js/platformer/GameControl.js';
-      import SettingsControl from '{{site.baseurl}}/assets/js/platformer/SettingsControl.js';
-      import GameEnv from '{{site.baseurl}}/assets/js/platformer/GameEnv.js';
-      import Leaderboard from '{{site.baseurl}}/assets/js/platformer/Leaderboard.js';
-      import startCutstory from '{{site.baseurl}}/assets/js/platformer/Cutstory.js';;
+      import GameSetup from '{{site.baseurl}}/assets/js/platformer3x/GameSetup.js';
+      import GameControl from '{{site.baseurl}}/assets/js/platformer3x/GameControl.js';
+      import SettingsControl from '{{site.baseurl}}/assets/js/platformer3x/SettingsControl.js';
+      import GameEnv from '{{site.baseurl}}/assets/js/platformer3x/GameEnv.js';
+      import Leaderboard from '{{site.baseurl}}/assets/js/platformer3x/Leaderboard.js';
+      import startCutstory from '{{site.baseurl}}/assets/js/platformer3x/Cutstory.js';;
   
       /* 
        * ==========================================
