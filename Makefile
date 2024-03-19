@@ -1,6 +1,6 @@
 # Configuration, override port with usage: make PORT=4200
-PORT ?= 4100
-REPO_NAME ?= teacher_portfolio
+PORT ?= 4400
+REPO_NAME ?= platformer3x 
 LOG_FILE = /tmp/jekyll$(PORT).log
 
 SHELL = /bin/bash -c
