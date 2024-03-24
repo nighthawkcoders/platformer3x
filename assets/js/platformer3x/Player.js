@@ -105,8 +105,6 @@ export class Player extends Character {
      * @param {string} key - The key representing the animation to set.
      */
     setAnimation(key) {
-        // animation comes from playerData
-        var animation = this.playerData[key]
         // direction setup
         if (this.isKeyActionLeft(key)) {
             this.directionKey = key;
@@ -115,8 +113,11 @@ export class Player extends Character {
             this.directionKey = key;
             this.playerData.w = this.playerData.wd;
         }
+        // animation comes from playerData
+        var animation = this.playerData[key]
         // set frame and idle frame
         this.setFrameY(animation.row);
+        this.setMinFrame(animation.min ? animation.min : 0);
         this.setMaxFrame(animation.frames);
         if (this.isIdle && animation.idleFrame) {
             this.setFrameX(animation.idleFrame.column)
@@ -377,7 +378,6 @@ export class Player extends Character {
             if (event.key in this.pressedKeys) {
                 delete this.pressedKeys[event.key];
             }
-            this.setAnimation(key);  
             // player idle
             this.isIdle = true;
             // dash action off
