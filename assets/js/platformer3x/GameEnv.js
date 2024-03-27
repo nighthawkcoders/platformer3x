@@ -79,6 +79,7 @@ export class GameEnv {
     static goombaInvincible = false;
     static goombaBounce = false;
     static goombaBounce1 = false;
+    static userScore = 0;
 
 
     
