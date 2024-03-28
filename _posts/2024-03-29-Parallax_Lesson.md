@@ -20,16 +20,16 @@ This effect is frequently replicated in games by layering transparent images ove
 
 For example, our Mario game layers images from ``/images/platformer/backgrounds``
 
-![combined](../images/lesson/combined.gif)
+![combined](../../../images/lesson/combined.gif)
 
 Notice how as the player moves, the mountains in the background move slower than the hills closer to the player.
 
 This is accomplished by setting different speed logic to each of the backgrounds, then layering on top of each other.
 
-![hills](../images/lesson/hills.gif)
+![hills](../../../images/lesson/hills.gif)
 
 > Fast moving hills in the front
 
-![mountains](../images/lesson/mountains.gif)
+![mountains](../../../images/lesson/mountains.gif)
 
 > Slower moving mountains in the back
