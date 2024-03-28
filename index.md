@@ -50,6 +50,9 @@ image: /images/platformer/backgrounds/home.png
       <div id="leaderboard"> <!-- Controls -->
           <button id="leaderboard-button">Leaderboard</button>
       </div>
+      <div id="controlText"> <!-- Controls -->
+      <button onclick="controlText()">Hide Fun Fact</button>
+      </div>
     </div>
     <!-- JavaScript-generated canvas items are inserted here -->
   </div>
@@ -62,6 +65,20 @@ image: /images/platformer/backgrounds/home.png
     </div>
   
   <footer id="cut-story"></footer>
+
+  <script>
+    var hideFunFact = document.getElementById("container");
+
+    function controlText() {
+      if(hideFunFact.style.display === "block"){
+        hideFunFact.style.display = "none";
+        document.getElementById("controlText").querySelector("button").innerText = "Display Fun Fact";
+      } else{
+        hideFunFact.style.display = "block";
+        document.getElementById("controlText").querySelector("button").innerText = "Hide Fun Fact";
+      }
+    };
+  </script>
   
   <script type="module">
       // Imports to drive game
