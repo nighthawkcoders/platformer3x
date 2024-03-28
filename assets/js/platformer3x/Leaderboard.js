@@ -17,6 +17,9 @@ export class Leaderboard{
         var th2 = document.createElement("th");
         th2.innerText = "Time";
         header.append(th2);
+        var th3 = document.createElement("th");
+        th3.innerText = "Score";
+        header.append(th3);
         t.append(header);
 
         this.table = t;
@@ -47,6 +50,9 @@ export class Leaderboard{
         var th2 = document.createElement("th");
         th2.innerText = "Time";
         header.append(th2);
+        var th3 = document.createElement("th");
+        th3.innerText = "Score";
+        header.append(th3);
         table.append(header);
 
         // Populate the table with time scores
@@ -60,6 +66,9 @@ export class Leaderboard{
             row.append(td2);
             table.append(row);
         });
+
+        // Populate the table with coin/goomba scores
+        
     }
 
     get clearButton() {
