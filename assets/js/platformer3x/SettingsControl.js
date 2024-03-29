@@ -498,12 +498,11 @@ export class SettingsControl extends LocalStorage{
         document.getElementById("sidebar").append(invertControl); 
 
         var hintsSection = document.createElement("div")
-        hintsSection.innerHTML = "Toggle fun facts:"
+        hintsSection.innerHTML = "Toggle fun facts: "
         
         var hintsButton = document.createElement("input")
         hintsButton.type = "checkbox"
         hintsButton.checked = true
-        hintsButton.label = "Toggle fun facts: "
         hintsButton.addEventListener("click", () => {
             const hints = document.getElementsByClassName("fun_facts")[0]
 
