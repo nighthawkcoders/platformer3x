@@ -503,6 +503,7 @@ export class SettingsControl extends LocalStorage{
         var hintsButton = document.createElement("input")
         hintsButton.type = "checkbox"
         hintsButton.checked = true
+        
         hintsButton.addEventListener("click", () => {
             const hints = document.getElementsByClassName("fun_facts")[0]
 
