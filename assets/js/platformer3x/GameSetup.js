@@ -409,7 +409,7 @@ const GameSetup = {
           { name: 'flyingGoomba', id: 'flyingGoomba', class: FlyingGoomba, data: this.assets.enemies.flyingGoomba, xPercentage:  0.9, minPosition: 0.5},
           { name: 'monkey', id: 'player', class: Player, data: this.assets.players.monkey },
           { name: 'tree', id: 'tree', class: Tree, data: this.assets.obstacles.tree },
-          { name: 'complete', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.complete },
+          { name: 'complete2', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.complete2 },
         ];
         // Space Game Level added to the GameEnv ...
         new GameLevel( {tag: "space", callback: this.playerOffScreenCallBack, objects: spaceGameObjects} );
