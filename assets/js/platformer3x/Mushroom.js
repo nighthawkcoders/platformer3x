@@ -5,7 +5,7 @@ import GameControl from './GameControl.js';
 export class Mushroom extends Character {
     // constructors sets up Character object 
     constructor(canvas, image, data, xPercentage, yPercentage, name, minPosition){
-        super(canvas, image, data, 0.0, 0.2);
+        super(canvas, image, data);
 
         //Unused but must be Defined
         this.name = name;
