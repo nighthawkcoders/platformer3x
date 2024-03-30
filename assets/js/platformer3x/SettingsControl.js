@@ -497,6 +497,27 @@ export class SettingsControl extends LocalStorage{
         var invertControl = settingsControl.isInvertedInput;
         document.getElementById("sidebar").append(invertControl); 
 
+        var hintsSection = document.createElement("div")
+        hintsSection.innerHTML = "Toggle fun facts: "
+        
+        var hintsButton = document.createElement("input")
+        hintsButton.type = "checkbox"
+        hintsButton.checked = true
+        
+        hintsButton.addEventListener("click", () => {
+            const hints = document.getElementsByClassName("fun_facts")[0]
+
+            if (!hintsButton.checked) {
+                hints.style.display = "none"
+            }
+            else {
+                hints.style.display = "unset"
+            }
+        })
+
+        hintsSection.append(hintsButton)
+        document.getElementById("sidebar").append(hintsSection)
+
         // Get/Construct HTML input and event update for game speed 
         var gameSpeed = settingsControl.gameSpeedInput;
         document.getElementById("sidebar").append(gameSpeed);
