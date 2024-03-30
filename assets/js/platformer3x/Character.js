@@ -2,8 +2,8 @@ import GameEnv from './GameEnv.js';
 import GameObject from './GameObject.js';
 
 class Character extends GameObject {
-    constructor(canvas, image, data, widthPercentage = 0.0, heightPercentage = 0.0) {
-        super(canvas, image, data, widthPercentage, heightPercentage);
+    constructor(canvas, image, data) {
+        super(canvas, image, data);
 
         // sprite sizes
         this.spriteWidth = data.width;

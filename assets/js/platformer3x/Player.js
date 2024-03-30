@@ -14,8 +14,8 @@ import GameControl from './GameControl.js';
  */
 export class Player extends Character {
     // instantiation: constructor sets up player object 
-    constructor(canvas, image, data, widthPercentage = 0.3, heightPercentage = 0.8) {
-        super(canvas, image, data, widthPercentage, heightPercentage);
+    constructor(canvas, image, data) {
+        super(canvas, image, data);
         // Player Data is required for Animations
         this.playerData = data;
         GameEnv.invincible = false; 

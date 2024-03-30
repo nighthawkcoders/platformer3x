@@ -2,8 +2,8 @@ import GameEnv from './GameEnv.js';
 import GameObject from './GameObject.js';
 
 export class Tree extends GameObject {
-    constructor(canvas, image) {
-        super(canvas, image, 0, 0.5, 0.5);
+    constructor(canvas, image, data) {
+        super(canvas, image, data);
     }
     
     // Required, but no update action

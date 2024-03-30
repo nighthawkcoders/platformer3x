@@ -168,9 +168,13 @@ const GameSetup = {
 
     assets: {
       obstacles: {
-        tube: { src: "/images/platformer/obstacles/tube.png" },
+        tube: { src: "/images/platformer/obstacles/tube.png",
+                hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
+              },
         coin: { src: "/images/platformer/obstacles/coin.png"},
-        tree: { src: "/images/platformer/obstacles/tree.png"}
+        tree: { src: "/images/platformer/obstacles/tree.png",
+                hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
+              },
       },
       platforms: {
         grass: { src: "/images/platformer/platforms/grass.png" },
@@ -186,6 +190,7 @@ const GameSetup = {
           height: 204,
           scaleSize: 80,
           speedRatio: 0.7,
+          hitbox: { widthPercentage: 0.4, heightPercentage: -0.2}
         }
       },
       backgrounds: {
@@ -212,7 +217,8 @@ const GameSetup = {
           wd: { row: 10, frames: 15 },
           a: { row: 3, frames: 7, idleFrame: { column: 7, frames: 0 } },
           s: { row: 12, frames: 15 },
-          d: { row: 2, frames: 7, idleFrame: { column: 7, frames: 0 } }
+          d: { row: 2, frames: 7, idleFrame: { column: 7, frames: 0 } },
+          hitbox: { widthPercentage: 0.3, heightPercentage: 0.8}
         },
         monkey: {
           src: "/images/platformer/sprites/monkey.png",
@@ -250,6 +256,7 @@ const GameSetup = {
           scaleSize: 60,
           speedRatio: 0.7,
           xPercentage: 0.6,
+          hitbox: { widthPercentage: 0.0, heightPercentage: 0.2}
         },
         flyingGoomba: {
           src: "/images/platformer/sprites/flying-goomba.png",
@@ -262,6 +269,7 @@ const GameSetup = {
           src: "/images/platformer/platforms/mushroom.png",
           width: 200,
           height: 180,
+          hitbox: { widthPercentage: 0.0, heightPercentage: 0.2}
         },
       }
     },
