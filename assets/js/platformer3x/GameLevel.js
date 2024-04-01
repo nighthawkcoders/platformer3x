@@ -25,7 +25,7 @@ class GameLevel {
         this.isComplete = levelObject?.callback;
         // The gameObjects property is an array of the game objects for this level.
         this.gameObjects = this.levelObjects?.objects || [];
-        // Each GameLevel instance is stored in the GameEnv.levels array. 
+        // Each GameLevel instance is stored in the GameEnv.levels array.
         GameEnv.levels.push(this);
     }
 
