@@ -45,7 +45,7 @@ const GameControl = {
      * @type {number}
      */
     startTime: null, // Variable to hold the start time
-
+    localStorageTimeKey: "localTimes",
     /**
      * Updates and displays the game timer.
      * @function updateTimer
@@ -119,40 +119,35 @@ const GameControl = {
         }
     },   
     async saveTime(time) {
+        if (time == 0) return;
         const userID = GameEnv.userID
-        const newTable = await this.getAllTimes()
+        const oldTable = await this.getAllTimes()
 
-        const data = JSON.stringify({
-            time: time,
-            userId: userID
-        })
+        const data = {
+            userID: userID,
+            time: time
+        }
 
-        if (!newTable) {
-            localStorage.setItem('time', [data])
+        if (!oldTable) {
+            localStorage.setItem(this.localStorageTimeKey, JSON.stringify([data]))
             return;
         }
 
-        console.log(newTable)
+        oldTable.push(data)
 
-        newTable.push(data)
-
-        console.log(newTable)
-
-
-        localStorage.setItem('time', newTable)
+        localStorage.setItem(this.localStorageTimeKey, JSON.stringify(oldTable))
     },
     async getAllTimes() {
         let timeTable = null;
 
         try {
-            timeTable = localStorage.getItem('time');
+            timeTable = localStorage.getItem(this.localStorageTimeKey);
         }
         catch (e) {
             return e;
         }
 
-        console.log(timeTable)
-        JSON.parse(timeTable)
+        return JSON.parse(timeTable)
     },
     updateTimer() {
         

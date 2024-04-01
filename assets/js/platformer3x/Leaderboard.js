@@ -62,7 +62,7 @@ export class Leaderboard{
             td1.innerText = score.userID;
             row.append(td1);
             var td2 = document.createElement("td");
-            td2.innerText = score.time;
+            td2.innerText = (score.time/1000).toFixed(2);
             row.append(td2);
             table.append(row);
         });
@@ -115,8 +115,8 @@ export class Leaderboard{
         localMultiplayer.id = "leaderboardTitle";
         document.getElementById("leaderboardDropDown").appendChild(localMultiplayer);
 
-        var localLeaderboard = new Leaderboard("timeScores");
-        var serverLeaderboard = new Leaderboard("GtimeScores")
+        var localLeaderboard = new Leaderboard("serverTimes");
+        var serverLeaderboard = new Leaderboard("localTimes")
 
         var t1 = localLeaderboard.leaderboardTable;
         var t2 = serverLeaderboard.leaderboardTable;
