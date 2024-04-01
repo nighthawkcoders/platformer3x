@@ -50,9 +50,6 @@ image: /images/platformer/backgrounds/home.png
       <div id="leaderboard"> <!-- Controls -->
           <button id="leaderboard-button">Leaderboard</button>
       </div>
-      <div id="controlText"> <!-- Controls -->
-      <button onclick="controlText()">Hide Fun Fact</button>
-      </div>
     </div>
     <!-- JavaScript-generated canvas items are inserted here -->
   </div>
