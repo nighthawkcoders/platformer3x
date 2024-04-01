@@ -387,8 +387,8 @@ const GameSetup = {
         { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage:  0.5, minPosition: 0.3 },
         { name: 'mushroom', id: 'mushroom', class: Mushroom, data: this.assets.enemies.mushroom, xPercentage: 0.09},
         { name: 'goombaSpecial', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage:  0.75, minPosition: 0.5 }, //this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
-        { name: 'flyingGoomba', id: 'flyingGoomba', class: FlyingGoomba, data: this.assets.enemies.flyingGoomba, xPercentage:  0.5, minPosition:  0.05},
-        { name: 'flyingGoomba', id: 'flyingGoomba', class: FlyingGoomba, data: this.assets.enemies.flyingGoomba, xPercentage:  0.9, minPosition: 0.5},
+        { name: 'flyingGoomba', id: 'flyingGoomba', class: FlyingGoomba, data: this.assets.enemies.flyingGoomba, xPercentage:  0.6, minPosition:  0.05 },
+        { name: 'flyingGoomba', id: 'flyingGoomba', class: FlyingGoomba, data: this.assets.enemies.flyingGoomba, xPercentage:  0.35, minPosition: 0.3 },
         { name: 'lopez', id: 'player', class: Player, data: this.assets.players.lopez },
         { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
         { name: 'complete', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.complete },
@@ -410,7 +410,7 @@ const GameSetup = {
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.4, yPercentage: 0.8 },
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.4, yPercentage: 0.7 },
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.4, yPercentage: 0.6 },
-          { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage: 0.3, minPosition: 0.05},
+          { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage: 0.3, minPosition: 0.07},
           { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage:  0.5, minPosition: 0.3 },
           { name: 'goombaSpecial', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage:  0.75, minPosition: 0.5 }, //this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
           { name: 'flyingGoomba', id: 'flyingGoomba', class: FlyingGoomba, data: this.assets.enemies.flyingGoomba, xPercentage:  0.5, minPosition:  0.05},
