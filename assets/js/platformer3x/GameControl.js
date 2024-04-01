@@ -7,6 +7,7 @@
  * - call or add listener to GameControl.startTimer() to start the game timer.
  */
 import GameEnv from './GameEnv.js';
+import LocalStorage from './LocalStorage.js';
 import Socket from './Multiplayer.js';
 import SettingsControl from "./SettingsControl.js";
 
@@ -38,7 +39,7 @@ const GameControl = {
      * A reference to the interval used for the game timer.
      * @type {number}
      */
-    timerInterval: null, // Variable to hold the timer interval reference
+    intervalId: null, // Variable to hold the timer interval reference
     /**
      * The start time of the game timer.
      * @type {number}
@@ -117,84 +118,56 @@ const GameControl = {
             */
         }
     },   
+    async saveTime(time) {
+        const userID = GameEnv.userID
+        const newTable = await this.getAllTimes()
+
+        const data = JSON.stringify({
+            time: time,
+            userId: userID
+        })
+
+        if (!newTable) {
+            localStorage.setItem('time', [data])
+            return;
+        }
+
+        console.log(newTable)
+
+        newTable.push(data)
+
+        console.log(newTable)
+
+
+        localStorage.setItem('time', newTable)
+    },
+    async getAllTimes() {
+        let timeTable = null;
+
+        try {
+            timeTable = localStorage.getItem('time');
+        }
+        catch (e) {
+            return e;
+        }
+
+        console.log(timeTable)
+        JSON.parse(timeTable)
+    },
     updateTimer() {
-        const id = document.getElementById("gameOver");
-    
-        const elapsedTimeNum = (Date.now() - this.startTime) / 1000;
-
-        if (id.hidden == false) {
-            this.stopTimer();
-            // Get the current user ID from SettingsControl
-            const userID = GameEnv.userID
-
-            // Subtract 3 seconds if destroyedMushroom is true
-            //const adjustedElapsedTime = GameEnv.destroyedMushroom ? Math.max(0, elapsedTimeNum - 3) : elapsedTimeNum;
-    
-            // Retrieve existing time scores from local storage
-            const existingTimeScores = JSON.parse(localStorage.getItem('timeScores')) || [];
-            const existingTimeScores2 = JSON.parse(localStorage.getItem('GtimeScores')) || [];
         
-            // Add the new time score with user ID to the array
-            const newTimeScore = {
-                userID: userID,
-                time: elapsedTimeNum.toFixed(2),
-                // You can add more properties if needed
-            };
-            existingTimeScores.push(newTimeScore);
-            existingTimeScores2.push(newTimeScore);
+            const time = GameEnv.time
 
-            // Log the updated array to the console for debugging
-            console.log(existingTimeScores);
+            if (GameEnv.timerActive) {
+                const newTime = time + GameEnv.timerInterval
+                GameEnv.time = newTime
+                
+                if (document.getElementById('timeScore')) {
+                    document.getElementById('timeScore').textContent = (time/1000).toFixed(2) 
+                }
 
-            // Save the updated array to local storage
-            localStorage.setItem('timeScores', JSON.stringify(existingTimeScores));
-            localStorage.setItem('GtimeScores', JSON.stringify(existingTimeScores2));
-
-            Socket.sendData("leaderboard",elapsedTimeNum.toFixed(2));
-        
-        }
-    
-        const timeScoreElement = document.getElementById('timeScore');
-        if (timeScoreElement) {
-            // Update the displayed time
-            timeScoreElement.textContent = elapsedTimeNum.toFixed(2);
-    
-            // Get the current user ID from SettingsControl
-            const userID = SettingsControl.userID;
-    
-            /*
-            // Retrieve existing time scores from local storage
-            const existingTimeScores = JSON.parse(localStorage.getItem('timeScore')) || [];
-    
-            // Check if there is a recent time score for the current user
-            const recentTimeScore = existingTimeScores.find(score => score.userID === userID);
-    
-            if (!recentTimeScore) {
-                // Add the new time score with user ID to the array
-                // Assume the existingTimeScores retrieval as described in the previous response
-
-                // Assuming you have userID and elapsedTime defined somewhere in your code
-                const userID = 'exampleUserID';
-                const elapsedTime = elapsedTimeNum.toFixed(2); // Replace with the actual elapsed time value
-
-                // Add the new time score with user ID to the array
-                const newTimeScore = {
-                    userID: userID,
-                    time: elapsedTime,
-                    // You can add more properties if needed
-                };
-
-                existingTimeScores.push(newTimeScore);
-
-                // Log the updated array to the console for debugging
-                //console.log(existingTimeScores);
-
-                // Save the updated array to local storage
-                localStorage.setItem('timeScores', JSON.stringify(existingTimeScores));
-
+                return newTime
             }
-            */
-        }
     },    
         
     /**
@@ -203,11 +176,9 @@ const GameControl = {
      * @memberof GameControl
      */
     startTimer() {
-        // Get the current time
-        this.startTime = Date.now();
+        this.intervalId = setInterval(() => this.updateTimer(), GameEnv.timerInterval);
 
-        // Start the timer interval, updating the timer every 0.01 second (10 milliseconds)
-        this.timerInterval = setInterval(() => this.updateTimer(), 10);
+        GameEnv.timerActive = true;
     },
 
     /**
@@ -216,7 +187,16 @@ const GameControl = {
      * @memberof GameControl
      */
     stopTimer() {   
-        clearInterval(this.timerInterval); // Clear the interval to stop the timer
+        if (!GameEnv.timerActive) return;
+        
+        this.saveTime(GameEnv.time)
+
+        this.getAllTimes()
+
+        GameEnv.timerActive = false
+        GameEnv.time = 0;
+
+        clearInterval(this.intervalId)
     },
 
     randomEventId: null, //Variable to determine which random event will activate.

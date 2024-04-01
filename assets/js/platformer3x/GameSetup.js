@@ -75,7 +75,26 @@ const GameSetup = {
             const waitButton = document.getElementById(id);
             // Listener function to resolve the promise when the button is clicked
             const waitButtonListener = () => {
-                GameControl.startTimer()
+              GameControl.stopTimer()
+                if (!GameEnv.timerActive) {
+                  GameControl.startTimer()
+                }
+                resolve(true);
+            };
+            // Add the listener to the button's click event
+            waitButton.addEventListener('click', waitButtonListener);
+        });
+      },
+    
+      waitForButtonRestart: function(id) {
+        // Returns a promise that resolves when the button is clicked
+        return new Promise((resolve) => {
+            const waitButton = document.getElementById(id);
+            // Listener function to resolve the promise when the button is clicked
+            const waitButtonListener = () => {
+              if (document.getElementById('timeScore')) {
+                document.getElementById('timeScore').textContent = GameEnv.time 
+            }
                 resolve(true);
             };
             // Add the listener to the button's click event
@@ -146,9 +165,9 @@ const GameSetup = {
     gameOverCallBack: async function() {
       const id = document.getElementById("gameOver");
       id.hidden = false;
-      
+      GameControl.stopTimer()
       // Wait for the restart button to be clicked
-      await this.waitForButton('restartGame');
+      await this.waitForButtonRestart('restartGame');
       id.hidden = true;
       
       // Change currentLevel to start/restart value of null
