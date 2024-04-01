@@ -66,20 +66,6 @@ image: /images/platformer/backgrounds/home.png
   
   <footer id="cut-story"></footer>
 
-  <script>
-    var hideFunFact = document.getElementById("container");
-
-    function controlText() {
-      if(hideFunFact.style.display === "block"){
-        hideFunFact.style.display = "none";
-        document.getElementById("controlText").querySelector("button").innerText = "Display Fun Fact";
-      } else{
-        hideFunFact.style.display = "block";
-        document.getElementById("controlText").querySelector("button").innerText = "Hide Fun Fact";
-      }
-    };
-  </script>
-  
   <script type="module">
       // Imports to drive game
       import GameSetup from '{{site.baseurl}}/assets/js/platformer3x/GameSetup.js';
