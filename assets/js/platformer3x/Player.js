@@ -21,7 +21,7 @@ export class Player extends Character {
         GameEnv.invincible = false; 
 
         // Player control data
-        this.moveSpeed = this.speed * 5;
+        this.moveSpeed = this.speed * 3;
         this.pressedKeys = {};
         this.movement = {up: true, down: true, left: true, right: true};
         this.isIdle = true;
