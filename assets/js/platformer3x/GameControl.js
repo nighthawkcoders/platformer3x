@@ -128,10 +128,7 @@ const GameControl = {
             time: time
         }
 
-        console.log(oldTable)
-
         if (!oldTable) {
-            console.log("FRESH DATA")
             localStorage.setItem(this.localStorageTimeKey, JSON.stringify([data]))
             return;
         }
