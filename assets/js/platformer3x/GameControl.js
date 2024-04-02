@@ -66,7 +66,7 @@ const GameControl = {
             // Add the new time score with user ID to the array
             const newTimeScore = {
                 userID: userID,
-                time: GameEnv.userScore,
+                time: GameEnv.coinScore,
                 // You can add more properties if needed
             };
 
@@ -79,7 +79,7 @@ const GameControl = {
         const userScoreElement = document.getElementById('userScore');
         if ( userScoreElement) {
             // Update the displayed time
-            userScoreElement.textContent = GameEnv.userScore.toFixed(2);
+            userScoreElement.textContent = GameEnv.coinScore.toFixed(2);
             
             // Get the current user ID from SettingsControl
             const userID = SettingsControl.userID;

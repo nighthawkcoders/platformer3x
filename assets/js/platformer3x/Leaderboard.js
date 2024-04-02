@@ -115,8 +115,8 @@ export class Leaderboard{
         localMultiplayer.id = "leaderboardTitle";
         document.getElementById("leaderboardDropDown").appendChild(localMultiplayer);
 
-        var localLeaderboard = new Leaderboard("serverTimes");
-        var serverLeaderboard = new Leaderboard("localTimes")
+        var localLeaderboard = new Leaderboard("localTimes");
+        var serverLeaderboard = new Leaderboard("serverTimes")
 
         var t1 = localLeaderboard.leaderboardTable;
         var t2 = serverLeaderboard.leaderboardTable;
