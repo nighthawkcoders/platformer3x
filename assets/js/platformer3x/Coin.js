@@ -53,7 +53,7 @@ export class Coin extends GameObject {
         // check player collision
         if (this.collisionData.touchPoints.other.id === "player") {
             this.destroy();
-            GameEnv.userScore += 5;
+            GameEnv.coinScore += 5;
             GameControl.updateScore();
             GameEnv.playSound("coin");
         }
