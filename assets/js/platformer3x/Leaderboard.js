@@ -64,6 +64,9 @@ export class Leaderboard{
             var td2 = document.createElement("td");
             td2.innerText = (score.time/1000).toFixed(2);
             row.append(td2);
+            var td3 = document.createElement("td");
+            td3.innerText = score.score;
+            row.append(td3)
             table.append(row);
         });
 
