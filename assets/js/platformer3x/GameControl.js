@@ -46,86 +46,30 @@ const GameControl = {
      */
     startTime: null, // Variable to hold the start time
     localStorageTimeKey: "localTimes",
+    localStorageScoreKey: "coinScore",
     /**
      * Updates and displays the game timer.
      * @function updateTimer
      * @memberof GameControl
      */
     updateScore() {
-        const id = document.getElementById("gameOver");
-
-        if (id.hidden == false) {
-            // Get the current user ID from SettingsControl
-            const userID = GameEnv.userID
-
-            // Subtract 3 seconds if destroyedMushroom is true
-            //const adjustedElapsedTime = GameEnv.destroyedMushroom ? Math.max(0, elapsedTimeNum - 3) : elapsedTimeNum;
-    
-            // Retrieve existing time scores from local storage
-        
-            // Add the new time score with user ID to the array
-            const newTimeScore = {
-                userID: userID,
-                time: GameEnv.coinScore,
-                // You can add more properties if needed
-            };
-
-            // Save the updated array to local storage
-            localStorage.setItem('userScores', JSON.stringify(GameEnv.userScore));
-            Socket.sendData("leaderboard",GameEnv.userScore.toFixed(2));
-            
-        }
     
         const userScoreElement = document.getElementById('userScore');
         if ( userScoreElement) {
             // Update the displayed time
             userScoreElement.textContent = GameEnv.coinScore.toFixed(2);
-            
-            // Get the current user ID from SettingsControl
-            const userID = SettingsControl.userID;
-    
-            /*
-            // Retrieve existing time scores from local storage
-            const existingTimeScores = JSON.parse(localStorage.getItem('timeScore')) || [];
-    
-            // Check if there is a recent time score for the current user
-            const recentTimeScore = existingTimeScores.find(score => score.userID === userID);
-    
-            if (!recentTimeScore) {
-                // Add the new time score with user ID to the array
-                // Assume the existingTimeScores retrieval as described in the previous response
-
-                // Assuming you have userID and elapsedTime defined somewhere in your code
-                const userID = 'exampleUserID';
-                const elapsedTime = elapsedTimeNum.toFixed(2); // Replace with the actual elapsed time value
-
-                // Add the new time score with user ID to the array
-                const newTimeScore = {
-                    userID: userID,
-                    time: elapsedTime,
-                    // You can add more properties if needed
-                };
-
-                existingTimeScores.push(newTimeScore);
-
-                // Log the updated array to the console for debugging
-                //console.log(existingTimeScores);
-
-                // Save the updated array to local storage
-                localStorage.setItem('timeScores', JSON.stringify(existingTimeScores));
-
-            }
-            */
         }
     },   
     async saveTime(time) {
         if (time == 0) return;
         const userID = GameEnv.userID
         const oldTable = await this.getAllTimes()
+        const score = GameEnv.coinScore
 
         const data = {
             userID: userID,
-            time: time
+            time: time,
+            score: score
         }
 
         if (!oldTable) {
@@ -185,8 +129,6 @@ const GameControl = {
         if (!GameEnv.timerActive) return;
         
         this.saveTime(GameEnv.time)
-
-        this.getAllTimes()
 
         GameEnv.timerActive = false
         GameEnv.time = 0;
