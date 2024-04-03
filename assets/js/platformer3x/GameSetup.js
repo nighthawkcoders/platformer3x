@@ -1,6 +1,7 @@
 // GameSehup.js Key objective is to define GameLevel objects and their assets.
 import GameEnv from './GameEnv.js';
 import GameLevel from './GameLevel.js';
+import GameControl from './GameControl.js';
 // To build GameLevels, each contains GameObjects from below imports
 import Background from './Background.js'
 import BackgroundHills from './BackgroundHills.js';
@@ -75,6 +76,26 @@ const GameSetup = {
             const waitButton = document.getElementById(id);
             // Listener function to resolve the promise when the button is clicked
             const waitButtonListener = () => {
+              GameControl.stopTimer()
+                if (!GameEnv.timerActive) {
+                  GameControl.startTimer()
+                }
+                resolve(true);
+            };
+            // Add the listener to the button's click event
+            waitButton.addEventListener('click', waitButtonListener);
+        });
+      },
+    
+      waitForButtonRestart: function(id) {
+        // Returns a promise that resolves when the button is clicked
+        return new Promise((resolve) => {
+            const waitButton = document.getElementById(id);
+            // Listener function to resolve the promise when the button is clicked
+            const waitButtonListener = () => {
+              if (document.getElementById('timeScore')) {
+                document.getElementById('timeScore').textContent = GameEnv.time 
+            }
                 resolve(true);
             };
             // Add the listener to the button's click event
@@ -145,9 +166,9 @@ const GameSetup = {
     gameOverCallBack: async function() {
       const id = document.getElementById("gameOver");
       id.hidden = false;
-      
+      GameControl.stopTimer()
       // Wait for the restart button to be clicked
-      await this.waitForButton('restartGame');
+      await this.waitForButtonRestart('restartGame');
       id.hidden = true;
       
       // Change currentLevel to start/restart value of null
