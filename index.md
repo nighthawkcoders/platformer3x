@@ -63,7 +63,7 @@ image: /images/platformer/backgrounds/home.png
     </div>
   
   <footer id="cut-story"></footer>
-  
+
   <script type="module">
       // Imports to drive game
       import GameSetup from '{{site.baseurl}}/assets/js/platformer3x/GameSetup.js';

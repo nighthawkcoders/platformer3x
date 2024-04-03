@@ -171,7 +171,7 @@ $dt-leaderboard: #5f40f7;
 }
 /// @import is used to import other stylesheets, see @import of this file in “_sass/minima/custom-styles.sccs”.
 #toggleCanvasEffect, #background, #platform{
-  animation: fadein 5s;
+  animation: fadein 3s;
 }
 #startGame, #marioSays{
   animation: flash 0.5s infinite;

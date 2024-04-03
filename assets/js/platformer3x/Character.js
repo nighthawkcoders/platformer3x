@@ -2,8 +2,8 @@ import GameEnv from './GameEnv.js';
 import GameObject from './GameObject.js';
 
 class Character extends GameObject {
-    constructor(canvas, image, data, widthPercentage = 0.0, heightPercentage = 0.0) {
-        super(canvas, image, data, widthPercentage, heightPercentage);
+    constructor(canvas, image, data) {
+        super(canvas, image, data);
 
         // sprite sizes
         this.spriteWidth = data.width;
@@ -23,7 +23,7 @@ class Character extends GameObject {
     }
 
     getMinFrame(){
-        return this.manFrame;
+        return this.minFrame;
     }
 
     setMinFrame(minFrame){
@@ -136,7 +136,7 @@ class Character extends GameObject {
         if (this.frameX < this.maxFrame) {
             this.frameX++;
         } else {
-            this.frameX = 0;
+            this.frameX = this.minFrame;
         }
 
         this.collisionChecks();

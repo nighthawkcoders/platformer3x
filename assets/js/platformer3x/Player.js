@@ -14,8 +14,8 @@ import GameControl from './GameControl.js';
  */
 export class Player extends Character {
     // instantiation: constructor sets up player object 
-    constructor(canvas, image, data, widthPercentage = 0.3, heightPercentage = 0.8) {
-        super(canvas, image, data, widthPercentage, heightPercentage);
+    constructor(canvas, image, data) {
+        super(canvas, image, data);
         // Player Data is required for Animations
         this.playerData = data;
         GameEnv.invincible = false; 
@@ -105,8 +105,6 @@ export class Player extends Character {
      * @param {string} key - The key representing the animation to set.
      */
     setAnimation(key) {
-        // animation comes from playerData
-        var animation = this.playerData[key]
         // direction setup
         if (this.isKeyActionLeft(key)) {
             this.directionKey = key;
@@ -115,8 +113,11 @@ export class Player extends Character {
             this.directionKey = key;
             this.playerData.w = this.playerData.wd;
         }
+        // animation comes from playerData
+        var animation = this.playerData[key]
         // set frame and idle frame
         this.setFrameY(animation.row);
+        this.setMinFrame(animation.min ? animation.min : 0);
         this.setMaxFrame(animation.frames);
         if (this.isIdle && animation.idleFrame) {
             this.setFrameX(animation.idleFrame.column)
@@ -229,7 +230,9 @@ export class Player extends Character {
      */
     collisionAction() {
         // Tube collision check
-        if (this.collisionData.touchPoints.other.id === "tube") {
+        if (this.collisionData.touchPoints.other.id === "tube" 
+            || this.collisionData.touchPoints.other.id === "tree") {
+
             // Collision with the left side of the Tube
             if (this.collisionData.touchPoints.other.left) {
                 this.movement.right = false;
@@ -240,46 +243,18 @@ export class Player extends Character {
             }
             // Collision with the top of the player
             if (this.collisionData.touchPoints.other.bottom) {
-                this.x = this.collisionData.touchPoints.other.x;
+                this.x = this.collisionData.newX;
                 this.gravityEnabled = false; // stop gravity
                 // Pause for two seconds
                 setTimeout(() => {   // animation in tube for 1 seconds
                     this.gravityEnabled = true;
                     setTimeout(() => { // move to end of screen for end of game detection
                         this.x = GameEnv.innerWidth + 1;
-                    }, 1000);
-                }, 1000);
+                    }, 100);
+                }, 100);
             }
         } else {
             // Reset movement flags if not colliding with a tube
-            this.movement.left = true;
-            this.movement.right = true;
-        }
-
-        // Tree collision check
-        if (this.collisionData.touchPoints.other.id === "tree") {
-            // Collision with the left side of the tree
-            if (this.collisionData.touchPoints.other.left) {
-                this.movement.right = false;
-            }
-            // Collision with the right side of the tree
-            if (this.collisionData.touchPoints.other.right) {
-                this.movement.left = false;
-            }
-            // Collision with the top of the player
-            if (this.collisionData.touchPoints.other.bottom) {
-                this.x = this.collisionData.touchPoints.other.x;
-                this.gravityEnabled = false; // stop gravity
-                // Pause for two seconds
-                setTimeout(() => {   
-                    this.gravityEnabled = true;
-                    setTimeout(() => { // move to end of screen for end of game detection
-                        this.x = GameEnv.innerWidth + 1;
-                    }, 500);
-                }, 500);
-            }
-        } else {
-            // Reset movement flags if not colliding with a tree
             this.movement.left = true;
             this.movement.right = true;
         }
@@ -308,11 +283,6 @@ export class Player extends Character {
                 this.canvas.style.filter = 'invert(0)';
             }, 2000); // 2000 milliseconds = 2 seconds
         }
-
-        //if (GameEnv.destroyedMushroom === true) {
-            //GameEnv.playMessage = true;
-        //}
-         
 
         if (this.collisionData.touchPoints.other.id === "jumpPlatform") {
             if (this.collisionData.touchPoints.other.left) {
@@ -408,7 +378,6 @@ export class Player extends Character {
             if (event.key in this.pressedKeys) {
                 delete this.pressedKeys[event.key];
             }
-            this.setAnimation(key);  
             // player idle
             this.isIdle = true;
             // dash action off
