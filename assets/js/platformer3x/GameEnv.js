@@ -80,11 +80,6 @@ export class GameEnv {
     static goombaBounce = false;
     static goombaBounce1 = false;
 
-    static timerActive = false;
-    static timerInterval = 10;
-    static coinScore = 0;
-    static time = 0;
-
 
     
     // Make the constructor throws an error, or effectively make it a private constructor.

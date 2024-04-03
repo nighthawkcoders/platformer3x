@@ -15,11 +15,8 @@ export class Leaderboard{
         th1.innerText = "Name";
         header.append(th1);
         var th2 = document.createElement("th");
-        th2.innerText = "Time";
+        th2.innerText = "Score";
         header.append(th2);
-        var th3 = document.createElement("th");
-        th3.innerText = "Score";
-        header.append(th3);
         t.append(header);
 
         this.table = t;
@@ -48,11 +45,8 @@ export class Leaderboard{
         th1.innerText = "Name";
         header.append(th1);
         var th2 = document.createElement("th");
-        th2.innerText = "Time";
+        th2.innerText = "Score";
         header.append(th2);
-        var th3 = document.createElement("th");
-        th3.innerText = "Score";
-        header.append(th3);
         table.append(header);
 
         // Populate the table with time scores
@@ -62,16 +56,10 @@ export class Leaderboard{
             td1.innerText = score.userID;
             row.append(td1);
             var td2 = document.createElement("td");
-            td2.innerText = (score.time/1000).toFixed(2);
+            td2.innerText = score.time;
             row.append(td2);
-            var td3 = document.createElement("td");
-            td3.innerText = score.score;
-            row.append(td3)
             table.append(row);
         });
-
-        // Populate the table with coin/goomba scores
-        
     }
 
     get clearButton() {
@@ -118,8 +106,8 @@ export class Leaderboard{
         localMultiplayer.id = "leaderboardTitle";
         document.getElementById("leaderboardDropDown").appendChild(localMultiplayer);
 
-        var localLeaderboard = new Leaderboard("localTimes");
-        var serverLeaderboard = new Leaderboard("serverTimes")
+        var localLeaderboard = new Leaderboard("timeScores");
+        var serverLeaderboard = new Leaderboard("GtimeScores")
 
         var t1 = localLeaderboard.leaderboardTable;
         var t2 = serverLeaderboard.leaderboardTable;

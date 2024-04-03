@@ -7,7 +7,6 @@
  * - call or add listener to GameControl.startTimer() to start the game timer.
  */
 import GameEnv from './GameEnv.js';
-import LocalStorage from './LocalStorage.js';
 import Socket from './Multiplayer.js';
 import SettingsControl from "./SettingsControl.js";
 
@@ -39,74 +38,96 @@ const GameControl = {
      * A reference to the interval used for the game timer.
      * @type {number}
      */
-    intervalId: null, // Variable to hold the timer interval reference
+    timerInterval: null, // Variable to hold the timer interval reference
     /**
      * The start time of the game timer.
      * @type {number}
      */
     startTime: null, // Variable to hold the start time
-    localStorageTimeKey: "localTimes",
-    localStorageScoreKey: "coinScore",
+
     /**
      * Updates and displays the game timer.
      * @function updateTimer
      * @memberof GameControl
      */
-    updateScore() {
-    
-        const userScoreElement = document.getElementById('userScore');
-        if ( userScoreElement) {
-            // Update the displayed time
-            userScoreElement.textContent = GameEnv.coinScore.toFixed(2);
-        }
-    },   
-    async saveTime(time) {
-        if (time == 0) return;
-        const userID = GameEnv.userID
-        const oldTable = await this.getAllTimes()
-        const score = GameEnv.coinScore
-
-        const data = {
-            userID: userID,
-            time: time,
-            score: score
-        }
-
-        if (!oldTable) {
-            localStorage.setItem(this.localStorageTimeKey, JSON.stringify([data]))
-            return;
-        }
-
-        oldTable.push(data)
-
-        localStorage.setItem(this.localStorageTimeKey, JSON.stringify(oldTable))
-    },
-    async getAllTimes() {
-        let timeTable = null;
-
-        try {
-            timeTable = localStorage.getItem(this.localStorageTimeKey);
-        }
-        catch (e) {
-            return e;
-        }
-
-        return JSON.parse(timeTable)
-    },
     updateTimer() {
+        const id = document.getElementById("gameOver");
+    
+        const elapsedTimeNum = (Date.now() - this.startTime) / 1000;
+
+        if (id.hidden == false) {
+            this.stopTimer();
+            // Get the current user ID from SettingsControl
+            const userID = GameEnv.userID
+
+            // Subtract 3 seconds if destroyedMushroom is true
+            //const adjustedElapsedTime = GameEnv.destroyedMushroom ? Math.max(0, elapsedTimeNum - 3) : elapsedTimeNum;
+    
+            // Retrieve existing time scores from local storage
+            const existingTimeScores = JSON.parse(localStorage.getItem('timeScores')) || [];
+            const existingTimeScores2 = JSON.parse(localStorage.getItem('GtimeScores')) || [];
         
-            const time = GameEnv.time
+            // Add the new time score with user ID to the array
+            const newTimeScore = {
+                userID: userID,
+                time: elapsedTimeNum.toFixed(2),
+                // You can add more properties if needed
+            };
+            existingTimeScores.push(newTimeScore);
+            existingTimeScores2.push(newTimeScore);
 
-            if (GameEnv.timerActive) {
-                const newTime = time + GameEnv.timerInterval
-                GameEnv.time = newTime
-                
-                if (document.getElementById('timeScore')) {
-                    document.getElementById('timeScore').textContent = (time/1000).toFixed(2) 
-                }
+            // Log the updated array to the console for debugging
+            console.log(existingTimeScores);
 
-                return newTime
+            // Save the updated array to local storage
+            localStorage.setItem('timeScores', JSON.stringify(existingTimeScores));
+            localStorage.setItem('GtimeScores', JSON.stringify(existingTimeScores2));
+
+            Socket.sendData("leaderboard",elapsedTimeNum.toFixed(2));
+        
+        }
+    
+        const timeScoreElement = document.getElementById('timeScore');
+        if (timeScoreElement) {
+            // Update the displayed time
+            timeScoreElement.textContent = elapsedTimeNum.toFixed(2);
+    
+            // Get the current user ID from SettingsControl
+            const userID = SettingsControl.userID;
+    
+            /*
+            // Retrieve existing time scores from local storage
+            const existingTimeScores = JSON.parse(localStorage.getItem('timeScore')) || [];
+    
+            // Check if there is a recent time score for the current user
+            const recentTimeScore = existingTimeScores.find(score => score.userID === userID);
+    
+            if (!recentTimeScore) {
+                // Add the new time score with user ID to the array
+                // Assume the existingTimeScores retrieval as described in the previous response
+
+                // Assuming you have userID and elapsedTime defined somewhere in your code
+                const userID = 'exampleUserID';
+                const elapsedTime = elapsedTimeNum.toFixed(2); // Replace with the actual elapsed time value
+
+                // Add the new time score with user ID to the array
+                const newTimeScore = {
+                    userID: userID,
+                    time: elapsedTime,
+                    // You can add more properties if needed
+                };
+
+                existingTimeScores.push(newTimeScore);
+
+                // Log the updated array to the console for debugging
+                //console.log(existingTimeScores);
+
+                // Save the updated array to local storage
+                localStorage.setItem('timeScores', JSON.stringify(existingTimeScores));
+
             }
+            */
+        }
     },    
         
     /**
@@ -115,9 +136,11 @@ const GameControl = {
      * @memberof GameControl
      */
     startTimer() {
-        this.intervalId = setInterval(() => this.updateTimer(), GameEnv.timerInterval);
+        // Get the current time
+        this.startTime = Date.now();
 
-        GameEnv.timerActive = true;
+        // Start the timer interval, updating the timer every 0.01 second (10 milliseconds)
+        this.timerInterval = setInterval(() => this.updateTimer(), 10);
     },
 
     /**
@@ -126,14 +149,7 @@ const GameControl = {
      * @memberof GameControl
      */
     stopTimer() {   
-        if (!GameEnv.timerActive) return;
-        
-        this.saveTime(GameEnv.time)
-
-        GameEnv.timerActive = false
-        GameEnv.time = 0;
-
-        clearInterval(this.intervalId)
+        clearInterval(this.timerInterval); // Clear the interval to stop the timer
     },
 
     randomEventId: null, //Variable to determine which random event will activate.

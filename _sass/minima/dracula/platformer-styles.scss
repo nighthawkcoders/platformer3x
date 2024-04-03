@@ -77,7 +77,7 @@
   height: 75%;
 }
 .leaderboardDropDown {
-  background-color: #a1303f; // use the dark mode color scheme
+  @include dark-mode-color; // use the dark mode color scheme
   border: none; // remove setting as sidebar collapse leaves residue line
   position: fixed;
   z-index: 3; // Position on Top of other elements, as well as ID buttons above
@@ -97,22 +97,22 @@
 
 #leaderboardTitle {
   text-align: center;
-  color: #3d3af2;
+  color: greenyellow;
   text-decoration: wavy;
   font-weight: 900;
-  font-size: 70px;
-  font-family: "Press Start 2P", system-ui;
-  background-color: #b01a2e;
+  font-size: 100px;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  background-color: rgb(163, 55, 163);
 }
 
-$dt-leaderboard: #5f40f7;
+$dt-leaderboard: #B385EB;
 .table.scores, th, tr, td {
   text-align: center;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 .table.scores {
   th {
-    background-color: #5f40f7;
+    background-color: #5F3692;
   }
   tr {
     td {
