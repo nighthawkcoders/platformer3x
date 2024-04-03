@@ -4,4 +4,3 @@ _posts/*_IPYNB_2_.md
 nohup.out
 Gemfile.lock
 node_modules
-scripts/__pycache__/

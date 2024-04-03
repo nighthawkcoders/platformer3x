@@ -39,7 +39,7 @@ export class FlyingGoomba extends Character {
         this.y = followPlayer(this.y, playerY, 0.03);
       } else {
         //Move Goomba towards Sky
-        this.y = followPlayer(this.y, 0.1 * GameEnv.innerHeight, 0.02);
+        this.y = followPlayer(this.y, 0.4 * GameEnv.innerHeight, 0.02);
       }
     }
 
