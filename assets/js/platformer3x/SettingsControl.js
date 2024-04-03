@@ -394,11 +394,10 @@ export class SettingsControl extends LocalStorage{
         div.innerHTML = "Dark-mode: "; // label
     
         const button = document.createElement("button"); // button for Multiplayer
-        button.innerText = String(Socket.shouldBeSynced);
+        button.innerText = String(Socket.shouldBeSynced); ////CHANGE TO THEME BUTTON THINGY
     
         button.addEventListener("click", () => {
-            // dispatch event to update difficulty
-            button.innerText = String(Socket.changeStatus());
+            ////CHANGE TO THEME BUTTON THINGY
         });
     
         div.append(button); // wrap button element in div
