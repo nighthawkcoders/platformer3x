@@ -84,6 +84,7 @@ export class GameEnv {
     static timerInterval = 10;
     static coinScore = 0;
     static time = 0;
+    static darkMode = true
 
 
     

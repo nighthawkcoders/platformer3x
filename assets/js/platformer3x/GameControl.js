@@ -152,6 +152,7 @@ const GameControl = {
     //Make sure that the event id is within the possible numbers that can be picked
     //Once you are done make sure to add it to the random event key below
 
+
     startRandomEvent() {
         this.randomEventState = 1;
         this.randomEventId = Math.floor(Math.random() * 3) + 1; //The number multiplied by Math.random() is the number of possible events.

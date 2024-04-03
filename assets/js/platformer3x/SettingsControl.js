@@ -389,6 +389,22 @@ export class SettingsControl extends LocalStorage{
         return div;
     }
 
+    get themeButton() {
+        const div = document.createElement("div");
+        div.innerHTML = "Dark-mode: "; // label
+    
+        const button = document.createElement("button"); // button for Multiplayer
+        button.innerText = String(Socket.shouldBeSynced);
+    
+        button.addEventListener("click", () => {
+            // dispatch event to update difficulty
+            button.innerText = String(Socket.changeStatus());
+        });
+    
+        div.append(button); // wrap button element in div
+        return div;
+    }
+
     get chatButton() {
         const div = document.createElement("div");
         div.innerHTML = "Chat: "; // label
@@ -512,6 +528,10 @@ export class SettingsControl extends LocalStorage{
         // Get/Construct HTML button and event update for multiplayer
         var multiplayerButton = settingsControl.multiplayerButton;
         document.getElementById("sidebar").append(multiplayerButton);
+
+        // Get/Construct HTML button and event update for theme
+        var themeButton = settingsControl.themeButton;
+        document.getElementById("sidebar").append(themeButton);
 
         // Get/Construct HTML button and event update for multiplayer
         var chatButton = settingsControl.chatButton;
