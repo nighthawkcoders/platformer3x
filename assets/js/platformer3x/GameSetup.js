@@ -96,6 +96,12 @@ const GameSetup = {
               if (document.getElementById('timeScore')) {
                 document.getElementById('timeScore').textContent = GameEnv.time 
             }
+            const userScoreElement = document.getElementById('userScore');
+            
+            if ( userScoreElement) {
+                // Update the displayed time
+                userScoreElement.textContent = GameEnv.coinScore.toFixed(2);
+            }
                 resolve(true);
             };
             // Add the listener to the button's click event
