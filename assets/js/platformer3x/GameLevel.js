@@ -37,8 +37,8 @@ class GameLevel {
         Socket.removeAllListeners("stateUpdate") //reset Socket Connections
         Socket.removeAllListeners("disconnection")
         Socket.removeAllListeners("leaderboardUpdate")
-        Socket.createListener("leaderboardUpdate",this.handleLeaderboardUpdates)
-        Socket.createListener("stateUpdate",this.handleStateUpdates)
+        // Socket.createListener("leaderboardUpdate",this.handleLeaderboardUpdates)
+        // Socket.createListener("stateUpdate",this.handleStateUpdates)
         Socket.createListener("disconnection",this.handleSocketDisconnect)
         try {
             for (const obj of this.gameObjects) {
@@ -89,9 +89,6 @@ class GameLevel {
                 });
                  // Load the image for the game object.
                 const image = new Image();
-                if (!obj) {
-                    return
-                };
                 image.src = obj.data.file;
                  // Create a new canvas for the game object.
                  const canvas = document.createElement("canvas");
