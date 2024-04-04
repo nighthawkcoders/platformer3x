@@ -82,9 +82,7 @@ export class Alien extends Character {
         } else if (GameEnv.difficulty === "impossible") {
             this.canvas.style.filter = 'brightness(1000%)';
             this.immune = 1;
-        } else if (GameEnv.difficulty === "normal") {
-            this.immune = 1;
-        }
+        } 
 
         // Move the enemy
         this.x -= this.speed;
