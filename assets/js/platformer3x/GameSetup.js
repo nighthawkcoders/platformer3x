@@ -19,7 +19,8 @@ import Mushroom from './Mushroom.js';
 import Coin from './Coin.js';
 import FlyingUFO from './FlyingUFO.js';
 import Alien from './Alien.js';
-//test
+
+//test comment
 
 /* Coding Style Notes
  *
