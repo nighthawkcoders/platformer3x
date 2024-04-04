@@ -102,10 +102,10 @@ export class Leaderboard{
             });
 
         const pagingDiv = document.createElement("div");
-        pagingDiv.appendChild(prev.button);
-        pagingDiv.appendChild(next.button);
+        pagingDiv.appendChild(prevButton);
+        pagingDiv.appendChild(nextButton);
 
-        return paging.Div
+        return pagingDiv
 
     }
 
@@ -158,8 +158,8 @@ export class Leaderboard{
         var serverLeaderboard = new Leaderboard("serverTimes");
 
         // Add paging controls
-        const pagingControls = localLeaderboard("localTimes");
-        document.getElementById("leaderboardDropDown").appendChild(pagingControls);
+        const pagingControlsDiv = localLeaderboard.createPagingControls();
+        document.getElementById("leaderboardDropDown").appendChild(pagingControlsDiv);
 
         var t1 = localLeaderboard.leaderboardTable;
         var t2 = serverLeaderboard.leaderboardTable;
