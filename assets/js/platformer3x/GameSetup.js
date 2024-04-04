@@ -347,11 +347,19 @@ const GameSetup = {
         // Home Screen Background added to the GameEnv, "passive" means complementary, not an interactive level..
         new GameLevel( {tag: "home",  callback: this.homeScreenCallback, objects: homeGameObjects, passive: true } );
         
+      // Check local storage for the difficulty mode set
+      let difficulty = localStorage.getItem("difficulty");
+
+      // If difficulty is not set (null or undefined), set it to a default value
+      if (!difficulty) {
+          difficulty = "normal"; // Set default difficulty to "normal" or any other suitable value
+      }
+      
       // Hills Game Level defintion...
       const hillsGameObjects = [];
 
        
-      switch(localStorage.getItem("difficulty"))
+      switch(difficulty)
       {
         // change number of each type of goomba for each difficulty
         case "easy":
