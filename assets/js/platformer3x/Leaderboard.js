@@ -3,6 +3,8 @@ import Socket from "./Multiplayer.js";
 export class Leaderboard{
     constructor(key){ //default keys for localStorage
         this.key = key;
+        this.currentPage = 1; //track the current page
+        this.rowsPerPage = 10; //set the maximum number of rows of data per page
     }
 
     get leaderboardTable(){
@@ -27,7 +29,7 @@ export class Leaderboard{
         return t;
     }
 
-    updateLeaderboardTable() {
+    updateLeaderboardTable(pageNumber = 1) { //accept the page number parameter
         // Fetch time scores from local storage
         const timeScores = JSON.parse(localStorage.getItem(this.key)) || [];
 
@@ -35,6 +37,10 @@ export class Leaderboard{
         timeScores.sort((a, b) => a.time - b.time);
 
         console.log(timeScores,this.key)
+
+        // Calculate the start index and end index for the current leaderboard page
+        const startIndex = (pageNumber - 1) * this.rowsPerPage;
+        const endIndex = startIndex + this.rowsPerPage;
 
         // Get the existing table element
         const table = this.table;
@@ -70,9 +76,39 @@ export class Leaderboard{
             table.append(row);
         });
 
+        // Update the current page number
+        this.currentPage = pageNumber
+
         // Populate the table with coin/goomba scores
         
     }
+
+    // Create button for paging controls
+    createPagingControls(){
+        const prevButton = document.createElement("button");
+        prevButton.innerText = "Previous";
+        prevButton.addEventListener("click", () => {
+                if (this.CurrentPage>1) {
+                    this.updateLeaderboardTable(this.currentPage - 1);
+                }
+        });
+
+        const nextButton = document.createElement("button");
+        nextButton.innerText = "Next";
+        nextButton.addEventListener("click", () => {
+                if (this.CurrentPage>1) {
+                    this.updateLeaderboardTable(this.currentPage + 1);
+                }
+            });
+
+        const pagingDiv = document.createElement("div");
+        pagingDiv.appendChild(prev.button);
+        pagingDiv.appendChild(next.button);
+
+        return paging.Div
+
+    }
+
 
     get clearButton() {
         const div = document.createElement("div");
@@ -119,7 +155,11 @@ export class Leaderboard{
         document.getElementById("leaderboardDropDown").appendChild(localMultiplayer);
 
         var localLeaderboard = new Leaderboard("localTimes");
-        var serverLeaderboard = new Leaderboard("serverTimes")
+        var serverLeaderboard = new Leaderboard("serverTimes");
+
+        // Add paging controls
+        const pagingControls = localLeaderboard("localTimes");
+        document.getElementById("leaderboardDropDown").appendChild(pagingControls);
 
         var t1 = localLeaderboard.leaderboardTable;
         var t2 = serverLeaderboard.leaderboardTable;
