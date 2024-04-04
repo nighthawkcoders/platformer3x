@@ -278,14 +278,14 @@ const GameSetup = {
           width: 444,
           height: 640,
           scaleSize: 60,
-          speedRatio: 0.7,
+          speedRatio: 0.85,
         },
         flyingUFO: {
           src: "/images/platformer/sprites/flying-ufo.png",
           width: 1920,
           height: 1166,
           scaleSize: 150,
-          speedRatio: 0.8,
+          speedRatio: 0.9,
         },
       }
     },
