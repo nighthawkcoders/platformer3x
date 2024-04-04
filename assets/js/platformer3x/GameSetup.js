@@ -1,7 +1,6 @@
 // GameSehup.js Key objective is to define GameLevel objects and their assets.
 import GameEnv from './GameEnv.js';
 import GameLevel from './GameLevel.js';
-import GameControl from './GameControl.js';
 // To build GameLevels, each contains GameObjects from below imports
 import Background from './Background.js'
 import BackgroundHills from './BackgroundHills.js';
@@ -76,26 +75,6 @@ const GameSetup = {
             const waitButton = document.getElementById(id);
             // Listener function to resolve the promise when the button is clicked
             const waitButtonListener = () => {
-              GameControl.stopTimer()
-                if (!GameEnv.timerActive) {
-                  GameControl.startTimer()
-                }
-                resolve(true);
-            };
-            // Add the listener to the button's click event
-            waitButton.addEventListener('click', waitButtonListener);
-        });
-      },
-    
-      waitForButtonRestart: function(id) {
-        // Returns a promise that resolves when the button is clicked
-        return new Promise((resolve) => {
-            const waitButton = document.getElementById(id);
-            // Listener function to resolve the promise when the button is clicked
-            const waitButtonListener = () => {
-              if (document.getElementById('timeScore')) {
-                document.getElementById('timeScore').textContent = GameEnv.time 
-            }
                 resolve(true);
             };
             // Add the listener to the button's click event
@@ -166,9 +145,9 @@ const GameSetup = {
     gameOverCallBack: async function() {
       const id = document.getElementById("gameOver");
       id.hidden = false;
-      GameControl.stopTimer()
+      
       // Wait for the restart button to be clicked
-      await this.waitForButtonRestart('restartGame');
+      await this.waitForButton('restartGame');
       id.hidden = true;
       
       // Change currentLevel to start/restart value of null
@@ -368,11 +347,19 @@ const GameSetup = {
         // Home Screen Background added to the GameEnv, "passive" means complementary, not an interactive level..
         new GameLevel( {tag: "home",  callback: this.homeScreenCallback, objects: homeGameObjects, passive: true } );
         
+      // Check local storage for the difficulty mode set
+      let difficulty = localStorage.getItem("difficulty");
+
+      // If difficulty is not set (null or undefined), set it to a default value
+      if (!difficulty) {
+          difficulty = "normal"; // Set default difficulty to "normal" or any other suitable value
+      }
+      
       // Hills Game Level defintion...
       const hillsGameObjects = [];
 
        
-      switch(localStorage.getItem("difficulty"))
+      switch(difficulty)
       {
         // change number of each type of goomba for each difficulty
         case "easy":
