@@ -29,6 +29,14 @@ image: /images/platformer/backgrounds/home.png
   
   <!--Audio for coin collection -->
   <audio id ="coin" src="{{site.baseurl}}/assets/audio/coin.mp3" preload="auto"></audio>
+
+<!--Audio for when it hits top of platform -->
+  <audio id ="stomp" src="{{site.basurl}}/assets/audio/stomp2-93279.mp3" preload="auto"></audio>
+
+  <!--Audo for when it hits the sides of platform -->    
+  <audio id = "boing" src ="{{site.baseurl}}/assets/audio/boing-101318.mp3" preload="auto"></audio>
+  
+
   
   
   <!-- Wrap both the controls and gameplay in a container div -->
