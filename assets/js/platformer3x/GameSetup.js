@@ -193,19 +193,7 @@ const GameSetup = {
           speedRatio: 0.7,
           hitbox: { widthPercentage: 0.4, heightPercentage: -0.2}
         }
-        disapearing: {
-            src: "/images/platformer/platforms/brick_block.png",
-            sizeRatio: 83.2,
-            widthRatio: 0.5,
-            heightRatio: 1.0,
-            width: 204,
-            height: 204,
-            scaleSize: 80,
-            speedRatio: 0.7,
-            hitbox: { widthPercentage: 0.4, heightPercentage: -0.2}
-        }
-      }
-    },
+      },
       backgrounds: {
         start: { src: "/images/platformer/backgrounds/home.png" },
         hills: { src: "/images/platformer/backgrounds/hills.png" },
