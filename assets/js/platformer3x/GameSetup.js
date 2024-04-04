@@ -70,7 +70,7 @@ const GameSetup = {
      * * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
      * *  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve
      */
-    waitForButton: function(id) {
+    waitForButtonStart: function(id) {
         // Returns a promise that resolves when the button is clicked
         return new Promise((resolve) => {
             const waitButton = document.getElementById(id);
@@ -79,6 +79,7 @@ const GameSetup = {
               GameControl.stopTimer()
                 if (!GameEnv.timerActive) {
                   GameControl.startTimer()
+                  resolve(true)
                 }
                 resolve(true);
             };
@@ -127,7 +128,7 @@ const GameSetup = {
         id.hidden = false;
         
         // Wait for the startGame button to be clicked
-        await this.waitForButton('startGame');
+        await this.waitForButtonStart('startGame');
         // Hide the gameBegin button after it is clicked
         id.hidden = true;
         
