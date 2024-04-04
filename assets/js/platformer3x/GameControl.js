@@ -60,11 +60,10 @@ const GameControl = {
             userScoreElement.textContent = GameEnv.coinScore.toFixed(2);
         }
     },   
-    async saveTime(time) {
+    async saveTime(time, score) {
         if (time == 0) return;
         const userID = GameEnv.userID
         const oldTable = await this.getAllTimes()
-        const score = GameEnv.coinScore
 
         const data = {
             userID: userID,
@@ -116,7 +115,6 @@ const GameControl = {
      */
     startTimer() {
         this.intervalId = setInterval(() => this.updateTimer(), GameEnv.timerInterval);
-
         GameEnv.timerActive = true;
     },
 
@@ -128,7 +126,7 @@ const GameControl = {
     stopTimer() {   
         if (!GameEnv.timerActive) return;
         
-        this.saveTime(GameEnv.time)
+        this.saveTime(GameEnv.time, GameEnv.coinScore)
 
         GameEnv.timerActive = false
         GameEnv.time = 0;
