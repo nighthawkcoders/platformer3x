@@ -250,8 +250,8 @@ export class Player extends Character {
                     this.gravityEnabled = true;
                     setTimeout(() => { // move to end of screen for end of game detection
                         this.x = GameEnv.innerWidth + 1;
-                    }, 1000);
-                }, 1000);
+                    }, 100);
+                }, 100);
             }
         } else {
             // Reset movement flags if not colliding with a tube
