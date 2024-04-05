@@ -56,6 +56,9 @@ const GameControl = {
             }
                 return newTime
             }
+            if (document.getElementById('timeScore')) {
+                document.getElementById('timeScore').textContent = (time/1000).toFixed(2) 
+            }
     },    
         
     /**
@@ -64,7 +67,11 @@ const GameControl = {
      * @memberof GameControl
      */
     startTimer() {
-        this.intervalId = setInterval(() => this.updateTimer(), GameEnv.timerIntervalMillisecond);
+        if (GameEnv.timerActive) {
+            return;
+        }
+        
+        this.intervalId = setInterval(() => this.updateTimer(), GameEnv.timerInterval);
 
         GameEnv.timerActive = true;
     },
