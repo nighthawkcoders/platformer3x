@@ -19,6 +19,7 @@ import Mushroom from './Mushroom.js';
 import Coin from './Coin.js';
 import FlyingUFO from './FlyingUFO.js';
 import Alien from './Alien.js';
+import GameControl from './GameControl.js';
 
 //test comment
 
@@ -147,7 +148,7 @@ const GameSetup = {
     gameOverCallBack: async function() {
       const id = document.getElementById("gameOver");
       id.hidden = false;
-      
+      GameControl.stopTimer()
       // Wait for the restart button to be clicked
       await this.waitForButton('restartGame');
       id.hidden = true;
