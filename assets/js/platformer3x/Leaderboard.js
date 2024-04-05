@@ -1,3 +1,4 @@
+import GameControl from "./GameControl.js";
 import GameEnv from "./GameEnv.js";
 import Socket from "./Multiplayer.js";
 export class Leaderboard{
@@ -106,7 +107,7 @@ export class Leaderboard{
         localMultiplayer.id = "leaderboardTitle";
         document.getElementById("leaderboardDropDown").appendChild(localMultiplayer);
 
-        var localLeaderboard = new Leaderboard("timeScores");
+        var localLeaderboard = new Leaderboard(GameControl.localStorageTimeKey);
         var serverLeaderboard = new Leaderboard("GtimeScores")
 
         var t1 = localLeaderboard.leaderboardTable;
