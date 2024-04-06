@@ -193,6 +193,27 @@ export class GameEnv {
         const sound = document.getElementById(id);
         sound.play();
     }
+
+    static updateParallaxBackgrounds(key) {
+        switch (key) {
+            case "a":
+                if (GameEnv.player?.x > 2) {
+                    GameEnv.backgroundHillsSpeed = -0.4;
+                    GameEnv.backgroundMountainsSpeed = -0.1;
+                }
+                break;
+            case "d":
+                if (GameEnv.player?.x < (GameEnv.innerWidth - 2)) {
+                    GameEnv.backgroundHillsSpeed = 0.4;
+                    GameEnv.backgroundMountainsSpeed = 0.1;
+                }
+                break;
+            default:
+                GameEnv.backgroundHillsSpeed = 0;
+                GameEnv.backgroundMountainsSpeed = 0;
+                break;
+        }
+    }
   }
   
   export default GameEnv;
