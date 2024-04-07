@@ -28,6 +28,8 @@ export class PlayerBase extends Character {
         idle: true,
         movement: {up: true, down: true, left: true, right: true},
         counter: 0,
+        isAnimation: false,
+        isDying: false,
         collisions: []  
     };
 

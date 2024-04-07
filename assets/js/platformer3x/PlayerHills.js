@@ -1,5 +1,6 @@
 import GameEnv from './GameEnv.js';
 import PlayerBase from './PlayerBase.js';
+import GameControl from './GameControl.js';
 
 /**
  * @class PlayerHills class
@@ -41,6 +42,7 @@ export class PlayerHills extends PlayerBase {
     handleCollisionStart() {
         super.handleCollisionStart();
         this.handleCollisionEvent("tube");
+        this.handleCollisionEvent("goomba");
     }
     
     updatePlayerMovementAndGravity() {
@@ -67,7 +69,40 @@ export class PlayerHills extends PlayerBase {
                     this.state.movement.right = true;
                 }
                 break;
+            case "goomba":
+                if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
+                    // GoombaBounce deals with player.js and goomba.js
+                    if (GameEnv.goombaBounce === true) {
+                        GameEnv.goombaBounce = false;
+                        this.y = this.y - 100;
+                    }
+                    if (GameEnv.goombaBounce1 === true) {
+                        GameEnv.goombaBounce1 = false; 
+                        this.y = this.y - 250
+                    } 
+                } else if (this.collisionData.touchPoints.this.right || this.collisionData.touchPoints.this.left) {
+                    if (this.state.isAnimation === false) {
+                        this.state.isAnimation = true;
+                        if (GameEnv.difficulty === "normal" || GameEnv.difficulty === "hard") {
+                            if (this.state.isDying == false) {
+                                this.state.isDying = true;
+                                this.canvas.style.transition = "transform 0.5s";
+                                this.canvas.style.transform = "rotate(-90deg) translate(-26px, 0%)";
+                                GameEnv.playSound("PlayerDeath");
+                                setTimeout(async() => {
+                                    await GameControl.transitionToLevel(GameEnv.levels[GameEnv.levels.indexOf(GameEnv.currentLevel)]);
+                                }, 900); 
+                            }
+                        } else if (GameEnv.difficulty === "easy" && this.collisionData.touchPoints.this.right) {
+                            this.x -= 10;
+                        } else if (GameEnv.difficulty === "easy" && this.collisionData.touchPoints.this.left) {
+                            this.x += 10;
+                        }
+                    }                
+                }
+                break;
         }
+
     }
 
 }
