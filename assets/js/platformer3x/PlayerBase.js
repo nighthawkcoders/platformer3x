@@ -201,14 +201,21 @@ export class PlayerBase extends Character {
         this.handleCollisionStart();
         this.handleCollisionEnd();
         this.updatePlayerState();
-        this.updatePlayerMovementAndGravity();
+        this.handlePlayerReaction();
     }
-    
+   
+    /**
+     * gameloop: enables a type of collision events between player and object
+     */
     handleCollisionStart() {
         this.handleCollisionEvent("jumpPlatform");
         this.handleCollisionEvent("wall");
     }
 
+    /**
+     *  helper: sets up collision event handler if player is touching the object
+     * @param {*} collisionType 
+     */
     handleCollisionEvent(collisionType) {
         if (this.collisionData.touchPoints.other.id === collisionType) {
             if (!this.state.collisions.includes(collisionType)) {
@@ -216,7 +223,10 @@ export class PlayerBase extends Character {
             }
         }
     }
-    
+   
+    /**
+     * gameloop: disables expired collision events when player is no longer touching the object 
+     */
     handleCollisionEnd() {
         // remove each collision when player is no longer touching the object
         if (this.state.id === "floor") {
@@ -226,7 +236,10 @@ export class PlayerBase extends Character {
         }
         // Add similar code for "wall" and other obstacles
     }
-    
+   
+    /**
+     * gameloop: updates the player's state based on the most recent collision
+     */
     updatePlayerState() {
         // set player collision id based on last collision  
         if (this.state.collisions.length > 0) {
@@ -235,18 +248,23 @@ export class PlayerBase extends Character {
             this.state.id = "floor";
         }
     }
-    
-    updatePlayerMovementAndGravity() {
+   
+    /**
+     * gameloop: handles player reaction to the collision
+     */
+    handlePlayerReaction() {
         this.state.movement = { up: true, left: true, right: true, down: true };
         this.gravityEnabled = true;
 
         switch (this.state.id) {
+            // 1. Player is on a jump platform
             case "jumpPlatform":
                 if (this.collisionData.touchPoints.this.top) {
                     this.state.movement.down = false;
                     this.gravityEnabled = false;
                 }
                 break;
+            // 2. Player is on or touching a wall 
             case "wall":
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
                     this.state.movement.down = false;

@@ -24,20 +24,15 @@ export class PlayerHills extends PlayerBase {
         super(canvas, image, data);
     }
 
-    /* Overrides for setAnimation method */
-    setAnimation(key) {
-        super.setAnimation(key);
-    }
-
-    /* Overrides for movement methods */
-    updateHorizontalMovement() {
-        super.updateHorizontalMovement();
-    }
-    
+    /**
+     * @override, replaces the super class method 
+     * gameloop: updates the player's vertical movement.
+     */
     updateJumpMovement() {
         if (this.isActiveGravityAnimation("w")) {
             GameEnv.playSound("PlayerJump");
             let jumpHeightFactor;
+            // Jump height factor is based on difficulty
             if (this.gravityEnabled) {
                 if (GameEnv.difficulty === "easy") {
                     jumpHeightFactor = 0.50;
@@ -46,6 +41,7 @@ export class PlayerHills extends PlayerBase {
                 } else {
                     jumpHeightFactor = 0.30;
                 }
+            // Jump height factor is based being ontop of platform
             } else if (this.state.movement.down === false) {
                 jumpHeightFactor = 0.15;  // platform jump height
             }
@@ -53,16 +49,25 @@ export class PlayerHills extends PlayerBase {
         }
     }
 
-    /* Overrides for collision methods */
+    /**
+     * @override
+     * gameloop: enables a type of collision events between player and object
+     * 
+     */ 
     handleCollisionStart() {
-        super.handleCollisionStart();
+        super.handleCollisionStart(); // calls the super class method
+        // adds additional collision events
         this.handleCollisionEvent("tube");
         this.handleCollisionEvent("goomba");
     }
-    
-    updatePlayerMovementAndGravity() {
-        super.updatePlayerMovementAndGravity();
-
+   
+    /**
+     * @override
+     * gameloop: handles player reaction to the collision
+     */
+    handlePlayerReaction() {
+        super.handlePlayerReaction(); // calls the super class method
+        // handles additional player reactions
         switch (this.state.id) {
             case "tube":
                 // 1. Caught in tube
@@ -85,6 +90,7 @@ export class PlayerHills extends PlayerBase {
                 }
                 break;
             case "goomba":
+                // 1. Player jumps on goomba, interaction with Goomba.js
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom && this.state.isDying == false) {
                     // GoombaBounce deals with player.js and goomba.js
                     if (GameEnv.goombaBounce === true) {
@@ -94,7 +100,8 @@ export class PlayerHills extends PlayerBase {
                     if (GameEnv.goombaBounce1 === true) {
                         GameEnv.goombaBounce1 = false; 
                         this.y = this.y - 250
-                    } 
+                    }
+                // 2. Player touches goomba sides of goomba 
                 } else if (this.collisionData.touchPoints.this.right || this.collisionData.touchPoints.this.left) {
                     if (GameEnv.difficulty === "normal" || GameEnv.difficulty === "hard") {
                         if (this.state.isDying == false) {
