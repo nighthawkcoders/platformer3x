@@ -35,7 +35,22 @@ export class PlayerHills extends PlayerBase {
     }
     
     updateJumpMovement() {
-        super.updateJumpMovement();
+        if (this.isActiveGravityAnimation("w")) {
+            GameEnv.playSound("PlayerJump");
+            let jumpHeightFactor;
+            if (this.gravityEnabled) {
+                if (GameEnv.difficulty === "easy") {
+                    jumpHeightFactor = 0.50;
+                } else if (GameEnv.difficulty === "normal") {
+                    jumpHeightFactor = 0.40;
+                } else {
+                    jumpHeightFactor = 0.30;
+                }
+            } else if (this.state.movement.down === false) {
+                jumpHeightFactor = 0.15;  // platform jump height
+            }
+            this.y -= (this.bottom * jumpHeightFactor);
+        }
     }
 
     /* Overrides for collision methods */
@@ -70,7 +85,7 @@ export class PlayerHills extends PlayerBase {
                 }
                 break;
             case "goomba":
-                if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
+                if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom && this.state.isDying == false) {
                     // GoombaBounce deals with player.js and goomba.js
                     if (GameEnv.goombaBounce === true) {
                         GameEnv.goombaBounce = false;
@@ -81,24 +96,22 @@ export class PlayerHills extends PlayerBase {
                         this.y = this.y - 250
                     } 
                 } else if (this.collisionData.touchPoints.this.right || this.collisionData.touchPoints.this.left) {
-                    if (this.state.isAnimation === false) {
-                        this.state.isAnimation = true;
-                        if (GameEnv.difficulty === "normal" || GameEnv.difficulty === "hard") {
-                            if (this.state.isDying == false) {
-                                this.state.isDying = true;
-                                this.canvas.style.transition = "transform 0.5s";
-                                this.canvas.style.transform = "rotate(-90deg) translate(-26px, 0%)";
-                                GameEnv.playSound("PlayerDeath");
-                                setTimeout(async() => {
-                                    await GameControl.transitionToLevel(GameEnv.levels[GameEnv.levels.indexOf(GameEnv.currentLevel)]);
-                                }, 900); 
-                            }
-                        } else if (GameEnv.difficulty === "easy" && this.collisionData.touchPoints.this.right) {
-                            this.x -= 10;
-                        } else if (GameEnv.difficulty === "easy" && this.collisionData.touchPoints.this.left) {
-                            this.x += 10;
+                    if (GameEnv.difficulty === "normal" || GameEnv.difficulty === "hard") {
+                        if (this.state.isDying == false) {
+                            this.state.isDying = true;
+                            this.canvas.style.transition = "transform 0.5s";
+                            this.canvas.style.transform = "rotate(-90deg) translate(-26px, 0%)";
+                            GameEnv.playSound("PlayerDeath");
+                            setTimeout(async() => {
+                                await GameControl.transitionToLevel(GameEnv.levels[GameEnv.levels.indexOf(GameEnv.currentLevel)]);
+                            }, 900); 
                         }
-                    }                
+                    } else if (GameEnv.difficulty === "easy" && this.collisionData.touchPoints.this.right) {
+                        this.x -= 10;
+                    } else if (GameEnv.difficulty === "easy" && this.collisionData.touchPoints.this.left) {
+                       this.x += 10;
+                    }
+                
                 }
                 break;
         }

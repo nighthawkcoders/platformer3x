@@ -28,7 +28,6 @@ export class PlayerBase extends Character {
         idle: true,
         movement: {up: true, down: true, left: true, right: true},
         counter: 0,
-        isAnimation: false,
         isDying: false,
         collisions: []  
     };
@@ -181,16 +180,8 @@ export class PlayerBase extends Character {
     updateJumpMovement() {
         if (this.isActiveGravityAnimation("w")) {
             GameEnv.playSound("PlayerJump");
-            let jumpHeightFactor;
-            if (this.gravityEnabled) {
-                if (GameEnv.difficulty === "easy") {
-                    jumpHeightFactor = 0.50;
-                } else if (GameEnv.difficulty === "normal") {
-                    jumpHeightFactor = 0.40;
-                } else {
-                    jumpHeightFactor = 0.30;
-                }
-            } else if (this.state.movement.down === false) {
+            let jumpHeightFactor = 0.40;
+            if (this.state.movement.down === false) {
                 jumpHeightFactor = 0.15;  // platform jump height
             }
             this.y -= (this.bottom * jumpHeightFactor);
