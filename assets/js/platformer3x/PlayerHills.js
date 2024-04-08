@@ -89,7 +89,7 @@ export class PlayerHills extends PlayerBase {
                     this.state.movement.right = true;
                 }
                 break;
-            case "goomba":
+            case "goomba": // Note: Goomba.js and Player.js could be refactored
                 // 1. Player jumps on goomba, interaction with Goomba.js
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom && this.state.isDying == false) {
                     // GoombaBounce deals with player.js and goomba.js
@@ -121,6 +121,17 @@ export class PlayerHills extends PlayerBase {
                 
                 }
                 break;
+            case "mushroom": // 
+                // Player touches mushroom   
+                if (GameEnv.destroyedMushroom === false) {
+                    GameEnv.destroyedMushroom = true;
+                    this.canvas.style.filter = 'invert(1)';
+                    // Invert state lasts for 2 seconds
+                    setTimeout(() => {
+                        this.canvas.style.filter = 'invert(0)';
+                    }, 2000); // 2000 milliseconds = 2 seconds
+                }
+                break;  
         }
 
     }
