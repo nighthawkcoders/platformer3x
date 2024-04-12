@@ -24,12 +24,16 @@ export class PlayerBase extends Character {
      * @property {Array} collisions - The collisions that the player has had.
      */
     initEnvironmentState = {
-        id: 'floor', // floor, wall, platform, ... 
-        idle: true,
-        movement: {up: true, down: true, left: true, right: true},
+        // environment
+        id: 'floor',
         counter: 0,
+        collisions: [],
+        // player
+        current: 'idle',
+        direction: 'right',
+        speed: this.speed,
+        movement: {up: false, down: false, left: false, right: false},
         isDying: false,
-        collisions: []  
     };
 
     /** GameObject instantiation: constructor for Player object
@@ -56,7 +60,7 @@ export class PlayerBase extends Character {
         this.transitionHide = false;
         
         // Player control data
-        this.moveSpeed = this.speed * 3;
+        this.runSpeed = this.speed * 3;
         this.pressedKeys = {};
         this.directionKey = "d"; // initially facing right
 
@@ -86,68 +90,6 @@ export class PlayerBase extends Character {
     }
 
     /**
-     * Helper methods for checking the state of the player.
-     * Each method checks a specific condition and returns a boolean indicating whether that condition is met.
-     */
-
-    // helper: player facing left
-    isFaceLeft() { return this.directionKey === "a"; }
-    // helper: left action key is pressed
-    isKeyActionLeft(key) { return key === "a"; }
-    // helper: player facing right  
-    isFaceRight() { return this.directionKey === "d"; }
-    // helper: right action key is pressed
-    isKeyActionRight(key) { return key === "d"; }
-    // helper: dash key is pressed
-    isKeyActionDash(key) { return key === "s"; }
-    // helper: action key is in queue 
-    isActiveAnimation(key) { return (key in this.pressedKeys) && !this.state.idle; }
-    // helper: gravity action key is in queue
-    // helper: gravity action key is in queue
-    isActiveGravityAnimation(key) {
-        return this.isActiveAnimation(key) && this.isInAir();
-    }
-    // helper: player is in air
-    isInAir() {
-        return this.bottom <= this.y || this.state.movement.down === false;
-    }
-
-    updateAnimation() {
-        if (this.isInAir()) {
-            this.setAnimation(this.directionKey);
-        }
-    }
-
-    /**
-     * This helper method that acts like an animation manager. Frames are set according to player events.
-     *  - Sets the animation of the player based on the provided key.
-     *  - The key is used to look up the animation frame and idle in the objects playerData.
-     * If the key corresponds to a left or right movement, the directionKey is updated.
-     * 
-     * @param {string} key - The key representing the animation to set.
-     */
-    setAnimation(key) {
-        // direction setup
-        if (this.isKeyActionLeft(key)) {
-            this.directionKey = key;
-            this.playerData.w = this.playerData.wa;
-        } else if (this.isKeyActionRight(key)) {
-            this.directionKey = key;
-            this.playerData.w = this.playerData.wd;
-        }
-        // animation comes from playerData
-        var animation = this.playerData[key]
-        // set frame and idle frame
-        this.setFrameY(animation.row);
-        this.setMinFrame(animation.min ? animation.min : 0);
-        this.setMaxFrame(animation.frames);
-        if (this.state.idle && animation.idleFrame) {
-            this.setFrameX(animation.idleFrame.column)
-            this.setMinFrame(animation.idleFrame.frames);
-        }
-    }
-   
-    /**
      * gameloop: updates the player's state and position.
      * In each refresh cycle of the game loop, the player-specific movement is updated.
      * - If the player is moving left or right, the player's x position is updated.
@@ -156,37 +98,125 @@ export class PlayerBase extends Character {
      * @override
      */
     update() {
-        this.updateHorizontalMovement();
-        this.updateJumpMovement();
+        this.updateMovement();
+        this.updateAnimation();
 
         // Perform super update actions
         super.update();
+    }
+    
+    updateMovement() {
+        switch (this.state.current) {
+            case 'idle':
+                break;
+            case 'jump':
+                this.y -= (this.bottom * 0.02); // Jump height factor
+                break;
+            default:
+                if (this.state.direction === 'left') {
+                    this.x -= this.state.current === 'run' ? this.runSpeed : this.speed;
+                } else {
+                    this.x += this.state.current === 'run' ? this.runSpeed : this.speed;
+                }
+        }
+    }
 
-        // reset animatiion: for instance remove platform wiggle when idle   
-        this.updateAnimation();
+    setSpriteAnimation(animation) {
+        this.setFrameY(animation.row);
+        this.setMinFrame(animation.min ? animation.min : 0);
+        this.setMaxFrame(animation.frames);
     }
-    
-    updateHorizontalMovement() {
-        if (this.isActiveAnimation("a") && this.state.movement.left) {
-            this.x -= this.isActiveAnimation("s") ? this.moveSpeed : this.speed;  // Move to left
+
+    updateAnimation() {
+        switch (this.state.current) {
+            case 'idle':
+                this.setSpriteAnimation(this.playerData.idle[this.state.direction]);
+                break;
+            case 'walk':
+                this.setSpriteAnimation(this.playerData.walk[this.state.direction]);
+                break;
+            case 'run':
+                this.setSpriteAnimation(this.playerData.run[this.state.direction]);
+                break;
+            case 'jump':
+                this.setSpriteAnimation(this.playerData.jump[this.state.direction]);
+                break;
+            default:
+                console.error(`Invalid state: ${this.state.current}`);
         }
-        if (this.isActiveAnimation("d") && this.state.movement.right) {
-            this.x += this.isActiveAnimation("s") ? this.moveSpeed : this.speed;  // Move to right
-        }
-        // Player moving at dash speed left or right 
-        if (this.isActiveAnimation("s")) {}
     }
+
+    updateState(key) {
+        switch (key) {
+            case 'a':
+            case 'd':
+                if (this.pressedKeys['s']) {
+                    this.state.current = 'run';
+                } else {
+                    this.state.current = 'walk';
+                }
+                break;
+            case 'w':
+                this.state.current = 'jump';
+                break;
+            default:
+                this.state.current = 'idle';
+                break;
+        }
+    }
+
+    /**
+     * Handles the keydown event.
+     * This method checks the pressed key, then conditionally:
+     * - adds the key to the pressedKeys object
+     * - sets the player's animation
+     * - adjusts the game environment
+     *
+     * @param {Event} event - The keydown event.
+     */    
     
-    updateJumpMovement() {
-        if (this.isActiveGravityAnimation("w")) {
-            GameEnv.playSound("PlayerJump");
-            let jumpHeightFactor = 0.40;
-            if (this.state.movement.down === false) {
-                jumpHeightFactor = 0.15;  // platform jump height
+    handleKeyDown(event) {
+        const key = event.key;
+        if (!(event.key in this.pressedKeys)) {
+            //If both 'a' and 'd' are pressed, then only 'd' will be inputted
+            //Originally if this is deleted, player would stand still. 
+            if (this.pressedKeys['a'] && key === 'd') {
+                delete this.pressedKeys['a']; // Remove "a" key from pressedKeys
+                return; //(return) = exit early
+            } else if (this.pressedKeys['d'] && key === 'a') {
+                // If "d" is pressed and "a" is pressed afterward, ignore "a" key
+                return;
             }
-            this.y -= (this.bottom * jumpHeightFactor);
+            if (key === 'a') {
+                this.state.direction = 'left';
+            } else if (key === 'd') {
+                this.state.direction = 'right';
+            } else if (key === 'w' && this.state.current !== 'jump') {
+                this.state.current = 'jump';
+            }
+            this.updateState(key);
+            GameEnv.transitionHide = true;
         }
+
+        // parallax background speed starts on player movement
+        GameEnv.updateParallaxBackgrounds(key)
     }
+
+    /**
+     * Handles the keyup event.
+     * This method checks the released key, then conditionally stops actions from formerly pressed key
+     * *
+     * @param {Event} event - The keyup event.
+     */
+    handleKeyUp(event) {
+        const key = event.key;
+        if (event.key in this.pressedKeys) {
+            delete this.pressedKeys[event.key];
+        }
+        this.updateState(null);
+        // parallax background speed halts on key up
+        GameEnv.updateParallaxBackgrounds(null)
+}
     
 
     /**
@@ -277,70 +307,6 @@ export class PlayerBase extends Character {
                     this.state.movement.right = true;
                 }
                 break;
-        }
-    }
-
-    /**
-     * Handles the keydown event.
-     * This method checks the pressed key, then conditionally:
-     * - adds the key to the pressedKeys object
-     * - sets the player's animation
-     * - adjusts the game environment
-     *
-     * @param {Event} event - The keydown event.
-     */    
-    
-    handleKeyDown(event) {
-        if (this.playerData.hasOwnProperty(event.key)) {
-            const key = event.key;
-            if (!(event.key in this.pressedKeys)) {
-                //If both 'a' and 'd' are pressed, then only 'd' will be inputted
-                //Originally if this is deleted, player would stand still. 
-                if (this.pressedKeys['a'] && key === 'd') {
-                    delete this.pressedKeys['a']; // Remove "a" key from pressedKeys
-                    return; //(return) = exit early
-                } else if (this.pressedKeys['d'] && key === 'a') {
-                    // If "d" is pressed and "a" is pressed afterward, ignore "a" key
-                    return;
-                }
-                this.pressedKeys[event.key] = this.playerData[key];
-                this.setAnimation(key);
-                // player active
-                this.state.idle = false;
-                GameEnv.transitionHide = true;
-            }
-
-            // dash action on
-            if (this.isKeyActionDash(key)) {
-                GameEnv.dash = true;
-                this.canvas.style.filter = 'invert(1)';
-            }
-            // parallax background speed starts on player movement
-            GameEnv.updateParallaxBackgrounds(key)
-        }
-    }
-
-    /**
-     * Handles the keyup event.
-     * This method checks the released key, then conditionally stops actions from formerly pressed key
-     * *
-     * @param {Event} event - The keyup event.
-     */
-    handleKeyUp(event) {
-        if (this.playerData.hasOwnProperty(event.key)) {
-            const key = event.key;
-            if (event.key in this.pressedKeys) {
-                delete this.pressedKeys[event.key];
-            }
-            // player idle
-            this.state.idle = true;
-            // dash action off
-            if (this.isKeyActionDash(key)) {
-                this.canvas.style.filter = 'invert(0)';
-                GameEnv.dash = false;
-            } 
-            // parallax background speed halts on key up
-            GameEnv.updateParallaxBackgrounds(null)
         }
     }
 
