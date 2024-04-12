@@ -150,9 +150,11 @@ export class PlayerBase extends Character {
                 this.state.current = 'walk';
                 break;
             case 'w':
+              if (this.state.movement.up == false) {
+                this.state.movement.up = true;
                 this.state.current = 'jump';
-                this.state.movement = { up: true, down: true, left: true, right: true, falling: false};
-                break;
+              }
+              break;
             default:
                 this.state.current = 'idle';
                 break;
@@ -295,6 +297,11 @@ export class PlayerBase extends Character {
                     this.state.movement = { up: false, down: false, left: true, right: false, falling: false};
                 } else if (this.collisionData.touchPoints.this.left) {
                     this.state.movement = { up: false, down: false, left: false, right: true, falling: false};
+                }
+                break;
+            case "floor":
+                if (this.onTop) {
+                    this.state.movement = { up: false, down: false, left: true, right: true, falling: false};
                 }
                 break;
         }

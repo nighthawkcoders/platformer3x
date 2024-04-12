@@ -20,6 +20,7 @@ class Character extends GameObject {
         
         // gravity for character enabled by default
         this.gravityEnabled = true;
+        this.onTop = false;
     }
 
     setSpriteAnimation(animation) {
@@ -137,6 +138,9 @@ class Character extends GameObject {
 
         if (this.bottom > this.y && this.gravityEnabled) {
             this.y += GameEnv.gravity;
+            this.onTop = false;
+        } else {
+            this.onTop = true;
         }
 
         // Update animation frameX of the object
