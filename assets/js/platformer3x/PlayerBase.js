@@ -117,9 +117,9 @@ export class PlayerBase extends Character {
                 // leave break out to allow left / right speed 
             default:
                 if (this.state.direction === 'left' && this.state.movement.left) {
-                    this.x -= this.state.current === 'run' ? this.runSpeed : this.speed;
+                    this.setX(this.x - (this.state.current === 'run' ? this.runSpeed : this.speed));
                 } else if (this.state.direction === 'right' && this.state.movement.right){
-                    this.x += this.state.current === 'run' ? this.runSpeed : this.speed;
+                    this.setX(this.x + (this.state.current === 'run' ? this.runSpeed : this.speed));
                 }
         }
     }
