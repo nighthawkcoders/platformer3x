@@ -32,7 +32,7 @@ export class PlayerBase extends Character {
         current: 'idle',
         direction: 'right',
         speed: this.speed,
-        movement: {up: false, down: false, left: false, right: false},
+        movement: {up: false, down: false, left: true, right: true},
         isDying: false,
     };
 
@@ -98,9 +98,9 @@ export class PlayerBase extends Character {
      * @override
      */
     update() {
-        this.updateMovement();
         this.updateAnimation();
-
+        this.updateMovement();
+ 
         // Perform super update actions
         super.update();
     }
@@ -110,12 +110,14 @@ export class PlayerBase extends Character {
             case 'idle':
                 break;
             case 'jump':
-                this.y -= (this.bottom * 0.02); // Jump height factor
+                if (this.state.movement.up) {
+                    this.y -= (this.bottom * 0.35); // Jump height factor
+                }
                 break;
             default:
-                if (this.state.direction === 'left') {
+                if (this.state.direction === 'left' && this.state.movement.left) {
                     this.x -= this.state.current === 'run' ? this.runSpeed : this.speed;
-                } else {
+                } else if (this.state.direction === 'right' && this.state.movement.right){
                     this.x += this.state.current === 'run' ? this.runSpeed : this.speed;
                 }
         }
@@ -191,8 +193,8 @@ export class PlayerBase extends Character {
                 this.state.direction = 'left';
             } else if (key === 'd') {
                 this.state.direction = 'right';
-            } else if (key === 'w' && this.state.current !== 'jump') {
-                this.state.current = 'jump';
+            } else if (key === 'w' && !this.state.movement.up) {
+                this.state.movement.up = true;
             }
             this.updateState(key);
             GameEnv.transitionHide = true;
@@ -283,7 +285,7 @@ export class PlayerBase extends Character {
      * gameloop: handles player reaction to the collision
      */
     handlePlayerReaction() {
-        this.state.movement = { up: true, left: true, right: true, down: true };
+        this.state.movement = { up: false, down: false, left: true, right: true };
         this.gravityEnabled = true;
 
         switch (this.state.id) {
