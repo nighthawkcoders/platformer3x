@@ -40,7 +40,7 @@ export class PlayerBase extends Character {
         isDying: false,
     };
 
-    /** Constructor for Player object
+    /** GameObject: Constructor for Player object
      * @extends Character 
      * @param {HTMLCanvasElement} canvas - The canvas element to draw the player on.
      * @param {HTMLImageElement} image - The image to draw the player with.
@@ -78,7 +78,7 @@ export class PlayerBase extends Character {
     }
 
     /**
-     * GameObject: responds to level change and game over destroy for the player object
+     * GameObject: Destructor for Player Object
      * This method is used to remove the event listeners for keydown and keyup events.
      * After removing the event listeners, it calls the parent class's destroy player object. 
      * This method overrides standard GameObject.destroy.
@@ -152,7 +152,7 @@ export class PlayerBase extends Character {
 
 
     /**
-     * event: updates the player's state, key pressed is mapped to player's animation state  
+     * User Event: updates the player's state, key pressed is mapped to player's animation state  
      * @param {*} key 
      */
     updateState(key) {
@@ -174,7 +174,7 @@ export class PlayerBase extends Character {
     }
 
     /**
-     * Handles the keydown event.
+     * User Event: Handles the keydown event.
      * This method checks the pressed key, then conditionally:
      * - adds the key to the pressedKeys object
      * - sets the player's animation
@@ -210,7 +210,7 @@ export class PlayerBase extends Character {
     }
 
     /**
-     * Handles the keyup event.
+     * User Event: Handles the keyup event.
      * This method checks the released key, then conditionally stops actions from formerly pressed key
      * *
      * @param {Event} event - The keyup event.
@@ -227,7 +227,7 @@ export class PlayerBase extends Character {
     
 
     /**
-     * gameLoop: performs action on collisions
+     * gameLoop: Collision action handler for the player.
      * Handles the player's actions when a collision occurs.
      * This method checks the collision, type of game object, and then to determine action, e.g game over, animation, etc.
      * Depending on the side of the collision, it performs player action, e.g. stops movement, etc.
@@ -242,8 +242,7 @@ export class PlayerBase extends Character {
     }
    
     /**
-     * gameLoop: enables tracking of events between player and another game object
-     * 
+     * gameLoop: Set up Player collision events 
      */
     handleCollisionStart() {
         this.handleCollisionEvent("jumpPlatform");
@@ -252,7 +251,7 @@ export class PlayerBase extends Character {
     }
 
     /**
-     * gameLoop: sets up collision event handler if player is touching the object
+     * gameLoop helper: sets up collision event handler if player is touching the object
      * @param {*} collisionType 
      */
     handleCollisionEvent(collisionType) {
@@ -264,7 +263,7 @@ export class PlayerBase extends Character {
     }
    
     /**
-     * gameLoop: disables expired collision events when player is no longer touching the object 
+     * gameLoop: Tears down Player collision events
      */
     handleCollisionEnd() {
         // remove each collision when player is no longer touching the object
@@ -277,7 +276,7 @@ export class PlayerBase extends Character {
     }
    
     /**
-     * gameLoop: updates the player's state based on the most recent collision
+     * gameLoop: Updates Player state based on the most recent collision
      */
     updatePlayerState() {
         // set player collision id based on last collision  
@@ -289,7 +288,7 @@ export class PlayerBase extends Character {
     }
    
     /**
-     * gameloop: handles player reaction to the collision
+     * gameloop: Handles Player reaction / state updates to the collision
      */
     handlePlayerReaction() {
         this.gravityEnabled = true;
