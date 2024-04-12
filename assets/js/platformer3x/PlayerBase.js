@@ -15,18 +15,22 @@ export class PlayerBase extends Character {
     /**
      * Initial environment of the player.
      * @property {string} id - The current surface the player is on (e.g., 'floor', 'wall', 'platform').
-     * @property {boolean} idle - Whether the player is idle.
+     * @property {Array} collisions - The collisions that the player has had.
+     * @property {string} current - The current animation state of the player (e.g., 'idle', 'walk', 'run', 'jump').
+     * @property {string} direction - The direction the player is facing (e.g., 'left', 'right').
      * @property {Object} movement - The directions in which the player can move.
      * @property {boolean} movement.up - Whether the player can move up.
      * @property {boolean} movement.down - Whether the player can move down.
      * @property {boolean} movement.left - Whether the player can move left.
      * @property {boolean} movement.right - Whether the player can move right.
-     * @property {Array} collisions - The collisions that the player has had.
+     * @property {boolean} movement.falling - Whether the player is falling.
+     * @property {boolean} isDying - Whether the player is dying.
      */
+
+    // This object represents the initial state of the player when the game starts.
     initEnvironmentState = {
         // environment
         id: 'floor',
-        counter: 0,
         collisions: [],
         // player
         current: 'idle',
@@ -36,8 +40,8 @@ export class PlayerBase extends Character {
         isDying: false,
     };
 
-    /** GameObject instantiation: constructor for Player object
-     *  * @extends Character 
+    /** Constructor for Player object
+     * @extends Character 
      * @param {HTMLCanvasElement} canvas - The canvas element to draw the player on.
      * @param {HTMLImageElement} image - The image to draw the player with.
      * @param {Object} data - The data object containing the player's properties.
@@ -90,21 +94,21 @@ export class PlayerBase extends Character {
     }
 
     /**
-     * gameloop: updates the player's state and position.
-     * In each refresh cycle of the game loop, the player-specific movement is updated.
-     * - If the player is moving left or right, the player's x position is updated.
-     * - If the player is dashing, the player's x position is updated at twice the speed.
-     * This method overrides Character.update, which overrides GameObject.update. 
+     * gameLoop: updates the player's state, animation and position.
      * @override
      */
     update() {
+        // player methods
         this.updateAnimation();
         this.updateMovement();
  
-        // Perform super update actions
+        // super actions need to be after; this is to preserve player order of operations
         super.update();
     }
-    
+   
+    /**
+     * gameLoop: updates the player's movement based on the current player state (idle, walk, run, jump, etc.)
+     */ 
     updateMovement() {
         switch (this.state.current) {
             case 'idle':
@@ -114,16 +118,19 @@ export class PlayerBase extends Character {
                     this.y -= (this.bottom * 0.35); // Jump height factor
                     this.state.movement.falling = true;
                 }
-                // leave break out to allow left / right speed 
+                // break is left out to allow left / right speed to be applied 
             default:
-                if (this.state.direction === 'left' && this.state.movement.left) {
+                if (this.state.direction === 'left' && this.state.movement.left && 'a' in this.pressedKeys) {
                     this.setX(this.x - (this.state.current === 'run' ? this.runSpeed : this.speed));
-                } else if (this.state.direction === 'right' && this.state.movement.right){
+                } else if (this.state.direction === 'right' && this.state.movement.right && 'd' in this.pressedKeys){
                     this.setX(this.x + (this.state.current === 'run' ? this.runSpeed : this.speed));
                 }
         }
     }
 
+    /**
+     * gameLoop: updates the player's animation based on the current state (idle, walk, run, jump, etc.)
+     */
     updateAnimation() {
         switch (this.state.current) {
             case 'idle':
@@ -143,6 +150,11 @@ export class PlayerBase extends Character {
         }
     }
 
+
+    /**
+     * event: updates the player's state, key pressed is mapped to player's animation state  
+     * @param {*} key 
+     */
     updateState(key) {
         switch (key) {
             case 'a':
@@ -188,6 +200,7 @@ export class PlayerBase extends Character {
             } else if (key === 'd') {
                 this.state.direction = 'right';
             }
+            this.pressedKeys[event.key] = true;
             this.updateState(key);
             GameEnv.transitionHide = true;
         }
@@ -214,7 +227,7 @@ export class PlayerBase extends Character {
     
 
     /**
-     * gameloop: performs action on collisions
+     * gameLoop: performs action on collisions
      * Handles the player's actions when a collision occurs.
      * This method checks the collision, type of game object, and then to determine action, e.g game over, animation, etc.
      * Depending on the side of the collision, it performs player action, e.g. stops movement, etc.
@@ -229,7 +242,8 @@ export class PlayerBase extends Character {
     }
    
     /**
-     * gameloop: enables a type of collision events between player and object
+     * gameLoop: enables tracking of events between player and another game object
+     * 
      */
     handleCollisionStart() {
         this.handleCollisionEvent("jumpPlatform");
@@ -238,7 +252,7 @@ export class PlayerBase extends Character {
     }
 
     /**
-     *  helper: sets up collision event handler if player is touching the object
+     * gameLoop: sets up collision event handler if player is touching the object
      * @param {*} collisionType 
      */
     handleCollisionEvent(collisionType) {
@@ -250,7 +264,7 @@ export class PlayerBase extends Character {
     }
    
     /**
-     * gameloop: disables expired collision events when player is no longer touching the object 
+     * gameLoop: disables expired collision events when player is no longer touching the object 
      */
     handleCollisionEnd() {
         // remove each collision when player is no longer touching the object
@@ -263,7 +277,7 @@ export class PlayerBase extends Character {
     }
    
     /**
-     * gameloop: updates the player's state based on the most recent collision
+     * gameLoop: updates the player's state based on the most recent collision
      */
     updatePlayerState() {
         // set player collision id based on last collision  
@@ -300,6 +314,7 @@ export class PlayerBase extends Character {
                 }
                 break;
             case "floor":
+                // 3. Player is on the floor, default platform
                 if (this.onTop) {
                     this.state.movement = { up: false, down: false, left: true, right: true, falling: false};
                 }
