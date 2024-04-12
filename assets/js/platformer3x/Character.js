@@ -22,6 +22,12 @@ class Character extends GameObject {
         this.gravityEnabled = true;
     }
 
+    setSpriteAnimation(animation) {
+        this.setFrameY(animation.row);
+        this.setMinFrame(animation.min ? animation.min : 0);
+        this.setMaxFrame(animation.frames);
+    }
+
     getMinFrame(){
         return this.minFrame;
     }
@@ -129,8 +135,9 @@ class Character extends GameObject {
     */
     update() {
 
-        if (this.bottom > this.y && this.gravityEnabled)
+        if (this.bottom > this.y && this.gravityEnabled) {
             this.y += GameEnv.gravity;
+        }
 
         // Update animation frameX of the object
         if (this.frameX < this.maxFrame) {

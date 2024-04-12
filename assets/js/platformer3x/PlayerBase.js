@@ -32,7 +32,7 @@ export class PlayerBase extends Character {
         current: 'idle',
         direction: 'right',
         speed: this.speed,
-        movement: {up: false, down: false, left: true, right: true},
+        movement: {up: false, down: false, left: true, right: true, falling: false},
         isDying: false,
     };
 
@@ -110,10 +110,11 @@ export class PlayerBase extends Character {
             case 'idle':
                 break;
             case 'jump':
-                if (this.state.movement.up) {
+                if (this.state.movement.up && !this.state.movement.falling) {
                     this.y -= (this.bottom * 0.35); // Jump height factor
+                    this.state.movement.falling = true;
                 }
-                break;
+                // leave break out to allow left / right speed 
             default:
                 if (this.state.direction === 'left' && this.state.movement.left) {
                     this.x -= this.state.current === 'run' ? this.runSpeed : this.speed;
@@ -121,12 +122,6 @@ export class PlayerBase extends Character {
                     this.x += this.state.current === 'run' ? this.runSpeed : this.speed;
                 }
         }
-    }
-
-    setSpriteAnimation(animation) {
-        this.setFrameY(animation.row);
-        this.setMinFrame(animation.min ? animation.min : 0);
-        this.setMaxFrame(animation.frames);
     }
 
     updateAnimation() {
@@ -152,14 +147,11 @@ export class PlayerBase extends Character {
         switch (key) {
             case 'a':
             case 'd':
-                if (this.pressedKeys['s']) {
-                    this.state.current = 'run';
-                } else {
-                    this.state.current = 'walk';
-                }
+                this.state.current = 'walk';
                 break;
             case 'w':
                 this.state.current = 'jump';
+                this.state.movement = { up: true, down: true, left: true, right: true, falling: false};
                 break;
             default:
                 this.state.current = 'idle';
@@ -193,8 +185,6 @@ export class PlayerBase extends Character {
                 this.state.direction = 'left';
             } else if (key === 'd') {
                 this.state.direction = 'right';
-            } else if (key === 'w' && !this.state.movement.up) {
-                this.state.movement.up = true;
             }
             this.updateState(key);
             GameEnv.transitionHide = true;
@@ -242,6 +232,7 @@ export class PlayerBase extends Character {
     handleCollisionStart() {
         this.handleCollisionEvent("jumpPlatform");
         this.handleCollisionEvent("wall");
+        this.handleCollisionEvent("floor");
     }
 
     /**
@@ -285,28 +276,25 @@ export class PlayerBase extends Character {
      * gameloop: handles player reaction to the collision
      */
     handlePlayerReaction() {
-        this.state.movement = { up: false, down: false, left: true, right: true };
         this.gravityEnabled = true;
 
         switch (this.state.id) {
             // 1. Player is on a jump platform
             case "jumpPlatform":
                 if (this.collisionData.touchPoints.this.top) {
-                    this.state.movement.down = false;
+                    this.state.movement = { up: false, down: false, left: true, right: true, falling: false};
                     this.gravityEnabled = false;
                 }
                 break;
             // 2. Player is on or touching a wall 
             case "wall":
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
-                    this.state.movement.down = false;
+                    this.state.movement = { up: false, down: false, left: true, right: true, falling: false};
                     this.gravityEnabled = false;
                 } else if (this.collisionData.touchPoints.this.right) {
-                    this.state.movement.right = false;
-                    this.state.movement.left = true;
+                    this.state.movement = { up: false, down: false, left: true, right: false, falling: false};
                 } else if (this.collisionData.touchPoints.this.left) {
-                    this.state.movement.left = false;
-                    this.state.movement.right = true;
+                    this.state.movement = { up: false, down: false, left: false, right: true, falling: false};
                 }
                 break;
         }
