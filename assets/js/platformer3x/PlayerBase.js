@@ -28,7 +28,7 @@ export class PlayerBase extends Character {
         idle: true,
         movement: {up: true, down: true, left: true, right: true},
         counter: 0,
-        isDying: false,
+        isDying: false,  // player is dying, stops update method call in GameEnv    
         collisions: []  
     };
 
@@ -49,8 +49,6 @@ export class PlayerBase extends Character {
         this.state = {...this.initEnvironmentState}; // start with player on the floor 
 
         // ??  needed to start the game
-        this.isDying = false;
-        this.isDyingR = false;
         this.timer = false;
         GameEnv.invincible = false; 
         this.transitionHide = false;
