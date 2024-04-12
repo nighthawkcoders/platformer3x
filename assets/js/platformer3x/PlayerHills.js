@@ -25,7 +25,8 @@ export class PlayerHills extends PlayerBase {
     }
 
     /**
-     * @override, replaces the super class method
+     * @override
+     * gameLoop helper: Update Player jump height, replaces PlayerBase updateJump using settings from GameEnv
      */
     updateJump() {  
         let jumpHeightFactor;
@@ -41,7 +42,7 @@ export class PlayerHills extends PlayerBase {
 
     /**
      * @override
-     * gameloop: enables a type of collision events between player and object
+     * gameLoop: Set up Player additional collision events for game level
      * 
      */ 
     handleCollisionStart() {
@@ -53,7 +54,7 @@ export class PlayerHills extends PlayerBase {
    
     /**
      * @override
-     * gameloop: handles player reaction to the collision
+     * gameloop: Handles additional Player reaction / state updates to the collision for game level 
      */
     handlePlayerReaction() {
         super.handlePlayerReaction(); // calls the super class method
