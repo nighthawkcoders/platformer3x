@@ -25,28 +25,18 @@ export class PlayerHills extends PlayerBase {
     }
 
     /**
-     * @override, replaces the super class method 
-     * gameloop: updates the player's vertical movement.
+     * @override, replaces the super class method
      */
-    updateJumpMovement() {
-        if (this.isActiveGravityAnimation("w")) {
-            GameEnv.playSound("PlayerJump");
-            let jumpHeightFactor;
-            // Jump height factor is based on difficulty
-            if (this.gravityEnabled) {
-                if (GameEnv.difficulty === "easy") {
-                    jumpHeightFactor = 0.50;
-                } else if (GameEnv.difficulty === "normal") {
-                    jumpHeightFactor = 0.40;
-                } else {
-                    jumpHeightFactor = 0.30;
-                }
-            // Jump height factor is based being ontop of platform
-            } else if (this.state.movement.down === false) {
-                jumpHeightFactor = 0.15;  // platform jump height
-            }
-            this.y -= (this.bottom * jumpHeightFactor);
+    updateJump() {  
+        let jumpHeightFactor;
+        if (GameEnv.difficulty === "easy") {
+            jumpHeightFactor = 0.50;
+        } else if (GameEnv.difficulty === "normal") {
+            jumpHeightFactor = 0.40;
+        } else {
+            jumpHeightFactor = 0.30;
         }
+        this.y -= (this.bottom * jumpHeightFactor);
     }
 
     /**

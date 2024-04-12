@@ -105,7 +105,14 @@ export class PlayerBase extends Character {
         // super actions need to be after; this is to preserve player order of operations
         super.update();
     }
-   
+  
+    /**
+     * gameLoop helper: Udate Player jump height
+     */
+    updateJump() {
+        this.y -= (this.bottom * 0.35); // Jump height factor
+    }
+
     /**
      * gameLoop: updates the player's movement based on the current player state (idle, walk, run, jump, etc.)
      */ 
@@ -115,7 +122,8 @@ export class PlayerBase extends Character {
                 break;
             case 'jump':
                 if (this.state.movement.up && !this.state.movement.falling) {
-                    this.y -= (this.bottom * 0.35); // Jump height factor
+                    GameEnv.playSound("PlayerJump");
+                    this.updateJump();
                     this.state.movement.falling = true;
                 }
                 // break is left out to allow left / right speed to be applied 
