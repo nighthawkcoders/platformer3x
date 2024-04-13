@@ -175,6 +175,11 @@ export class PlayerBase extends Character {
                 this.state.current = 'jump';
               }
               break;
+            case 's':
+                if ("a" in this.pressedKeys || "d" in this.pressedKeys) {
+                    this.state.current = 'run';
+                }
+                break;
             default:
                 this.state.current = 'idle';
                 break;
@@ -220,18 +225,23 @@ export class PlayerBase extends Character {
     /**
      * User Event: Handles the keyup event.
      * This method checks the released key, then conditionally stops actions from formerly pressed key
-     * *
+     * 
      * @param {Event} event - The keyup event.
      */
     handleKeyUp(event) {
         const key = event.key;
-        if (event.key in this.pressedKeys) {
-            delete this.pressedKeys[event.key];
+        if (key in this.pressedKeys) {
+            delete this.pressedKeys[key];
+            if (Object.keys(this.pressedKeys).length > 0) {
+                // If there are still keys in pressedKeys, update the state to the last one
+                const lastKey = Object.keys(this.pressedKeys)[Object.keys(this.pressedKeys).length - 1];
+                this.updateState(lastKey);
+            } else {
+                // If there are no more keys in pressedKeys, update the state to null
+                this.updateState(null);
+            }
         }
-        this.updateState(null);
-        // parallax background speed halts on key up
-        GameEnv.updateParallaxBackgrounds(null)
-}
+    }
     
 
     /**
