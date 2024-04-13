@@ -145,7 +145,7 @@ export class GameEnv {
     static update() {
         // Update game state, including all game objects
         // if statement prevents game from updating upon player death
-        if (GameEnv.player == null || GameEnv.player.isDying == false) {
+        if (GameEnv.player === null || GameEnv.player.state.isDying === false) {
             for (const gameObject of GameEnv.gameObjects) {
                 gameObject.update();
                 gameObject.serialize();

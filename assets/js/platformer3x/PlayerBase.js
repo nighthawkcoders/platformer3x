@@ -56,13 +56,6 @@ export class PlayerBase extends Character {
         this.shouldBeSynced = true; // multi-player sync
         this.state = {...this.initEnvironmentState}; // start with player on the floor 
 
-        // ??  needed to start the game
-        this.isDying = false;
-        this.isDyingR = false;
-        this.timer = false;
-        GameEnv.invincible = false; 
-        this.transitionHide = false;
-        
         // Player control data
         this.runSpeed = this.speed * 3;
         this.pressedKeys = {};

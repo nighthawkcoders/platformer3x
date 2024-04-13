@@ -22,6 +22,10 @@ export class PlayerHills extends PlayerBase {
      */
     constructor(canvas, image, data) {
         super(canvas, image, data);
+
+        // Goomba variables, deprecate?
+        this.timer = false;
+        GameEnv.invincible = false; // Player is not invincible 
     }
 
     /**
