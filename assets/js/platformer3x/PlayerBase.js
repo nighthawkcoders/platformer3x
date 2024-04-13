@@ -14,9 +14,9 @@ import Character from './Character.js';
 export class PlayerBase extends Character {
     /**
      * Initial environment of the player.
-     * @property {string} id - The current surface the player is on (e.g., 'floor', 'wall', 'platform').
+     * @property {string} collision - The current object the player is interacting with (e.g., 'floor', 'wall', 'platform').
      * @property {Array} collisions - The collisions that the player has had.
-     * @property {string} current - The current animation state of the player (e.g., 'idle', 'walk', 'run', 'jump').
+     * @property {string} animation - The current animation state of the player (e.g., 'idle', 'walk', 'run', 'jump').
      * @property {string} direction - The direction the player is facing (e.g., 'left', 'right').
      * @property {Object} movement - The directions in which the player can move.
      * @property {boolean} movement.up - Whether the player can move up.
@@ -30,10 +30,10 @@ export class PlayerBase extends Character {
     // This object represents the initial state of the player when the game starts.
     initEnvironmentState = {
         // environment
-        id: 'floor',
+        collision: 'floor',
         collisions: [],
         // player
-        current: 'idle',
+        animation: 'idle',
         direction: 'right',
         speed: this.speed,
         movement: {up: false, down: false, left: true, right: true, falling: false},
@@ -107,10 +107,10 @@ export class PlayerBase extends Character {
     }
 
     /**
-     * gameLoop: updates the player's movement based on the current player state (idle, walk, run, jump, etc.)
+     * gameLoop: updates the player's movement based on the player's animation (idle, walk, run, jump, etc.)
      */ 
     updateMovement() {
-        switch (this.state.current) {
+        switch (this.state.animation) {
             case 'idle':
                 break;
             case 'jump':
@@ -122,18 +122,18 @@ export class PlayerBase extends Character {
                 // break is left out to allow left / right speed to be applied 
             default:
                 if (this.state.direction === 'left' && this.state.movement.left && 'a' in this.pressedKeys) {
-                    this.setX(this.x - (this.state.current === 'run' ? this.runSpeed : this.speed));
+                    this.setX(this.x - (this.state.animation === 'run' ? this.runSpeed : this.speed));
                 } else if (this.state.direction === 'right' && this.state.movement.right && 'd' in this.pressedKeys){
-                    this.setX(this.x + (this.state.current === 'run' ? this.runSpeed : this.speed));
+                    this.setX(this.x + (this.state.animation === 'run' ? this.runSpeed : this.speed));
                 }
         }
     }
 
     /**
-     * gameLoop: updates the player's animation based on the current state (idle, walk, run, jump, etc.)
+     * gameLoop: updates the player's animation (idle, walk, run, jump, etc.)
      */
     updateAnimation() {
-        switch (this.state.current) {
+        switch (this.state.animation) {
             case 'idle':
                 this.setSpriteAnimation(this.playerData.idle[this.state.direction]);
                 break;
@@ -147,7 +147,7 @@ export class PlayerBase extends Character {
                 this.setSpriteAnimation(this.playerData.jump[this.state.direction]);
                 break;
             default:
-                console.error(`Invalid state: ${this.state.current}`);
+                console.error(`Invalid state: ${this.state.animation}`);
         }
     }
 
@@ -160,21 +160,21 @@ export class PlayerBase extends Character {
         switch (key) {
             case 'a':
             case 'd':
-                this.state.current = 'walk';
+                this.state.animation = 'walk';
                 break;
             case 'w':
               if (this.state.movement.up == false) {
                 this.state.movement.up = true;
-                this.state.current = 'jump';
+                this.state.animation = 'jump';
               }
               break;
             case 's':
                 if ("a" in this.pressedKeys || "d" in this.pressedKeys) {
-                    this.state.current = 'run';
+                    this.state.animation = 'run';
                 }
                 break;
             default:
-                this.state.current = 'idle';
+                this.state.animation = 'idle';
                 break;
         }
     }
@@ -278,12 +278,11 @@ export class PlayerBase extends Character {
      */
     handleCollisionEnd() {
         // remove each collision when player is no longer touching the object
-        if (this.state.id === "floor") {
+        if (this.state.collision === "floor") {
             // noop
-        } else if (this.state.collisions.includes(this.state.id) && this.collisionData.touchPoints.other.id !== this.state.id ) {
-            this.state.collisions = this.state.collisions.filter(id => id !== this.state.id );
+        } else if (this.state.collisions.includes(this.state.collision) && this.collisionData.touchPoints.other.id !== this.state.collision ) {
+            this.state.collisions = this.state.collisions.filter(collision => collision !== this.state.collision);
         }
-        // Add similar code for "wall" and other obstacles
     }
    
     /**
@@ -292,9 +291,9 @@ export class PlayerBase extends Character {
     updatePlayerState() {
         // set player collision id based on last collision  
         if (this.state.collisions.length > 0) {
-            this.state.id = this.state.collisions[this.state.collisions.length - 1];
+            this.state.collision = this.state.collisions[this.state.collisions.length - 1];
         } else {
-            this.state.id = "floor";
+            this.state.collision = "floor";
         }
     }
    
@@ -304,7 +303,7 @@ export class PlayerBase extends Character {
     handlePlayerReaction() {
         this.gravityEnabled = true;
 
-        switch (this.state.id) {
+        switch (this.state.collision) {
             // 1. Player is on a jump platform
             case "jumpPlatform":
                 if (this.collisionData.touchPoints.this.top) {

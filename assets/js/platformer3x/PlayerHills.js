@@ -63,7 +63,7 @@ export class PlayerHills extends PlayerBase {
     handlePlayerReaction() {
         super.handlePlayerReaction(); // calls the super class method
         // handles additional player reactions
-        switch (this.state.id) {
+        switch (this.state.collision) {
             case "tube":
                 // 1. Caught in tube
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
