@@ -238,22 +238,19 @@ export class PlayerBase extends Character {
     
 
     /**
-     * gameLoop: Collision action handler for the player.
-     * Handles the player's actions when a collision occurs.
-     * This method checks the collision, type of game object, and then to determine action, e.g game over, animation, etc.
-     * Depending on the side of the collision, it performs player action, e.g. stops movement, etc.
+     * gameLoop: Collision action handler for the Player.
      * This method overrides GameObject.collisionAction. 
      * @override
      */
     collisionAction() {
         this.handleCollisionStart();
         this.handleCollisionEnd();
-        this.updatePlayerState();
+        this.setActiveCollision();
         this.handlePlayerReaction();
     }
    
     /**
-     * gameLoop: Set up Player collision events 
+     * gameLoop: Watch for Player collision events 
      */
     handleCollisionStart() {
         this.handleCollisionEvent("jumpPlatform");
@@ -262,12 +259,15 @@ export class PlayerBase extends Character {
     }
 
     /**
-     * gameLoop helper: sets up collision event handler if player is touching the object
+     * gameLoop helper: Adds the collisionType to the collisions array when player is touching the object
      * @param {*} collisionType 
      */
     handleCollisionEvent(collisionType) {
+        // check if player is touching the "collisionType" object
         if (this.collisionData.touchPoints.other.id === collisionType) {
+            // check if the collisionType is not already in the collisions array
             if (!this.state.collisions.includes(collisionType)) {
+                // add the collisionType to the collisions array, making it the current collision
                 this.state.collisions.push(collisionType);
             }
         }
@@ -277,22 +277,25 @@ export class PlayerBase extends Character {
      * gameLoop: Tears down Player collision events
      */
     handleCollisionEnd() {
-        // remove each collision when player is no longer touching the object
-        if (this.state.collision === "floor") {
-            // noop
+        // test if this.state.collision is floor, if so, do nothing as it is the default state
+        if (this.state.collision === "floor") { 
+        // else if collision exists in collisions array and it is not the current collision
         } else if (this.state.collisions.includes(this.state.collision) && this.collisionData.touchPoints.other.id !== this.state.collision ) {
+            // filter out the collision from the array, or in other words, remove the collision
             this.state.collisions = this.state.collisions.filter(collision => collision !== this.state.collision);
         }
     }
    
     /**
-     * gameLoop: Updates Player state based on the most recent collision
+     * gameLoop: Sets Player collision state from most recent collision in collisions array
      */
-    updatePlayerState() {
-        // set player collision id based on last collision  
+    setActiveCollision() {
+        // check array for any remaining collisions
         if (this.state.collisions.length > 0) {
+            // the array contains collisions, set the the last collision in the array
             this.state.collision = this.state.collisions[this.state.collisions.length - 1];
         } else {
+            // the array is empty, set to floor collision (default state)
             this.state.collision = "floor";
         }
     }
@@ -301,11 +304,14 @@ export class PlayerBase extends Character {
      * gameloop: Handles Player reaction / state updates to the collision
      */
     handlePlayerReaction() {
+        // gravity on is default for player/character
         this.gravityEnabled = true;
 
+        // handle player reaction based on collision type
         switch (this.state.collision) {
             // 1. Player is on a jump platform
             case "jumpPlatform":
+                // Player is on top of the jump platform
                 if (this.collisionData.touchPoints.this.top) {
                     this.state.movement = { up: false, down: false, left: true, right: true, falling: false};
                     this.gravityEnabled = false;
@@ -313,19 +319,26 @@ export class PlayerBase extends Character {
                 break;
             // 2. Player is on or touching a wall 
             case "wall":
+                // Player is on top of the wall
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
                     this.state.movement = { up: false, down: false, left: true, right: true, falling: false};
                     this.gravityEnabled = false;
+                // Player is touching the wall with right side
                 } else if (this.collisionData.touchPoints.this.right) {
                     this.state.movement = { up: false, down: false, left: true, right: false, falling: false};
+                // Player is touching the wall with left side
                 } else if (this.collisionData.touchPoints.this.left) {
                     this.state.movement = { up: false, down: false, left: false, right: true, falling: false};
                 }
                 break;
+            // 4. Player is in default state
             case "floor":
-                // 3. Player is on the floor, default platform
+                // Player is on the floor
                 if (this.onTop) {
                     this.state.movement = { up: false, down: false, left: true, right: true, falling: false};
+                // Player is falling, there are no collisions, but is in default state 
+                } else { 
+                    this.state.movement = { up: false, down: false, left: true, right: true, falling: true};
                 }
                 break;
         }

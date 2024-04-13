@@ -46,14 +46,14 @@ export class PlayerHills extends PlayerBase {
 
     /**
      * @override
-     * gameLoop: Set up Player additional collision events for game level
-     * 
+     * gameLoop: Watch for Player collision events 
      */ 
     handleCollisionStart() {
         super.handleCollisionStart(); // calls the super class method
         // adds additional collision events
         this.handleCollisionEvent("tube");
         this.handleCollisionEvent("goomba");
+        this.handleCollisionEvent("mushroom");
     }
    
     /**
