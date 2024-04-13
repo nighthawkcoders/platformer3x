@@ -25,33 +25,24 @@ export class PlayerHills extends PlayerBase {
     }
 
     /**
-     * @override, replaces the super class method 
-     * gameloop: updates the player's vertical movement.
+     * @override
+     * gameLoop helper: Update Player jump height, replaces PlayerBase updateJump using settings from GameEnv
      */
-    updateJumpMovement() {
-        if (this.isActiveGravityAnimation("w")) {
-            GameEnv.playSound("PlayerJump");
-            let jumpHeightFactor;
-            // Jump height factor is based on difficulty
-            if (this.gravityEnabled) {
-                if (GameEnv.difficulty === "easy") {
-                    jumpHeightFactor = 0.50;
-                } else if (GameEnv.difficulty === "normal") {
-                    jumpHeightFactor = 0.40;
-                } else {
-                    jumpHeightFactor = 0.30;
-                }
-            // Jump height factor is based being ontop of platform
-            } else if (this.state.movement.down === false) {
-                jumpHeightFactor = 0.15;  // platform jump height
-            }
-            this.y -= (this.bottom * jumpHeightFactor);
+    updateJump() {  
+        let jumpHeightFactor;
+        if (GameEnv.difficulty === "easy") {
+            jumpHeightFactor = 0.50;
+        } else if (GameEnv.difficulty === "normal") {
+            jumpHeightFactor = 0.40;
+        } else {
+            jumpHeightFactor = 0.30;
         }
+        this.y -= (this.bottom * jumpHeightFactor);
     }
 
     /**
      * @override
-     * gameloop: enables a type of collision events between player and object
+     * gameLoop: Set up Player additional collision events for game level
      * 
      */ 
     handleCollisionStart() {
@@ -63,7 +54,7 @@ export class PlayerHills extends PlayerBase {
    
     /**
      * @override
-     * gameloop: handles player reaction to the collision
+     * gameloop: Handles additional Player reaction / state updates to the collision for game level 
      */
     handlePlayerReaction() {
         super.handlePlayerReaction(); // calls the super class method

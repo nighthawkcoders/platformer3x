@@ -20,6 +20,13 @@ class Character extends GameObject {
         
         // gravity for character enabled by default
         this.gravityEnabled = true;
+        this.onTop = false;
+    }
+
+    setSpriteAnimation(animation) {
+        this.setFrameY(animation.row);
+        this.setMinFrame(animation.min ? animation.min : 0);
+        this.setMaxFrame(animation.frames);
     }
 
     getMinFrame(){
@@ -129,8 +136,12 @@ class Character extends GameObject {
     */
     update() {
 
-        if (this.bottom > this.y && this.gravityEnabled)
+        if (this.bottom > this.y && this.gravityEnabled) {
             this.y += GameEnv.gravity;
+            this.onTop = false;
+        } else {
+            this.onTop = true;
+        }
 
         // Update animation frameX of the object
         if (this.frameX < this.maxFrame) {

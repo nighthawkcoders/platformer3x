@@ -217,12 +217,23 @@ const GameSetup = {
           height: 256,
           scaleSize: 80,
           speedRatio: 0.7,
-          wa: { row: 11, frames: 15 },
-          wd: { row: 10, frames: 15 },
-          a: { row: 3, frames: 7, idleFrame: { column: 7, frames: 0 } },
-          s: { row: 12, frames: 15 },
-          d: { row: 2, frames: 7, idleFrame: { column: 7, frames: 0 } },
-          hitbox: { widthPercentage: 0.3, heightPercentage: 0.8}
+          idle: {
+              left: { row: 1, frames: 15 },
+              right: { row: 0, frames: 15},
+          },
+          walk: {
+              left: { row: 3, frames: 7 },
+              right: { row: 2, frames: 7 },
+          },
+          run: {
+              left: { row: 5, frames: 15 },
+              right: { row: 4, frames: 15 },
+          },
+          jump: {
+              left: { row: 11, frames: 15 },
+              right: { row: 10, frames: 15 },
+          },
+          hitbox: { widthPercentage: 0.3, heightPercentage: 0.8 }
         },
         monkey: {
           src: "/images/platformer/sprites/monkey.png",
@@ -385,7 +396,7 @@ const GameSetup = {
             { name: 'mountains', id: 'background', class: BackgroundMountains,  data: this.assets.backgrounds.mountains },
             { name: 'clouds', id: 'background', class: BackgroundClouds, data: this.assets.backgrounds.clouds },
             { name: 'hills', id: 'background', class: BackgroundHills, data: this.assets.backgrounds.hills },
-            { name: 'grass', id: 'platform', class: Platform, data: this.assets.platforms.grass },
+            { name: 'grass', id: 'floor', class: Platform, data: this.assets.platforms.grass },
             { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2, yPercentage: 0.85 },
             { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2368, yPercentage: 0.85 },
             { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2736, yPercentage: 0.85 },
