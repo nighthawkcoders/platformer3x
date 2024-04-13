@@ -41,7 +41,7 @@ export class PlayerHills extends PlayerBase {
         } else {
             jumpHeightFactor = 0.30;
         }
-        this.y -= (this.bottom * jumpHeightFactor);
+        this.setY(this.y - (this.bottom * jumpHeightFactor));
     }
 
     /**

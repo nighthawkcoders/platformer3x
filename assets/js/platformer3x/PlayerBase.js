@@ -2,12 +2,12 @@ import GameEnv from './GameEnv.js';
 import Character from './Character.js';
 
 /**
- * @class Player class
- * @description Player.js key objective is to eent the user-controlled character in the game.   
+ * @class PlayerBase class
+ * @description PlayeiBase.js key objective is to handle the user controlled player's actions and animations. 
  * 
- * The Player class extends the Character class, which in turn extends the GameObject class.
+ * The PlayerBase class extends the Character class, which in turn extends the GameObject class.
  * Animations and events are activated by key presses, collisions, and gravity.
- * WASD keys are used by user to control The Player object.  
+ * WASD keys are used by user to control The PlayerBase object.  
  * 
  * @extends Character
  */
@@ -35,7 +35,6 @@ export class PlayerBase extends Character {
         // player
         animation: 'idle',
         direction: 'right',
-        speed: this.speed,
         movement: {up: false, down: false, left: true, right: true, falling: false},
         isDying: false,
     };
@@ -47,19 +46,18 @@ export class PlayerBase extends Character {
      * @param {Object} data - The data object containing the player's properties.
      */
     constructor(canvas, image, data) {
-        super(canvas, image, data);
+        super(canvas, image, data); // Call the Character class's constructor
 
         // Player Data
         GameEnv.player = this; // Global player object
-        this.playerData = data; // GameSetup data
         this.name = GameEnv.userID; // name of the player
-        this.shouldBeSynced = true; // multi-player sync
-        this.state = {...this.initEnvironmentState}; // start with player on the floor 
 
         // Player control data
-        this.runSpeed = this.speed * 3;
-        this.pressedKeys = {};
-        this.directionKey = "d"; // initially facing right
+        this.state = {...this.initEnvironmentState}; // Player and environment states 
+        this.playerData = data; // GameSetup data
+        this.pressedKeys = {}; // active keys array
+        this.runSpeed = this.speed * 3; // dash speed
+        this.shouldBeSynced = true; // multi-player sync
 
         // Store a reference to the event listener function
         this.keydownListener = this.handleKeyDown.bind(this);
@@ -103,7 +101,8 @@ export class PlayerBase extends Character {
      * gameLoop helper: Udate Player jump height
      */
     updateJump() {
-        this.y -= (this.bottom * 0.35); // Jump height factor
+        // Jump height is 35% of the screen bottom, same as screen height
+        this.setY(this.y - (this.bottom * 0.35)); 
     }
 
     /**
@@ -114,16 +113,23 @@ export class PlayerBase extends Character {
             case 'idle':
                 break;
             case 'jump':
+                // Check condition for player to jump
                 if (this.state.movement.up && !this.state.movement.falling) {
+                    // jump
                     GameEnv.playSound("PlayerJump");
                     this.updateJump();
+                    // start falling
                     this.state.movement.falling = true;
                 }
-                // break is left out to allow left / right speed to be applied 
+                // break is purposely omitted to allow default case to run 
             default:
+                // Player is moving left
                 if (this.state.direction === 'left' && this.state.movement.left && 'a' in this.pressedKeys) {
+                    // Decrease the player's x position according to run or walk animation and related speed
                     this.setX(this.x - (this.state.animation === 'run' ? this.runSpeed : this.speed));
+                // Player is moving right
                 } else if (this.state.direction === 'right' && this.state.movement.right && 'd' in this.pressedKeys){
+                    // Increase the player's x position according to run or walk animation and related speed
                     this.setX(this.x + (this.state.animation === 'run' ? this.runSpeed : this.speed));
                 }
         }
@@ -156,7 +162,7 @@ export class PlayerBase extends Character {
      * User Event: updates the player's state, key pressed is mapped to player's animation state  
      * @param {*} key 
      */
-    updateState(key) {
+    updateAnimationState(key) {
         switch (key) {
             case 'a':
             case 'd':
@@ -201,13 +207,16 @@ export class PlayerBase extends Character {
                 // If "d" is pressed and "a" is pressed afterward, ignore "a" key
                 return;
             }
+            // Set the direction when a or d key is pressed
             if (key === 'a') {
                 this.state.direction = 'left';
             } else if (key === 'd') {
                 this.state.direction = 'right';
             }
+            // Record the pressed key
             this.pressedKeys[event.key] = true;
-            this.updateState(key);
+            // Update the player's animation state based on the pressed key
+            this.updateAnimationState(key);
             GameEnv.transitionHide = true;
         }
 
@@ -228,10 +237,10 @@ export class PlayerBase extends Character {
             if (Object.keys(this.pressedKeys).length > 0) {
                 // If there are still keys in pressedKeys, update the state to the last one
                 const lastKey = Object.keys(this.pressedKeys)[Object.keys(this.pressedKeys).length - 1];
-                this.updateState(lastKey);
+                this.updateAnimationState(lastKey);
             } else {
                 // If there are no more keys in pressedKeys, update the state to null
-                this.updateState(null);
+                this.updateAnimationState(null);
             }
         }
     }
