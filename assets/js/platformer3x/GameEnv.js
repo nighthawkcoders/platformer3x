@@ -145,7 +145,7 @@ export class GameEnv {
     static update() {
         // Update game state, including all game objects
         // if statement prevents game from updating upon player death
-        if (GameEnv.player == null || GameEnv.player.isDying == false) {
+        if (GameEnv.player === null || GameEnv.player.state.isDying === false) {
             for (const gameObject of GameEnv.gameObjects) {
                 gameObject.update();
                 gameObject.serialize();
@@ -192,6 +192,27 @@ export class GameEnv {
     static playSound(id) {
         const sound = document.getElementById(id);
         sound.play();
+    }
+
+    static updateParallaxBackgrounds(key) {
+        switch (key) {
+            case "a":
+                if (GameEnv.player?.x > 2) {
+                    GameEnv.backgroundHillsSpeed = -0.4;
+                    GameEnv.backgroundMountainsSpeed = -0.1;
+                }
+                break;
+            case "d":
+                if (GameEnv.player?.x < (GameEnv.innerWidth - 2)) {
+                    GameEnv.backgroundHillsSpeed = 0.4;
+                    GameEnv.backgroundMountainsSpeed = 0.1;
+                }
+                break;
+            default:
+                GameEnv.backgroundHillsSpeed = 0;
+                GameEnv.backgroundMountainsSpeed = 0;
+                break;
+        }
     }
   }
   
