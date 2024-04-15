@@ -350,6 +350,25 @@ export class PlayerBase extends Character {
                     this.state.movement = { up: false, down: false, left: true, right: true, falling: true};
                 }
                 break;
+
+            // 3. Player is climbing a wall
+            case "climbingWall":
+                // Player is climbing up the wall
+                if (this.state.input.up) {
+                    this.state.movement = { up: true, down: false, left: false, right: false, falling: false };
+                    this.gravityEnabled = false;
+                // Player is climbing down the wall
+                } else if (this.state.input.down) {
+                    this.state.movement = { up: false, down: true, left: false, right: false, falling: false };
+                    this.gravityEnabled = false;
+                // Player is not moving vertically on the wall
+                } else {
+                    this.state.movement = { up: false, down: false, left: false, right: false, falling: false };
+                    this.gravityEnabled = true; // Gravity is enabled when not climbing
+                }
+                break;
+
+            
         }
     }
 
