@@ -208,6 +208,7 @@ const GameSetup = {
         loading: { src: "/images/platformer/backgrounds/greenscreen.png" },
         complete: { src: "/images/platformer/backgrounds/OneStar.png" },
         complete2: { src: "/images/platformer/backgrounds/TwoStar.png" },
+        moon: {src: "/images/platformer/backgrounds/moon.jpg"},
         end: { src: "/images/platformer/backgrounds/Congratulations!!!.png" }
       },
       players: {
@@ -534,7 +535,7 @@ const GameSetup = {
         // Space Game Level definition...
         const spaceGameObjects = [
           // GameObject(s), the order is important to z-index...
-          { name: 'space', id: 'background', class: Background, data: this.assets.backgrounds.space },
+          { name: 'moon', id: 'background', class: Background, data: this.assets.backgrounds.moon },
           { name: 'grass', id: 'platform', class: Platform, data: this.assets.platforms.grass },
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.2, yPercentage: 0.85 },
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.2368, yPercentage: 0.85 },
