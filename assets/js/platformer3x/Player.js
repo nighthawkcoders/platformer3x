@@ -13,12 +13,17 @@ import GameControl from './GameControl.js';
  * @extends Character
  */
 export class Player extends Character {
+    initEnvironmentState = {
+        isDying: false,
+    };
+
     // instantiation: constructor sets up player object 
     constructor(canvas, image, data) {
         super(canvas, image, data);
         // Player Data is required for Animations
         this.playerData = data;
         GameEnv.invincible = false; 
+        this.state = {...this.initEnvironmentState}; // start with player on the floor 
 
         // Player control data
         this.moveSpeed = this.speed * 3;
@@ -36,10 +41,7 @@ export class Player extends Character {
         document.addEventListener('keyup', this.keyupListener);
 
         GameEnv.player = this;
-        this.transitionHide = false;
         this.shouldBeSynced = true;
-        this.isDying = false;
-        this.isDyingR = false;
         this.timer = false;
 
         this.name = GameEnv.userID;
@@ -83,12 +85,12 @@ export class Player extends Character {
                 this.canvas.style.transform = "rotate(-90deg) translate(-26px, 0%)";
                 GameEnv.playSound("PlayerDeath");
 
-                if (this.isDying == false) {
-                    this.isDying = true;
+                if (this.state.isDying == false) {
+                    this.state.isDying = true;
                     setTimeout(async() => {
                         await GameControl.transitionToLevel(GameEnv.levels[GameEnv.levels.indexOf(GameEnv.currentLevel)]);
                         console.log("level restart")
-                        this.isDying = false;
+                        this.state.isDying = false;
                     }, 900); 
                 }
             } else if (GameEnv.difficulty === "easy") {
