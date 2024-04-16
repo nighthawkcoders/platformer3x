@@ -342,17 +342,6 @@ export class PlayerBase extends Character {
                     this.state.movement = { up: false, down: false, left: false, right: true, falling: false};
                 }
                 break;
-            // 4. Player is in default state
-            case "floor":
-                // Player is on the floor
-                if (this.onTop) {
-                    this.state.movement = { up: false, down: false, left: true, right: true, falling: false};
-                // Player is falling, there are no collisions, but is in default state 
-                } else { 
-                    this.state.movement = { up: false, down: false, left: true, right: true, falling: true};
-                }
-                break;
-
             // 3. Player is climbing a wall
             case "climbingWall":
                 // Player is climbing up the wall
@@ -369,7 +358,18 @@ export class PlayerBase extends Character {
                     this.gravityEnabled = true; // Gravity is enabled when not climbing
                 }
                 break;
-
+            
+            // 4. Player is in default state
+            case "floor":
+                // Player is on the floor
+                if (this.onTop) {
+                    this.state.movement = { up: false, down: false, left: true, right: true, falling: false};
+                // Player is falling, there are no collisions, but is in default state 
+                } else { 
+                    this.state.movement = { up: false, down: false, left: true, right: true, falling: true};
+                }
+                break;
+            
             
         }
     }
