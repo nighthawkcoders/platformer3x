@@ -12,7 +12,7 @@ import JumpPlatform from './JumpPlatform.js';
 import Player from './Player.js';
 import PlayerHills from './PlayerHills.js';
 import Tube from './Tube.js';
-//import Tree from './Tree.js';
+import Tree from './Tree.js';
 import Goomba from './Goomba.js';
 import FlyingGoomba from './FlyingGoomba.js';
 import BlockPlatform from './BlockPlatform.js';
@@ -553,7 +553,7 @@ const GameSetup = {
           { name: 'flyingUFO', id: 'flyingUFO', class: FlyingUFO, data: this.assets.enemies.flyingUFO, xPercentage:  0.1, minPosition:  0.05},
           { name: 'flyingUFO', id: 'flyingUFO', class: FlyingUFO, data: this.assets.enemies.flyingUFO, xPercentage:  0.5, minPosition:  0.05},
           { name: 'monkey', id: 'player', class: Player, data: this.assets.players.monkey },
-          { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
+          { name: 'tube', id: 'tube', class: Tree, data: this.assets.obstacles.tube },
           { name: 'complete2', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.complete2 },
         ];
         // Space Game Level added to the GameEnv ...
