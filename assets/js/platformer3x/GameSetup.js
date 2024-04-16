@@ -79,7 +79,6 @@ const GameSetup = {
             const waitButton = document.getElementById(id);
             // Listener function to resolve the promise when the button is clicked
             const waitButtonListener = () => {
-<<<<<<< HEAD
               GameControl.stopTimer()
                 if (!GameEnv.timerActive) {
                   GameControl.startTimer()
@@ -105,10 +104,8 @@ const GameSetup = {
             
             if ( userScoreElement) {
                 // Update the displayed time
-                userScoreElement.textContent = GameEnv.coinScore.toFixed(2);
+                userScoreElement.textContent = (GameEnv.coinScore/1000).toFixed(2);
             }
-=======
->>>>>>> origin/main
                 resolve(true);
             };
             // Add the listener to the button's click event
