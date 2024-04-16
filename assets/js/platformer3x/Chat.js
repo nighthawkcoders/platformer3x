@@ -13,7 +13,7 @@ class Chat {
         '911', 'die', 'luigi', 'peach', 'bowser', 'mario', 
         'mr.mortensen', 'mr. mortensen', 'mortensen', 'lopez', 
         'mr.lopez', 'mr. lopez','mister mortensen', 'mister lopez', 
-        'aws', 'amazonwebservices', 'amazon', 'amazonweb', 'shit', 'fuck', 'bitch', 'gay', 'ass', 'asshole', 'lgbt', 'pussy', 'queer'];
+        'aws', 'amazonwebservices', 'amazon', 'amazonweb'];
 
         this.prohibitedWords.concat(wordsToAdd);
     }
@@ -29,7 +29,7 @@ class Chat {
     parseMessage(message){
         this.prohibitedWords.forEach(word => {
             const regex = new RegExp('\\b' + word + '\\b', 'gi');
-            message = message.replace(regex, 'hey :( you shouldn\'t say that :( that\'s mean and we don\'t like that :( stop it :('.repeat(word.length));
+            message = message.replace(regex, 'I Love CSSE! '.repeat(word.length));
         });
         return message;
     }
@@ -65,40 +65,31 @@ class Chat {
         }
 
         function onMessage(){
-            // Remove the listener to prevent multiple listeners being added
-            Multiplayer.removeListener("onMessage");
-            // Add a new listener to handle incoming messages
-            Multiplayer.createListener("onMessage",(data)=>{
-                var message = this.parseMessage(data.message);
-                addMessage(message, data.name ? data.name : data.id);
-                this.soundArray.forEach((d)=>{
-                    if (d[1]==true){ //sound can be played
-                        d[0].play();
-                        d[1]=false;
-                        return;
-                    }
-                });
-                var sound = createSound(this.soundSource);
-                var arrayToAdd = [sound,true];
-                this.soundArray.push(arrayToAdd);
-                sound.addEventListener("ended",()=>{
-                    arrayToAdd[1]=true;
+                Multiplayer.removeListener("onMessage")
+                Multiplayer.createListener("onMessage",(data)=>{
+                    var message = this.parseMessage(data.message);
+                    addMessage(message,data.name?data.name:data.id);
+                    this.soundArray.forEach((d)=>{
+                        if (d[1]==true){ //sound can be played
+                            d[0].play();
+                            d[1]=false;
+                            return;
+                        }
+                    });
+                    var sound = createSound(this.soundSource);
+                    var arrayToAdd = [sound,true];
+                    this.soundArray.push(arrayToAdd);
+                    sound.addEventListener("ended",()=>{
+                        arrayToAdd[1]=true;
+                    })
+                    sound.play();
                 })
-                sound.play();
-            });
-            
-            var message = input.value;
-            message = this.parseMessage(message);
-            addMessage(message, "you");
-            this.sendMessage(message);
-        
-            // Clear the input field after sending the message
-            input.value = "";
-        
-            // Optionally, scroll the chat to the latest message
-            div2.scrollTop = div2.scrollHeight;
-        }
-        
+                var message = input.value;
+                message = this.parseMessage(message);
+                addMessage(message,"you");
+                this.sendMessage(message);
+            }
+        button.addEventListener("click",onMessage.bind(this));
 
         function KeyCheck(e){
             //console.log(this)

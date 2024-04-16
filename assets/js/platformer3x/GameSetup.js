@@ -1,7 +1,6 @@
 // GameSehup.js Key objective is to define GameLevel objects and their assets.
 import GameEnv from './GameEnv.js';
 import GameLevel from './GameLevel.js';
-import GameControl from './GameControl.js';
 // To build GameLevels, each contains GameObjects from below imports
 import Background from './Background.js'
 import BackgroundHills from './BackgroundHills.js';
@@ -18,8 +17,11 @@ import FlyingGoomba from './FlyingGoomba.js';
 import BlockPlatform from './BlockPlatform.js';
 import Mushroom from './Mushroom.js';
 import Coin from './Coin.js';
+import FlyingUFO from './FlyingUFO.js';
+import Alien from './Alien.js';
+import GameControl from './GameControl.js';
 
-//test
+//test comment
 
 /* Coding Style Notes
  *
@@ -76,6 +78,7 @@ const GameSetup = {
             const waitButton = document.getElementById(id);
             // Listener function to resolve the promise when the button is clicked
             const waitButtonListener = () => {
+<<<<<<< HEAD
               GameControl.stopTimer()
                 if (!GameEnv.timerActive) {
                   GameControl.startTimer()
@@ -103,6 +106,8 @@ const GameSetup = {
                 // Update the displayed time
                 userScoreElement.textContent = GameEnv.coinScore.toFixed(2);
             }
+=======
+>>>>>>> origin/main
                 resolve(true);
             };
             // Add the listener to the button's click event
@@ -175,7 +180,7 @@ const GameSetup = {
       id.hidden = false;
       GameControl.stopTimer()
       // Wait for the restart button to be clicked
-      await this.waitForButtonRestart('restartGame');
+      await this.waitForButton('restartGame');
       id.hidden = true;
       
       // Change currentLevel to start/restart value of null
@@ -300,6 +305,20 @@ const GameSetup = {
           height: 180,
           hitbox: { widthPercentage: 0.0, heightPercentage: 0.2}
         },
+        alien: {
+          src: "/images/platformer/sprites/alien.png",
+          width: 444,
+          height: 640,
+          scaleSize: 60,
+          speedRatio: 0.85,
+        },
+        flyingUFO: {
+          src: "/images/platformer/sprites/flying-ufo.png",
+          width: 1920,
+          height: 1166,
+          scaleSize: 150,
+          speedRatio: 0.9,
+        },
       }
     },
 
@@ -375,11 +394,19 @@ const GameSetup = {
         // Home Screen Background added to the GameEnv, "passive" means complementary, not an interactive level..
         new GameLevel( {tag: "home",  callback: this.homeScreenCallback, objects: homeGameObjects, passive: true } );
         
+      // Check local storage for the difficulty mode set
+      let difficulty = localStorage.getItem("difficulty");
+
+      // If difficulty is not set (null or undefined), set it to a default value
+      if (!difficulty) {
+          difficulty = "normal"; // Set default difficulty to "normal" or any other suitable value
+      }
+      
       // Hills Game Level defintion...
       const hillsGameObjects = [];
 
        
-      switch(localStorage.getItem("difficulty"))
+      switch(difficulty)
       {
         // change number of each type of goomba for each difficulty
         case "easy":
@@ -537,11 +564,11 @@ const GameSetup = {
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.4, yPercentage: 0.8 },
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.4, yPercentage: 0.7 },
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.4, yPercentage: 0.6 },
-          { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage: 0.3, minPosition: 0.07},
-          { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage:  0.5, minPosition: 0.3 },
-          { name: 'goombaSpecial', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage:  0.75, minPosition: 0.5 }, //this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
-          { name: 'flyingGoomba', id: 'flyingGoomba', class: FlyingGoomba, data: this.assets.enemies.flyingGoomba, xPercentage:  0.5, minPosition:  0.05},
-          { name: 'flyingGoomba', id: 'flyingGoomba', class: FlyingGoomba, data: this.assets.enemies.flyingGoomba, xPercentage:  0.9, minPosition: 0.5},
+          { name: 'alien', id: 'alien', class: Alien, data: this.assets.enemies.alien, xPercentage:  0.3, minPosition: 0.07 },
+          { name: 'alien', id: 'alien', class: Alien, data: this.assets.enemies.alien, xPercentage:  0.5, minPosition: 0.3 },
+          { name: 'alienSpecial', id: 'alien', class: Alien, data: this.assets.enemies.alien, xPercentage:  0.75, minPosition: 0.5 }, //this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
+          { name: 'flyingUFO', id: 'flyingUFO', class: FlyingUFO, data: this.assets.enemies.flyingUFO, xPercentage:  0.1, minPosition:  0.05},
+          { name: 'flyingUFO', id: 'flyingUFO', class: FlyingUFO, data: this.assets.enemies.flyingUFO, xPercentage:  0.5, minPosition:  0.05},
           { name: 'monkey', id: 'player', class: Player, data: this.assets.players.monkey },
           { name: 'tree', id: 'tree', class: Tree, data: this.assets.obstacles.tree },
           { name: 'complete2', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.complete2 },
