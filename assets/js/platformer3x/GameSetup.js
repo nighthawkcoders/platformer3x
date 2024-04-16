@@ -209,7 +209,7 @@ const GameSetup = {
         complete: { src: "/images/platformer/backgrounds/OneStar.png" },
         complete2: { src: "/images/platformer/backgrounds/TwoStar.png" },
         end: { src: "/images/platformer/backgrounds/Congratulations!!!.png" },
-        moon: {src: "/images/platfromer/backgrounds/moon.jpg" },
+        moon: { src: "/images/platfromer/backgrounds/moon.jpg" },
       },
       players: {
         mario: {
