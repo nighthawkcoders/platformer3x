@@ -185,7 +185,6 @@ const GameSetup = {
         alien: { src: "/images/platformer/platforms/alien.png" },
         bricks: { src: "/images/platformer/platforms/brick_wall.png" },
         block: { src: "/images/platformer/platforms/brick_block.png" }, //MAY need 3 new variables: sizeRatio, widthRatio, and heightRatio
-        ground: { src: "/images/platformer/platforms/ground.png" },
         itemBlock: {
           src: "/images/platformer/platforms/mario_block_spritesheet_v2.png",
           sizeRatio: 83.2,
@@ -209,8 +208,7 @@ const GameSetup = {
         loading: { src: "/images/platformer/backgrounds/greenscreen.png" },
         complete: { src: "/images/platformer/backgrounds/OneStar.png" },
         complete2: { src: "/images/platformer/backgrounds/TwoStar.png" },
-        end: { src: "/images/platformer/backgrounds/Congratulations!!!.png" },
-        moon: { src: "/images/platfromer/backgrounds/moon.jpg" },
+        end: { src: "/images/platformer/backgrounds/Congratulations!!!.png" }
       },
       players: {
         mario: {
@@ -536,16 +534,17 @@ const GameSetup = {
         // Space Game Level definition...
         const spaceGameObjects = [
           // GameObject(s), the order is important to z-index...
-          { name: 'moon', id: 'background', class: Background, data: this.assets.backgrounds.moon },
-          { name: 'ground', id: 'platform', class: Platform, data: this.assets.platforms.ground },
+          { name: 'space', id: 'background', class: Background, data: this.assets.backgrounds.space },
+          { name: 'grass', id: 'platform', class: Platform, data: this.assets.platforms.grass },
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.2, yPercentage: 0.85 },
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.2368, yPercentage: 0.85 },
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.5, yPercentage: 0.85 },
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.5368, yPercentage: 0.85 },
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.4, yPercentage: 1 },
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.4, yPercentage: 0.9 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.4, yPercentage: 0.8 },
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.4, yPercentage: 0.7 },
-          { name: 'itemBlock', id: 'jumpPlatform', class: JumpPlatform, data: this.assets.platforms.itemBlock, xPercentage: 0.4, yPercentage: 0.65 },
+          { name: 'itemBlock', id: 'jumpPlatform', class: JumpPlatform, data: this.assets.platforms.itemBlock, xPercentage: 0.4, yPercentage: 0.65 },,
           { name: 'alien', id: 'alien', class: Alien, data: this.assets.enemies.alien, xPercentage:  0.3, minPosition: 0.07 },
           { name: 'alien', id: 'alien', class: Alien, data: this.assets.enemies.alien, xPercentage:  0.5, minPosition: 0.3 },
           { name: 'alienSpecial', id: 'alien', class: Alien, data: this.assets.enemies.alien, xPercentage:  0.75, minPosition: 0.5 }, //this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
