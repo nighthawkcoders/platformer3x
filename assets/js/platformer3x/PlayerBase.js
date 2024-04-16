@@ -360,7 +360,7 @@ export class PlayerBase extends Character {
                     this.state.movement = { up: true, down: false, left: false, right: false, falling: false };
                     this.gravityEnabled = false;
                 // Player is climbing down the wall
-                } else if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
+                } else if (this.collisionData.touchPoints.this.top) {
                     this.state.movement = { up: false, down: true, left: false, right: false, falling: false };
                     this.gravityEnabled = false;
                 // Player is not moving vertically on the wall
