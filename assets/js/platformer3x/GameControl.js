@@ -44,19 +44,11 @@ const GameControl = {
      * Updates and displays the game timer.
      * @function updateTimer
      * @memberof GameControl
-     */
-    updateScore() {
-    
-        const userScoreElement = document.getElementById('userScore');
-        if ( userScoreElement) {
-            // Update the displayed time
-            userScoreElement.textContent = GameEnv.coinScore.toFixed(2);
-        }
-    },   
-    async saveTime(time, score) {
+     */ 
+    saveTime(time, score) {
         if (time == 0) return;
         const userID = GameEnv.userID
-        const oldTable = await this.getAllTimes()
+        const oldTable = this.getAllTimes()
 
         const data = {
             userID: userID,
@@ -73,7 +65,7 @@ const GameControl = {
 
         localStorage.setItem(this.localStorageTimeKey, JSON.stringify(oldTable))
     },
-    async getAllTimes() {
+    getAllTimes() {
         let timeTable = null;
 
         try {
