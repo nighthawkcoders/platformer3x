@@ -312,6 +312,8 @@ export class PlayerBase extends Character {
     /**
      * gameloop: Handles Player reaction / state updates to the collision
      */
+    // Assuming you have some kind of input handling system
+
     handlePlayerReaction() {
         // gravity on is default for player/character
         this.gravityEnabled = true;
@@ -354,11 +356,11 @@ export class PlayerBase extends Character {
             // 3. Player is climbing a wall
             case "climbingWall":
                 // Player is climbing up the wall
-                if (this.state.input.up) {
+                if (this.collisionData.touchPoints.this.left) {
                     this.state.movement = { up: true, down: false, left: false, right: false, falling: false };
                     this.gravityEnabled = false;
                 // Player is climbing down the wall
-                } else if (this.state.input.down) {
+                } else if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
                     this.state.movement = { up: false, down: true, left: false, right: false, falling: false };
                     this.gravityEnabled = false;
                 // Player is not moving vertically on the wall
