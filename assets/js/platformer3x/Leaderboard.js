@@ -57,7 +57,7 @@ export class Leaderboard{
             td1.innerText = score.userID;
             row.append(td1);
             var td2 = document.createElement("td");
-            td2.innerText = score.time;
+            td2.innerText = (score.time/1000);
             row.append(td2);
             table.append(row);
         });
