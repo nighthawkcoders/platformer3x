@@ -185,6 +185,7 @@ const GameSetup = {
         alien: { src: "/images/platformer/platforms/alien.png" },
         bricks: { src: "/images/platformer/platforms/brick_wall.png" },
         block: { src: "/images/platformer/platforms/brick_block.png" }, //MAY need 3 new variables: sizeRatio, widthRatio, and heightRatio
+        ground: { src: "/images/platformer/platforms/ground.png" },
         itemBlock: {
           src: "/images/platformer/platforms/mario_block_spritesheet_v2.png",
           sizeRatio: 83.2,
@@ -536,7 +537,7 @@ const GameSetup = {
         const spaceGameObjects = [
           // GameObject(s), the order is important to z-index...
           { name: 'moon', id: 'background', class: Background, data: this.assets.backgrounds.moon },
-          { name: 'grass', id: 'platform', class: Platform, data: this.assets.platforms.grass },
+          { name: 'ground', id: 'platform', class: Platform, data: this.assets.platforms.ground },
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.2, yPercentage: 0.85 },
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.2368, yPercentage: 0.85 },
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.5, yPercentage: 0.85 },
