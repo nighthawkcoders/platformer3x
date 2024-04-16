@@ -2,7 +2,7 @@ import Character from './Character.js';
 import GameEnv from './GameEnv.js';
 import GameControl from './GameControl.js';
 
-export class Goomba extends Character {
+export class Alien extends Character {
     // constructors sets up Character object 
     constructor(canvas, image, data, xPercentage, yPercentage, name, minPosition){
         super(canvas, image, data);
@@ -41,7 +41,7 @@ export class Goomba extends Character {
         //Random Event 2: Time Stop All Goombas
         if (GameControl.randomEventId === 2 && GameControl.randomEventState === 1) {
             this.speed = 0;
-            if (this.name === "goombaSpecial") {
+            if (this.name === "alienSpecial") {
                 GameControl.endRandomEvent();
             };
         };
@@ -82,7 +82,7 @@ export class Goomba extends Character {
         } else if (GameEnv.difficulty === "impossible") {
             this.canvas.style.filter = 'brightness(1000%)';
             this.immune = 1;
-        }
+        } 
 
         // Move the enemy
         this.x -= this.speed;
@@ -92,7 +92,7 @@ export class Goomba extends Character {
     
     // Player action on collisions
     collisionAction() {
-        if (this.collisionData.touchPoints.other.id === "tube") {
+        if (this.collisionData.touchPoints.other.id === "tree") {
             if (this.collisionData.touchPoints.other.left || this.collisionData.touchPoints.other.right) {
                 this.speed = -this.speed;            
             }
@@ -128,7 +128,7 @@ export class Goomba extends Character {
             }
         }
 
-        if (this.collisionData.touchPoints.other.id === "goomba") {
+        if (this.collisionData.touchPoints.other.id === "alien") {
             if (GameEnv.difficulty !== "impossible" && (this.collisionData.touchPoints.other.left || this.collisionData.touchPoints.other.right)) {
                 this.speed = -this.speed;      
             }
@@ -141,4 +141,4 @@ export class Goomba extends Character {
     }
 }
 
-export default Goomba;
+export default Alien;
