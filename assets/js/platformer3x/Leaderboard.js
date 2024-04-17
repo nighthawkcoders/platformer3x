@@ -67,15 +67,12 @@ export class Leaderboard{
             row.append(td2);
             table.append(row);
         });
-<<<<<<< HEAD
 
         // Update the current page number
         this.currentPage = pageNumber
 
         // Populate the table with coin/goomba scores
         
-=======
->>>>>>> refs/remotes/origin/main
     }
 
     // Create button for paging controls
@@ -149,17 +146,9 @@ export class Leaderboard{
         localMultiplayer.id = "leaderboardTitle";
         document.getElementById("leaderboardDropDown").appendChild(localMultiplayer);
 
-<<<<<<< HEAD
-        var localLeaderboard = new Leaderboard("localTimes");
-        var serverLeaderboard = new Leaderboard("serverTimes");
 
-        // Add paging controls
-        const pagingControlsDiv = localLeaderboard.createPagingControls();
-        document.getElementById("leaderboardDropDown").appendChild(pagingControlsDiv);
-=======
         var localLeaderboard = new Leaderboard(GameControl.localStorageTimeKey);
         var serverLeaderboard = new Leaderboard("GtimeScores")
->>>>>>> refs/remotes/origin/main
 
         var t1 = localLeaderboard.leaderboardTable;
         var t2 = serverLeaderboard.leaderboardTable;
