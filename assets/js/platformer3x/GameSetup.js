@@ -178,7 +178,7 @@ const GameSetup = {
       id.hidden = false;
       GameControl.stopTimer()
       // Wait for the restart button to be clicked
-      await this.waitForButton('restartGame');
+      await this.waitForButtonRestart('restartGame');
       id.hidden = true;
       
       // Change currentLevel to start/restart value of null
