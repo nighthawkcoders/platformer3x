@@ -79,11 +79,6 @@ const GameSetup = {
             const waitButton = document.getElementById(id);
             // Listener function to resolve the promise when the button is clicked
             const waitButtonListener = () => {
-              GameControl.stopTimer()
-                if (!GameEnv.timerActive) {
-                  GameControl.startTimer()
-                  resolve(true)
-                }
                 resolve(true);
             };
             // Add the listener to the button's click event
