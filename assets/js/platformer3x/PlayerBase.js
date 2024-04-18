@@ -1,5 +1,6 @@
 import GameEnv from './GameEnv.js';
 import Character from './Character.js';
+import GameControl from './GameControl.js';
 
 /**
  * @class PlayerBase class
@@ -218,6 +219,7 @@ export class PlayerBase extends Character {
             // Update the player's animation state based on the pressed key
             this.updateAnimationState(key);
             GameEnv.transitionHide = true;
+            GameControl.startTimer()
         }
 
         // parallax background speed starts on player movement
