@@ -14,7 +14,9 @@ class Chat {
         '911', 'die', 'luigi', 'peach', 'bowser', 'mario', 
         'mr.mortensen', 'mr. mortensen', 'mortensen', 'lopez', 
         'mr.lopez', 'mr. lopez','mister mortensen', 'mister lopez', 
-        'aws', 'amazonwebservices', 'amazon', 'amazonweb'];
+        'aws', 'amazonwebservices', 'amazon', 'amazonweb',
+        'shit', 'fuck', 'bitch', 'ass', 'asshole',
+        'piss', 'penis'];
 
         this.prohibitedWords = this.prohibitedWords.concat(wordsToAdd);
     }
