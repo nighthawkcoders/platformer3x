@@ -32,7 +32,7 @@ class Chat {
     parseMessage(message){
         this.prohibitedWords.forEach(word => {
             const regex = new RegExp('\\b' + word + '\\b', 'gi');
-            message = message.replace(regex, 'I Love CSSE! '.repeat(word.length));
+            message = message.replace(regex, 'Erm...you can\'t say that here! This is a safe space! o_o ');
         });
         return message;
     }
