@@ -187,8 +187,7 @@ const GameSetup = {
         sand: { src: "/images/platformer/platforms/sand.png"},
         soil: { src: "/images/platfromer/platforms/soil.png"},
         block: { src: "/images/platformer/platforms/brick_block.png" }, //MAY need 3 new variables: sizeRatio, widthRatio, and heightRatio
-        itemBlock: {
-          src: "/images/platformer/platforms/mario_block_spritesheet_v2.png",
+        itemBlock: { src: "/images/platformer/platforms/mario_block_spritesheet_v2.png",
           sizeRatio: 83.2,
           widthRatio: 0.5,
           heightRatio: 1.0,
