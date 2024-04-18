@@ -2,14 +2,13 @@
 // Uncomment out the following themes to use them 
 
 // Guide: https://github.com/jekyll/minima/blob/master/README.md
-@import "minima/dark-mode"; 
+@import "minima/light-mode"; 
 
 /*--- CUSTOM STYLES FOR Nighthawkpages ---*/
 @import "minima/Nighthawkpages-styles"; 
 @import "minima/Nighthawkpages-button-styles"; // calculator, binary math styles 
 @import "minima/dracula/color-highlight-styles";  // Dracula theme
-@import "minima/dracula/platformer-styles";  // platformer game styles 
-
+@import "minima/dracula/platformer-styles"; 
 
 /*--- CUSTOM STYLES FOR Minma ---*/
 //@import "minima/leaf/_leaf";  //Leaf theme 
@@ -23,3 +22,6 @@
 //@import "minima/hamilton/skins/midnight";
 //@import "minima/hamilton/skins/sunrise";
 //@import "minima/hamilton/skins/sunset"
+
+@import "dark-mode.scss";
+@import "light-mode.scss";

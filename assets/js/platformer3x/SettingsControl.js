@@ -181,6 +181,15 @@ export class SettingsControl extends LocalStorage{
             // Save the gravity value to local storage
             this.save(this.keys.difficulty); 
         });
+
+        window.addEventListener("isTheme", (e)=>{ 
+            // Update the isInverted value when an invert event is fired
+            this[this.keys.isTheme] = e.detail.isTheme();
+            // Update the isInverted value in the game environment
+            GameEnv.isTheme = this[this.keys.isTheme]; 
+            // Save the isInverted value to local storage
+            this.save(this.keys.isTheme); 
+        });
  
     }
 
@@ -277,6 +286,32 @@ export class SettingsControl extends LocalStorage{
         });
     
         div.append(isInverted); // wrap input element in div
+        return div;
+    }
+
+    get isThemeInput() {
+        const div = document.createElement("div");
+        div.innerHTML = "Theme Change: "; // label
+    
+        const islightMode = document.createElement("input");  // get user defined invert boolean
+        islightMode.type = "checkbox";
+        islightMode.checked = GameEnv.lightMode; // GameEnv contains latest isInverted state
+    
+       // Add event listener to the input element
+islightMode.addEventListener("change", () => {
+    // Dispatch event to switch the theme to light mode
+    window.dispatchEvent(new CustomEvent("switchToLightMode"));
+});
+
+// Listen for the custom event to switch to light mode
+window.addEventListener("switchToLightMode", () => {
+    const body = document.body;
+    body.classList.remove("dark-mode.scss"); // Remove 'dark-mode' class from the body
+    const themeStyle = document.getElementById("theme-style");
+    themeStyle.href = "light-mode.scss"; // Update the theme style href to the light mode CSS file
+});
+    
+        div.append(islightMode); // wrap input element in div
         return div;
     }
 
@@ -383,21 +418,6 @@ export class SettingsControl extends LocalStorage{
         button.addEventListener("click", () => {
             // dispatch event to update difficulty
             button.innerText = String(Socket.changeStatus());
-        });
-    
-        div.append(button); // wrap button element in div
-        return div;
-    }
-
-    get themeButton() {
-        const div = document.createElement("div");
-        div.innerHTML = "Dark-mode: "; // label
-    
-        const button = document.createElement("button"); // button for Multiplayer
-        button.innerText = String(Socket.shouldBeSynced); ////CHANGE TO THEME BUTTON THINGY
-    
-        button.addEventListener("click", () => {
-            ////CHANGE TO THEME BUTTON THINGY
         });
     
         div.append(button); // wrap button element in div
@@ -512,27 +532,6 @@ export class SettingsControl extends LocalStorage{
         var invertControl = settingsControl.isInvertedInput;
         document.getElementById("sidebar").append(invertControl); 
 
-        var hintsSection = document.createElement("div")
-        hintsSection.innerHTML = "Toggle fun facts: "
-        
-        var hintsButton = document.createElement("input")
-        hintsButton.type = "checkbox"
-        hintsButton.checked = true
-        
-        hintsButton.addEventListener("click", () => {
-            const hints = document.getElementsByClassName("fun_facts")[0]
-
-            if (!hintsButton.checked) {
-                hints.style.display = "none"
-            }
-            else {
-                hints.style.display = "unset"
-            }
-        })
-
-        hintsSection.append(hintsButton)
-        document.getElementById("sidebar").append(hintsSection)
-
         // Get/Construct HTML input and event update for game speed 
         var gameSpeed = settingsControl.gameSpeedInput;
         document.getElementById("sidebar").append(gameSpeed);
@@ -549,10 +548,6 @@ export class SettingsControl extends LocalStorage{
         var multiplayerButton = settingsControl.multiplayerButton;
         document.getElementById("sidebar").append(multiplayerButton);
 
-        // Get/Construct HTML button and event update for theme
-        var themeButton = settingsControl.themeButton;
-        document.getElementById("sidebar").append(themeButton);
-
         // Get/Construct HTML button and event update for multiplayer
         var chatButton = settingsControl.chatButton;
         document.getElementById("sidebar").append(chatButton);
@@ -560,6 +555,11 @@ export class SettingsControl extends LocalStorage{
          // Get/Construct HTML button and event update for multiplayer
          var playerCount = settingsControl.playerCount;
          document.getElementById("sidebar").append(playerCount);
+
+          // Get/Construct HTML input and event update for theme change
+        var themeChangeControl = settingsControl.isThemeInput;
+        document.getElementById("sidebar").append(themeChangeControl); 
+
 
 
         // Listener, isOpen, and function for sidebar open and close

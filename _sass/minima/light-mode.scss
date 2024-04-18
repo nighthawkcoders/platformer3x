@@ -1,0 +1,105 @@
+
+$high-emph: #FFFFFF;
+$med-emph: (#FFFFFF );
+$low-emph: (#FFFFFF );
+$dark-grey: #FFFFFF;
+$black: #3a3939;
+
+
+html, body, input, textarea, select, button {   
+  color: $high-emph !important;
+  background-color: $dark-grey !important;
+}
+
+a {
+    color: rgb(75, 186, 255) !important;
+}
+
+a:hover {
+    color:$high-emph !important;
+}
+
+.site-title, .site-title:visited, .site-nav, .page-link {
+    color: $black!important;
+}
+
+.site-nav {
+    background-color: $high-emph;
+    border-color: $high-emph;
+}
+
+* {
+    scrollbar-color: #FFFFFF; 
+}
+
+pre, code {
+    // BVas a lighter colour to better highlight short code words
+    border-color: $dark-grey;
+    background-color: $dark-grey;
+}
+
+.page-description {
+    color: $black
+}
+
+.post-meta {
+    color: $low-emph;
+}
+
+.post-content p, .post-content li {
+    color: $med-emph;
+}
+
+.btn {
+    background-color: $high-emph !important;
+    color: $high-emph !important;
+    border-color: $high-emph !important;
+}
+
+.btn:hover {
+    background-color: $dark-grey !important;
+}
+
+table th{
+    background-color: $black;
+    border-color: $black;
+    color: $high-emph;
+}
+
+table td{
+    background-color: $black;
+    border-color: $black;
+    color: $med-emph;
+}
+
+.flash {
+    color: $dark-grey !important;
+    filter: brightness(80%);
+}
+
+canvas {
+    background-color: #FFFFFF; 
+}
+
+.post-list > li > div {
+    box-shadow: none !important;
+    background-color: $high-emph;
+    border: none !important;
+}
+
+li .post-meta-description {
+    color: $med-emph !important;
+}
+
+.search-result-preview{
+    color: $black !important; 
+}
+
+.search-result-highlight {
+    color:yellow !important;
+    font-weight:bold !important;
+}
+
+.search-results-list-item .search-result-title {
+    color: cornflowerblue !important;
+}
