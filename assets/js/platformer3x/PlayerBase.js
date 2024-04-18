@@ -318,51 +318,24 @@ export class PlayerBase extends Character {
         // gravity on is default for player/character
         this.gravityEnabled = true;
 
-        if (this.state.collision === "wall") {
-            // If player is on top of the wall, prevent falling through
-            if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
-                this.setY(this.collisionData.other.bottom + this.height);
-                this.state.movement.falling = false;
-            }
-            // Add additional conditions for handling side collisions if necessary
-        }
-    
-        // Handle collision with floor
-        if (this.state.collision === "floor") {
-            // If player is above the floor, prevent falling through
-            if (this.collisionData.touchPoints.this.bottom && this.collisionData.touchPoints.other.top) {
-                this.setY(this.collisionData.other.top - this.height);
-                this.state.movement.falling = false;
-            }
-        }
         // handle player reaction based on collision type
-
         switch (this.state.collision) {
-        
+            // 1. Player is on a jump platform
             case "jumpPlatform":
                 // Player is on top of the jump platform
                 if (this.collisionData.touchPoints.this.top) {
                     this.state.movement = { up: false, down: false, left: true, right: true, falling: false};
                     this.gravityEnabled = false;
                 }
-                // Player is touching the jump platform on its right side
-                 if (this.collisionData.touchPoints.this.right) {
-                    this.state.movement = { up: false, down: false, left: true, right: false, falling: false};
-                    this.setX(this.collisionData.other.left - this.width);
-
-                    this.state.movement.right = true;
+                if (this.collisionData.touchPoints.this.right) {
+                    this.state.movement = { up: true, down: false, left: false, right: true, falling: true};
+                    this.gravityEnabled = false;
                 }
-                // Player is touching the jump platform on its left side
-                 if (this.collisionData.touchPoints.this.left) {
-                    this.state.movement = { up: false, down: false, left: false, right: true, falling: false};
-                    this.setX(this.collisionData.other.right); // Move player to the right edge of the platform
-
-                    this.state.movement.left = true;
-                 }
+                if (this.collisionData.touchPoints.other.left) {
+                    this.state.movement = { up: true, down: false, left: true, right: false, falling: true};
+                    this.gravityEnabled = false;
+                }
                 break;
-
-
-            // 1. Player is on a jump platform
             // 2. Player is on or touching a wall 
             case "wall":
                 // Player is on top of the wall
@@ -404,6 +377,7 @@ export class PlayerBase extends Character {
                     this.state.movement = { up: false, down: false, left: true, right: true, falling: true};
                 }
                 break;
+            
             
         }
     }
