@@ -75,6 +75,8 @@ export class PlayerBase extends Character {
      * This method overrides standard GameObject.destroy.
      * @override
      */
+     
+
     destroy() {
         // Remove event listeners
         document.removeEventListener('keydown', this.keydownListener);
@@ -316,26 +318,34 @@ export class PlayerBase extends Character {
 
     handlePlayerReaction() {
         // gravity on is default for player/character
+
+        // Check if the player is colliding with the jump platform
+       
         this.gravityEnabled = true;
 
         // handle player reaction based on collision type
         switch (this.state.collision) {
             // 1. Player is on a jump platform
             case "jumpPlatform":
-                // Player is on top of the jump platform
-                if (this.collisionData.touchPoints.this.top) {
-                    this.state.movement = { up: false, down: false, left: true, right: true, falling: false};
-                    this.gravityEnabled = false;
-                }
-                if (this.collisionData.touchPoints.this.right) {
-                    this.state.movement = { up: true, down: false, left: false, right: true, falling: true};
-                    this.gravityEnabled = false;
-                }
-                if (this.collisionData.touchPoints.other.left) {
-                    this.state.movement = { up: true, down: false, left: true, right: false, falling: true};
-                    this.gravityEnabled = false;
-                }
-                break;
+            // Player is on top of the jump platform
+            if (this.collisionData.touchPoints.this.top) {
+                // Allow movement in all directions except falling
+                this.state.movement = { up: true, down: false, left: true, right: true, falling: false };
+                // Disable gravity when on the platform to prevent falling
+                this.gravityEnabled = false;
+            }
+            // Player is on the right side of the jump platform
+            if (this.collisionData.touchPoints.this.right) {
+                // Prevent rightward movement
+                this.state.movement.right = false;
+            }
+            // Player is on the left side of the jump platform
+            if (this.collisionData.touchPoints.this.left) {
+                // Prevent leftward movement
+                this.state.movement.left = false;
+            }
+            break;
+        // Handle other collision types...
             // 2. Player is on or touching a wall 
             case "wall":
                 // Player is on top of the wall
@@ -377,11 +387,10 @@ export class PlayerBase extends Character {
                     this.state.movement = { up: false, down: false, left: true, right: true, falling: true};
                 }
                 break;
-            
-            
-        }
-    }
-
+            }
+      }
 }
+
+        
 
 export default PlayerBase;
