@@ -1,5 +1,6 @@
 import GameEnv from './GameEnv.js';
 import GameObject from './GameObject.js';
+import GameControl from './GameControl.js';
 
 export class Coin extends GameObject {
     constructor(canvas, image, data, xPercentage, yPercentage) {
@@ -51,6 +52,8 @@ export class Coin extends GameObject {
     collisionAction() {
         // check player collision
         if (this.collisionData.touchPoints.other.id === "player") {
+            GameEnv.coinScore += 5;
+            GameControl.updateScore()
             this.destroy();
             GameEnv.playSound("coin");
         }

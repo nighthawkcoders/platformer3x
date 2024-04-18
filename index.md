@@ -44,6 +44,7 @@ image: /images/platformer/backgrounds/home.png
     <div class="submenu">
       <div id="score">
           Timer: <span id="timeScore">0</span>
+          Score: <span id="userScore">0</span>
       </div>
       <div id="gameBegin" hidden>
           <button id="startGame">Start Game</button>

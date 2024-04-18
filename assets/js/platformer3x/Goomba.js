@@ -107,6 +107,8 @@ export class Goomba extends Character {
             if (this.collisionData.touchPoints.other.bottom && this.immune == 0) {
                 GameEnv.invincible = true;
                 GameEnv.goombaBounce = true;
+                GameEnv.coinScore += 1;
+                GameControl.updateScore();
                 this.canvas.style.transition = "transform 1.5s, opacity 1s";
                 this.canvas.style.transition = "transform 2s, opacity 1s";
                 this.canvas.style.transformOrigin = "bottom"; // Set the transform origin to the bottom

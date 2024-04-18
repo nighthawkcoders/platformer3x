@@ -92,6 +92,18 @@ const GameControl = {
                 document.getElementById('timeScore').textContent = (time/1000).toFixed(2) 
             }
     },    
+    updateScore() {
+        const score = GameEnv.coinScore
+
+        if (GameEnv.timerActive) {              
+            if (document.getElementById('userScore')) {
+                document.getElementById('userScore').textContent = (score).toFixed(2) 
+            }
+            }
+            if (document.getElementById('userScore')) {
+                document.getElementById('userScore').textContent = (score).toFixed(2) 
+            }
+    },   
         
     /**
      * Starts the game timer.
