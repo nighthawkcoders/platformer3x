@@ -20,6 +20,7 @@ import Mushroom from './Mushroom.js';
 import Coin from './Coin.js';
 import FlyingUFO from './FlyingUFO.js';
 import Alien from './Alien.js';
+import GameControl from './GameControl.js';
 
 //test comment
 
@@ -72,12 +73,34 @@ const GameSetup = {
      * * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
      * *  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve
      */
-    waitForButton: function(id) {
+    waitForButtonStart: function(id) {
         // Returns a promise that resolves when the button is clicked
         return new Promise((resolve) => {
             const waitButton = document.getElementById(id);
             // Listener function to resolve the promise when the button is clicked
             const waitButtonListener = () => {
+                resolve(true);
+            };
+            // Add the listener to the button's click event
+            waitButton.addEventListener('click', waitButtonListener);
+        });
+      },
+    
+      waitForButtonRestart: function(id) {
+        // Returns a promise that resolves when the button is clicked
+        return new Promise((resolve) => {
+            const waitButton = document.getElementById(id);
+            // Listener function to resolve the promise when the button is clicked
+            const waitButtonListener = () => {
+              if (document.getElementById('timeScore')) {
+                document.getElementById('timeScore').textContent = GameEnv.time 
+            }
+            const userScoreElement = document.getElementById('userScore');
+            
+            if ( userScoreElement) {
+                // Update the displayed time
+                userScoreElement.textContent = (GameEnv.coinScore/1000).toFixed(2);
+            }
                 resolve(true);
             };
             // Add the listener to the button's click event
@@ -103,7 +126,7 @@ const GameSetup = {
         id.hidden = false;
         
         // Wait for the startGame button to be clicked
-        await this.waitForButton('startGame');
+        await this.waitForButtonStart('startGame');
         // Hide the gameBegin button after it is clicked
         id.hidden = true;
         
@@ -148,9 +171,9 @@ const GameSetup = {
     gameOverCallBack: async function() {
       const id = document.getElementById("gameOver");
       id.hidden = false;
-      
+      GameControl.stopTimer()
       // Wait for the restart button to be clicked
-      await this.waitForButton('restartGame');
+      await this.waitForButtonRestart('restartGame');
       id.hidden = true;
       
       // Change currentLevel to start/restart value of null
@@ -239,7 +262,7 @@ const GameSetup = {
           src: "/images/platformer/sprites/monkey.png",
           width: 40,
           height: 40,
-          scaleSize: 80,
+          scaleSize: 100,
           speedRatio: 0.7,
           wa: { row: 9, min: 8, frames: 15 },
           wd: { row: 9, min: 0, frames: 7 },
@@ -337,14 +360,14 @@ const GameSetup = {
         var fun_facts = {
           //data structure
           "Fun Fact #1" : "Mario's full name is Mario Mario.", //key and value
-          "Fun Fact #2" : "Mario's least favorite food is shittake mushrooms.", //single quotes to include the double quotes
+          "Fun Fact #2" : "Mario's least favorite food is shiitake mushrooms.", //single quotes to include the double quotes
           "Fun Fact #3" : "Mario, in human years, is 24-25 years old.",
           "Fun Fact #4" : "Mario's girlfriend's name is Pauline.",
-          "Fun Fact #5" : "Call or text 929-55-MARIO (929-556-2746) to get a fun suprise!",
+          "Fun Fact #5" : "Call or text 929-55-MARIO (929-556-2746) to get a fun surprise!",
           "Fun Fact #6" : "Mario's original name was Jumpman.",
           "Fun Fact #7" : "March 10th is known as Mario Day because the abbreviation for March 10th (Mar10) looks like Mario.",
-          "Fun Fact #8" : " Mario was originally a carpenter, not a plumber.",
-          "Fun Fact #9" : " There are actually lyrics to the Mario theme song."
+          "Fun Fact #8" : "Mario was originally a carpenter, not a plumber.",
+          "Fun Fact #9" : "There are actually lyrics to the Mario theme song."
           }
         function generate(){
           var nums = Object.keys(fun_facts);

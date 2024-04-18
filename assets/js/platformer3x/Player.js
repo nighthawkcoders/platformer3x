@@ -345,7 +345,9 @@ export class Player extends Character {
                 this.setAnimation(key);
                 // player active
                 this.isIdle = false;
-                GameEnv.transitionHide = true;
+                if (!GameEnv.transitionHide) {
+                    GameEnv.transitionHide = true;
+                }
             }
 
             // dash action on

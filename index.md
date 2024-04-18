@@ -36,9 +36,6 @@ image: /images/platformer/backgrounds/home.png
   <!--Audo for when it hits the sides of platform -->    
   <audio id = "boing" src ="{{site.baseurl}}/assets/audio/boing-101318.mp3" preload="auto"></audio>
   
-
-  
-  
   <!-- Wrap both the controls and gameplay in a container div -->
   <div id="canvasContainer">
     <div class="submenu">
