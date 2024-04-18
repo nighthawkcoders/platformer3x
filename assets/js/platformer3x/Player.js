@@ -346,7 +346,6 @@ export class Player extends Character {
                 // player active
                 this.isIdle = false;
                 if (!GameEnv.transitionHide) {
-                    GameControl.startTimer();
                     GameEnv.transitionHide = true;
                 }
             }
