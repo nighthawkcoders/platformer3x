@@ -16,7 +16,7 @@ class Chat {
         'mr.lopez', 'mr. lopez','mister mortensen', 'mister lopez', 
         'aws', 'amazonwebservices', 'amazon', 'amazonweb',
         'shit', 'fuck', 'bitch', 'ass', 'asshole',
-        'piss', 'penis'];
+        'piss', 'penis', 'kill yourself', 'kys'];
 
         this.prohibitedWords = this.prohibitedWords.concat(wordsToAdd);
     }
