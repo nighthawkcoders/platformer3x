@@ -22,11 +22,11 @@ export class Goomba extends Character {
 
         //Define Speed of Enemy
         if (["easy", "normal"].includes(GameEnv.difficulty)) {
-            this.speed = this.speed * Math.floor(Math.random() * 1.5 + 2);
+            this.speed = this.speed * Math.floor(Math.random() * 5 + 5);
         } else if (GameEnv.difficulty === "hard") {
-            this.speed = this.speed * Math.floor(Math.random() * 3 + 3);
+            this.speed = this.speed * Math.floor(Math.random() * 9 + 9);
         } else {
-            this.speed = this.speed * 5
+            this.speed = this.speed * 10
         }
     }
 
