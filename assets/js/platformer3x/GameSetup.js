@@ -287,20 +287,20 @@ const GameSetup = {
           runningRight: { row: 4, frames: 3, idleFrame: {column: 1, frames: 0} },
         },        
         harry: {
-          src: "/images/platformer/sprites/harryanimation2.png", 
+          src: "/images/platformer/sprites/harryanimation3.png", 
           width: 32,
-          height: 48,
+          height: 32,
           scaleSize: 80,
           speedRatio: 1,
-          w: {row: 1, frames: 3},
-          wa: {row: 1, frames: 3},
-          wd: {row: 2, frames: 3},
+          w: {row: 1, frames: 6},
+          wa: {row: 1, frames: 6},
+          wd: {row: 2, frames: 6},
           idle: { row: 6, frames: 1, idleFrame: {column: 1, frames: 0} },
-          a: { row: 1, frames: 4, idleFrame: { column: 1, frames: 0 } }, // Right Movement
-          s: {row: 1, frames: 3}, // Stop the movement 
-          d: { row: 2, frames: 4, idleFrame: { column: 1, frames: 0 } }, // Left Movement 
-          runningLeft: { row: 5, frames: 3, idleFrame: {column: 1, frames: 0} },
-          runningRight: { row: 4, frames: 3, idleFrame: {column: 1, frames: 0} },
+          a: { row: 1, frames: 5, idleFrame: { column: 1, frames: 0 } }, // Right Movement
+          s: {row: 1, frames: 5}, // Stop the movement 
+          d: { row: 2, frames: 5, idleFrame: { column: 1, frames: 0 } }, // Left Movement 
+          runningLeft: { row: 1, frames: 6, idleFrame: {column: 1, frames: 0} },
+          runningRight: { row: 2, frames: 6, idleFrame: {column: 1, frames: 0} },
         }
       },
       enemies: {
