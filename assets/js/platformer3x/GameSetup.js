@@ -231,7 +231,8 @@ const GameSetup = {
         loading: { src: "/images/platformer/backgrounds/greenscreen.png" },
         complete: { src: "/images/platformer/backgrounds/OneStar.png" },
         complete2: { src: "/images/platformer/backgrounds/TwoStar.png" },
-        end: { src: "/images/platformer/backgrounds/Congratulations!!!.png" }
+        end: { src: "/images/platformer/backgrounds/Congratulations!!!.png" },
+        quidditch: { src: "/images/platformer/backgrounds/quidditch2.jpg"}
       },
       players: {
         mario: {
@@ -284,6 +285,22 @@ const GameSetup = {
           d: { row: 2, frames: 3, idleFrame: { column: 1, frames: 0 } }, // Right Movement 
           runningLeft: { row: 5, frames: 3, idleFrame: {column: 1, frames: 0} },
           runningRight: { row: 4, frames: 3, idleFrame: {column: 1, frames: 0} },
+        },        
+        harry: {
+          src: "/images/platformer/sprites/harryanimation2.png", 
+          width: 32,
+          height: 48,
+          scaleSize: 80,
+          speedRatio: 1,
+          w: {row: 1, frames: 3},
+          wa: {row: 1, frames: 3},
+          wd: {row: 2, frames: 3},
+          idle: { row: 6, frames: 1, idleFrame: {column: 1, frames: 0} },
+          a: { row: 1, frames: 4, idleFrame: { column: 1, frames: 0 } }, // Right Movement
+          s: {row: 1, frames: 3}, // Stop the movement 
+          d: { row: 2, frames: 4, idleFrame: { column: 1, frames: 0 } }, // Left Movement 
+          runningLeft: { row: 5, frames: 3, idleFrame: {column: 1, frames: 0} },
+          runningRight: { row: 4, frames: 3, idleFrame: {column: 1, frames: 0} },
         }
       },
       enemies: {
@@ -323,6 +340,21 @@ const GameSetup = {
           scaleSize: 150,
           speedRatio: 0.9,
         },
+        dementor: {
+          src: "/images/platformer/sprites/dementor2.png",
+          width: 400,
+          height: 400,
+          scaleSize: 80,
+          speedRatio: 0.7,
+        },
+        draco: {
+          src: "/images/platformer/sprites/dracomalfoy.png",
+          width: 301,
+          height: 261,
+          scaleSize: 80,
+          speedRatio: 0.7,
+          xPercentage: 0.6,
+      }
       }
     },
 
@@ -578,6 +610,29 @@ const GameSetup = {
         ];
         // Space Game Level added to the GameEnv ...
         new GameLevel( {tag: "space", callback: this.playerOffScreenCallBack, objects: spaceGameObjects} );
+
+        // Quidditch Game Level definition...
+        const quidditchGameObjects = [
+          // GameObject(s), the order is important to z-index...
+          { name: 'quidditch', id: 'background', class: Background, data: this.assets.backgrounds.quidditch },
+          { name: 'grass', id: 'platform', class: Platform, data: this.assets.platforms.grass },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2, yPercentage: 0.85 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2368, yPercentage: 0.85 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.5, yPercentage: 0.85 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.5368, yPercentage: 0.85 },
+          { name: 'itemBlock', id: 'jumpPlatform', class: JumpPlatform, data: this.assets.platforms.itemBlock, xPercentage: 0.4, yPercentage: 0.65 }, //item block is a platform
+          { name: 'draco', id: 'draco', class: Goomba, data: this.assets.enemies.draco, xPercentage: 0.3, minPosition: 0.05},
+          { name: 'draco', id: 'draco', class: Goomba, data: this.assets.enemies.draco, xPercentage:  0.5, minPosition: 0.3 },
+          { name: 'mushroom', id: 'mushroom', class: Mushroom, data: this.assets.enemies.mushroom, xPercentage: 0.09},
+          { name: 'draco', id: 'draco', class: Goomba, data: this.assets.enemies.draco, xPercentage:  0.75, minPosition: 0.5 }, //this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
+          { name: 'dementor', id: 'dementor', class: FlyingGoomba, data: this.assets.enemies.dementor, xPercentage:  0.5, minPosition:  0.05},
+          { name: 'dementor', id: 'dementor', class: FlyingGoomba, data: this.assets.enemies.dementor, xPercentage:  0.9, minPosition: 0.5},
+          { name: 'harry', id: 'player', class: Player, data: this.assets.players.harry },
+          { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
+          { name: 'loading', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.loading },
+          ];
+          // Quidditch Game Level added to the GameEnv ...
+          new GameLevel( {tag: "quidditch", callback: this.playerOffScreenCallBack, objects: quidditchGameObjects } );
 
         // Game Over Level definition...
         const endGameObjects = [
