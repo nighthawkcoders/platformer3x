@@ -21,6 +21,7 @@ import Coin from './Coin.js';
 import FlyingUFO from './FlyingUFO.js';
 import Alien from './Alien.js';
 import GameControl from './GameControl.js';
+import Enemy from './Enemy.js';
 
 //test comment
 
