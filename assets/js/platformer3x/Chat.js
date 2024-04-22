@@ -1,11 +1,6 @@
 import Multiplayer from './Multiplayer.js';
 import createSound from './Sound.js';
 
-/**
- * Prevents players from typing no-no words in the chat.
- * If these words are detected, a pre-written message 
- * will be displayed instead
- */
 class Chat {
     constructor(wordsToAdd){
         this.prohibitedWords = ['westview', 'pee', 'poo', 
@@ -24,9 +19,9 @@ class Chat {
     soundSource = "/game_levels_mp/assets/audio/discord-ping.mp3";
     soundArray = [];
 
-    sendMessage(message){
+    sendMessage(message, color = "black"){
         message = this.parseMessage(message);  
-        Multiplayer.sendData("message", message);
+        Multiplayer.sendData("message", { message, color });
     }
 
     parseMessage(message){
@@ -37,13 +32,9 @@ class Chat {
         return message;
     }
 
-    /**
-     * Sets up primary chat interfaces and quality of life features, 
-     * like usernames, buttons, or message placeholders
-     */
     get chatBoxContainer(){
         const div = document.createElement("div");
-        div.className = ""; //create a class for the chatBox
+        div.className = "";
         div.id = "chatBoxContainer";
 
         const div2 = document.createElement("div");
@@ -54,15 +45,23 @@ class Chat {
         input.type = "text";
         input.placeholder = "Type your message...";
 
+        const colorSelect = document.createElement("select");
+        colorSelect.id = "colorSelect";
+        colorSelect.innerHTML = `
+            <option value="black">Black</option>
+            <option value="blue">Blue</option>
+            <option value="green">Green</option>
+            <option value="red">Red</option>
+        `;
+
         const button = document.createElement("button");
         button.id = "chatButton";
         button.innerText = "Send";
 
-        function addMessage(message, name){
+        function addMessage(message, name, color){
             const div3 = document.createElement("div");
             const para = document.createElement("p");
-            para.innerHTML = "<b>"+name+":</b>"+" "+message;
-            para.style.color = "black";
+            para.innerHTML = `<b style="color:${color};">${name}:</b> ${message}`;
             div3.append(para);
             div2.append(div3);
         }
@@ -70,10 +69,10 @@ class Chat {
         const onMessage = () => {
             Multiplayer.removeListener("onMessage");
             Multiplayer.createListener("onMessage", (data) => {
-                const message = this.parseMessage(data.message);
-                addMessage(message, data.name ? data.name : data.id);
+                const message = this.parseMessage(data.message.message);
+                addMessage(message, data.name ? data.name : data.id, data.message.color);
                 this.soundArray.forEach((d) => {
-                    if (d[1] == true) { //sound can be played
+                    if (d[1] == true) { 
                         d[0].play();
                         d[1] = false;
                         return;
@@ -89,11 +88,11 @@ class Chat {
             });
 
             let message = input.value;
+            const color = colorSelect.value;
             message = this.parseMessage(message);
-            addMessage(message, "you");
-            this.sendMessage(message);
+            addMessage(message, "you", color);
+            this.sendMessage(message, color);
 
-            // Clear chat input box
             input.value = '';
         };
 
@@ -109,6 +108,7 @@ class Chat {
 
         div.append(div2);
         div.append(input);
+        div.append(colorSelect);
         div.append(button);
         return div;
     }
