@@ -291,7 +291,8 @@ export class Player extends Character {
                 this.movement.down = false; // enable movement down without gravity
                 this.gravityEnabled = false;
                 this.setAnimation(this.directionKey); // set animation to direction
-                GameEnv.playSound("stomp")
+                GameEnv.playSound("boing")
+
             } else { 
             if (this.collisionData.touchPoints.other.left) {
                 this.movement.right = false;
