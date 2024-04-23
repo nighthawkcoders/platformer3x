@@ -223,7 +223,7 @@ export class PlayerBase extends Character {
         }
 
         // parallax background speed starts on player movement
-        GameEnv.updateParallaxBackgrounds(key)
+        GameEnv.updateParallaxDirection(key)
     }
 
     /**
@@ -240,9 +240,11 @@ export class PlayerBase extends Character {
                 // If there are still keys in pressedKeys, update the state to the last one
                 const lastKey = Object.keys(this.pressedKeys)[Object.keys(this.pressedKeys).length - 1];
                 this.updateAnimationState(lastKey);
+                GameEnv.updateParallaxDirection(lastKey)
             } else {
                 // If there are no more keys in pressedKeys, update the state to null
                 this.updateAnimationState(null);
+                GameEnv.updateParallaxDirection(null)
             }
         }
     }
