@@ -91,8 +91,19 @@ const GameControl = {
             if (document.getElementById('timeScore')) {
                 document.getElementById('timeScore').textContent = (time/1000).toFixed(2) 
             }
-    },    
-        
+    },   
+    updateCoinDisplay() {
+        const coins = GameEnv.coinScore
+        const coinDisplay = document.getElementById('coinScore')
+        if (!coinDisplay) {
+            console.error("COIN DISPLAY DOES NOT EXIST");
+        }
+        coinDisplay.textContent = coins
+    },     
+    gainCoin(value) {
+        GameEnv.coinScore += value;
+        this.updateCoinDisplay()
+    },
     /**
      * Starts the game timer.
      * @function startTimer
@@ -121,7 +132,7 @@ const GameControl = {
         GameEnv.timerActive = false
         GameEnv.time = 0;
         GameEnv.coinScore = 0;
-
+        this.updateCoinDisplay()
         clearInterval(this.intervalID)
     },
 
