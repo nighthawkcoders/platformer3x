@@ -325,11 +325,17 @@ export class PlayerBase extends Character {
             // 1. Player is on a jump platform
             case "jumpPlatform":
                 // Player is on top of the jump platform
-                if (this.collisionData.touchPoints.this.top) {
+                if (this.collisionData.touchPoints.this.onTopofPlatform) {
                     this.state.movement = { up: false, down: false, left: true, right: true, falling: false};
                     this.gravityEnabled = false;
+                } else if (this.collisionData.touchPoints.this.right) {
+                    this.state.movement = { up: false, down: false, left: true, right: false, falling: false};
+                // Player is touching the wall with left side
+                } else if (this.collisionData.touchPoints.this.left) {
+                    this.state.movement = { up: false, down: false, left: false, right: true, falling: false};
                 }
                 break;
+               
             // 2. Player is on or touching a wall 
             case "wall":
                 // Player is on top of the wall
