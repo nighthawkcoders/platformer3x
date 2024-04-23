@@ -1,7 +1,7 @@
 // GameSehup.js Key objective is to define GameLevel objects and their assets.
 import GameEnv from './GameEnv.js';
 import GameLevel from './GameLevel.js';
-/// To build GameLevels, each contains GameObjects from below imports
+// To build GameLevels, each contains GameObjects from below imports
 import Background from './Background.js'
 import BackgroundHills from './BackgroundHills.js';
 import BackgroundMountains from './BackgroundMountains.js';
@@ -184,9 +184,10 @@ const GameSetup = {
         grass: { src: "/images/platformer/platforms/grass.png" },
         alien: { src: "/images/platformer/platforms/alien.png" },
         bricks: { src: "/images/platformer/platforms/brick_wall.png" },
+        sand: { src: "/images/platformer/platforms/sand.png"},
+        ground: { src: "/images/platformer/platforms/ground.png"},
         block: { src: "/images/platformer/platforms/brick_block.png" }, //MAY need 3 new variables: sizeRatio, widthRatio, and heightRatio
-        itemBlock: {
-          src: "/images/platformer/platforms/mario_block_spritesheet_v2.png",
+        itemBlock: { src: "/images/platformer/platforms/mario_block_spritesheet_v2.png",
           sizeRatio: 83.2,
           widthRatio: 0.5,
           heightRatio: 1.0,
@@ -208,6 +209,8 @@ const GameSetup = {
         loading: { src: "/images/platformer/backgrounds/greenscreen.png" },
         complete: { src: "/images/platformer/backgrounds/OneStar.png" },
         complete2: { src: "/images/platformer/backgrounds/TwoStar.png" },
+        water: { src: "/images/platformer/backgrounds/water.jpg"},
+        moon: { src: "/images/platformer/backgrounds/moon.jpg"},
         end: { src: "/images/platformer/backgrounds/Congratulations!!!.png" }
       },
       players: {
@@ -511,12 +514,13 @@ const GameSetup = {
         // Avenida Game Level definition...
         const avenidaGameObjects = [
         // GameObject(s), the order is important to z-index...
-        { name: 'avenida', id: 'background', class: Background, data: this.assets.backgrounds.avenida },
-        { name: 'grass', id: 'platform', class: Platform, data: this.assets.platforms.grass },
+        { name: 'water', id: 'background', class: Background, data: this.assets.backgrounds.water },
+        { name: 'sand', id: 'platform', class: Platform, data: this.assets.platforms.sand },
         { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2, yPercentage: 0.85 },
         { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2368, yPercentage: 0.85 },
         { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.5, yPercentage: 0.85 },
         { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.5368, yPercentage: 0.85 },
+        { name: 'itemBlock', id: 'jumpPlatform', class: JumpPlatform, data: this.assets.platforms.itemBlock, xPercentage: 0.4, yPercentage: 0.65 },
         { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage: 0.3, minPosition: 0.05},
         { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage:  0.5, minPosition: 0.3 },
         { name: 'mushroom', id: 'mushroom', class: Mushroom, data: this.assets.enemies.mushroom, xPercentage: 0.09},
@@ -531,10 +535,10 @@ const GameSetup = {
         new GameLevel( {tag: "avenida", callback: this.playerOffScreenCallBack, objects: avenidaGameObjects } );
 
         // Space Game Level definition...
-        const spaceGameObjects = [
+        const SpaceGameObjects = [
           // GameObject(s), the order is important to z-index...
-          { name: 'space', id: 'background', class: Background, data: this.assets.backgrounds.space },
-          { name: 'grass', id: 'platform', class: Platform, data: this.assets.platforms.grass },
+          { name: 'moon', id: 'background', class: Background, data: this.assets.backgrounds.moon },
+          { name: 'ground', id: 'platform', class: Platform, data: this.assets.platforms.ground },
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.2, yPercentage: 0.85 },
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.2368, yPercentage: 0.85 },
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.5, yPercentage: 0.85 },
@@ -543,16 +547,16 @@ const GameSetup = {
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.4, yPercentage: 0.9 },
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.4, yPercentage: 0.8 },
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.4, yPercentage: 0.7 },
-          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.4, yPercentage: 0.6 },
+          { name: 'itemBlock', id: 'jumpPlatform', class: JumpPlatform, data: this.assets.platforms.itemBlock, xPercentage: 0.4, yPercentage: 0.65 },
           { name: 'alien', id: 'alien', class: Alien, data: this.assets.enemies.alien, xPercentage:  0.3, minPosition: 0.07 },
           { name: 'alien', id: 'alien', class: Alien, data: this.assets.enemies.alien, xPercentage:  0.5, minPosition: 0.3 },
           { name: 'alienSpecial', id: 'alien', class: Alien, data: this.assets.enemies.alien, xPercentage:  0.75, minPosition: 0.5 }, //this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
           { name: 'flyingUFO', id: 'flyingUFO', class: FlyingUFO, data: this.assets.enemies.flyingUFO, xPercentage:  0.1, minPosition:  0.05},
           { name: 'flyingUFO', id: 'flyingUFO', class: FlyingUFO, data: this.assets.enemies.flyingUFO, xPercentage:  0.5, minPosition:  0.05},
           { name: 'monkey', id: 'player', class: Player, data: this.assets.players.monkey },
-          { name: 'tree', id: 'tree', class: Tree, data: this.assets.obstacles.tree },
+          { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
           { name: 'complete2', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.complete2 },
-        ];
+         ];
         // Space Game Level added to the GameEnv ...
         new GameLevel( {tag: "space", callback: this.playerOffScreenCallBack, objects: spaceGameObjects} );
 
@@ -564,6 +568,38 @@ const GameSetup = {
         new GameLevel( {tag: "end",  callback: this.gameOverCallBack, objects: endGameObjects } );
     }
 } 
+
+const UnderWaterObjects = [
+  // GameObject(s), the order is important to z-index...
+  { name: 'moon', id: 'background', class: Background, data: this.assets.backgrounds.moon },
+  { name: 'ground', id: 'platform', class: Platform, data: this.assets.platforms.ground },
+  { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.2, yPercentage: 0.85 },
+  { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.2368, yPercentage: 0.85 },
+  { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.5, yPercentage: 0.85 },
+  { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.5368, yPercentage: 0.85 },
+  { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.4, yPercentage: 1 },
+  { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.4, yPercentage: 0.9 },
+  { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.4, yPercentage: 0.8 },
+  { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.4, yPercentage: 0.7 },
+  { name: 'itemBlock', id: 'jumpPlatform', class: JumpPlatform, data: this.assets.platforms.itemBlock, xPercentage: 0.4, yPercentage: 0.65 },
+  { name: 'alien', id: 'alien', class: Alien, data: this.assets.enemies.alien, xPercentage:  0.3, minPosition: 0.07 },
+  { name: 'alien', id: 'alien', class: Alien, data: this.assets.enemies.alien, xPercentage:  0.5, minPosition: 0.3 },
+  { name: 'alienSpecial', id: 'alien', class: Alien, data: this.assets.enemies.alien, xPercentage:  0.75, minPosition: 0.5 }, //this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
+  { name: 'flyingUFO', id: 'flyingUFO', class: FlyingUFO, data: this.assets.enemies.flyingUFO, xPercentage:  0.1, minPosition:  0.05},
+  { name: 'flyingUFO', id: 'flyingUFO', class: FlyingUFO, data: this.assets.enemies.flyingUFO, xPercentage:  0.5, minPosition:  0.05},
+  { name: 'monkey', id: 'player', class: Player, data: this.assets.players.monkey },
+  { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
+  { name: 'complete2', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.complete2 },
+ ];
+// Space Game Level added to the GameEnv ...
+new GameLevel( {tag: "UnderWater", callback: this.playerOffScreenCallBack, objects: spaceGameObjects} );
+
+// Game Over Level definition...
+const endGameObjects = [
+{ name:'background', class: Background, id: 'background', data: this.assets.backgrounds.end}
+];
+// Game Over screen added to the GameEnv ...
+new GameLevel( {tag: "end",  callback: this.gameOverCallBack, objects: endGameObjects } );
 // Bind the methods to the GameSetup object, ensures "this" inside of methods binds to "GameSetup"
 // * * this avoids "Temporal Dead Zone (TDZ)" error... 
 // * * * * "Cannot access 'GameSetup' before initialization", light reading TDZ (ha ha)...
