@@ -628,10 +628,11 @@ const GameSetup = {
           { name: 'itemBlock', id: 'jumpPlatform', class: JumpPlatform, data: this.assets.platforms.itemBlock, xPercentage: 0.4, yPercentage: 0.65 }, //item block is a platform
           { name: 'draco', id: 'draco', class: Goomba, data: this.assets.enemies.draco, xPercentage: 0.3, minPosition: 0.05},
           { name: 'draco', id: 'draco', class: Goomba, data: this.assets.enemies.draco, xPercentage:  0.5, minPosition: 0.3 },
-          { name: 'mushroom', id: 'mushroom', class: Mushroom, data: this.assets.enemies.mushroom, xPercentage: 0.09},
           { name: 'draco', id: 'draco', class: Goomba, data: this.assets.enemies.draco, xPercentage:  0.75, minPosition: 0.5 }, //this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
           { name: 'dementor', id: 'dementor', class: FlyingGoomba, data: this.assets.enemies.dementor, xPercentage:  0.5, minPosition:  0.05},
           { name: 'dementor', id: 'dementor', class: FlyingGoomba, data: this.assets.enemies.dementor, xPercentage:  0.9, minPosition: 0.5},
+          { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.1908, yPercentage: 0.78 },
+          { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.2242, yPercentage: 0.78 },
           { name: 'harry', id: 'player', class: Player, data: this.assets.players.harry },
           { name: 'tree', id: 'tree', class: Tree, data: this.assets.obstacles.whompingwillow },
           { name: 'loading', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.loading },
