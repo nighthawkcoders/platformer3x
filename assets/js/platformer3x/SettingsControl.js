@@ -389,6 +389,21 @@ export class SettingsControl extends LocalStorage{
         return div;
     }
 
+    get themeButton() {
+        const div = document.createElement("div");
+        div.innerHTML = "Dark-mode: "; // label
+    
+        const button = document.createElement("button"); // button for Multiplayer
+        button.innerText = String(Socket.shouldBeSynced); ////CHANGE TO THEME BUTTON THINGY
+    
+        button.addEventListener("click", () => {
+            ////CHANGE TO THEME BUTTON THINGY
+        });
+    
+        div.append(button); // wrap button element in div
+        return div;
+    }
+
     get chatButton() {
         const div = document.createElement("div");
         div.innerHTML = "Chat: "; // label
@@ -497,6 +512,27 @@ export class SettingsControl extends LocalStorage{
         var invertControl = settingsControl.isInvertedInput;
         document.getElementById("sidebar").append(invertControl); 
 
+        var hintsSection = document.createElement("div")
+        hintsSection.innerHTML = "Toggle fun facts: "
+        
+        var hintsButton = document.createElement("input")
+        hintsButton.type = "checkbox"
+        hintsButton.checked = true
+        
+        hintsButton.addEventListener("click", () => {
+            const hints = document.getElementsByClassName("fun_facts")[0]
+
+            if (!hintsButton.checked) {
+                hints.style.display = "none"
+            }
+            else {
+                hints.style.display = "unset"
+            }
+        })
+
+        hintsSection.append(hintsButton)
+        document.getElementById("sidebar").append(hintsSection)
+
         // Get/Construct HTML input and event update for game speed 
         var gameSpeed = settingsControl.gameSpeedInput;
         document.getElementById("sidebar").append(gameSpeed);
@@ -512,6 +548,10 @@ export class SettingsControl extends LocalStorage{
         // Get/Construct HTML button and event update for multiplayer
         var multiplayerButton = settingsControl.multiplayerButton;
         document.getElementById("sidebar").append(multiplayerButton);
+
+        // Get/Construct HTML button and event update for theme
+        var themeButton = settingsControl.themeButton;
+        document.getElementById("sidebar").append(themeButton);
 
         // Get/Construct HTML button and event update for multiplayer
         var chatButton = settingsControl.chatButton;
