@@ -1,5 +1,6 @@
 import GameEnv from './GameEnv.js';
 import Character from './Character.js';
+import GameControl from './GameControl.js';
 
 /**
  * @class PlayerBase class
@@ -218,10 +219,11 @@ export class PlayerBase extends Character {
             // Update the player's animation state based on the pressed key
             this.updateAnimationState(key);
             GameEnv.transitionHide = true;
+            GameControl.startTimer()
         }
 
         // parallax background speed starts on player movement
-        GameEnv.updateParallaxBackgrounds(key)
+        GameEnv.updateParallaxDirection(key)
     }
 
     /**
@@ -238,9 +240,11 @@ export class PlayerBase extends Character {
                 // If there are still keys in pressedKeys, update the state to the last one
                 const lastKey = Object.keys(this.pressedKeys)[Object.keys(this.pressedKeys).length - 1];
                 this.updateAnimationState(lastKey);
+                GameEnv.updateParallaxDirection(lastKey)
             } else {
                 // If there are no more keys in pressedKeys, update the state to null
                 this.updateAnimationState(null);
+                GameEnv.updateParallaxDirection(null)
             }
         }
     }
@@ -312,6 +316,8 @@ export class PlayerBase extends Character {
     /**
      * gameloop: Handles Player reaction / state updates to the collision
      */
+    // Assuming you have some kind of input handling system
+
     handlePlayerReaction() {
         // gravity on is default for player/character
         this.gravityEnabled = true;
@@ -340,6 +346,23 @@ export class PlayerBase extends Character {
                     this.state.movement = { up: false, down: false, left: false, right: true, falling: false};
                 }
                 break;
+            // 3. Player is climbing a wall
+            case "climbingWall":
+                // Player is climbing up the wall
+                if (this.collisionData.touchPoints.this.left) {
+                    this.state.movement = { up: true, down: false, left: false, right: false, falling: false };
+                    this.gravityEnabled = false;
+                // Player is climbing down the wall
+                } else if (this.collisionData.touchPoints.this.top) {
+                    this.state.movement = { up: false, down: true, left: false, right: false, falling: false };
+                    this.gravityEnabled = false;
+                // Player is not moving vertically on the wall
+                } else {
+                    this.state.movement = { up: false, down: false, left: false, right: false, falling: false };
+                    this.gravityEnabled = true; // Gravity is enabled when not climbing
+                }
+                break;
+            
             // 4. Player is in default state
             case "floor":
                 // Player is on the floor
@@ -350,6 +373,8 @@ export class PlayerBase extends Character {
                     this.state.movement = { up: false, down: false, left: true, right: true, falling: true};
                 }
                 break;
+            
+            
         }
     }
 
