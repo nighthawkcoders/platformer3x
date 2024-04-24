@@ -24,7 +24,7 @@ export class Goomba extends Character {
         if (["easy", "normal"].includes(GameEnv.difficulty)) {
             this.speed = this.speed * Math.floor(Math.random() * 5 + 5);
         } else if (GameEnv.difficulty === "hard") {
-            this.speed = this.speed * Math.floor(Math.random() * 9 + 9);
+            this.speed = this.speed * Math.floor(Math.random() * 9 + 9); // a lot harder on hard mode
         } else {
             this.speed = this.speed * 10
         }
