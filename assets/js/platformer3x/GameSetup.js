@@ -202,6 +202,10 @@ const GameSetup = {
         tree: { src: "/images/platformer/obstacles/tree.png",
                 hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
               },
+        whompingwillow: { src: "/images/platformer/obstacles/whompingwillowtree.png",
+                          hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
+
+        },
       },
       platforms: {
         grass: { src: "/images/platformer/platforms/grass.png" },
@@ -629,7 +633,7 @@ const GameSetup = {
           { name: 'dementor', id: 'dementor', class: FlyingGoomba, data: this.assets.enemies.dementor, xPercentage:  0.5, minPosition:  0.05},
           { name: 'dementor', id: 'dementor', class: FlyingGoomba, data: this.assets.enemies.dementor, xPercentage:  0.9, minPosition: 0.5},
           { name: 'harry', id: 'player', class: Player, data: this.assets.players.harry },
-          { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
+          { name: 'tree', id: 'tree', class: Tree, data: this.assets.obstacles.whompingwillow },
           { name: 'loading', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.loading },
           ];
           // Quidditch Game Level added to the GameEnv ...
