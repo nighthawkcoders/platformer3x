@@ -7,6 +7,7 @@ import BackgroundHills from './BackgroundHills.js';
 import BackgroundMountains from './BackgroundMountains.js';
 import BackgroundTransitions from './BackgroundTransitions.js';
 import BackgroundClouds from './BackgroundClouds.js';
+import BackgroundFish from './BackgroundFish.js';
 import Platform from './Platform.js';
 import JumpPlatform from './JumpPlatform.js';
 import Player from './Player.js';
@@ -228,6 +229,7 @@ const GameSetup = {
         water: { src: "/images/platformer/backgrounds/water.jpg" },
         mountains: { src: "/images/platformer/backgrounds/mountains.jpg" },
         clouds : { src: "/images/platformer/backgrounds/clouds.png"},
+        fish : { src: "/images/platformer/backgrounds/school-fish.png"},
         space: { src: "/images/platformer/backgrounds/planet.jpg" },
         castles: { src: "/images/platformer/backgrounds/castles.png" },
         loading: { src: "/images/platformer/backgrounds/greenscreen.png" },
@@ -446,6 +448,7 @@ const GameSetup = {
       // Under Water Game Level defintion...
       const allWaterGameObjects = [
         { name: 'water', id: 'background', class: Background,  data: this.assets.backgrounds.water },
+        { name: 'fish', id: 'background', class: BackgroundFish, data: this.assets.backgrounds.fish },
         { name: 'sand', id: 'floor', class: Platform, data: this.assets.platforms.sand },
         { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2, yPercentage: 0.85 },
         { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2368, yPercentage: 0.85 },
