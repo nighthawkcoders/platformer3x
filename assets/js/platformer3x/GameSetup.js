@@ -206,6 +206,7 @@ const GameSetup = {
       },
       platforms: {
         grass: { src: "/images/platformer/platforms/grass.png" },
+        sand: { src: "/images/platformer/platforms/sand.png" },
         alien: { src: "/images/platformer/platforms/alien.png" },
         bricks: { src: "/images/platformer/platforms/brick_wall.png" },
         block: { src: "/images/platformer/platforms/brick_block.png" }, //MAY need 3 new variables: sizeRatio, widthRatio, and heightRatio
@@ -224,6 +225,7 @@ const GameSetup = {
       backgrounds: {
         start: { src: "/images/platformer/backgrounds/home.png" },
         hills: { src: "/images/platformer/backgrounds/hills.png" },
+        water: { src: "/images/platformer/backgrounds/water.jpg" },
         mountains: { src: "/images/platformer/backgrounds/mountains.jpg" },
         clouds : { src: "/images/platformer/backgrounds/clouds.png"},
         space: { src: "/images/platformer/backgrounds/planet.jpg" },
@@ -443,10 +445,8 @@ const GameSetup = {
 
       // Under Water Game Level defintion...
       const allWaterGameObjects = [
-        { name: 'mountains', id: 'background', class: BackgroundMountains,  data: this.assets.backgrounds.mountains },
-        { name: 'clouds', id: 'background', class: BackgroundClouds, data: this.assets.backgrounds.clouds },
-        { name: 'hills', id: 'background', class: BackgroundHills, data: this.assets.backgrounds.hills },
-        { name: 'grass', id: 'floor', class: Platform, data: this.assets.platforms.grass },
+        { name: 'water', id: 'background', class: Background,  data: this.assets.backgrounds.water },
+        { name: 'sand', id: 'floor', class: Platform, data: this.assets.platforms.sand },
         { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2, yPercentage: 0.85 },
         { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2368, yPercentage: 0.85 },
         { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2736, yPercentage: 0.85 },
