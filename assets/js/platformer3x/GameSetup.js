@@ -199,6 +199,7 @@ const GameSetup = {
                 hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
               },
         coin: { src: "/images/platformer/obstacles/coin.png"},
+        snitch: { src: "/images/platformer/obstacles/snitch.png"},
         tree: { src: "/images/platformer/obstacles/tree.png",
                 hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
               },
@@ -631,8 +632,8 @@ const GameSetup = {
           { name: 'draco', id: 'draco', class: Goomba, data: this.assets.enemies.draco, xPercentage:  0.75, minPosition: 0.5 }, //this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
           { name: 'dementor', id: 'dementor', class: FlyingGoomba, data: this.assets.enemies.dementor, xPercentage:  0.5, minPosition:  0.05},
           { name: 'dementor', id: 'dementor', class: FlyingGoomba, data: this.assets.enemies.dementor, xPercentage:  0.9, minPosition: 0.5},
-          { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.1908, yPercentage: 0.78 },
-          { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.2242, yPercentage: 0.78 },
+          { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.2352, yPercentage: 0.78, },
+          { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.2162, yPercentage: 0.78 },
           { name: 'harry', id: 'player', class: Player, data: this.assets.players.harry },
           { name: 'tree', id: 'tree', class: Tree, data: this.assets.obstacles.whompingwillow },
           { name: 'loading', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.loading },
