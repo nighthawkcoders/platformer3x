@@ -33,25 +33,110 @@ const Leaderboard = {
         return table
     },
 
+    createPagingButtonsRow(table) {
+
+        const breakRow = document.createElement("br")
+        table.append(breakRow)
+        const pagingButtonsRow = document.createElement("tr")
+        const td1 = document.createElement("td");
+        td1.style.textAlign = "end"
+        const backButton = document.createElement("button")
+        backButton.innerText = "<"
+        backButton.style.width = "100%"
+        td1.append(backButton)
+        pagingButtonsRow.append(td1);
+        const td2 = document.createElement("td");
+        td2.innerText = this.currentPage
+        pagingButtonsRow.append(td2);
+        const td3 = document.createElement("td");
+        td3.style.textAlign = "start"
+        const frontButton = document.createElement("button")
+        frontButton.innerText = ">"
+        frontButton.style.width = "100%"
+        td3.append(frontButton)
+        pagingButtonsRow.append(td3);
+
+        backButton.addEventListener("click", this.backPage)
+        frontButton.addEventListener("click", this.frontPage)
+
+        return pagingButtonsRow
+    },
+
     updateLeaderboardTable () {
         const data = this.getSortedLeaderboardData()
         const table = this.createLeaderboardDisplayTable()
-
-        data.forEach(score => {
-            const row = document.createElement("tr");
-            const td1 = document.createElement("td");
-            td1.innerText = score.userID;
-            row.append(td1);
-            const td2 = document.createElement("td");
-            td2.innerText = (score.time/1000);
-            row.append(td2);
-            const td3 = document.createElement("td");
-            td3.innerText = score.coinScore;
-            row.append(td3);
-            table.append(row);
+        const startPage = (this.currentPage-1)*this.rowsPerPage
+        const displayData = data.slice(startPage, startPage+this.rowsPerPage)
+        
+        displayData.forEach(score => {
+                    const row = document.createElement("tr");
+                    const td1 = document.createElement("td");
+                    td1.innerText = score.userID;
+                    row.append(td1);
+                    const td2 = document.createElement("td");
+                    td2.innerText = (score.time/1000);
+                    row.append(td2);
+                    const td3 = document.createElement("td");
+                    td3.innerText = score.coinScore;
+                    row.append(td3);
+                    table.append(row);
         });
 
+        
+        table.append(Leaderboard.createPagingButtonsRow(table));
         return table
+    },
+
+    backPage () {
+        const table = document.getElementsByClassName("table scores")[0]
+
+        if (Leaderboard.currentPage - 1 == 0) {
+            return;
+        }
+    
+
+        Leaderboard.currentPage -= 1
+
+        console.log(Leaderboard.currentPage)
+
+        if (table) {
+            table.remove() //remove old table if it is there
+        }
+        document.getElementById("leaderboardDropDown").append(Leaderboard.updateLeaderboardTable()) //update new leaderboard
+    },
+    
+    frontPage () {
+        const table = document.getElementsByClassName("table scores")[0]
+
+        Leaderboard.currentPage += 1
+
+        console.log(Leaderboard.currentPage)
+
+        if (table) {
+            table.remove() //remove old table if it is there
+        }
+        document.getElementById("leaderboardDropDown").append(Leaderboard.updateLeaderboardTable()) //update new leaderboard
+    },
+
+    openLeaderboardPanel () {
+            leaderboardTitle.innerHTML = "Local Leaderboard";
+
+            // toggle isOpen
+            this.isOpen = !this.isOpen;
+            // open and close properties for sidebar based on isOpen
+            const table = document.getElementsByClassName("table scores")[0]
+
+            if (this.isOpen) {
+                if (table) {
+                    table.remove() //remove old table if it is there
+                }
+                document.getElementById("leaderboardDropDown").append(Leaderboard.updateLeaderboardTable()) //update new leaderboard
+            }
+
+            const leaderboardDropDown = document.querySelector('.leaderboardDropDown');
+            leaderboardDropDown.style.width = this.isOpen?"70%":"0px";
+            leaderboardDropDown.style.top = this.isOpen?"15%":"0px";
+            leaderboardDropDown.style.left = this.isOpen?"15%":"0px";
     },
 
     initializeLeaderboard () {
@@ -60,28 +145,9 @@ const Leaderboard = {
         document.getElementById("leaderboardDropDown").appendChild(leaderboardTitle);
         document.getElementById("leaderboardDropDown").append(this.updateLeaderboardTable())
 
-        function openLeaderboardPanel() {
-                leaderboardTitle.innerHTML = "Local Leaderboard";
-
-                // toggle isOpen
-                this.isOpen = !this.isOpen;
-                // open and close properties for sidebar based on isOpen
-                const table = document.getElementsByClassName("table scores")[0]
-
-                if (this.isOpen) {
-                    if (table) {
-                        table.remove()
-                    }
-                    document.getElementById("leaderboardDropDown").append(Leaderboard.updateLeaderboardTable())
-                }
-
-                const leaderboardDropDown = document.querySelector('.leaderboardDropDown');
-                leaderboardDropDown.style.width = this.isOpen?"70%":"0px";
-                leaderboardDropDown.style.top = this.isOpen?"15%":"0px";
-                leaderboardDropDown.style.left = this.isOpen?"15%":"0px";
-        }
-        document.getElementById("leaderboard-button").addEventListener("click",openLeaderboardPanel)
+        document.getElementById("leaderboard-button").addEventListener("click",Leaderboard.openLeaderboardPanel)
     },
+
 //     get leaderboardTable(){
 //         // create table element
 //         var t = document.createElement("table");
