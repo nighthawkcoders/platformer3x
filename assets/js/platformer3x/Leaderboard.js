@@ -12,6 +12,15 @@ const Leaderboard = {
         const localData = JSON.parse(localStorage.getItem(this.currentKey))
         localData.sort((a, b) => a.time - b.time);
         return localData
+    }, 
+
+    backgroundDim: {
+        create () {
+            console.log("CREATE DIM")
+        },
+        remove () {
+            console.log("REMOVE DIM");
+        }
     },
 
     createLeaderboardDisplayTable () {
@@ -129,8 +138,11 @@ const Leaderboard = {
             this.isOpen = !this.isOpen;
             // open and close properties for sidebar based on isOpen
             const table = document.getElementsByClassName("table scores")[0]
-
+            if (!this.isOpen) {
+                Leaderboard.backgroundDim.remove()
+            }
             if (this.isOpen) {
+                Leaderboard.backgroundDim.create()
                 if (table) {
                     table.remove() //remove old table if it is there
                 }
