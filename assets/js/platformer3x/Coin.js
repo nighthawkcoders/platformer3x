@@ -21,7 +21,7 @@ export class Coin extends GameObject {
 
         // Rotate the canvas 90 degrees to the left
         this.ctx.rotate(-Math.PI / 2);
-
+        // this.ctx.rotate(-Math.PI / 2);
         // Draw the image at the rotated position (swap x and y)
         this.ctx.drawImage(this.image, -this.image.height, 0);
 
