@@ -22,6 +22,7 @@ import FlyingUFO from './FlyingUFO.js';
 import Alien from './Alien.js';
 import GameControl from './GameControl.js';
 import Enemy from './Enemy.js';
+import Cerberus from './Cerberus.js';
 
 //test comment
 
@@ -323,6 +324,18 @@ const GameSetup = {
           scaleSize: 150,
           speedRatio: 0.9,
         },
+        cerberus: {
+          src: "/images/platformer/sprites/cerberus.png",
+          width: 103,
+          height: 103,
+          scaleSize: 80,
+          speedRatio: 0.85,
+          wa: {row: 0, frames: 0}, // Up-Left Movement 
+          wd: {row: 0, frames: 0}, // Up-Right Movement
+          a: { row: 0, frames: 0, idleFrame: { column: 0, frames: 0 } }, // Left Movement
+          s: {row: 0, frames: 0}, // Stop the movement 
+          d: { row: 0, frames: 0, idleFrame: { column: 0, frames: 0 } }, // Right Movement 
+        },
       }
     },
 
@@ -442,7 +455,7 @@ const GameSetup = {
        new GameLevel( {tag: "hills", callback: this.playerOffScreenCallBack, objects: hillsGameObjects } );
 
         // Space Game Level definition...
-        const spaceGameObjects = [
+        const ancientGreeceGameObjects = [
           // GameObject(s), the order is important to z-index...
           { name: 'space', id: 'background', class: Background, data: this.assets.backgrounds.space },
           { name: 'grass', id: 'platform', class: Platform, data: this.assets.platforms.grass },
@@ -455,7 +468,7 @@ const GameSetup = {
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.4, yPercentage: 0.8 },
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.4, yPercentage: 0.7 },
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.4, yPercentage: 0.6 },
-          { name: 'alien', id: 'alien', class: Alien, data: this.assets.enemies.alien, xPercentage:  0.3, minPosition: 0.07 },
+          { name: 'cerberus', id: 'cerberus', class: Cerberus, data: this.assets.enemies.cerberus, xPercentage:  0.3, minPosition: 0.07 },
           { name: 'alien', id: 'alien', class: Alien, data: this.assets.enemies.alien, xPercentage:  0.5, minPosition: 0.3 },
           { name: 'alienSpecial', id: 'alien', class: Alien, data: this.assets.enemies.alien, xPercentage:  0.75, minPosition: 0.5 }, //this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
           { name: 'flyingUFO', id: 'flyingUFO', class: FlyingUFO, data: this.assets.enemies.flyingUFO, xPercentage:  0.1, minPosition:  0.05},
@@ -465,7 +478,7 @@ const GameSetup = {
           { name: 'complete2', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.complete2 },
         ];
         // Space Game Level added to the GameEnv ...
-        new GameLevel( {tag: "space", callback: this.playerOffScreenCallBack, objects: spaceGameObjects} );
+        new GameLevel( {tag: "ancient greece", callback: this.playerOffScreenCallBack, objects: ancientGreeceGameObjects} );
 
         // Game Over Level definition...
         const endGameObjects = [
