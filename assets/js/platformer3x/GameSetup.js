@@ -21,7 +21,10 @@ import Coin from './Coin.js';
 import FlyingUFO from './FlyingUFO.js';
 import Alien from './Alien.js';
 import GameControl from './GameControl.js';
+import Cabin from './Cabin.js';
 import Enemy from './Enemy.js';
+import Owl from './Owl.js';
+import Snowman from './Snowman.js';
 
 //test comment
 
@@ -199,6 +202,9 @@ const GameSetup = {
         tube: { src: "/images/platformer/obstacles/tube.png",
                 hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
               },
+        cabin: { src: "/images/platformer/obstacles/cabin.png",
+        hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
+              },
         coin: { src: "/images/platformer/obstacles/coin.png"},
         tree: { src: "/images/platformer/obstacles/tree.png",
                 hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
@@ -206,6 +212,8 @@ const GameSetup = {
       },
       platforms: {
         grass: { src: "/images/platformer/platforms/grass.png" },
+        snowyfloor: { src: "/images/platformer/platforms/snowyfloor.png" },
+        snowywood: { src: "/images/platformer/platforms/snowywood.png" },
         alien: { src: "/images/platformer/platforms/alien.png" },
         bricks: { src: "/images/platformer/platforms/brick_wall.png" },
         block: { src: "/images/platformer/platforms/brick_block.png" }, //MAY need 3 new variables: sizeRatio, widthRatio, and heightRatio
@@ -231,7 +239,9 @@ const GameSetup = {
         loading: { src: "/images/platformer/backgrounds/greenscreen.png" },
         complete: { src: "/images/platformer/backgrounds/OneStar.png" },
         complete2: { src: "/images/platformer/backgrounds/TwoStar.png" },
-        end: { src: "/images/platformer/backgrounds/Congratulations!!!.png" }
+        complete3: {src: "/images/platformer/backgrounds/ThreeStar.png" },
+        end: { src: "/images/platformer/backgrounds/Congratulations!!!.png" },
+        winter: {src: "/images/platformer/backgrounds/winter.png" },
       },
       players: {
         mario: {
@@ -295,6 +305,20 @@ const GameSetup = {
           speedRatio: 0.7,
           xPercentage: 0.6,
           hitbox: { widthPercentage: 0.0, heightPercentage: 0.2}
+        },
+        Snowman: {
+          src: "/images/platformer/sprites/snowman.png",
+          width: 401,
+          height: 268,
+          scaleSize: 60,
+          speedRatio: 0.7,
+        },
+        Owl: {
+          src: "/images/platformer/sprites/owl.png",
+          width: 1920,
+          height: 1166,
+          scaleSize: 150,
+          speedRatio: 0.8,  
         },
         flyingGoomba: {
           src: "/images/platformer/sprites/flying-goomba.png",
@@ -440,7 +464,6 @@ const GameSetup = {
 
        // Hills Game Level added to the GameEnv ...
        new GameLevel( {tag: "hills", callback: this.playerOffScreenCallBack, objects: hillsGameObjects } );
-
         // Game Over Level definition...
         const endGameObjects = [
         { name:'background', class: Background, id: 'background', data: this.assets.backgrounds.end}
