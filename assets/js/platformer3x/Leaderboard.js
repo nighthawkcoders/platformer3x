@@ -69,21 +69,21 @@ const Leaderboard = {
         const displayData = data.slice(startPage, startPage+this.rowsPerPage)
         
         displayData.forEach(score => {
-                    const row = document.createElement("tr");
-                    const td1 = document.createElement("td");
-                    td1.innerText = score.userID;
-                    row.append(td1);
-                    const td2 = document.createElement("td");
-                    td2.innerText = (score.time/1000);
-                    row.append(td2);
-                    const td3 = document.createElement("td");
-                    td3.innerText = score.coinScore;
-                    row.append(td3);
-                    table.append(row);
+            const row = document.createElement("tr");
+            const td1 = document.createElement("td");
+            td1.innerText = score.userID;
+            row.append(td1);
+            const td2 = document.createElement("td");
+            td2.innerText = (score.time/1000);
+            row.append(td2);
+            const td3 = document.createElement("td");
+            td3.innerText = score.coinScore;
+            row.append(td3);
+            table.append(row);
         });
 
-        
         table.append(Leaderboard.createPagingButtonsRow(table));
+
         return table
     },
 
@@ -97,8 +97,6 @@ const Leaderboard = {
 
         Leaderboard.currentPage -= 1
 
-        console.log(Leaderboard.currentPage)
-
         if (table) {
             table.remove() //remove old table if it is there
         }
@@ -108,9 +106,15 @@ const Leaderboard = {
     frontPage () {
         const table = document.getElementsByClassName("table scores")[0]
 
-        Leaderboard.currentPage += 1
+        const data = Leaderboard.getSortedLeaderboardData()
 
-        console.log(Leaderboard.currentPage)
+        console.log(data.length/Leaderboard.rowsPerPage)
+
+        if (Leaderboard.currentPage + 1 > Math.ceil(data.length/Leaderboard.rowsPerPage)) {
+            return
+        }
+
+        Leaderboard.currentPage += 1
 
         if (table) {
             table.remove() //remove old table if it is there
