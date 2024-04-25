@@ -355,6 +355,7 @@ export class PlayerBase extends Character {
                     this.state.movement = { up: false, down: false, left: false, right: true, falling: false};
                 }
                 break;
+
             
             // 4. Player is in default state
             case "floor":
