@@ -34,7 +34,7 @@ const Leaderboard = {
     },
 
     createPagingButtonsRow(table) {
-
+        const data = Leaderboard.getSortedLeaderboardData()
         const breakRow = document.createElement("br")
         table.append(breakRow)
         const pagingButtonsRow = document.createElement("tr")
@@ -46,7 +46,7 @@ const Leaderboard = {
         td1.append(backButton)
         pagingButtonsRow.append(td1);
         const td2 = document.createElement("td");
-        td2.innerText = this.currentPage
+        td2.innerText = `${this.currentPage} of ${Math.ceil(data.length/Leaderboard.rowsPerPage)}`
         pagingButtonsRow.append(td2);
         const td3 = document.createElement("td");
         td3.style.textAlign = "start"
