@@ -438,15 +438,50 @@ const GameSetup = {
       ];
       let hillsGameObjects = allHillsGameObjects.filter(obj => !obj.difficulties || obj.difficulties.includes(difficulty));
 
-       // Hills Game Level added to the GameEnv ...
-       new GameLevel( {tag: "hills", callback: this.playerOffScreenCallBack, objects: hillsGameObjects } );
+      // Hills Game Level added to the GameEnv ...
+      new GameLevel( {tag: "hills", callback: this.playerOffScreenCallBack, objects: hillsGameObjects } );
 
-        // Game Over Level definition...
-        const endGameObjects = [
-        { name:'background', class: Background, id: 'background', data: this.assets.backgrounds.end}
-        ];
-        // Game Over screen added to the GameEnv ...
-        new GameLevel( {tag: "end",  callback: this.gameOverCallBack, objects: endGameObjects } );
+      // Under Water Game Level defintion...
+      const allWaterGameObjects = [
+        { name: 'mountains', id: 'background', class: BackgroundMountains,  data: this.assets.backgrounds.mountains },
+        { name: 'clouds', id: 'background', class: BackgroundClouds, data: this.assets.backgrounds.clouds },
+        { name: 'hills', id: 'background', class: BackgroundHills, data: this.assets.backgrounds.hills },
+        { name: 'grass', id: 'floor', class: Platform, data: this.assets.platforms.grass },
+        { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2, yPercentage: 0.85 },
+        { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2368, yPercentage: 0.85 },
+        { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2736, yPercentage: 0.85 },
+        { name: 'blocks', id: 'wall', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.6, yPercentage: 1 },
+        { name: 'itemBlock', id: 'jumpPlatform', class: JumpPlatform, data: this.assets.platforms.itemBlock, xPercentage: 0.4, yPercentage: 0.65 }, //item block is a platform
+        { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage: 0.5, yPercentage: 1, minPosition: 0.05},
+        { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage: 0.4, yPercentage: 1, minPosition: 0.05, difficulties: ["normal", "hard", "impossible"]},
+        { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage: 0.3, yPercentage: 1, minPosition: 0.05, difficulties: ["normal", "hard", "impossible"]},
+        { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage: 0.2, yPercentage: 1, minPosition: 0.05, difficulties: ["hard", "impossible"]},
+        { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage: 0.1, yPercentage: 1, minPosition: 0.05, difficulties: ["impossible"]},
+        { name: 'goombaSpecial', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage:  0.75, yPercentage: 1, minPosition: 0.5 }, //this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
+        { name: 'goombaSpecial', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage:  0.95, yPercentage: 1, minPosition: 0.5, difficulties: ["hard", "impossible"] }, //this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
+        { name: 'flyingGoomba', id: 'flyingGoomba', class: FlyingGoomba, data: this.assets.enemies.flyingGoomba, xPercentage:  0.9, minPosition: 0.5, difficulties: ["normal","hard","impossible"]},
+        { name: 'flyingGoomba', id: 'flyingGoomba', class: FlyingGoomba, data: this.assets.enemies.flyingGoomba, xPercentage:  0.9, minPosition: 0.5, difficulties: ["hard","impossible"]},
+        { name: 'flyingGoomba', id: 'flyingGoomba', class: FlyingGoomba, data: this.assets.enemies.flyingGoomba, xPercentage:  0.9, minPosition: 0.5, difficulties: ["impossible"]},
+        { name: 'mushroom', id: 'mushroom', class: Mushroom, data: this.assets.enemies.mushroom, xPercentage: 0.49},
+        { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.1908, yPercentage: 0.75 },
+        { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.2242, yPercentage: 0.75 },
+        { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.2575, yPercentage: 0.75 },
+        { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.5898, yPercentage: 0.900 },
+        { name: 'mario', id: 'player', class: PlayerHills, data: this.assets.players.mario },
+        { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
+        { name: 'loading', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.loading },
+      ];
+      let waterGameObjects = allWaterGameObjects.filter(obj => !obj.difficulties || obj.difficulties.includes(difficulty));
+
+       // Hills Game Level added to the GameEnv ...
+       new GameLevel( {tag: "water", callback: this.playerOffScreenCallBack, objects: waterGameObjects } );
+
+      // Game Over Level definition...
+      const endGameObjects = [
+      { name:'background', class: Background, id: 'background', data: this.assets.backgrounds.end}
+      ];
+      // Game Over screen added to the GameEnv ...
+      new GameLevel( {tag: "end",  callback: this.gameOverCallBack, objects: endGameObjects } );
     }
 } 
 // Bind the methods to the GameSetup object, ensures "this" inside of methods binds to "GameSetup"
