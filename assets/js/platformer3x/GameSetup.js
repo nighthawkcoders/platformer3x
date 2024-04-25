@@ -226,10 +226,11 @@ const GameSetup = {
       backgrounds: {
         start: { src: "/images/platformer/backgrounds/home.png" },
         hills: { src: "/images/platformer/backgrounds/hills.png" },
-        water: { src: "/images/platformer/backgrounds/water.jpg" },
         mountains: { src: "/images/platformer/backgrounds/mountains.jpg" },
         clouds : { src: "/images/platformer/backgrounds/clouds.png"},
+        water: { src: "/images/platformer/backgrounds/water.png" },
         fish : { src: "/images/platformer/backgrounds/school-fish.png"},
+        reef: { src: "/images/platformer/backgrounds/reef.png" },
         space: { src: "/images/platformer/backgrounds/planet.jpg" },
         castles: { src: "/images/platformer/backgrounds/castles.png" },
         loading: { src: "/images/platformer/backgrounds/greenscreen.png" },
@@ -449,6 +450,7 @@ const GameSetup = {
       const allWaterGameObjects = [
         { name: 'water', id: 'background', class: Background,  data: this.assets.backgrounds.water },
         { name: 'fish', id: 'background', class: BackgroundFish, data: this.assets.backgrounds.fish },
+        { name: 'reef', id: 'background', class: Background, data: this.assets.backgrounds.reef},
         { name: 'sand', id: 'floor', class: Platform, data: this.assets.platforms.sand },
         { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2, yPercentage: 0.85 },
         { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2368, yPercentage: 0.85 },
