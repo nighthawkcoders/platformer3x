@@ -10,6 +10,10 @@ const Leaderboard = {
 
     getSortedLeaderboardData () {
         const localData = JSON.parse(localStorage.getItem(this.currentKey))
+        if (!localData) {
+            console.log("NO DATA")
+            return []
+        }
         localData.sort((a, b) => a.time - b.time);
         return localData
     }, 
