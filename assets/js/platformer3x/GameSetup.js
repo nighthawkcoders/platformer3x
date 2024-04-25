@@ -459,6 +459,7 @@ const GameSetup = {
         { name: 'mario', id: 'player', class: PlayerHills, data: this.assets.players.mario },
         { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
         { name: 'loading', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.loading },
+        { name: 'end', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.end },
       ];
       let hillsGameObjects = allHillsGameObjects.filter(obj => !obj.difficulties || obj.difficulties.includes(difficulty));
 
@@ -468,6 +469,39 @@ const GameSetup = {
         const endGameObjects = [
         { name:'background', class: Background, id: 'background', data: this.assets.backgrounds.end}
         ];
+        const winterObjects = [
+          // GameObject(s), the order is important to z-index...
+          { name: 'winter', id: 'background', class: Background, data: this.assets.backgrounds.winter },
+          { name: 'snowyfloor', id: 'platform', class: Platform, data: this.assets.platforms.snowyfloor },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.2, yPercentage: 0.82 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.2368, yPercentage: 0.82 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.2736 , yPercentage: 0.82 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.3104, yPercentage: 0.82 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.3472, yPercentage: 0.82 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.384, yPercentage: 0.74 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.4208, yPercentage: 0.66 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.5090, yPercentage: 0.56 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.5090, yPercentage: 0.48 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.5090, yPercentage: 0.40 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.5090, yPercentage: 0.32 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.69, yPercentage: 0.76 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.655, yPercentage: 0.68 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.62, yPercentage: 0.68 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.72, yPercentage: 0.76 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.755, yPercentage: 1 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.755, yPercentage: 0.92 },
+          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.755, yPercentage: 0.84 },
+          { name: 'Owl', id: 'Owl', class: Owl, data: this.assets.enemies.Owl, xPercentage:  0.55, minPosition:  0.05},
+          { name: 'Owl', id: 'Owl', class: Owl, data: this.assets.enemies.Owl, xPercentage:  0.8, minPosition:  0.05},
+          { name: 'Snowman', id: 'Snowman', class: Snowman, data: this.assets.enemies.Snowman, xPercentage: 0.2, minPosition: 0.05},
+          { name: 'Snowman', id: 'Snowman', class: Snowman, data: this.assets.enemies.Snowman, xPercentage:  0.35, minPosition: 0.07 },
+          { name: 'Snowman', id: 'Snowman', class: Snowman, data: this.assets.enemies.Snowman, xPercentage:  0.45, minPosition: 0.07 },
+          { name: 'monkey', id: 'player', class: Player, data: this.assets.players.monkey },
+          { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
+          { name: 'end', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.end },
+        ];
+        // Winter Game Level added to the GameEnv ...
+        new GameLevel( {tag: "winter", callback: this.playerOffScreenCallBack, objects: winterObjects} );
         // Game Over screen added to the GameEnv ...
         new GameLevel( {tag: "end",  callback: this.gameOverCallBack, objects: endGameObjects } );
     }
