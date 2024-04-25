@@ -271,6 +271,30 @@ const GameSetup = {
           s: { row: 12, frames: 15 },
           d: { row: 0, frames: 15, idleFrame: { column: 7, frames: 0 } }
         },
+        knight: {
+          src: "/images/platformer/sprites/knight.png",
+          width: 128,
+          height: 128,
+          scaleSize: 120,
+          speedRatio: 0.7,
+          idle: {
+              left: { row: 1, frames: 23 },
+              right: { row: 0, frames: 23},
+          },
+          walk: {
+              left: { row: 7, frames: 20 },
+              right: { row: 6, frames: 20 },
+          },
+          run: {
+              left: { row: 5, frames: 23 },
+              right: { row: 4, frames: 23 },
+          },
+          jump: {
+              left: { row: 3, frames: 23 },
+              right: { row: 2, frames: 23 },
+          },
+          hitbox: { widthPercentage: 0.3, heightPercentage: 0.8 }
+        },
         lopez: {
           src: "/images/platformer/sprites/lopezanimation.png", 
           width: 46,
