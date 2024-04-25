@@ -459,7 +459,6 @@ const GameSetup = {
         { name: 'mario', id: 'player', class: PlayerHills, data: this.assets.players.mario },
         { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
         { name: 'loading', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.loading },
-        { name: 'end', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.end },
       ];
       let hillsGameObjects = allHillsGameObjects.filter(obj => !obj.difficulties || obj.difficulties.includes(difficulty));
 
@@ -497,8 +496,8 @@ const GameSetup = {
           { name: 'Snowman', id: 'Snowman', class: Snowman, data: this.assets.enemies.Snowman, xPercentage:  0.35, minPosition: 0.07 },
           { name: 'Snowman', id: 'Snowman', class: Snowman, data: this.assets.enemies.Snowman, xPercentage:  0.45, minPosition: 0.07 },
           { name: 'monkey', id: 'player', class: Player, data: this.assets.players.monkey },
-          { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
-          { name: 'end', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.end },
+          { name: 'cabin', id: 'cabin', class: Cabin, data: this.assets.obstacles.cabin },
+          { name: 'complete', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.complete },
         ];
         // Winter Game Level added to the GameEnv ...
         new GameLevel( {tag: "winter", callback: this.playerOffScreenCallBack, objects: winterObjects} );
