@@ -1,31 +1,20 @@
 
-$high-emph: #FFFFFF;
-$med-emph: (#FFFFFF );
-$low-emph: (#FFFFFF );
-$dark-grey: #FFFFFF;
-$black: #3a3939;
-
-
-html, body, input, textarea, select, button {   
-  color: $high-emph !important;
-  background-color: $dark-grey !important;
-}
+.light-mode {  
 
 a {
-    color: rgb(75, 186, 255) !important;
+    color: rgb(75, 186, 255);
 }
 
 a:hover {
-    color:$high-emph !important;
+    color: #7a7976;
 }
-
 .site-title, .site-title:visited, .site-nav, .page-link {
-    color: $black!important;
+    color: #000000;
 }
 
 .site-nav {
-    background-color: $high-emph;
-    border-color: $high-emph;
+    background-color: #FFFFFF;
+    border-color: #000000;
 }
 
 * {
@@ -34,46 +23,46 @@ a:hover {
 
 pre, code {
     // BVas a lighter colour to better highlight short code words
-    border-color: $dark-grey;
-    background-color: $dark-grey;
+    border-color: #000000;
+    background-color:#FFFFFF ;
 }
 
 .page-description {
-    color: $black
+    color: #000000
 }
 
 .post-meta {
-    color: $low-emph;
+    color: #000000;
 }
 
 .post-content p, .post-content li {
-    color: $med-emph;
+    color: #000000;
 }
 
 .btn {
-    background-color: $high-emph !important;
-    color: $high-emph !important;
-    border-color: $high-emph !important;
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+    border-color: #000000 !important;
 }
 
 .btn:hover {
-    background-color: $dark-grey !important;
+    background-color: #7a7976 !important;
 }
 
 table th{
-    background-color: $black;
-    border-color: $black;
-    color: $high-emph;
+    background-color: #FFFFFF;
+    border-color: #000000;
+    color: #000000;
 }
 
 table td{
-    background-color: $black;
-    border-color: $black;
-    color: $med-emph;
+    background-color: #FFFFFF;
+    border-color: #000000;
+    color: #000000;
 }
 
 .flash {
-    color: $dark-grey !important;
+    color: #5e5d5b !important;
     filter: brightness(80%);
 }
 
@@ -83,16 +72,16 @@ canvas {
 
 .post-list > li > div {
     box-shadow: none !important;
-    background-color: $high-emph;
+    background-color: #FFFFFF;
     border: none !important;
 }
 
 li .post-meta-description {
-    color: $med-emph !important;
+    color: #000000!important;
 }
 
 .search-result-preview{
-    color: $black !important; 
+    color: #000000 !important; 
 }
 
 .search-result-highlight {
@@ -102,4 +91,46 @@ li .post-meta-description {
 
 .search-results-list-item .search-result-title {
     color: cornflowerblue !important;
+}
+
+.button#startGame {
+    color:#000000;
+    background-color: #FFFFFF;
+}
+
+.leaderboard-button {
+    color:#000000;
+    background-color: #FFFFFF;
+}
+
+.input.userID {
+    background: #FFFFFF
+}
+
+.table.levels {
+    background-color: #FFFFFF;
+}
+
+.sidebar {
+    color:#000000;
+    background-color: #FFFFFF;
+}
+.p {
+    color: #000000
+}
+
+.div {
+.submenu {
+    color: #000000;
+    background-color: #FFFFFF
+}}
+
+.menu-icon {
+    color: #000000
+}
+
+.div {
+    color:#000000;
+    background-color:#FFFFFF;
+}
 }

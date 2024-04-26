@@ -4,6 +4,8 @@ import GameEnv from "./GameEnv.js";
 import GameControl from "./GameControl.js";
 import Socket from "./Multiplayer.js";
 import Chat from "./Chat.js"
+import { enableLightMode } from './lightMode.js';
+import { enableDarkMode } from './darkMode.js';
 
 /* Coding Style Notes
  *
@@ -291,28 +293,25 @@ export class SettingsControl extends LocalStorage{
 
     get isThemeInput() {
         const div = document.createElement("div");
-        div.innerHTML = "Theme Change: "; // label
+        div.innerHTML = "Theme Change:"; // label
     
-        const islightMode = document.createElement("input");  // get user defined invert boolean
+        const islightMode = document.createElement("input");  // get user defined lightmode boolean
         islightMode.type = "checkbox";
-        islightMode.checked = GameEnv.lightMode; // GameEnv contains latest isInverted state
-    
-       // Add event listener to the input element
-islightMode.addEventListener("change", () => {
-    // Dispatch event to switch the theme to light mode
-    window.dispatchEvent(new CustomEvent("switchToLightMode"));
-});
+        islightMode.checked = GameEnv.lightMode; // GameEnv contains latest is lightMode state
+        islightMode.addEventListener('change', () => {
+            if (islightMode.checked) {
+                enableLightMode();
+            } else {
+                enableDarkMode();
+            }
+        });
 
-// Listen for the custom event to switch to light mode
-window.addEventListener("switchToLightMode", () => {
-    const body = document.body;
-    body.classList.remove("dark-mode.scss"); // Remove 'dark-mode' class from the body
-    const themeStyle = document.getElementById("theme-style");
-    themeStyle.href = "light-mode.scss"; // Update the theme style href to the light mode CSS file
-});
-    
-        div.append(islightMode); // wrap input element in div
-        return div;
+        // Append elements to the DOM or wherever appropriate
+        div.appendChild(islightMode); 
+        return div
+        // Append div to your settings container
+        // For example:
+        // document.getElementById('settingsContainer').appendChild(div);
     }
 
     /**
@@ -321,6 +320,7 @@ window.addEventListener("switchToLightMode", () => {
      * The input's value is bound to the GameEnv's gameSpeed state.
      * @returns {HTMLDivElement} The div containing the gameSpeed input.
      */
+
     get gameSpeedInput() {
         const div = document.createElement("div");
         div.innerHTML = "Game Speed: "; // label

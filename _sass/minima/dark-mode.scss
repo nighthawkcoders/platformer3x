@@ -1,109 +1,138 @@
-:root {
-    --default-canvas-filter: invert(100%);
-}
 
-$high-emph: rgba(white, 0.87);
-$med-emph: rgba(white, 0.69); 
-$low-emph: rgba(white, 0.38);
-$dark-grey : #121212; 
-// $dark-grey : #1F1B24;
-$overlay: mix($dark-grey, white, 95%);
-$overlay-light: mix($dark-grey, white, 86%);
+.dark-mode {   
+    color: #FFFFFF;
+    background-color: #000000;
 
-html, body, input, textarea, select, button {   
-  color: $high-emph !important;
-  background-color: $dark-grey !important;
-}
-
-a {
-    color: rgb(75, 186, 255) !important;
-}
-
-a:hover {
-    color:$high-emph !important;
-}
-
-.site-title, .site-title:visited, .site-nav, .page-link {
-    color: $high-emph !important;
-}
-
-.site-nav {
-    background-color: $dark-grey;
-    border-color: $overlay-light;
-}
-
-* {
-    scrollbar-color: $dark-grey $overlay-light;
-}
-
-pre, code {
-    // BVas a lighter colour to better highlight short code words
-    border-color: $overlay-light;
-    background-color: $overlay;
-}
-
-.page-description {
-    color: $med-emph;
-}
-
-.post-meta {
-    color: $low-emph;
-}
-
-.post-content p, .post-content li {
-    color: $med-emph;
-}
-
-.btn {
-    background-color: $overlay !important;
-    color: $high-emph !important;
-    border-color: $overlay-light !important;
-}
-
-.btn:hover {
-    background-color: $dark-grey !important;
-}
-
-table th{
-    background-color: $overlay;
-    border-color: $overlay-light;
-    color: $high-emph;
-}
-
-table td{
-    background-color: $dark-grey;
-    border-color: $overlay-light;
-    color: $med-emph;
-}
-
-.flash {
-    color: $dark-grey !important;
-    filter: brightness(80%);
-}
-
-canvas {
-    filter: var(--default-canvas-filter);
-}
-
-.post-list > li > div {
-    box-shadow: none !important;
-    background-color: $overlay;
-    border: none !important;
-}
-
-li .post-meta-description {
-    color: $med-emph !important;
-}
-
-.search-result-preview{
-    color: lightgray !important; 
-}
-
-.search-result-highlight {
-    color:yellow !important;
-    font-weight:bold !important;
-}
-
-.search-results-list-item .search-result-title {
-    color: cornflowerblue !important;
+  a {
+      color: rgb(75, 186, 255) !important;
+  }
+  
+  a:hover {
+      color: #7a7976 !important;
+  }
+  .site-title, .site-title:visited, .site-nav, .page-link {
+      color: #FFFFFF !important;
+  }
+  
+  .site-nav {
+      background-color: #FFFFFF;
+      border-color: #000000;
+  }
+  
+  * {
+      scrollbar-color: #FFFFFF; 
+  }
+  
+  pre, code {
+      // BVas a lighter colour to better highlight short code words
+      border-color: #5e5d5b;
+      background-color:#82807a ;
+  }
+  
+  .page-description {
+      color: #FFFFFF
+  }
+  
+  .post-meta {
+      color: #000000;
+  }
+  
+  .post-content p, .post-content li {
+      color: #000000;
+  }
+  
+  .btn {
+      background-color: #FFFFFF !important;
+      color: #000000 !important;
+      border-color: #000000 !important;
+  }
+  
+  .btn:hover {
+      background-color: #7a7976 !important;
+  }
+  
+  table th{
+      background-color: #FFFFFF;
+      border-color: #000000;
+      color: #000000;
+  }
+  
+  table td {
+      background-color: #FFFFFF;
+      border-color: #000000;
+      color: #000000;
+  }
+  
+  .flash {
+      color: #5e5d5b !important;
+      filter: brightness(80%);
+  }
+  
+  canvas {
+      background-color: #000000;
+  }
+  
+  .post-list > li > div {
+      box-shadow: none !important;
+      background-color: #000000;
+      border: none !important;
+  }
+  
+  li .post-meta-description {
+      color: #FFFFFF!important;
+  }
+  
+  .search-result-preview{
+      color: #FFFFFF !important; 
+  }
+  
+  .search-result-highlight {
+      color:yellow !important;
+      font-weight:bold !important;
+  }
+  
+  .search-results-list-item .search-result-title {
+      color: cornflowerblue !important;
+  }
+  
+  .startGame {
+      color:#FFFFFF;
+      background-color: #000000;
+  }
+  
+  .leaderboard-button {
+      color:#FFFFFF;
+      background-color: #000000;
+  }
+  
+  .input.userID {
+      background: #000000;
+  }
+  
+  .table.levels {
+      background-color: #000000;
+  }
+  
+  .sidebar {
+      color:#000000;
+      background-color: #FFFFFF;
+  }
+  .p {
+      color: #000000;
+  }
+  .submenu {
+      color: #000000;
+      background-color: #FFFFFF;
+  }
+  
+  .menu-icon {
+      color: #5e5d5b;
+  }
+  .page-link {  
+    color: #000000;
+    background-color: #FFFFFF;
+  }
+  .trigger {
+    background-color: #000000;
+  }
 }

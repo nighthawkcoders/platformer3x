@@ -2,6 +2,7 @@
 // Uncomment out the following themes to use them 
 
 // Guide: https://github.com/jekyll/minima/blob/master/README.md
+@import "minima/dark-mode";
 @import "minima/light-mode"; 
 
 /*--- CUSTOM STYLES FOR Nighthawkpages ---*/
@@ -23,5 +24,7 @@
 //@import "minima/hamilton/skins/sunrise";
 //@import "minima/hamilton/skins/sunset"
 
-@import "dark-mode.scss";
-@import "light-mode.scss";
+
+
+
+
