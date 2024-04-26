@@ -12,8 +12,10 @@ import Platform from './Platform.js';
 import JumpPlatform from './JumpPlatform.js';
 import Player from './Player.js';
 import PlayerHills from './PlayerHills.js';
+import PlayerWinter from './PlayerWinter.js';
 import Tube from './Tube.js';
 import Tree from './Tree.js';
+import Cabin from './Cabin.js';
 import Goomba from './Goomba.js';
 import FlyingGoomba from './FlyingGoomba.js';
 import BlockPlatform from './BlockPlatform.js';
@@ -22,7 +24,6 @@ import Coin from './Coin.js';
 import FlyingUFO from './FlyingUFO.js';
 import Alien from './Alien.js';
 import GameControl from './GameControl.js';
-import Cabin from './Cabin.js';
 import Enemy from './Enemy.js';
 import Owl from './Owl.js';
 import Snowman from './Snowman.js';
@@ -500,7 +501,7 @@ const GameSetup = {
           { name: 'Snowman', id: 'Snowman', class: Snowman, data: this.assets.enemies.Snowman, xPercentage: 0.2, minPosition: 0.05},
           { name: 'Snowman', id: 'Snowman', class: Snowman, data: this.assets.enemies.Snowman, xPercentage:  0.35, minPosition: 0.07 },
           { name: 'Snowman', id: 'Snowman', class: Snowman, data: this.assets.enemies.Snowman, xPercentage:  0.45, minPosition: 0.07 },
-          { name: 'monkey', id: 'player', class: Player, data: this.assets.players.monkey },
+          { name: 'mario', id: 'player', class: PlayerWinter, data: this.assets.players.mario },
           { name: 'cabin', id: 'cabin', class: Cabin, data: this.assets.obstacles.cabin },
           { name: 'complete', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.complete },
         ];

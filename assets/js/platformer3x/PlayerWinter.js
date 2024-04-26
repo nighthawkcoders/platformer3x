@@ -92,10 +92,6 @@ export class PlayerWinter extends PlayerBase {
                         GameEnv.snowmanBounce = false;
                         this.y = this.y - 100;
                     }
-                    if (GameEnv.snowmanBounce1 === true) {
-                        GameEnv.snowmanBounce1 = false; 
-                        this.y = this.y - 250
-                    }
                 // 2. Player touches snowman sides of snowman 
                 } else if (this.collisionData.touchPoints.this.right || this.collisionData.touchPoints.this.left) {
                     if (GameEnv.difficulty === "normal" || GameEnv.difficulty === "hard") {
@@ -116,17 +112,6 @@ export class PlayerWinter extends PlayerBase {
                 
                 }
                 break;
-            case "mushroom": // 
-                // Player touches mushroom   
-                if (GameEnv.destroyedMushroom === false) {
-                    GameEnv.destroyedMushroom = true;
-                    this.canvas.style.filter = 'invert(1)';
-                    // Invert state lasts for 2 seconds
-                    setTimeout(() => {
-                        this.canvas.style.filter = 'invert(0)';
-                    }, 2000); // 2000 milliseconds = 2 seconds
-                }
-                break;  
         }
 
     }
