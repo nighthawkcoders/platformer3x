@@ -26,7 +26,6 @@ import Cabin from './Cabin.js';
 import Enemy from './Enemy.js';
 import Owl from './Owl.js';
 import Snowman from './Snowman.js';
-import BackgroundWinter from './BackgroundWinter.js';
 
 //test comment
 
