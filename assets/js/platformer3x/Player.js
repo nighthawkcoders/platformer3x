@@ -298,7 +298,7 @@ export class Player extends Character {
                 this.movement.right = false;
                 this.gravityEnabled = true;
                 this.y -= GameEnv.gravity; // allows movemnt on platform, but climbs walls
-                GameEnv.playSound("boing")
+
 
                 // this.x -= this.isActiveAnimation("s") ? this.moveSpeed : this.speed;  // Move to left
 
