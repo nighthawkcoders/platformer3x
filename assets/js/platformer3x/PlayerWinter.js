@@ -23,7 +23,7 @@ export class PlayerWinter extends PlayerBase {
     constructor(canvas, image, data) {
         super(canvas, image, data);
 
-        // Goomba variables, deprecate?
+        // Snowman variables, deprecate?
         this.timer = false;
         GameEnv.invincible = false; // Player is not invincible 
     }
@@ -51,8 +51,8 @@ export class PlayerWinter extends PlayerBase {
     handleCollisionStart() {
         super.handleCollisionStart(); // calls the super class method
         // adds additional collision events
-        this.handleCollisionEvent("tube");
-        this.handleCollisionEvent("goomba");
+        this.handleCollisionEvent("cabin");
+        this.handleCollisionEvent("snowman");
         this.handleCollisionEvent("mushroom");
     }
    
@@ -64,7 +64,7 @@ export class PlayerWinter extends PlayerBase {
         super.handlePlayerReaction(); // calls the super class method
         // handles additional player reactions
         switch (this.state.collision) {
-            case "tube":
+            case "cabin":
                 // 1. Caught in tube
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
                     // Position player in the center of the tube 
@@ -84,19 +84,19 @@ export class PlayerWinter extends PlayerBase {
                     this.state.movement.right = true;
                 }
                 break;
-            case "goomba": // Note: Goomba.js and Player.js could be refactored
-                // 1. Player jumps on goomba, interaction with Goomba.js
+            case "snowman": // Note: Snowman.js and Player.js could be refactored
+                // 1. Player jumps on snowman, interaction with Snowman.js
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom && this.state.isDying == false) {
-                    // GoombaBounce deals with player.js and goomba.js
-                    if (GameEnv.goombaBounce === true) {
-                        GameEnv.goombaBounce = false;
+                    // SnowmanBounce deals with player.js and Snowman.js
+                    if (GameEnv.snowmanBounce === true) {
+                        GameEnv.snowmanBounce = false;
                         this.y = this.y - 100;
                     }
-                    if (GameEnv.goombaBounce1 === true) {
-                        GameEnv.goombaBounce1 = false; 
+                    if (GameEnv.snowmanBounce1 === true) {
+                        GameEnv.snowmanBounce1 = false; 
                         this.y = this.y - 250
                     }
-                // 2. Player touches goomba sides of goomba 
+                // 2. Player touches snowman sides of snowman 
                 } else if (this.collisionData.touchPoints.this.right || this.collisionData.touchPoints.this.left) {
                     if (GameEnv.difficulty === "normal" || GameEnv.difficulty === "hard") {
                         if (this.state.isDying == false) {

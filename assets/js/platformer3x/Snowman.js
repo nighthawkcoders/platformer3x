@@ -92,7 +92,7 @@ export class Snowman extends Character {
     
     // Player action on collisions
     collisionAction() {
-        if (this.collisionData.touchPoints.other.id === "tube") {
+        if (this.collisionData.touchPoints.other.id === "cabin") {
             if (this.collisionData.touchPoints.other.left || this.collisionData.touchPoints.other.right) {
                 this.speed = -this.speed;            
             }
@@ -106,13 +106,13 @@ export class Snowman extends Character {
             //console.log(this.collisionData.touchPoints.other.left + "left")
             if (this.collisionData.touchPoints.other.bottom && this.immune == 0) {
                 GameEnv.invincible = true;
-                GameEnv.snowmanBounce = true;
+                GameEnv.goombaBounce = true;
                 this.canvas.style.transition = "transform 1.5s, opacity 1s";
                 this.canvas.style.transition = "transform 2s, opacity 1s";
                 this.canvas.style.transformOrigin = "bottom"; // Set the transform origin to the bottom
                 this.canvas.style.transform = "scaleY(0)"; // Make the Snowman flat
                 this.speed = 0;
-                GameEnv.playSound("snowmanDeath");
+                GameEnv.playSound("goombaDeath");
 
                 setTimeout((function() {
                     GameEnv.invincible = false;
