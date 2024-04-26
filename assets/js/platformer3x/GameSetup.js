@@ -659,9 +659,9 @@ const GameSetup = {
           { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.27, yPercentage: 0.74 },
           { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.35, yPercentage: 0.65 },
           // coins on right blocks
-          { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.706, yPercentage: 0.83, },
-          { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.626, yPercentage: 0.74 },
-          { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.546, yPercentage: 0.65 },
+          { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.687, yPercentage: 0.83, },
+          { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.611, yPercentage: 0.74 },
+          { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.529, yPercentage: 0.65 },
           { name: 'harry', id: 'player', class: Player, data: this.assets.players.harry },
           { name: 'tree', id: 'tree', class: Tree, data: this.assets.obstacles.whompingwillow },
           { name: 'loading', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.loading },
