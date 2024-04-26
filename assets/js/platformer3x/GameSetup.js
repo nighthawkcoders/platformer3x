@@ -23,6 +23,9 @@ import Alien from './Alien.js';
 import GameControl from './GameControl.js';
 import Enemy from './Enemy.js';
 import Cerberus from './Cerberus.js';
+import PlayerGreece from './PlayerGreece.js';
+import Flag from './Flag.js';
+import Dragon from './Dragon.js';
 
 //test comment
 
@@ -204,11 +207,15 @@ const GameSetup = {
         tree: { src: "/images/platformer/obstacles/tree.png",
                 hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
               },
+        flag: { src: "/images/platformer/obstacles/flag.png",
+              hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
+            },
       },
       platforms: {
         grass: { src: "/images/platformer/platforms/grass.png" },
         alien: { src: "/images/platformer/platforms/alien.png" },
         bricks: { src: "/images/platformer/platforms/brick_wall.png" },
+        sandstone: { src: "/images/platformer/platforms/sandstone.jpg" },
         block: { src: "/images/platformer/platforms/brick_block.png" }, //MAY need 3 new variables: sizeRatio, widthRatio, and heightRatio
         itemBlock: {
           src: "/images/platformer/platforms/mario_block_spritesheet_v2.png",
@@ -361,6 +368,13 @@ const GameSetup = {
           s: {row: 0, frames: 0}, // Stop the movement 
           d: { row: 0, frames: 0, idleFrame: { column: 0, frames: 0 } }, // Right Movement 
         },
+        dragon: {
+          src: "/images/platformer/sprites/dragon.png",
+          width: 152,
+          height: 119,
+          scaleSize: 60,
+          speedRatio: 0.7,
+        },
       }
     },
 
@@ -479,22 +493,22 @@ const GameSetup = {
        // Hills Game Level added to the GameEnv ...
        new GameLevel( {tag: "hills", callback: this.playerOffScreenCallBack, objects: hillsGameObjects } );
 
-        // Space Game Level definition...
+        // Greece Game Level definition...
         const greeceGameObjects = [
           // GameObject(s), the order is important to z-index...
-          { name: 'space', id: 'background', class: Background, data: this.assets.backgrounds.space },
+          { name: 'greece', id: 'background', class: Background, data: this.assets.backgrounds.greece },
           { name: 'grass', id: 'platform', class: Platform, data: this.assets.platforms.grass },
-          { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.alien, xPercentage: 0.2, yPercentage: 0.85 },
+          { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.1, yPercentage: 0.1 },
           { name: 'cerberus', id: 'cerberus', class: Cerberus, data: this.assets.enemies.cerberus, xPercentage:  0.5, minPosition: 0.07, difficulties: ["normal", "hard", "impossible"]},
           { name: 'cerberus', id: 'cerberus', class: Cerberus, data: this.assets.enemies.cerberus, xPercentage:  0.4, minPosition: 0.07, difficulties: ["normal", "hard", "impossible"]},
-          { name: 'cerberus', id: 'cerberus', class: Cerberus, data: this.assets.enemies.cerberus, xPercentage:  0.3, minPosition: 0.07, difficulties: ["normal", "hard", "impossible"]},//this special name is used for random event 2 to make sure that only one of the Goombas ends the random event          { name: 'flyingUFO', id: 'flyingUFO', class: FlyingUFO, data: this.assets.enemies.flyingUFO, xPercentage:  0.1, minPosition:  0.05},
-          { name: 'flyingUFO', id: 'flyingUFO', class: FlyingUFO, data: this.assets.enemies.flyingUFO, xPercentage:  0.5, minPosition:  0.05},
-          { name: 'knight', id: 'player', class: PlayerHills, data: this.assets.players.knight },
-          { name: 'tree', id: 'tree', class: Tree, data: this.assets.obstacles.tree },
+          { name: 'cerberus', id: 'cerberus', class: Cerberus, data: this.assets.enemies.cerberus, xPercentage:  0.3, minPosition: 0.07, difficulties: ["normal", "hard", "impossible"]},//this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
+          { name: 'dragon', id: 'dragon', class: Dragon, data: this.assets.enemies.dragon, xPercentage:  0.5, minPosition:  0.05},
+          { name: 'knight', id: 'player', class: PlayerGreece, data: this.assets.players.knight },
+          { name: 'flag', id: 'flag', class: Flag, data: this.assets.obstacles.flag },
           { name: 'complete2', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.complete2 },
         ];
 
-        // Space Game Level added to the GameEnv ...
+        // Greece Game Level added to the GameEnv ...
            new GameLevel( {tag: "ancient greece", callback: this.playerOffScreenCallBack, objects: greeceGameObjects} );
 
         // Game Over Level definition...
