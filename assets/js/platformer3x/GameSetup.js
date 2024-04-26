@@ -237,7 +237,7 @@ const GameSetup = {
         loading: { src: "/images/platformer/backgrounds/greenscreen.png" },
         complete: { src: "/images/platformer/backgrounds/OneStar.png" },
         complete2: { src: "/images/platformer/backgrounds/TwoStar.png" },
-        end: { src: "/images/platformer/backgrounds/Congratulations!!!.png" }
+        end: { src: "/images/platformer/backgrounds/congratulations!!!.png" }
       },
       players: {
         mario: {
