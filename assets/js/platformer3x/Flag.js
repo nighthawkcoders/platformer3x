@@ -18,7 +18,7 @@ export class Flag extends GameObject {
     // Set flag position
     size() {
         // Formula for Height should be on constant ratio, using a proportion of 832
-        const scaledHeight = GameEnv.innerHeight * (480/832);
+        const scaledHeight = GameEnv.innerHeight * (120000/832);
         // Formula for Width is scaled: scaledWidth/scaledHeight == this.width/this.height
         const scaledWidth = scaledHeight * this.aspect_ratio;
         const flagX = .82 * GameEnv.innerWidth;
