@@ -45,7 +45,7 @@ export class Background extends GameObject {
         const ADJUST = 1 // visual layer adjust; alien_planet.jpg: 1.42, try 1 for others
 
         const canvasWidth = GameEnv.innerWidth;
-        const canvasHeight = canvasWidth / this.aspect_ratio;
+        const canvasHeight = GameEnv.innerHeight - 300; // height of window - space for navbar and facts
         GameEnv.backgroundHeight = canvasHeight;
         const canvasLeft = 0;
 
