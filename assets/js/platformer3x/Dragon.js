@@ -37,6 +37,12 @@ export class Dragon extends FlyingGoomba {
             this.speed = -this.speed;
         }
 
+        if (this.speed < 0) {
+            this.canvas.style.transform = 'scaleX(1)';
+        } else {
+            this.canvas.style.transform = 'scaleX(-1)';
+        }
+
         this.dropGoomba();
 
         // Every so often change direction
