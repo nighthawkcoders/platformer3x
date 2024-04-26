@@ -4,11 +4,13 @@ import Background from './Background.js';
 export class BackgroundHills extends Background {
     constructor(canvas, image, data) {
         super(canvas, image, data);
+
+        this.parallaxSpeed = 0.4;
     }
 
     // speed is used to background parallax behavior
     update() {
-        this.speed = GameEnv.backgroundHillsSpeed;
+        this.speed = GameEnv.backgroundDirection * this.parallaxSpeed;
         super.update();
     }
 
