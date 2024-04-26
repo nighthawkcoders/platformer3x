@@ -7,6 +7,7 @@ import BackgroundHills from './BackgroundHills.js';
 import BackgroundMountains from './BackgroundMountains.js';
 import BackgroundTransitions from './BackgroundTransitions.js';
 import BackgroundClouds from './BackgroundClouds.js';
+import BackgroundWinter from './BackgroundWinter.js';
 import Platform from './Platform.js';
 import JumpPlatform from './JumpPlatform.js';
 import Player from './Player.js';
@@ -470,7 +471,7 @@ const GameSetup = {
         ];
         const winterObjects = [
           // GameObject(s), the order is important to z-index...
-          { name: 'winter', id: 'background', class: Background, data: this.assets.backgrounds.winter },
+          { name: 'winter', id: 'background', class: BackgroundWinter, data: this.assets.backgrounds.winter },
           { name: 'snowyfloor', id: 'platform', class: Platform, data: this.assets.platforms.snowyfloor },
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.2, yPercentage: 0.82 },
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.2368, yPercentage: 0.82 },
