@@ -1,7 +1,7 @@
 import GameEnv from './GameEnv.js';
 import Background from './Background.js';
 
-export class BackgroundClouds extends Background {
+export class BackgroundFish extends Background {
     constructor(canvas, image, data) {
         super(canvas, image, data);
 
@@ -21,4 +21,4 @@ export class BackgroundClouds extends Background {
 
 }
 
-export default BackgroundClouds;
+export default BackgroundFish;
