@@ -211,6 +211,7 @@ const GameSetup = {
       },
       platforms: {
         grass: { src: "/images/platformer/platforms/grass.png" },
+        turf: { src: "/images/platformer/platforms/turf.png"},
         alien: { src: "/images/platformer/platforms/alien.png" },
         bricks: { src: "/images/platformer/platforms/brick_wall.png" },
         cobblestone: { src: "/images/platformer/platforms/cobblestone.png"},
@@ -630,7 +631,7 @@ const GameSetup = {
         const quidditchGameObjects = [
           // GameObject(s), the order is important to z-index...
           { name: 'quidditch', id: 'background', class: Background, data: this.assets.backgrounds.quidditch },
-          { name: 'grass', id: 'platform', class: Platform, data: this.assets.platforms.grass },
+          { name: 'turf', id: 'platform', class: Platform, data: this.assets.platforms.turf },
           //blocks on left side of wall/tower
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.2, yPercentage: 0.90 },
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.28, yPercentage: 0.81 },
