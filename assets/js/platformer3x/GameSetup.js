@@ -8,6 +8,7 @@ import BackgroundMountains from './BackgroundMountains.js';
 import BackgroundTransitions from './BackgroundTransitions.js';
 import BackgroundClouds from './BackgroundClouds.js';
 import BackgroundWinter from './BackgroundWinter.js';
+import BackgroundSnow from './BackgroundSnow.js';
 import Platform from './Platform.js';
 import JumpPlatform from './JumpPlatform.js';
 import Player from './Player.js';
@@ -244,6 +245,7 @@ const GameSetup = {
         complete3: {src: "/images/platformer/backgrounds/ThreeStar.png" },
         end: { src: "/images/platformer/backgrounds/Congratulations!!!.png" },
         winter: {src: "/images/platformer/backgrounds/winter.png" },
+        snow: {src: "/images/platformer/backgrounds/snowfall.png" },
       },
       players: {
         mario: {
@@ -504,6 +506,7 @@ const GameSetup = {
         const winterObjects = [
           // GameObject(s), the order is important to z-index...
           { name: 'winter', id: 'background', class: BackgroundWinter, data: this.assets.backgrounds.winter },
+          { name: 'snow', id: 'background', class: BackgroundSnow, data: this.assets.backgrounds.snow },
           { name: 'snowyfloor', id: 'platform', class: Platform, data: this.assets.platforms.snowyfloor },
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.2, yPercentage: 0.82 },
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.2368, yPercentage: 0.82 },
