@@ -1,8 +1,9 @@
 import Character from './Character.js';
+import FlyingGoomba from './FlyingGoomba.js';
 import GameEnv from './GameEnv.js';
 
-export class Owl extends Character {
-
+export class Snowman extends FlyingGoomba {
+  
     // constructors sets up Character object 
     constructor(canvas, image, data, xPercentage, yPercentage, name, minPosition){
         super(canvas, image, data);
@@ -14,7 +15,7 @@ export class Owl extends Character {
         //Initial Position of Goomba
         this.x = xPercentage * GameEnv.innerWidth;
         this.y = 0.4 * GameEnv.innerHeight;
-
+        
         //Access in which a Goomba can travel
         this.minPosition = minPosition * GameEnv.innerWidth;
         this.maxPosition = this.x + xPercentage * GameEnv.innerWidth;
@@ -25,22 +26,8 @@ export class Owl extends Character {
         if (GameEnv.difficulty === "normal") {
             this.speed = this.speed;
         } else {
-            this.speed = this.speed * 0.02;
+            this.speed = this.speed * 2;
         }
-    }
-
-    dropGoomba() {
-      let playerX = GameEnv.PlayerPosition.playerX;
-      let playerY = GameEnv.PlayerPosition.playerY;
-
-      // Drop the Goomba on the Player when relatively close
-      if (Math.abs(this.x - playerX) < 150 && this.y !== playerY) {
-        //Move Goomba towards Player
-        this.y = followPlayer(this.y, playerY, 0.03);
-      } else {
-        //Move Goomba towards Sky
-        this.y = followPlayer(this.y, 0.4 * GameEnv.innerHeight, 0.02);
-      }
     }
 
     update() {
@@ -48,6 +35,12 @@ export class Owl extends Character {
 
         if (this.x <= this.minPosition || (this.x + this.canvasWidth >= this.maxPosition) || this.x > (GameEnv.innerWidth - 100) ) {
             this.speed = -this.speed;
+        }
+
+        if (this.speed < 0) {
+            this.canvas.style.transform = 'scaleX(1)';
+        } else {
+            this.canvas.style.transform = 'scaleX(-1)';
         }
 
         this.dropGoomba();
@@ -64,10 +57,10 @@ export class Owl extends Character {
                 this.immune = 1;
             }
         }
-
+        
         //Immunize Goomba & Texture It
         if (GameEnv.difficulty === "hard") {
-                this.canvas.style.filter = "invert(0%)";
+                this.canvas.style.filter = "invert(100%)";
                 this.canvas.style.scale = 1.25;
                 this.immune = 1;
         } else if (GameEnv.difficulty === "impossible") {
@@ -81,54 +74,7 @@ export class Owl extends Character {
     }
 
     // Player action on collisions
-    collisionAction() {
-        if (this.collisionData.touchPoints.other.id === "tree") {
-            if (this.collisionData.touchPoints.other.left || this.collisionData.touchPoints.other.right) {
-                this.speed = -this.speed;            
-            }
-        }
-        if (this.collisionData.touchPoints.other.id === "player") {
-            this.speed = 0;
-            // Collision: Top of Goomba with Bottom of Player
-            console.log(this.collisionData.touchPoints.other.bottom + 'bottom')
-            console.log(this.collisionData.touchPoints.other.top + "top")
-            console.log(this.collisionData.touchPoints.other.right + "right")
-            console.log(this.collisionData.touchPoints.other.left + "left")
-
-            if (this.collisionData.touchPoints.other.bottom && this.immune == 0) {
-                GameEnv.invincible = true;
-                this.speed = 0;
-
-                setTimeout((function() {
-                    GameEnv.invincible = false;
-                    this.destroy();
-                }).bind(this), 1500);
-
-            }
-        }
-
-        if (this.collisionData.touchPoints.other.id === "jumpPlatform") {
-            if (this.collisionData.touchPoints.other.left || this.collisionData.touchPoints.other.right) {
-                this.speed = -this.speed;            
-            }
-        }
-    }
 }
 
 
-/**
- * followPlayer Purpose:
- * Allows for smooth movement &
- * Dynamically changes based off player Y
- * 
- * @param {number} min Start Point
- * @param {number} max Destination
- * @param {number} t Rate of Change
- * @returns 
- * 
- */
-function followPlayer(min, max, t) {
-  return (max - min) * t + min;
-}
-
-export default Owl;
+export default Snowman;
