@@ -219,7 +219,13 @@ export class PlayerBase extends Character {
             // Update the player's animation state based on the pressed key
             this.updateAnimationState(key);
             GameEnv.transitionHide = true;
+<<<<<<< HEAD
             GameControl.startTimer()
+=======
+            if (!GameEnv.timerActive) {
+                GameControl.startTimer()
+            }
+>>>>>>> bce3574aff1044e82788b7bd2803b255c43ad737
         }
 
         // parallax background speed starts on player movement
