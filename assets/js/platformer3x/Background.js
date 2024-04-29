@@ -2,9 +2,22 @@ import GameEnv from './GameEnv.js';
 import GameObject from './GameObject.js';
 import GameControl from './GameControl.js';
 
+
 export class Background extends GameObject {
     constructor(canvas, image, data) {
         super(canvas, image, data);
+
+        this.canvasWidth = GameEnv.innerWidth;
+        
+        if (this.canvasWidth > GameEnv.innerHeight) {
+            this.canvasHeight = GameEnv.innerHeight * 0.7
+        }
+
+        else {
+            this.canvasHeight = this.canvasWidth / (16/9)
+        }
+
+        console.log(`width:${this.canvasWidth}, height:${this.canvasHeight}`)
     }
 
     /* Update uses modulo math to cycle to start at width extent
@@ -25,8 +38,11 @@ export class Background extends GameObject {
      * x + width to y is wrap around draw
     */
     draw() {
+        const canvasWidth = this.canvasWidth;
+        const canvasHeight = this.canvasHeight;
         // Draw the primary segment
-        this.ctx.drawImage(this.image, this.x, this.y);
+        // first set of w/h parameters takes section of input image, second creates output of dimensions provided
+        this.ctx.drawImage(this.image, this.x, this.y, canvasWidth, canvasHeight, this.x, this.y, canvasWidth, canvasHeight);
         
         // Draw the wrap-around segment for the left side
         this.ctx.drawImage(this.image, this.x - this.width, this.y);
@@ -44,8 +60,9 @@ export class Background extends GameObject {
         // Update canvas size
         const ADJUST = 1 // visual layer adjust; alien_planet.jpg: 1.42, try 1 for others
 
-        const canvasWidth = GameEnv.innerWidth;
-        const canvasHeight = GameEnv.innerHeight - 300; // height of window - space for navbar and facts
+        // const canvasHeight = canvasWidth / this.aspect_ratio
+        const canvasHeight = this.canvasHeight;
+        const canvasWidth = this.canvasWidth;
         GameEnv.backgroundHeight = canvasHeight;
         const canvasLeft = 0;
 
