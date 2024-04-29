@@ -82,11 +82,7 @@ const GameControl = {
 
         if (GameEnv.timerActive) {
             const newTime = time + GameEnv.timerInterval
-<<<<<<< HEAD
             GameEnv.time = newTime                
-=======
-            GameEnv.time = newTime              
->>>>>>> bce3574aff1044e82788b7bd2803b255c43ad737
             if (document.getElementById('timeScore')) {
                 document.getElementById('timeScore').textContent = (time/1000).toFixed(2) 
             }
@@ -118,12 +114,9 @@ const GameControl = {
             console.warn("TIMER ACTIVE: TRUE, TIMER NOT STARTED")
             return;
         }
-<<<<<<< HEAD
-        
+
         this.intervalId = setInterval(() => this.updateTimer(), GameEnv.timerInterval);
-=======
         clearInterval(GameControl.intervalID)
->>>>>>> bce3574aff1044e82788b7bd2803b255c43ad737
         GameEnv.timerActive = true;
         GameControl.intervalID = setInterval(() => this.updateTimer(), GameEnv.timerInterval);
     },
@@ -139,6 +132,7 @@ const GameControl = {
         }
 
         clearInterval(GameControl.intervalID)
+        GameControl.intervalID = null
 
         this.saveTime(GameEnv.time, GameEnv.coinScore)
 
@@ -146,11 +140,6 @@ const GameControl = {
         GameEnv.time = 0;
         GameEnv.coinScore = 0;
         this.updateCoinDisplay()
-<<<<<<< HEAD
-        clearInterval(this.intervalID)
-=======
-        
->>>>>>> bce3574aff1044e82788b7bd2803b255c43ad737
     },
 
     saveTime() {
