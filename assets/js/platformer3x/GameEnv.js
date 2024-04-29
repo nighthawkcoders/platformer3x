@@ -35,7 +35,6 @@ export class GameEnv {
      * @property {boolean} invincible - invincibility for the mario when stomping on Goomba
      * @property {boolean} goombaInvincible - invincibility for the goomba when mario touch
      * @property {boolean} goombaBounce - mario touch goomba --> bounce
-     * @property {boolean} snowmanBounce - mario touch snowman --> bounce
      * @property {boolean} goombaBounce1 - bounce on mushroom
      * @property {number} gameSpeed - localstorage key, used by platformer objects
      * @property {number} backgroundDirection- used by background objects

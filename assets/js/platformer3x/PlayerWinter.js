@@ -3,8 +3,8 @@ import PlayerBase from './PlayerBase.js';
 import GameControl from './GameControl.js';
 
 /**
- * @class PlayerWinter class
- * @description PlayerWinter.js key objective is to eent the user-controlled character in the game.   
+ * @class PlayerHills class
+ * @description PlayerHills.js key objective is to eent the user-controlled character in the game.   
  * 
  * The Player class extends the Character class, which in turn extends the GameObject class.
  * Animations and events are activated by key presses, collisions, and gravity.
@@ -14,7 +14,7 @@ import GameControl from './GameControl.js';
  */
 export class PlayerWinter extends PlayerBase {
 
-    /** GameObject instantiation: constructor for PlayerWinter object
+    /** GameObject instantiation: constructor for PlayerHills object
      * @extends Character 
      * @param {HTMLCanvasElement} canvas - The canvas element to draw the player on.
      * @param {HTMLImageElement} image - The image to draw the player with.
@@ -23,7 +23,7 @@ export class PlayerWinter extends PlayerBase {
     constructor(canvas, image, data) {
         super(canvas, image, data);
 
-        // Snowman variables, deprecate?
+        // Goomba variables, deprecate?
         this.timer = false;
         GameEnv.invincible = false; // Player is not invincible 
     }
@@ -53,7 +53,6 @@ export class PlayerWinter extends PlayerBase {
         // adds additional collision events
         this.handleCollisionEvent("cabin");
         this.handleCollisionEvent("snowman");
-        this.handleCollisionEvent("mushroom");
     }
    
     /**
@@ -84,15 +83,19 @@ export class PlayerWinter extends PlayerBase {
                     this.state.movement.right = true;
                 }
                 break;
-            case "snowman": // Note: Snowman.js and Player.js could be refactored
-                // 1. Player jumps on snowman, interaction with Snowman.js
+            case "snowman": // Note: Goomba.js and Player.js could be refactored
+                // 1. Player jumps on goomba, interaction with Goomba.js
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom && this.state.isDying == false) {
-                    // SnowmanBounce deals with player.js and Snowman.js
-                    if (GameEnv.snowmanBounce === true) {
-                        GameEnv.snowmanBounce = false;
+                    // GoombaBounce deals with player.js and goomba.js
+                    if (GameEnv.goombaBounce === true) {
+                        GameEnv.goombaBounce = false;
                         this.y = this.y - 100;
                     }
-                // 2. Player touches snowman sides of snowman 
+                    if (GameEnv.goombaBounce1 === true) {
+                        GameEnv.goombaBounce1 = false; 
+                        this.y = this.y - 250
+                    }
+                // 2. Player touches goomba sides of goomba 
                 } else if (this.collisionData.touchPoints.this.right || this.collisionData.touchPoints.this.left) {
                     if (GameEnv.difficulty === "normal" || GameEnv.difficulty === "hard") {
                         if (this.state.isDying == false) {

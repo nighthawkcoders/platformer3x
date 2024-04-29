@@ -334,10 +334,17 @@ const GameSetup = {
         },
         Snowman: {
           src: "/images/platformer/sprites/snowman.png",
-          width: 401,
-          height: 268,
+          width: 308,
+          height: 327,
           scaleSize: 60,
           speedRatio: 0.7,
+          xPercentage: 0.6,
+          hitbox: { widthPercentage: 0.0, heightPercentage: 0.2},
+          wa: {row: 0, frames: 0}, // Up-Left Movement 
+          wd: {row: 0, frames: 0}, // Up-Right Movement
+          a: { row: 0, frames: 0, idleFrame: { column: 0, frames: 0 } }, // Left Movement
+          s: {row: 0, frames: 0}, // Stop the movement 
+          d: { row: 0, frames: 0, idleFrame: { column: 0, frames: 0 } }, // Right Movement 
         },
         Owl: {
           src: "/images/platformer/sprites/owl.png",
