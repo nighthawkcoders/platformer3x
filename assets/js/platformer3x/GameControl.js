@@ -7,7 +7,6 @@
  * - call or add listener to GameControl.startTimer() to start the game timer.
  */
 import GameEnv from './GameEnv.js';
-import LocalStorage from './LocalStorage.js';
 import Socket from './Multiplayer.js';
 import SettingsControl from "./SettingsControl.js";
 
@@ -39,31 +38,17 @@ const GameControl = {
      * A reference to the interval used for the game timer.
      * @type {number}
      */
-    intervalId: null, // Variable to hold the timer interval reference
-    /**
-     * The start time of the game timer.
-     * @type {number}
-     */
-    startTime: null, // Variable to hold the start time
+    intervalID: null, // Variable to hold the timer interval reference
     localStorageTimeKey: "localTimes",
-    localStorageScoreKey: "coinScore",
     /**
      * Updates and displays the game timer.
      * @function updateTimer
      * @memberof GameControl
-     */
-    updateScore() {
-    
-        const userScoreElement = document.getElementById('userScore');
-        if ( userScoreElement) {
-            // Update the displayed time
-            userScoreElement.textContent = GameEnv.coinScore.toFixed(2);
-        }
-    },   
-    async saveTime(time, score) {
+     */ 
+    saveTime(time, score) {
         if (time == 0) return;
         const userID = GameEnv.userID
-        const oldTable = await this.getAllTimes()
+        const oldTable = this.getAllTimes()
 
         const data = {
             userID: userID,
@@ -80,7 +65,7 @@ const GameControl = {
 
         localStorage.setItem(this.localStorageTimeKey, JSON.stringify(oldTable))
     },
-    async getAllTimes() {
+    getAllTimes() {
         let timeTable = null;
 
         try {
@@ -93,27 +78,43 @@ const GameControl = {
         return JSON.parse(timeTable)
     },
     updateTimer() {
-        
-            const time = GameEnv.time
+        const time = GameEnv.time
 
-            if (GameEnv.timerActive) {
-                const newTime = time + GameEnv.timerInterval
-                GameEnv.time = newTime
-                
-                if (document.getElementById('timeScore')) {
-                    document.getElementById('timeScore').textContent = (time/1000).toFixed(2) 
-                }
-
+        if (GameEnv.timerActive) {
+            const newTime = time + GameEnv.timerInterval
+            GameEnv.time = newTime                
+            if (document.getElementById('timeScore')) {
+                document.getElementById('timeScore').textContent = (time/1000).toFixed(2) 
+            }
                 return newTime
             }
-    },    
-        
+            if (document.getElementById('timeScore')) {
+                document.getElementById('timeScore').textContent = (time/1000).toFixed(2) 
+            }
+    },   
+    updateCoinDisplay() {
+        const coins = GameEnv.coinScore
+        const coinDisplay = document.getElementById('coinScore')
+        if (!coinDisplay) {
+            console.error("COIN DISPLAY DOES NOT EXIST");
+        }
+        coinDisplay.textContent = coins
+    },     
+    gainCoin(value) {
+        GameEnv.coinScore += value;
+        this.updateCoinDisplay()
+    },
     /**
      * Starts the game timer.
      * @function startTimer
      * @memberof GameControl
      */
     startTimer() {
+        if (GameEnv.timerActive) {
+            console.warn("TIMER ACTIVE: TRUE, TIMER NOT STARTED")
+            return;
+        }
+        
         this.intervalId = setInterval(() => this.updateTimer(), GameEnv.timerInterval);
         GameEnv.timerActive = true;
     },
@@ -131,8 +132,27 @@ const GameControl = {
         GameEnv.timerActive = false
         GameEnv.time = 0;
         GameEnv.coinScore = 0;
+        this.updateCoinDisplay()
+        clearInterval(this.intervalID)
+    },
 
-        clearInterval(this.intervalId)
+    saveTime() {
+        const data = {
+            userID: GameEnv.userID,
+            time: GameEnv.time - 10,
+            coinScore: GameEnv.coinScore
+        }
+
+        const currDataList = JSON.parse(localStorage.getItem(this.localStorageTimeKey))
+
+        if (!currDataList || !Array.isArray(currDataList)) {
+            localStorage.setItem(this.localStorageTimeKey, JSON.stringify([data]))
+            return;
+        }
+
+        currDataList.push(data)
+        
+        localStorage.setItem(this.localStorageTimeKey, JSON.stringify(currDataList))
     },
 
     randomEventId: null, //Variable to determine which random event will activate.
@@ -157,7 +177,7 @@ const GameControl = {
         this.randomEventId = Math.floor(Math.random() * 3) + 1; //The number multiplied by Math.random() is the number of possible events.
         /**Random Event Key
          * 1: Inverts the Color of the Background
-         * 2: Time Stops all Goombas
+         * 2: Time Stops all Goombas    
          * 3: Kills a Random Goomba
         */
     },

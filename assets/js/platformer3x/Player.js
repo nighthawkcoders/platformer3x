@@ -13,12 +13,17 @@ import GameControl from './GameControl.js';
  * @extends Character
  */
 export class Player extends Character {
+    initEnvironmentState = {
+        isDying: false,
+    };
+
     // instantiation: constructor sets up player object 
     constructor(canvas, image, data) {
         super(canvas, image, data);
         // Player Data is required for Animations
         this.playerData = data;
         GameEnv.invincible = false; 
+        this.state = {...this.initEnvironmentState}; // start with player on the floor 
 
         // Player control data
         this.moveSpeed = this.speed * 3;
@@ -36,10 +41,7 @@ export class Player extends Character {
         document.addEventListener('keyup', this.keyupListener);
 
         GameEnv.player = this;
-        this.transitionHide = false;
         this.shouldBeSynced = true;
-        this.isDying = false;
-        this.isDyingR = false;
         this.timer = false;
 
         this.name = GameEnv.userID;
@@ -83,12 +85,12 @@ export class Player extends Character {
                 this.canvas.style.transform = "rotate(-90deg) translate(-26px, 0%)";
                 GameEnv.playSound("PlayerDeath");
 
-                if (this.isDying == false) {
-                    this.isDying = true;
+                if (this.state.isDying == false) {
+                    this.state.isDying = true;
                     setTimeout(async() => {
                         await GameControl.transitionToLevel(GameEnv.levels[GameEnv.levels.indexOf(GameEnv.currentLevel)]);
                         console.log("level restart")
-                        this.isDying = false;
+                        this.state.isDying = false;
                     }, 900); 
                 }
             } else if (GameEnv.difficulty === "easy") {
@@ -261,7 +263,7 @@ export class Player extends Character {
 
         // Goomba collision check
         // Checks if collision touchpoint id is either "goomba" or "flyingGoomba"
-        if (this.collisionData.touchPoints.other.id === "goomba" || this.collisionData.touchPoints.other.id === "flyingGoomba") {
+        if (this.collisionData.touchPoints.other.id === "goomba" || this.collisionData.touchPoints.other.id === "flyingGoomba" || this.collisionData.touchPoints.other.id === "flyingUFO" || this.collisionData.touchPoints.other.id === "alien" ) {
             if (GameEnv.invincible === false) {
                 GameEnv.goombaInvincible = true;
                 // Collision with the left side of the Enemy
@@ -285,10 +287,18 @@ export class Player extends Character {
         }
 
         if (this.collisionData.touchPoints.other.id === "jumpPlatform") {
+            if (this.collisionData.touchPoints.this.top) {
+                this.movement.down = false; // enable movement down without gravity
+                this.gravityEnabled = false;
+                this.setAnimation(this.directionKey); // set animation to direction
+                GameEnv.playSound("boing")
+
+            } else { 
             if (this.collisionData.touchPoints.other.left) {
                 this.movement.right = false;
                 this.gravityEnabled = true;
                 this.y -= GameEnv.gravity; // allows movemnt on platform, but climbs walls
+                GameEnv.playSound("boing")
 
                 // this.x -= this.isActiveAnimation("s") ? this.moveSpeed : this.speed;  // Move to left
 
@@ -297,15 +307,11 @@ export class Player extends Character {
                 this.movement.left = false;
                 this.gravityEnabled = true;
                 this.y -= GameEnv.gravity; // allows movemnt on platform, but climbs walls
- 
+                GameEnv.playSound("boing")
                 // this.x += this.isActiveAnimation("s") ? this.moveSpeed : this.speed;  // Move to right
             }
-            if (this.collisionData.touchPoints.this.top) {
-                this.movement.down = false; // enable movement down without gravity
-                this.gravityEnabled = false;
-                this.setAnimation(this.directionKey); // set animation to direction
-            }
         }
+    }
         // Fall Off edge of Jump platform
         else if (this.movement.down === false) {
             this.movement.down = true;          
@@ -340,7 +346,9 @@ export class Player extends Character {
                 this.setAnimation(key);
                 // player active
                 this.isIdle = false;
-                GameEnv.transitionHide = true;
+                if (!GameEnv.transitionHide) {
+                    GameEnv.transitionHide = true;
+                }
             }
 
             // dash action on

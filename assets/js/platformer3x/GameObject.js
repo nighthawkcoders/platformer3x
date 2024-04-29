@@ -73,6 +73,9 @@ class GameObject {
     }
 
     setX(x) {
+        if (x < 0) {
+            x = 0;
+        }
         this.x = x;
     }
 
@@ -82,6 +85,12 @@ class GameObject {
     }
 
     setY(y) {
+        if (y < GameEnv.top) {
+            y = GameEnv.top;
+        }
+        if (y > GameEnv.bottom) {
+            y = GameEnv.bottom;
+        }
         this.y = y;
     }
 

@@ -37,9 +37,7 @@ export class GameEnv {
      * @property {boolean} goombaBounce - mario touch goomba --> bounce
      * @property {boolean} goombaBounce1 - bounce on mushroom
      * @property {number} gameSpeed - localstorage key, used by platformer objects
-     * @property {number} backgroundHillsSpeed - used by background objects
-     * @property {number} backgroundMountainsSpeed - used by background objects
-     * @property {number} backgroundCloudsSpeed - used by background objects
+     * @property {number} backgroundDirection- used by background objects
      * @property {boolean} transitionHide - used to hide the transition screen
      * @property {number} gravity - localstorage key, used by platformer objects
      * @property {boolean} destroyedMushroom - to see when mushroom is destroyed
@@ -61,9 +59,7 @@ export class GameEnv {
     static gameObjects = [];
     static isInverted = false;
     static gameSpeed = 2;
-    static backgroundHillsSpeed = 0;
-    static backgroundMountainsSpeed = 0;
-    static backgroundCloudsSpeed = 2;
+    static backgroundDirection = 0;
     static transitionHide = false;
     static gravity = 3;
     static destroyedMushroom = false;
@@ -152,7 +148,7 @@ export class GameEnv {
     static update() {
         // Update game state, including all game objects
         // if statement prevents game from updating upon player death
-        if (GameEnv.player == null || GameEnv.player.isDying == false) {
+        if (GameEnv.player === null || GameEnv.player.state.isDying === false) {
             for (const gameObject of GameEnv.gameObjects) {
                 gameObject.update();
                 gameObject.serialize();
@@ -199,6 +195,24 @@ export class GameEnv {
     static playSound(id) {
         const sound = document.getElementById(id);
         sound.play();
+    }
+
+    static updateParallaxDirection(key) {
+        switch (key) {
+            case "a":
+                if (GameEnv.player?.x > 2) {
+                    GameEnv.backgroundDirection = -1;
+                }
+                break;
+            case "d":
+                if (GameEnv.player?.x < (GameEnv.innerWidth - 2)) {
+                    GameEnv.backgroundDirection = 1;
+                }
+                break;
+            default:
+                GameEnv.backgroundDirection = 0;
+                break;
+        }
     }
   }
   

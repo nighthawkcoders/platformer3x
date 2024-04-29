@@ -20,6 +20,13 @@ class Character extends GameObject {
         
         // gravity for character enabled by default
         this.gravityEnabled = true;
+        this.onTop = false;
+    }
+
+    setSpriteAnimation(animation) {
+        this.setFrameY(animation.row);
+        this.setMinFrame(animation.min ? animation.min : 0);
+        this.setMaxFrame(animation.frames);
     }
 
     getMinFrame(){
@@ -123,24 +130,43 @@ class Character extends GameObject {
         }
     }
 
-    /* Update cycle check collisions
-     * override draw for custom update
-     * be sure to have updated draw call super.update()
-    */
-    update() {
-
-        if (this.bottom > this.y && this.gravityEnabled)
+    /**
+     * Update the y posiion and update y related states
+     */
+    updateY() {
+        if (this.bottom > this.y && this.gravityEnabled) {
             this.y += GameEnv.gravity;
+            this.onTop = false;
+        } else {
+            this.onTop = true;
+        }
+    }
 
-        // Update animation frameX of the object
+    /**
+     * Cycle through the frameX of the character
+     */
+    updateFrameX() {
         if (this.frameX < this.maxFrame) {
             this.frameX++;
         } else {
             this.frameX = this.minFrame;
         }
+    }
 
+    /**
+     * Update cycle for the character, prepare for draw method
+     */
+    update() {
+        // Update the y position of the character based on gravity
+        this.updateY();
+
+        // Update animation frameX of the object
+        this.updateFrameX(); 
+
+        // Check for collisions, defined in GameObject which calls the collisionAction method
         this.collisionChecks();
     }
+
 }
 
 export default Character;
