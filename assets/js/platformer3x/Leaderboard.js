@@ -75,6 +75,44 @@ const Leaderboard = {
         return pagingButtonsRow
     },
 
+    createClearLeaderboardButton(table) {
+        const breakRow = document.createElement("br")
+        table.append(breakRow)
+        const clearButtonRow = document.createElement("tr")
+
+        const td1 = document.createElement("td");
+        td1.style.textAlign = "end"
+        const space1 = document.createElement("tr")
+        td1.append(space1)
+        clearButtonRow.append(td1);
+        const clearButton = document.createElement("button")
+        clearButton.innerText = "CLEAR TABLE"
+        clearButton.style.width = '100%'
+        clearButtonRow.append(clearButton)
+        const td3 = document.createElement("td");
+        td3.style.textAlign = "start"
+        const space2 = document.createElement("tr")
+        td3.append(space2)
+        clearButtonRow.append(td3);
+
+        clearButton.addEventListener("click", this.clearTable)
+
+        return clearButtonRow
+    },
+
+    clearTable () {
+        const table = document.getElementsByClassName("table scores")[0]
+
+        localStorage.removeItem(Leaderboard.currentKey)
+        
+        Leaderboard.currentPage = 1
+
+        if (table) {
+            table.remove() //remove old table if it is there
+        }
+        document.getElementById("leaderboardDropDown").append(Leaderboard.updateLeaderboardTable())
+    },
+
     updateLeaderboardTable () {
         const data = this.getSortedLeaderboardData()
         const table = this.createLeaderboardDisplayTable()
@@ -96,6 +134,7 @@ const Leaderboard = {
         });
 
         table.append(Leaderboard.createPagingButtonsRow(table));
+        table.append(Leaderboard.createClearLeaderboardButton(table))
 
         return table
     },
