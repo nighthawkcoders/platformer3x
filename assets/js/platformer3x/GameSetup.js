@@ -269,6 +269,30 @@ const GameSetup = {
               right: { row: 10, frames: 15 },
           },
           hitbox: { widthPercentage: 0.3, heightPercentage: 0.8 }
+        },       
+        whitemario: {
+          src: "/images/platformer/sprites/white_mario.png",
+          width: 256,
+          height: 256,
+          scaleSize: 80,
+          speedRatio: 0.7,
+          idle: {
+              left: { row: 1, frames: 15 },
+              right: { row: 0, frames: 15},
+          },
+          walk: {
+              left: { row: 3, frames: 7 },
+              right: { row: 2, frames: 7 },
+          },
+          run: {
+              left: { row: 5, frames: 15 },
+              right: { row: 4, frames: 15 },
+          },
+          jump: {
+              left: { row: 11, frames: 15 },
+              right: { row: 10, frames: 15 },
+          },
+          hitbox: { widthPercentage: 0.3, heightPercentage: 0.8 }
         },
         monkey: {
           src: "/images/platformer/sprites/monkey.png",
@@ -501,7 +525,7 @@ const GameSetup = {
           { name: 'Snowman', id: 'Snowman', class: Snowman, data: this.assets.enemies.Snowman, xPercentage: 0.2, minPosition: 0.05},
           { name: 'Snowman', id: 'Snowman', class: Snowman, data: this.assets.enemies.Snowman, xPercentage:  0.35, minPosition: 0.07 },
           { name: 'Snowman', id: 'Snowman', class: Snowman, data: this.assets.enemies.Snowman, xPercentage:  0.45, minPosition: 0.07 },
-          { name: 'mario', id: 'player', class: PlayerWinter, data: this.assets.players.mario },
+          { name: 'mario', id: 'player', class: PlayerWinter, data: this.assets.players.whitemario },
           { name: 'cabin', id: 'cabin', class: Cabin, data: this.assets.obstacles.cabin },
           { name: 'complete', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.complete },
         ];
