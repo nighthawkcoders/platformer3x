@@ -203,6 +203,10 @@ const GameSetup = {
         tree: { src: "/images/platformer/obstacles/tree.png",
                 hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
               },
+      snitch: { src: "/images/platformer/obstacles/snitch.png"},
+      whompingwillow: { src: "/images/platformer/obstacles/whompingwillowtree.png",
+                      hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
+              },
       },
       platforms: {
         turf: { src: "/images/platformer/platforms/turf.png"},
