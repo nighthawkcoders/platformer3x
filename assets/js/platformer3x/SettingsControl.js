@@ -183,6 +183,15 @@ export class SettingsControl extends LocalStorage{
             // Save the gravity value to local storage
             this.save(this.keys.difficulty); 
         });
+
+        window.addEventListener("isTheme", (e)=>{ 
+            // Update the isInverted value when an invert event is fired
+            this[this.keys.isTheme] = e.detail.isTheme();
+            // Update the isInverted value in the game environment
+            GameEnv.isTheme = this[this.keys.isTheme]; 
+            // Save the isInverted value to local storage
+            this.save(this.keys.isTheme); 
+        });
  
     }
 
@@ -282,12 +291,36 @@ export class SettingsControl extends LocalStorage{
         return div;
     }
 
+    get isThemeInput() {
+        const div = document.createElement("div");
+        div.innerHTML = "Theme Change:"; // label
+    
+        const islightMode = document.createElement("input");  // get user defined lightmode boolean
+        islightMode.type = "checkbox";
+        islightMode.checked = GameEnv.lightMode; // GameEnv contains latest is lightMode state
+        islightMode.addEventListener('change', () => {
+            if (islightMode.checked) {
+                enableLightMode();
+            } else {
+                enableDarkMode();
+            }
+        });
+
+        // Append elements to the DOM or wherever appropriate
+        div.appendChild(islightMode); 
+        return div
+        // Append div to your settings container
+        // For example:
+        // document.getElementById('settingsContainer').appendChild(div);
+    }
+
     /**
      * Getter for the gameSpeedInput property.
      * Creates a div with a number input for the user to adjust the game speed.
      * The input's value is bound to the GameEnv's gameSpeed state.
      * @returns {HTMLDivElement} The div containing the gameSpeed input.
      */
+
     get gameSpeedInput() {
         const div = document.createElement("div");
         div.innerHTML = "Game Speed: "; // label
@@ -391,29 +424,18 @@ export class SettingsControl extends LocalStorage{
         return div;
     }
 
-    get islightMode() {
+    get themeButton() {
         const div = document.createElement("div");
-        div.innerHTML = "Theme Change:"; // label
+        div.innerHTML = "Dark-mode: "; // label
     
-        const islightMode = document.createElement("input");  // get user defined theme boolean
-        islightMode.type = "checkbox";
-        islightMode.checked = GameEnv.lightMode; // GameEnv contains latest istheme state
-        enableDarkMode();
-
-        islightMode.addEventListener('change', () => {
-            if (islightMode.checked) {
-                enableLightMode();
-            } else {
-                enableDarkMode();
-            }
+        const button = document.createElement("button"); // button for Multiplayer
+        button.innerText = String(Socket.shouldBeSynced); ////CHANGE TO THEME BUTTON THINGY
+    
+        button.addEventListener("click", () => {
+            ////CHANGE TO THEME BUTTON THINGY
         });
-
-        // Append elements to the DOM or wherever appropriate
-        div.appendChild(islightMode);
-        // Append div to your settings container
-        // For example:
-        // document.getElementById('settingsContainer').appendChild(div);
-
+    
+        div.append(button); // wrap button element in div
         return div;
     }
 
@@ -525,27 +547,6 @@ export class SettingsControl extends LocalStorage{
         var invertControl = settingsControl.isInvertedInput;
         document.getElementById("sidebar").append(invertControl); 
 
-        var hintsSection = document.createElement("div")
-        hintsSection.innerHTML = "Toggle fun facts: "
-        
-        var hintsButton = document.createElement("input")
-        hintsButton.type = "checkbox"
-        hintsButton.checked = true
-        
-        hintsButton.addEventListener("click", () => {
-            const hints = document.getElementsByClassName("fun_facts")[0]
-
-            if (!hintsButton.checked) {
-                hints.style.display = "none"
-            }
-            else {
-                hints.style.display = "unset"
-            }
-        })
-
-        hintsSection.append(hintsButton)
-        document.getElementById("sidebar").append(hintsSection)
-
         // Get/Construct HTML input and event update for game speed 
         var gameSpeed = settingsControl.gameSpeedInput;
         document.getElementById("sidebar").append(gameSpeed);
@@ -563,8 +564,8 @@ export class SettingsControl extends LocalStorage{
         document.getElementById("sidebar").append(multiplayerButton);
 
         // Get/Construct HTML button and event update for theme
-        var islightMode = settingsControl.islightMode;
-        document.getElementById("sidebar").append(islightMode);
+        var themeButton = settingsControl.themeButton;
+        document.getElementById("sidebar").append(themeButton);
 
         // Get/Construct HTML button and event update for multiplayer
         var chatButton = settingsControl.chatButton;
@@ -573,6 +574,11 @@ export class SettingsControl extends LocalStorage{
          // Get/Construct HTML button and event update for multiplayer
          var playerCount = settingsControl.playerCount;
          document.getElementById("sidebar").append(playerCount);
+
+          // Get/Construct HTML input and event update for theme change
+        var themeChangeControl = settingsControl.isThemeInput;
+        document.getElementById("sidebar").append(themeChangeControl); 
+
 
 
         // Listener, isOpen, and function for sidebar open and close

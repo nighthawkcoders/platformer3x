@@ -129,4 +129,9 @@
         color:#000000;
         background-color:#FFFFFF;
     }
+    .container canvas {
+        /* Reset styles for canvases within .container */
+        background: none;
+        /* Add any other styles you want to reset */
+    }
 }
