@@ -67,10 +67,6 @@ table td{
     filter: brightness(80%);
 }
 
-canvas {
-    background-color: #FFFFFF; 
-}
-
 .post-list > li > div {
     box-shadow: none;
     background-color: #FFFFFF;
@@ -132,4 +128,10 @@ li .post-meta-description {
 .div {
     color:#000000;
     background-color:#FFFFFF;
+}
+
+.container canvas {
+    /* Reset styles for canvases within .container */
+    background: none;
+    /* Add any other styles you want to reset */
 }
