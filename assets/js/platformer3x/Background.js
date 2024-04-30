@@ -40,7 +40,6 @@ export class Background extends GameObject {
     */
     draw() {
         const canvasWidth = this.canvasWidth;
-        const canvasHeight = this.canvasHeight;
     
         // Normalize the x position for seamless wrapping
         let xWrapped = this.x % this.width;
@@ -53,7 +52,7 @@ export class Background extends GameObject {
     
         // Draw the image multiple times to cover the entire canvas
         for (let i = 0; i < numDraws; i++) {
-            this.ctx.drawImage(this.image, 0, this.y, this.width, this.height, xWrapped + i * this.width, this.y, this.width, canvasHeight);
+            this.ctx.drawImage(this.image, 0, this.y, this.width, this.height, xWrapped + i * this.width, this.y, this.width, this.height);
         }
     }
     
