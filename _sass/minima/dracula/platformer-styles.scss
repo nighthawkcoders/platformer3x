@@ -37,8 +37,8 @@
 /// Color mixin
 /// @description This mixin is defined to share colors with classes in this stylesheet.
 @mixin dark-mode-color {
-  color: $high-emph !important; // use the high-emphasis color for the text
-  background-color: $dark-grey !important; // use the dark grey color for the background
+  color: #FFFFFF!important; // use the high-emphasis color for the text
+  background-color: #000000 !important; // use the dark grey color for the background
   border: 1px solid $dt-blue; // from dracula-highlight.scss
 }
 /// Horizontal Submenu

@@ -4,6 +4,8 @@ import GameEnv from "./GameEnv.js";
 import GameControl from "./GameControl.js";
 import Socket from "./Multiplayer.js";
 import Chat from "./Chat.js"
+import { enableLightMode } from './lightMode.js';
+import { enableDarkMode } from './darkMode.js';
 
 /* Coding Style Notes
  *
@@ -389,18 +391,29 @@ export class SettingsControl extends LocalStorage{
         return div;
     }
 
-    get themeButton() {
+    get islightMode() {
         const div = document.createElement("div");
-        div.innerHTML = "Dark-mode: "; // label
+        div.innerHTML = "Theme Change:"; // label
     
-        const button = document.createElement("button"); // button for Multiplayer
-        button.innerText = String(Socket.shouldBeSynced); ////CHANGE TO THEME BUTTON THINGY
-    
-        button.addEventListener("click", () => {
-            ////CHANGE TO THEME BUTTON THINGY
+        const islightMode = document.createElement("input");  // get user defined theme boolean
+        islightMode.type = "checkbox";
+        islightMode.checked = GameEnv.lightMode; // GameEnv contains latest istheme state
+        enableDarkMode();
+
+        islightMode.addEventListener('change', () => {
+            if (islightMode.checked) {
+                enableLightMode();
+            } else {
+                enableDarkMode();
+            }
         });
-    
-        div.append(button); // wrap button element in div
+
+        // Append elements to the DOM or wherever appropriate
+        div.appendChild(islightMode);
+        // Append div to your settings container
+        // For example:
+        // document.getElementById('settingsContainer').appendChild(div);
+
         return div;
     }
 
@@ -550,8 +563,8 @@ export class SettingsControl extends LocalStorage{
         document.getElementById("sidebar").append(multiplayerButton);
 
         // Get/Construct HTML button and event update for theme
-        var themeButton = settingsControl.themeButton;
-        document.getElementById("sidebar").append(themeButton);
+        var islightMode = settingsControl.islightMode;
+        document.getElementById("sidebar").append(islightMode);
 
         // Get/Construct HTML button and event update for multiplayer
         var chatButton = settingsControl.chatButton;
