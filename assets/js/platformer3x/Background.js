@@ -27,6 +27,7 @@ export class Background extends GameObject {
     */
     update() {
         this.x = (this.x - this.speed) % this.width;
+        // console.log(this.x)
         if (GameControl.randomEventId === 1 && GameControl.randomEventState === 1) {
             this.canvas.style.filter = "invert(100)";
             GameControl.endRandomEvent();
@@ -40,16 +41,25 @@ export class Background extends GameObject {
     draw() {
         const canvasWidth = this.canvasWidth;
         const canvasHeight = this.canvasHeight;
-        // Draw the primary segment
-        // first set of w/h parameters takes section of input image, second creates output of dimensions provided
-        this.ctx.drawImage(this.image, this.x, this.y, canvasWidth, canvasHeight, this.x, this.y, canvasWidth, canvasHeight);
-        
-        // Draw the wrap-around segment for the left side
-        this.ctx.drawImage(this.image, this.x - this.width, this.y);
     
-        // Draw the wrap-around segment for the right side
-        this.ctx.drawImage(this.image, this.x + this.width, this.y);
+        // Normalize the x position for seamless wrapping
+        let xWrapped = this.x % this.width;
+        if (xWrapped > 0) {
+            xWrapped -= this.width;
+        }
+    
+        // Draw the primary segment
+        this.ctx.drawImage(this.image, -this.x, this.y, this.width, this.height, 0, 0, canvasWidth, canvasHeight);
+    
+        // Check if there is a need for the wrap-around segment
+        if (-xWrapped + canvasWidth > this.width) {
+            // Calculate the width of the area that needs to be covered by the wrap-around segment
+            this.ctx.drawImage(this.image, 0, 0, this.width, this.height, this.width + xWrapped, 0, canvasWidth, canvasHeight);
+        }
     }
+    
+    
+    
 
     /* Background camvas is set to screen
      * the ADJUST contant elements portions of image that don't wrap well
