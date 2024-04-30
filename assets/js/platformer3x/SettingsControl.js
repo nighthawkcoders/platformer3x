@@ -424,21 +424,6 @@ export class SettingsControl extends LocalStorage{
         return div;
     }
 
-    get themeButton() {
-        const div = document.createElement("div");
-        div.innerHTML = "Dark-mode: "; // label
-    
-        const button = document.createElement("button"); // button for Multiplayer
-        button.innerText = String(Socket.shouldBeSynced); ////CHANGE TO THEME BUTTON THINGY
-    
-        button.addEventListener("click", () => {
-            ////CHANGE TO THEME BUTTON THINGY
-        });
-    
-        div.append(button); // wrap button element in div
-        return div;
-    }
-
     get chatButton() {
         const div = document.createElement("div");
         div.innerHTML = "Chat: "; // label
@@ -530,56 +515,66 @@ export class SettingsControl extends LocalStorage{
         var settingsControl = new SettingsControl();
         settingsControl.initialize();
 
-        // Get/Construct an HTML input for userID
-        var userID = settingsControl.userIDInput;
-        document.getElementById("sidebar").append(userID);
+       // Get/Construct an HTML table/menu from GameEnv.levels[]
+       var levels = settingsControl.levelTable;
+       document.getElementById("sidebar").append(levels);
 
-        // Create a new div element to act as a spacer
-        var spacer = document.createElement("div");
-        spacer.style.height = "20px"; // Set the height of the spacer
-        document.getElementById("sidebar").append(spacer); // Add the spacer to the sidebar
+       // Get/Construct HTML input and event update for invert
+       var invertControl = settingsControl.isInvertedInput;
+       document.getElementById("sidebar").append(invertControl); 
 
-        // Get/Construct an HTML table/menu from GameEnv.levels[]
-        var levels = settingsControl.levelTable;
-        document.getElementById("sidebar").append(levels);
+       var hintsSection = document.createElement("div")
+       hintsSection.innerHTML = "Toggle fun facts: "
+       
+       var hintsButton = document.createElement("input")
+       hintsButton.type = "checkbox"
+       hintsButton.checked = true
+       
+       hintsButton.addEventListener("click", () => {
+           const hints = document.getElementsByClassName("fun_facts")[0]
 
-        // Get/Construct HTML input and event update for invert
-        var invertControl = settingsControl.isInvertedInput;
-        document.getElementById("sidebar").append(invertControl); 
+           if (!hintsButton.checked) {
+               hints.style.display = "none"
+           }
+           else {
+               hints.style.display = "unset"
+           }
+       })
 
-        // Get/Construct HTML input and event update for game speed 
-        var gameSpeed = settingsControl.gameSpeedInput;
-        document.getElementById("sidebar").append(gameSpeed);
+       hintsSection.append(hintsButton)
+       document.getElementById("sidebar").append(hintsSection)
 
-        // Get/Construct HTML input and event update for gravity
-        var gravityInput = settingsControl.gravityInput;
-        document.getElementById("sidebar").append(gravityInput);
+       // Get/Construct HTML input and event update for game speed 
+       var gameSpeed = settingsControl.gameSpeedInput;
+       document.getElementById("sidebar").append(gameSpeed);
 
-        // Get/Construct HTML input and event update for difficulty
-        var difficultyInput = settingsControl.difficultyInput;
-        document.getElementById("sidebar").append(difficultyInput);
+       // Get/Construct HTML input and event update for gravity
+       var gravityInput = settingsControl.gravityInput;
+       document.getElementById("sidebar").append(gravityInput);
+
+       // Get/Construct HTML input and event update for difficulty
+       var difficultyInput = settingsControl.difficultyInput;
+       document.getElementById("sidebar").append(difficultyInput);
+
+       // Get/Construct HTML button and event update for multiplayer
+       var multiplayerButton = settingsControl.multiplayerButton;
+       document.getElementById("sidebar").append(multiplayerButton);
+
+       // Get/Construct HTML button and event update for theme
+       var themeButton = settingsControl.themeButton;
+       document.getElementById("sidebar").append(themeButton);
+
+       // Get/Construct HTML button and event update for multiplayer
+       var chatButton = settingsControl.chatButton;
+       document.getElementById("sidebar").append(chatButton);
 
         // Get/Construct HTML button and event update for multiplayer
-        var multiplayerButton = settingsControl.multiplayerButton;
-        document.getElementById("sidebar").append(multiplayerButton);
-
-        // Get/Construct HTML button and event update for theme
-        var themeButton = settingsControl.themeButton;
-        document.getElementById("sidebar").append(themeButton);
-
-        // Get/Construct HTML button and event update for multiplayer
-        var chatButton = settingsControl.chatButton;
-        document.getElementById("sidebar").append(chatButton);
-
-         // Get/Construct HTML button and event update for multiplayer
-         var playerCount = settingsControl.playerCount;
-         document.getElementById("sidebar").append(playerCount);
+        var playerCount = settingsControl.playerCount;
+        document.getElementById("sidebar").append(playerCount);
 
           // Get/Construct HTML input and event update for theme change
         var themeChangeControl = settingsControl.isThemeInput;
         document.getElementById("sidebar").append(themeChangeControl); 
-
-
 
         // Listener, isOpen, and function for sidebar open and close
         var isOpen = false; // default sidebar is closed
