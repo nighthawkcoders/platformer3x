@@ -14,7 +14,7 @@ export class Background extends GameObject {
         }
 
         else {
-            this.canvasHeight = this.canvasWidth / (16/9)
+            this.canvasHeight = this.canvasWidth / (16/9) // force 16:9
         }
 
         console.log(`width:${this.canvasWidth}, height:${this.canvasHeight}`)
@@ -48,15 +48,15 @@ export class Background extends GameObject {
             xWrapped -= this.width;
         }
     
-        // Draw the primary segment
-        this.ctx.drawImage(this.image, -this.x, this.y, this.width, this.height, 0, 0, canvasWidth, canvasHeight);
+        // Calculate how many times to potentially draw the image to cover wide viewports
+        let numDraws = Math.ceil(canvasWidth / this.width) + 1; // +1 to ensure overlap coverage
     
-        // Check if there is a need for the wrap-around segment
-        if (-xWrapped + canvasWidth > this.width) {
-            // Calculate the width of the area that needs to be covered by the wrap-around segment
-            this.ctx.drawImage(this.image, 0, 0, this.width, this.height, this.width + xWrapped, 0, canvasWidth, canvasHeight);
+        // Draw the image multiple times to cover the entire canvas
+        for (let i = 0; i < numDraws; i++) {
+            this.ctx.drawImage(this.image, 0, this.y, this.width, this.height, xWrapped + i * this.width, this.y, this.width, canvasHeight);
         }
     }
+    
     
     
     
