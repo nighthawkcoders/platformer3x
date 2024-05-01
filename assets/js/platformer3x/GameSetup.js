@@ -11,7 +11,10 @@ import Platform from './Platform.js';
 import JumpPlatform from './JumpPlatform.js';
 import Player from './Player.js';
 import PlayerHills from './PlayerHills.js';
+import PlayerMini from './PlayerMini.js';
+import PlayerBase from './PlayerBase.js';
 import Tube from './Tube.js';
+import Tube1 from './Tube1.js';
 import Tree from './Tree.js';
 import Goomba from './Goomba.js';
 import FlyingGoomba from './FlyingGoomba.js';
@@ -201,9 +204,13 @@ const GameSetup = {
 
     assets: {
       obstacles: {
-        tube: { src: "/images/platformer/obstacles/tube.png",
+        tube: { src: "/images/platformer/obstacles/blue-tube-up.png",
                 hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
               },
+        tubeD: { src: "/images/platformer/obstacles/blue-tube.png",
+              hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
+              },
+        star: { src: "/images/platformer/obstacles/star.png"},
         coin: { src: "/images/platformer/obstacles/coin.png"},
         star: { src: "/images/platformer/obstacles/star.png"},
         tree: { src: "/images/platformer/obstacles/tree.png",
@@ -630,9 +637,10 @@ const GameSetup = {
             { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.7675, yPercentage: 0.5 },
             { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.7875, yPercentage: 0.5 },
             { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.8075, yPercentage: 0.5 },
-            { name: 'mario', id: 'player', class: PlayerHills, data: this.assets.players.mario },
+            { name: 'mario', id: 'player', class: PlayerMini, data: this.assets.players.mario },
+            { name: 'tubeD', id: 'tubeD', class: Tube1, data: this.assets.obstacles.tubeD},
             { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
-            { name: 'complete', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.complete },
+            // { name: 'complete', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.complete },
           ];
           // Space Game Level added to the GameEnv ...
           new GameLevel( {tag: "mini", callback: this.playerOffScreenCallBack, objects: miniGameObjects} );
