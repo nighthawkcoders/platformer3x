@@ -1,6 +1,6 @@
 import Character from './Character.js';
 import GameEnv from './GameEnv.js';
-import Player from './Player.js';
+import Player from './PlayerBase.js';
 import GameControl from './GameControl.js';
 var debounce = 0;
 export class skibidiTitan extends Character {
