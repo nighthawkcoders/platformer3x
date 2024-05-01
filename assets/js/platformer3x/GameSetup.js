@@ -9,9 +9,8 @@ import BackgroundTransitions from './BackgroundTransitions.js';
 import BackgroundClouds from './BackgroundClouds.js';
 import Platform from './Platform.js';
 import JumpPlatform from './JumpPlatform.js';
-import Player from './Player.js';
-import PlayerHills from './PlayerHills.js';
-import PlayerQuidditch from './PlayerQuidditch.js';
+import Player from './PlayerBase.js';
+import PlayerHills from './PlayerHills.js'; 
 import Tube from './Tube.js';
 import Tree from './Tree.js';
 import Goomba from './Goomba.js';
@@ -206,7 +205,7 @@ const GameSetup = {
                 hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
               },
       snitch: { src: "/images/platformer/obstacles/snitch.png"},
-      whompingwillow: { src: "/images/platformer/obstacles/whompingwillowtree.png",
+      whompingwillow: { src: "/images/platformer/obstacles/willowtree.png",
                       hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
               },
       },
@@ -523,8 +522,8 @@ const GameSetup = {
                 { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.687, yPercentage: 0.83, },
                 { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.611, yPercentage: 0.74 },
                 { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.529, yPercentage: 0.65 },
-                { name: 'harry', id: 'player', class: PlayerQuidditch, data: this.assets.players.harry },
-                { name: 'tree', id: 'tree', class: Tree, data: this.assets.obstacles.whompingwillow },
+                { name: 'mario', id: 'player', class: Player, data: this.assets.players.mario },
+                { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
                 { name: 'loading', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.loading },
                 ];
                 // Quidditch Game Level added to the GameEnv ...
