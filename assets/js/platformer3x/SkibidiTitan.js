@@ -1,6 +1,6 @@
 import Character from './Character.js';
 import GameEnv from './GameEnv.js';
-import Player from './Player.js';
+import Player from './PlayerBase.js';
 import GameControl from './GameControl.js';
 var moveOn = true;
 export class skibidiTitan extends Character {
