@@ -5,7 +5,7 @@ import GameControl from './GameControl.js';
 export class Goomba extends Character {
     // constructors sets up Character object 
     constructor(canvas, image, data, xPercentage, yPercentage, name, minPosition){
-        super(canvas, image, data);
+        super(canvas, image, data, 0.0, 0.2);
 
         //Unused but must be Defined
         this.name = name;
@@ -119,12 +119,7 @@ export class Goomba extends Character {
                     this.destroy();
                 }).bind(this), 1500);
 
-    
-                // Set a timeout to make GameEnv.invincible false after 2000 milliseconds (2 seconds)
-                setTimeout(function () {
-                this.destroy();
-                GameEnv.invincible = false;
-                }, 2000);
+
             }
         }
 
