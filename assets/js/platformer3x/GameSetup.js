@@ -204,8 +204,8 @@ const GameSetup = {
         tube: { src: "/images/platformer/obstacles/tube.png",
                 hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
               },
-        star: { src: "/images/platformer/obstacles/star.png"},
         coin: { src: "/images/platformer/obstacles/coin.png"},
+        star: { src: "/images/platformer/obstacles/star.png"},
         tree: { src: "/images/platformer/obstacles/tree.png",
                 hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
               },
