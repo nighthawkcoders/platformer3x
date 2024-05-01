@@ -1,7 +1,8 @@
 import Character from './Character.js';
 import GameEnv from './GameEnv.js';
+import Player from './Player.js';
 import GameControl from './GameControl.js';
-
+var moveOn = true;
 export class skibidiTitan extends Character {
     // constructors sets up Character object 
     constructor(canvas, image, data, xPercentage, yPercentage, name, minPosition){
@@ -22,19 +23,23 @@ export class skibidiTitan extends Character {
 
 
     }
-
+    turnMoveOn(){
+        moveOn = true
+        setTimeout(this.turnMoveOff(), 3000)
+    }
+    turnMoveOff(){
+        moveOn = false
+        setTimeout(this.turnMoveOn(), 3000)
+    }
     update() {
         super.update();
         this.immune = 1;
-
-
-         //Chance for Goomba to turn Gold
-         if (["normal","hard"].includes(GameEnv.difficulty)) {
-            if (Math.random() < 0.00001) {
-                this.canvas.style.filter = 'brightness(1000%)';
-                this.immune = 1;
-            }
+        if (moveOn == true){
+            this.x = GameEnv.PlayerPosition.playerX - 200;
         }
+        
+        
+        
         
         //Immunize Goomba & Texture It
         if (GameEnv.difficulty === "hard") {
