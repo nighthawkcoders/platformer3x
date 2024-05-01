@@ -4,6 +4,7 @@ import GameLevel from './GameLevel.js';
 // To build GameLevels, each contains GameObjects from below imports
 import Background from './Background.js'
 import BackgroundHills from './BackgroundHills.js';
+import BackgroundCoral from './BackgroundCoral.js';
 import BackgroundMountains from './BackgroundMountains.js';
 import BackgroundTransitions from './BackgroundTransitions.js';
 import BackgroundClouds from './BackgroundClouds.js';
@@ -450,7 +451,7 @@ const GameSetup = {
       const allWaterGameObjects = [
         { name: 'water', id: 'background', class: Background,  data: this.assets.backgrounds.water },
         { name: 'fish', id: 'background', class: BackgroundFish, data: this.assets.backgrounds.fish },
-        { name: 'reef', id: 'background', class: Background, data: this.assets.backgrounds.reef},
+        { name: 'reef', id: 'background', class: BackgroundCoral, data: this.assets.backgrounds.reef},
         { name: 'sand', id: 'floor', class: Platform, data: this.assets.platforms.sand },
         { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2, yPercentage: 0.85 },
         { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2368, yPercentage: 0.85 },
