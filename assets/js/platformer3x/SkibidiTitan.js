@@ -2,7 +2,7 @@ import Character from './Character.js';
 import GameEnv from './GameEnv.js';
 import Player from './Player.js';
 import GameControl from './GameControl.js';
-var moveOn = true;
+var debounce = 0;
 export class skibidiTitan extends Character {
     // constructors sets up Character object 
     constructor(canvas, image, data, xPercentage, yPercentage, name, minPosition){
@@ -23,21 +23,25 @@ export class skibidiTitan extends Character {
 
 
     }
-    turnMoveOn(){
-        moveOn = true
-        setTimeout(this.turnMoveOff(), 3000)
-    }
-    turnMoveOff(){
-        moveOn = false
-        setTimeout(this.turnMoveOn(), 3000)
-    }
+    
     update() {
         super.update();
         this.immune = 1;
-        if (moveOn == true){
-            this.x = GameEnv.PlayerPosition.playerX - 200;
-        }
         
+        if(debounce < 240 && debounce > -1){
+            this.x = GameEnv.PlayerPosition.playerX - 200;
+            debounce += 1;
+        }
+        if(debounce < -120){
+            debounce += 1;
+        }else if(debounce < 0 && debounce > -120){
+            debounce += 1;
+        }
+
+        if(debounce == 240){
+            debounce = -240;
+        }
+        console.log(debounce);
         
         
         
