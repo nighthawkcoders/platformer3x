@@ -161,6 +161,9 @@ const GameSetup = {
         // console.log(GameEnv.player?.x)
         if (GameEnv.player?.x > GameEnv.innerWidth) {
             GameEnv.player = null; // reset for next level
+            if(this.tag == "skibidi"){
+              GameEnv.playSound("flush");
+            }
             return true;
         } else {
             return false;
@@ -210,7 +213,7 @@ const GameSetup = {
                 hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
               },
         toilet: { src: "/images/platformer/obstacles/toilet.png",
-                hitbox: { widthPercentage: 0.1, heightPercentage: 0.1}
+                hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
               },
       },
       platforms: {
@@ -630,7 +633,7 @@ const GameSetup = {
           { name: 'skibidiToilet', id: 'Alien', class: Alien, data: this.assets.enemies.skibidiToilet, xPercentage:  0.5, minPosition: 0.3 },
           { name: 'skibidiToilet', id: 'Alien', class: Alien, data: this.assets.enemies.skibidiToilet, xPercentage:  0.75, minPosition: 0.5 }, //this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
           { name: 'monkey', id: 'player', class: Player, data: this.assets.players.monkey },
-          { name: 'toiletTube', id: 'tree', class: Tree, data: this.assets.obstacles.toilet },
+          { name: 'toiletTube', id: 'toiletEnd', class: Tree, data: this.assets.obstacles.toilet },
           { name: 'complete3', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.complete3 },
         ];
 

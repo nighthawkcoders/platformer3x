@@ -35,6 +35,9 @@ image: /images/platformer/backgrounds/home.png
 
   <!--Audo for when it hits the sides of platform -->    
   <audio id = "boing" src ="{{site.baseurl}}/assets/audio/boing-101318.mp3" preload="auto"></audio>
+
+  <!--Audo for flushing -->    
+  <audio id = "flush" src ="{{site.baseurl}}/assets/audio/toilet-flushing.mp3" preload="auto"></audio>
   
 
   
