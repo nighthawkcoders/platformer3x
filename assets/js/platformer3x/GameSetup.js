@@ -11,7 +11,10 @@ import Platform from './Platform.js';
 import JumpPlatform from './JumpPlatform.js';
 import Player from './Player.js';
 import PlayerHills from './PlayerHills.js';
+import PlayerMini from './PlayerMini.js';
+import PlayerBase from './PlayerBase.js';
 import Tube from './Tube.js';
+import Tube1 from './Tube1.js';
 import Tree from './Tree.js';
 import Goomba from './Goomba.js';
 import FlyingGoomba from './FlyingGoomba.js';
@@ -22,6 +25,11 @@ import FlyingUFO from './FlyingUFO.js';
 import Alien from './Alien.js';
 import GameControl from './GameControl.js';
 import Enemy from './Enemy.js';
+import Cerberus from './Cerberus.js';
+import PlayerGreece from './PlayerGreece.js';
+import Flag from './Flag.js';
+import Dragon from './Dragon.js';
+import Star from './Star.js';
 
 //test comment
 
@@ -196,19 +204,29 @@ const GameSetup = {
 
     assets: {
       obstacles: {
-        tube: { src: "/images/platformer/obstacles/tube.png",
+        tube: { src: "/images/platformer/obstacles/blue-tube-up.png",
                 hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
               },
+        tubeD: { src: "/images/platformer/obstacles/blue-tube.png",
+              hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
+              },
+        star: { src: "/images/platformer/obstacles/star.png"},
         coin: { src: "/images/platformer/obstacles/coin.png"},
+        star: { src: "/images/platformer/obstacles/star.png"},
         tree: { src: "/images/platformer/obstacles/tree.png",
                 hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
               },
+        flag: { src: "/images/platformer/obstacles/flag.png",
+              hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
+            },
       },
       platforms: {
         turf: { src: "/images/platformer/platforms/turf.png"},
         grass: { src: "/images/platformer/platforms/grass.png" },
         alien: { src: "/images/platformer/platforms/alien.png" },
         bricks: { src: "/images/platformer/platforms/brick_wall.png" },
+        lava: { src: "/images/platformer/platforms/lava.jpg" },
+        sandstone: { src: "/images/platformer/platforms/sandstone.png" },
         block: { src: "/images/platformer/platforms/brick_block.png" }, //MAY need 3 new variables: sizeRatio, widthRatio, and heightRatio
         itemBlock: {
           src: "/images/platformer/platforms/mario_block_spritesheet_v2.png",
@@ -225,6 +243,7 @@ const GameSetup = {
       backgrounds: {
         start: { src: "/images/platformer/backgrounds/home.png" },
         hills: { src: "/images/platformer/backgrounds/hills.png" },
+        greece: { src: "/images/platformer/backgrounds/greek.png"},
         mountains: { src: "/images/platformer/backgrounds/mountains.jpg" },
         clouds : { src: "/images/platformer/backgrounds/clouds.png"},
         space: { src: "/images/platformer/backgrounds/planet.jpg" },
@@ -232,7 +251,8 @@ const GameSetup = {
         loading: { src: "/images/platformer/backgrounds/greenscreen.png" },
         complete: { src: "/images/platformer/backgrounds/OneStar.png" },
         complete2: { src: "/images/platformer/backgrounds/TwoStar.png" },
-        end: { src: "/images/platformer/backgrounds/Congratulations!!!.png" },
+        mini: { src: "/images/platformer/backgrounds/mini.png" },
+        end: { src: "/images/platformer/backgrounds/Congratulations!!!.png" }
       },
       players: {
         mario: {
@@ -270,6 +290,30 @@ const GameSetup = {
           a: { row: 1, frames: 15, idleFrame: { column: 7, frames: 0 } },
           s: { row: 12, frames: 15 },
           d: { row: 0, frames: 15, idleFrame: { column: 7, frames: 0 } }
+        },
+        knight: {
+          src: "/images/platformer/sprites/knight.png",
+          width: 128,
+          height: 128,
+          scaleSize: 120,
+          speedRatio: 0.7,
+          idle: {
+              left: { row: 1, frames: 23 },
+              right: { row: 0, frames: 23},
+          },
+          walk: {
+              left: { row: 7, frames: 20 },
+              right: { row: 6, frames: 20 },
+          },
+          run: {
+              left: { row: 5, frames: 23 },
+              right: { row: 4, frames: 23 },
+          },
+          jump: {
+              left: { row: 3, frames: 23 },
+              right: { row: 2, frames: 23 },
+          },
+          hitbox: { widthPercentage: 0.3, heightPercentage: 0.8 }
         },
         lopez: {
           src: "/images/platformer/sprites/lopezanimation.png", 
@@ -324,7 +368,25 @@ const GameSetup = {
           scaleSize: 150,
           speedRatio: 0.9,
         },
-	  
+        cerberus: {
+          src: "/images/platformer/sprites/cerberus.png",
+          width: 103,
+          height: 103,
+          scaleSize: 80,
+          speedRatio: 0.85,
+          wa: {row: 0, frames: 0}, // Up-Left Movement 
+          wd: {row: 0, frames: 0}, // Up-Right Movement
+          a: { row: 0, frames: 0, idleFrame: { column: 0, frames: 0 } }, // Left Movement
+          s: {row: 0, frames: 0}, // Stop the movement 
+          d: { row: 0, frames: 0, idleFrame: { column: 0, frames: 0 } }, // Right Movement 
+        },
+        dragon: {
+          src: "/images/platformer/sprites/dragon.png",
+          width: 152,
+          height: 119,
+          scaleSize: 60,
+          speedRatio: 0.7,
+        },
       }
     },
 
@@ -443,6 +505,146 @@ const GameSetup = {
        // Hills Game Level added to the GameEnv ...
        new GameLevel( {tag: "hills", callback: this.playerOffScreenCallBack, objects: hillsGameObjects } );
 
+        // Greece Game Level definition...
+        const greeceGameObjects = [
+          // GameObject(s), the order is important to z-index...
+          { name: 'greece', id: 'background', class: Background, data: this.assets.backgrounds.greece },
+          { name: 'grass', id: 'platform', class: Platform, data: this.assets.platforms.grass },
+          { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.2, yPercentage: 0.82 },
+          { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.2368, yPercentage: 0.82 },
+          { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.2736 , yPercentage: 0.82 },
+          { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.3104, yPercentage: 0.82 },
+          { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.3472, yPercentage: 0.82 },
+          { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.384, yPercentage: 0.76 },
+          { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.4208, yPercentage: 0.70 },
+          { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.5090, yPercentage: 0.64 },
+          //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.5642, yPercentage: 0.34 },
+          //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.5274, yPercentage: 0.34 },
+          //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.4906, yPercentage: 0.34 },
+          { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.6, yPercentage: 1 },
+          { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.6, yPercentage: 0.94 },
+          { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.6, yPercentage: 0.88 },
+          { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.6, yPercentage: 0.82 },
+          { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.6, yPercentage: 0.76 },
+          { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.6, yPercentage: 0.70 },
+          //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.6, yPercentage: 0.64 },
+          //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.6, yPercentage: 0.58 },
+          //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.6, yPercentage: 0.52 },
+          //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.6, yPercentage: 0.46 },
+          //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.6, yPercentage: 0.40 },
+          { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.6, yPercentage: 0.34 },
+          { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.6, yPercentage: 0.28 },
+          { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.6, yPercentage: 0.22 },
+          { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.6368, yPercentage: 0.64 },
+          //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.6, yPercentage: 0.16 },
+          //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.6, yPercentage: 0.1 },
+          //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.6, yPercentage: 0.06 },
+          { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 1 },
+          { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.94 },
+          { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.88 },
+          { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.82 },
+          { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.76 },
+          { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.70 },
+          { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.64 },
+          { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.58 },
+          { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.52 },
+          //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.46 },
+          //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.40 },
+          //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.34 },
+          //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.28 },
+          { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.22 },
+          //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.16 },
+          //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.1 },
+          //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.06 },
+          { name: 'cerberus', id: 'cerberus', class: Cerberus, data: this.assets.enemies.cerberus, xPercentage:  0.2, minPosition: 0.05, difficulties: ["normal", "hard", "impossible"]},
+          { name: 'cerberus', id: 'cerberus', class: Cerberus, data: this.assets.enemies.cerberus, xPercentage:  0.5, minPosition: 0.3, difficulties: ["normal", "hard", "impossible"]},
+          { name: 'cerberus', id: 'cerberus', class: Cerberus, data: this.assets.enemies.cerberus, xPercentage:  0.7, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"]},//this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
+          { name: 'dragon', id: 'dragon', class: Dragon, data: this.assets.enemies.dragon, xPercentage:  0.5, minPosition:  0.05},
+          { name: 'knight', id: 'player', class: PlayerGreece, data: this.assets.players.knight },
+          { name: 'flag', id: 'flag', class: Flag, data: this.assets.obstacles.flag },
+          { name: 'complete2', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.complete2 },
+        ];
+
+        // Greece Game Level added to the GameEnv ...
+           new GameLevel( {tag: "ancient greece", callback: this.playerOffScreenCallBack, objects: greeceGameObjects} );
+
+           const miniGameObjects = [
+            // GameObject(s), the order is important to z-index...
+            { name: 'mini', id: 'background', class: Background, data: this.assets.backgrounds.mini },
+            // { name: 'rock', id: 'platform', class: Platform, data: this.assets.platforms.rock },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.59, yPercentage: 0.35 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.6268, yPercentage: 0.35 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.3, yPercentage: 0.35 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.3368, yPercentage: 0.35 },
+  
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.3, yPercentage: 0.85 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.3368, yPercentage: 0.85 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.4684, yPercentage: 0.85 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.6, yPercentage: 0.85 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.6368, yPercentage: 0.85 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.3736, yPercentage: 0.35 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.3736, yPercentage: 0.4334 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.3736, yPercentage: 0.5167 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.3736, yPercentage: 0.6 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.4104, yPercentage: 0.6 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.4472, yPercentage: 0.6 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.484, yPercentage: 0.6 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.5208, yPercentage: 0.6 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.5576, yPercentage: 0.6 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.5576, yPercentage: 0.5167 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.5576, yPercentage: 0.4334 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.5576, yPercentage: 0.35 },
+
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.8576, yPercentage: 0.6 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.8576, yPercentage: 0.5167 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.8576, yPercentage: 0.4334 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.8576, yPercentage: 0.35 },
+  
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.8576, yPercentage: 0.6 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.8208, yPercentage: 0.6 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.784, yPercentage: 0.6 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.7472, yPercentage: 0.6 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.7104, yPercentage: 0.6 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.6736, yPercentage: 0.6 },
+  
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.1736, yPercentage: 0.35 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.1736, yPercentage: 0.4334 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.1736, yPercentage: 0.5167 },
+            { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lava, xPercentage: 0.1736, yPercentage: 0.6 },
+            
+            { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.28, yPercentage: 0.25 },
+            { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.32, yPercentage: 0.25 },
+            { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.29, yPercentage: 0.75 },
+            { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.33, yPercentage: 0.75 },
+            { name: 'star', id: 'star', class: Star, data: this.assets.obstacles.star, xPercentage: 0.4584, yPercentage: 0.75 },
+            { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.40, yPercentage: 0.5 },
+            { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.42, yPercentage: 0.5 },
+            { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.44, yPercentage: 0.5 },
+            { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.46, yPercentage: 0.5 },
+            { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.48, yPercentage: 0.5 },
+            { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.5, yPercentage: 0.5 },
+            { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.59, yPercentage: 0.75 },
+            { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.63, yPercentage: 0.75 },
+            { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.58, yPercentage: 0.25 },
+            { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.62, yPercentage: 0.25 },
+  
+            { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.6475, yPercentage: 0.5 },
+            { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.6675, yPercentage: 0.5 },
+            { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.6875, yPercentage: 0.5 },
+            { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.7075, yPercentage: 0.5 },
+            { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.7275, yPercentage: 0.5 },
+            { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.7475, yPercentage: 0.5 },
+            { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.7675, yPercentage: 0.5 },
+            { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.7875, yPercentage: 0.5 },
+            { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.8075, yPercentage: 0.5 },
+            { name: 'mario', id: 'player', class: PlayerMini, data: this.assets.players.mario },
+            { name: 'tubeD', id: 'tubeD', class: Tube1, data: this.assets.obstacles.tubeD},
+            { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
+            // { name: 'complete', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.complete },
+          ];
+          // Space Game Level added to the GameEnv ...
+          new GameLevel( {tag: "mini", callback: this.playerOffScreenCallBack, objects: miniGameObjects} );
+  
         // Game Over Level definition...
         const endGameObjects = [
         { name:'background', class: Background, id: 'background', data: this.assets.backgrounds.end}
