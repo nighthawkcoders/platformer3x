@@ -23,7 +23,7 @@ import FlyingUFO from './FlyingUFO.js';
 import Alien from './Alien.js';
 import GameControl from './GameControl.js';
 import Enemy from './Enemy.js';
-import SpawnPlatform from './SpawnPlatform.js';
+
 
 //test comment
 
@@ -454,10 +454,10 @@ const GameSetup = {
         { name: 'clouds', id: 'background', class: BackgroundClouds, data: this.assets.backgrounds.clouds },
         { name: 'hills', id: 'background', class: BackgroundHills, data: this.assets.backgrounds.hills },
         { name: 'grass', id: 'floor', class: Platform, data: this.assets.platforms.grass },
-        { name: 'blocks', id: 'jumpPlatform', class: SpawnPlatform, data: this.assets.platforms.block, xPercentage: 0.2, yPercentage: 0.85 },
-        { name: 'blocks', id: 'jumpPlatform', class: SpawnPlatform, data: this.assets.platforms.block, xPercentage: 0.2368, yPercentage: 0.85 },
-        { name: 'blocks', id: 'jumpPlatform', class: SpawnPlatform, data: this.assets.platforms.block, xPercentage: 0.2736, yPercentage: 0.85 },
-	      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.5, yPercentage: 1 },
+        { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2, yPercentage: 0.85 },
+        { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2368, yPercentage: 0.85 },
+        { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2736, yPercentage: 0.85 },
+	{ name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.5, yPercentage: 1 },
         { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.5, yPercentage: 0.92 },
         { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.5, yPercentage: 0.84 },
         { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.5, yPercentage: 0.76 },
