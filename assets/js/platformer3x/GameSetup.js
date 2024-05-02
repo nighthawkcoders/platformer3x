@@ -750,6 +750,7 @@ const GameSetup = {
         // Winter Game Level added to the GameEnv ...
         new GameLevel( {tag: "winter", callback: this.playerOffScreenCallBack, objects: winterObjects} );
 
+        
         // Game Over Level definition...
         const endGameObjects = [
         { name:'background', class: Background, id: 'background', data: this.assets.backgrounds.end}
