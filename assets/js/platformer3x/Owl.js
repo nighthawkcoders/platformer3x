@@ -22,13 +22,17 @@ export class Snowman extends FlyingGoomba {
 
         this.immune = 0;
 
-        //Define Speed of Enemy
-        if (GameEnv.difficulty === "normal") {
-            this.speed = this.speed;
-        } else {
-            this.speed = this.speed * 2;
-        }
+        // Define Speed of Enemy
+    if (GameEnv.difficulty === "normal") {
+        this.speed = this.speed;
+    } else if (GameEnv.difficulty === "hard") {
+        this.speed = this.speed * 2;
+    } else if (GameEnv.difficulty === "easy") {
+        this.speed = this.speed * 0.5;
+    } else if (GameEnv.difficulty === "impossible") {
+        this.speed = this.speed * 3;
     }
+}
 
     update() {
         super.update();
