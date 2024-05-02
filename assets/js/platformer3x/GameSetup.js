@@ -252,7 +252,6 @@ const GameSetup = {
         complete2: { src: "/images/platformer/backgrounds/TwoStar.png" },
         mini: { src: "/images/platformer/backgrounds/mini.png" },
         end: { src: "/images/platformer/backgrounds/Congratulations!!!.png" }
-        
       },
       players: {
         mario: {
@@ -329,7 +328,7 @@ const GameSetup = {
           d: { row: 2, frames: 3, idleFrame: { column: 1, frames: 0 } }, // Right Movement 
           runningLeft: { row: 5, frames: 3, idleFrame: {column: 1, frames: 0} },
           runningRight: { row: 4, frames: 3, idleFrame: {column: 1, frames: 0} },
-        }
+        },        
       },
       enemies: {
         goomba: {
