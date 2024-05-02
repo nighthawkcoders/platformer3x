@@ -1,379 +1,136 @@
 import GameEnv from './GameEnv.js';
-import Character from './Character.js';
+import PlayerBase from './PlayerBase.js';
 import GameControl from './GameControl.js';
 
 /**
- * @class PlayerQuidditch class
- * @description PlayeiBase.js key objective is to handle the user controlled player's actions and animations. 
+ * @class PlayerHills class
+ * @description PlayerHills.js key objective is to eent the user-controlled character in the game.   
  * 
- * The PlayerBase class extends the Character class, which in turn extends the GameObject class.
+ * The Player class extends the Character class, which in turn extends the GameObject class.
  * Animations and events are activated by key presses, collisions, and gravity.
- * WASD keys are used by user to control The PlayerBase object.  
+ * WASD keys are used by user to control The Player object.  
  * 
- * @extends Character
+ * @extends PlayerBase 
  */
-export class PlayerBase extends Character {
-    /**
-     * Initial environment of the player.
-     * @property {string} collision - The current object the player is interacting with (e.g., 'floor', 'wall', 'platform').
-     * @property {Array} collisions - The collisions that the player has had.
-     * @property {string} animation - The current animation state of the player (e.g., 'idle', 'walk', 'run', 'jump').
-     * @property {string} direction - The direction the player is facing (e.g., 'left', 'right').
-     * @property {Object} movement - The directions in which the player can move.
-     * @property {boolean} movement.up - Whether the player can move up.
-     * @property {boolean} movement.down - Whether the player can move down.
-     * @property {boolean} movement.left - Whether the player can move left.
-     * @property {boolean} movement.right - Whether the player can move right.
-     * @property {boolean} movement.falling - Whether the player is falling.
-     * @property {boolean} isDying - Whether the player is dying.
-     */
+export class PlayerQuidditch extends PlayerBase {
 
-    // This object represents the initial state of the player when the game starts.
-    initEnvironmentState = {
-        // environment
-        collision: 'floor',
-        collisions: [],
-        // player
-        animation: 'idle',
-        direction: 'right',
-        movement: {up: false, down: false, left: true, right: true, falling: false},
-        isDying: false,
-    };
-
-    /** GameObject: Constructor for Player object
+    /** GameObject instantiation: constructor for PlayerHills object
      * @extends Character 
      * @param {HTMLCanvasElement} canvas - The canvas element to draw the player on.
      * @param {HTMLImageElement} image - The image to draw the player with.
      * @param {Object} data - The data object containing the player's properties.
      */
     constructor(canvas, image, data) {
-        super(canvas, image, data); // Call the Character class's constructor
+        super(canvas, image, data);
 
-        // Player Data
-        GameEnv.player = this; // Global player object
-        this.name = GameEnv.userID; // name of the player
-
-        // Player control data
-        this.state = {...this.initEnvironmentState}; // Player and environment states 
-        this.playerData = data; // GameSetup data
-        this.pressedKeys = {}; // active keys array
-        this.runSpeed = this.speed * 3; // dash speed
-        this.shouldBeSynced = true; // multi-player sync
-
-        // Store a reference to the event listener function
-        this.keydownListener = this.handleKeyDown.bind(this);
-        this.keyupListener = this.handleKeyUp.bind(this);
-
-        // Add event listeners
-        document.addEventListener('keydown', this.keydownListener);
-        document.addEventListener('keyup', this.keyupListener);
+        // Goomba variables, deprecate?
+        this.timer = false;
+        GameEnv.invincible = false; // Player is not invincible 
     }
 
     /**
-     * GameObject: Destructor for Player Object
-     * This method is used to remove the event listeners for keydown and keyup events.
-     * After removing the event listeners, it calls the parent class's destroy player object. 
-     * This method overrides standard GameObject.destroy.
      * @override
+     * gameLoop helper: Update Player jump height, replaces PlayerBase updateJump using settings from GameEnv
      */
-    destroy() {
-        // Remove event listeners
-        document.removeEventListener('keydown', this.keydownListener);
-        document.removeEventListener('keyup', this.keyupListener);
-
-        // Call the parent class's destroy method
-        super.destroy();
-    }
-
-    /**
-     * gameLoop: updates the player's state, animation and position.
-     * @override
-     */
-    update() {
-        // player methods
-        this.updateAnimation();
-        this.updateMovement();
- 
-        // super actions need to be after; this is to preserve player order of operations
-        super.update();
-    }
-  
-    /**
-     * gameLoop helper: Udate Player jump height
-     */
-    updateJump() {
-        // Jump height is 35% of the screen bottom, same as screen height
-        this.setY(this.y - (this.bottom * 0.35)); 
-    }
-
-    /**
-     * gameLoop: updates the player's movement based on the player's animation (idle, walk, run, jump, etc.)
-     */ 
-    updateMovement() {
-        switch (this.state.animation) {
-            case 'idle':
-                break;
-            case 'jump':
-                // Check condition for player to jump
-                if (this.state.movement.up && !this.state.movement.falling) {
-                    // jump
-                    GameEnv.playSound("PlayerJump");
-                    this.updateJump();
-                    // start falling
-                    this.state.movement.falling = true;
-                }
-                // break is purposely omitted to allow default case to run 
-            default:
-                // Player is moving left
-                if (this.state.direction === 'left' && this.state.movement.left && 'a' in this.pressedKeys) {
-                    // Decrease the player's x position according to run or walk animation and related speed
-                    this.setX(this.x - (this.state.animation === 'run' ? this.runSpeed : this.speed));
-                // Player is moving right
-                } else if (this.state.direction === 'right' && this.state.movement.right && 'd' in this.pressedKeys){
-                    // Increase the player's x position according to run or walk animation and related speed
-                    this.setX(this.x + (this.state.animation === 'run' ? this.runSpeed : this.speed));
-                }
-        }
-    }
-
-    /**
-     * gameLoop: updates the player's animation (idle, walk, run, jump, etc.)
-     */
-    updateAnimation() {
-        switch (this.state.animation) {
-            case 'idle':
-                this.setSpriteAnimation(this.playerData.idle[this.state.direction]);
-                break;
-            case 'walk':
-                this.setSpriteAnimation(this.playerData.walk[this.state.direction]);
-                break;
-            case 'run':
-                this.setSpriteAnimation(this.playerData.run[this.state.direction]);
-                break;
-            case 'jump':
-                this.setSpriteAnimation(this.playerData.jump[this.state.direction]);
-                break;
-            default:
-                console.error(`Invalid state: ${this.state.animation}`);
-        }
-    }
-
-
-    /**
-     * User Event: updates the player's state, key pressed is mapped to player's animation state  
-     * @param {*} key 
-     */
-    updateAnimationState(key) {
-        switch (key) {
-            case 'a':
-            case 'd':
-                this.state.animation = 'walk';
-                break;
-            case 'w':
-              if (this.state.movement.up == false) {
-                this.state.movement.up = true;
-                this.state.animation = 'jump';
-              }
-              break;
-            case 's':
-                if ("a" in this.pressedKeys || "d" in this.pressedKeys) {
-                    this.state.animation = 'run';
-                }
-                break;
-            default:
-                this.state.animation = 'idle';
-                break;
-        }
-    }
-
-    /**
-     * User Event: Handles the keydown event.
-     * This method checks the pressed key, then conditionally:
-     * - adds the key to the pressedKeys object
-     * - sets the player's animation
-     * - adjusts the game environment
-     *
-     * @param {Event} event - The keydown event.
-     */    
-    
-    handleKeyDown(event) {
-        const key = event.key;
-        if (!(event.key in this.pressedKeys)) {
-            //If both 'a' and 'd' are pressed, then only 'd' will be inputted
-            //Originally if this is deleted, player would stand still. 
-            if (this.pressedKeys['a'] && key === 'd') {
-                delete this.pressedKeys['a']; // Remove "a" key from pressedKeys
-                return; //(return) = exit early
-            } else if (this.pressedKeys['d'] && key === 'a') {
-                // If "d" is pressed and "a" is pressed afterward, ignore "a" key
-                return;
-            }
-            // Set the direction when a or d key is pressed
-            if (key === 'a') {
-                this.state.direction = 'left';
-            } else if (key === 'd') {
-                this.state.direction = 'right';
-            }
-            // Record the pressed key
-            this.pressedKeys[event.key] = true;
-            // Update the player's animation state based on the pressed key
-            this.updateAnimationState(key);
-            GameEnv.transitionHide = true;
-            GameControl.startTimer()
-        }
-
-        // parallax background speed starts on player movement
-        GameEnv.updateParallaxDirection(key)
-    }
-
-    /**
-     * User Event: Handles the keyup event.
-     * This method checks the released key, then conditionally stops actions from formerly pressed key
-     * 
-     * @param {Event} event - The keyup event.
-     */
-    handleKeyUp(event) {
-        const key = event.key;
-        if (key in this.pressedKeys) {
-            delete this.pressedKeys[key];
-            if (Object.keys(this.pressedKeys).length > 0) {
-                // If there are still keys in pressedKeys, update the state to the last one
-                const lastKey = Object.keys(this.pressedKeys)[Object.keys(this.pressedKeys).length - 1];
-                this.updateAnimationState(lastKey);
-                GameEnv.updateParallaxDirection(lastKey)
-            } else {
-                // If there are no more keys in pressedKeys, update the state to null
-                this.updateAnimationState(null);
-                GameEnv.updateParallaxDirection(null)
-            }
-        }
-    }
-    
-
-    /**
-     * gameLoop: Collision action handler for the Player.
-     * This method overrides GameObject.collisionAction. 
-     * @override
-     */
-    collisionAction() {
-        this.handleCollisionStart();
-        this.handleCollisionEnd();
-        this.setActiveCollision();
-        this.handlePlayerReaction();
-    }
-   
-    /**
-     * gameLoop: Watch for Player collision events 
-     */
-    handleCollisionStart() {
-        this.handleCollisionEvent("jumpPlatform");
-        this.handleCollisionEvent("wall");
-        this.handleCollisionEvent("floor");
-    }
-
-    /**
-     * gameLoop helper: Adds the collisionType to the collisions array when player is touching the object
-     * @param {*} collisionType 
-     */
-    handleCollisionEvent(collisionType) {
-        // check if player is touching the "collisionType" object
-        if (this.collisionData.touchPoints.other.id === collisionType) {
-            // check if the collisionType is not already in the collisions array
-            if (!this.state.collisions.includes(collisionType)) {
-                // add the collisionType to the collisions array, making it the current collision
-                this.state.collisions.push(collisionType);
-            }
-        }
-    }
-   
-    /**
-     * gameLoop: Tears down Player collision events
-     */
-    handleCollisionEnd() {
-        // test if this.state.collision is floor, if so, do nothing as it is the default state
-        if (this.state.collision === "floor") { 
-        // else if collision exists in collisions array and it is not the current collision
-        } else if (this.state.collisions.includes(this.state.collision) && this.collisionData.touchPoints.other.id !== this.state.collision ) {
-            // filter out the collision from the array, or in other words, remove the collision
-            this.state.collisions = this.state.collisions.filter(collision => collision !== this.state.collision);
-        }
-    }
-   
-    /**
-     * gameLoop: Sets Player collision state from most recent collision in collisions array
-     */
-    setActiveCollision() {
-        // check array for any remaining collisions
-        if (this.state.collisions.length > 0) {
-            // the array contains collisions, set the the last collision in the array
-            this.state.collision = this.state.collisions[this.state.collisions.length - 1];
+    updateJump() {  
+        let jumpHeightFactor;
+        if (GameEnv.difficulty === "easy") {
+            jumpHeightFactor = 0.50;
+        } else if (GameEnv.difficulty === "normal") {
+            jumpHeightFactor = 0.40;
         } else {
-            // the array is empty, set to floor collision (default state)
-            this.state.collision = "floor";
+            jumpHeightFactor = 0.30;
         }
+        this.setY(this.y - (this.bottom * jumpHeightFactor));
+    }
+
+    /**
+     * @override
+     * gameLoop: Watch for Player collision events 
+     */ 
+    handleCollisionStart() {
+        super.handleCollisionStart(); // calls the super class method
+        // adds additional collision events
+        this.handleCollisionEvent("tube");
+        this.handleCollisionEvent("goomba");
+        this.handleCollisionEvent("mushroom");
     }
    
     /**
-     * gameloop: Handles Player reaction / state updates to the collision
+     * @override
+     * gameloop: Handles additional Player reaction / state updates to the collision for game level 
      */
-    // Assuming you have some kind of input handling system
-
     handlePlayerReaction() {
-        // gravity on is default for player/character
-        this.gravityEnabled = true;
-
-        // handle player reaction based on collision type
+        super.handlePlayerReaction(); // calls the super class method
+        // handles additional player reactions
         switch (this.state.collision) {
-            // 1. Player is on a jump platform
-            case "jumpPlatform":
-                // Player is on top of the jump platform
-                if (this.collisionData.touchPoints.this.onTopofPlatform) {
-                    this.state.movement = { up: false, down: false, left: true, right: true, falling: false};
-                    this.gravityEnabled = false;
-                } else if (this.collisionData.touchPoints.this.right) {
-                    this.state.movement = { up: false, down: false, left: true, right: false, falling: false};
-                    this.y -= 4;
-
-                // Player is touching the wall with left side
-                } else if (this.collisionData.touchPoints.this.left) {
-                    this.state.movement = { up: false, down: false, left: false, right: true, falling: false};
-                    this.y -= 4;
-                }
-            
-
-                break;
-               
-            // 2. Player is on or touching a wall 
-            case "wall":
-                // Player is on top of the wall
+            case "tube":
+                // 1. Caught in tube
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
-                    this.state.movement = { up: false, down: false, left: true, right: true, falling: false};
-                    this.gravityEnabled = false;
-                // Player is touching the wall with right side
+                    // Position player in the center of the tube 
+                    this.x = this.collisionData.newX;
+                    // Using natural gravity wait for player to reach floor
+                    if (Math.abs(this.y - this.bottom) <= GameEnv.gravity) {
+                        // Force end of level condition
+                        this.x = GameEnv.innerWidth + 1;
+                    }
+                // 2. Collision between player right and tube   
                 } else if (this.collisionData.touchPoints.this.right) {
-                    this.state.movement = { up: false, down: false, left: true, right: false, falling: false};
-                // Player is touching the wall with left side
+                    this.state.movement.right = false;
+                    this.state.movement.left = true;
+                // 3. Collision between player left and tube
                 } else if (this.collisionData.touchPoints.this.left) {
-                    this.state.movement = { up: false, down: false, left: false, right: true, falling: false};
+                    this.state.movement.left = false;
+                    this.state.movement.right = true;
                 }
                 break;
-
-            
-            // 4. Player is in default state
-            case "floor":
-                // Player is on the floor
-                if (this.onTop) {
-                    this.state.movement = { up: false, down: false, left: true, right: true, falling: false};
-                // Player is falling, there are no collisions, but is in default state 
-                } else { 
-                    this.state.movement = { up: false, down: false, left: true, right: true, falling: true};
+            case "goomba": // Note: Goomba.js and Player.js could be refactored
+                // 1. Player jumps on goomba, interaction with Goomba.js
+                if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom && this.state.isDying == false) {
+                    // GoombaBounce deals with player.js and goomba.js
+                    if (GameEnv.goombaBounce === true) {
+                        GameEnv.goombaBounce = false;
+                        this.y = this.y - 100;
+                    }
+                    if (GameEnv.goombaBounce1 === true) {
+                        GameEnv.goombaBounce1 = false; 
+                        this.y = this.y - 250
+                    }
+                // 2. Player touches goomba sides of goomba 
+                } else if (this.collisionData.touchPoints.this.right || this.collisionData.touchPoints.this.left) {
+                    if (GameEnv.difficulty === "normal" || GameEnv.difficulty === "hard") {
+                        if (this.state.isDying == false) {
+                            this.state.isDying = true;
+                            this.canvas.style.transition = "transform 0.5s";
+                            this.canvas.style.transform = "rotate(-90deg) translate(-26px, 0%)";
+                            GameEnv.playSound("PlayerDeath");
+                            setTimeout(async() => {
+                                await GameControl.transitionToLevel(GameEnv.levels[GameEnv.levels.indexOf(GameEnv.currentLevel)]);
+                            }, 900); 
+                        }
+                    } else if (GameEnv.difficulty === "easy" && this.collisionData.touchPoints.this.right) {
+                        this.x -= 10;
+                    } else if (GameEnv.difficulty === "easy" && this.collisionData.touchPoints.this.left) {
+                       this.x += 10;
+                    }
+                
                 }
                 break;
-            
-            
+            case "mushroom": // 
+                // Player touches mushroom   
+                if (GameEnv.destroyedMushroom === false) {
+                    GameEnv.destroyedMushroom = true;
+                    this.canvas.style.filter = 'invert(1)';
+                    // Invert state lasts for 2 seconds
+                    setTimeout(() => {
+                        this.canvas.style.filter = 'invert(0)';
+                    }, 2000); // 2000 milliseconds = 2 seconds
+                }
+                break;  
         }
+
     }
 
 }
 
-export default PlayerBase;
+export default PlayerQuidditch;

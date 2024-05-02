@@ -24,7 +24,6 @@ import Alien from './Alien.js';
 import GameControl from './GameControl.js';
 import Enemy from './Enemy.js';
 
-
 //test comment
 
 /* Coding Style Notes
@@ -301,16 +300,24 @@ const GameSetup = {
           width: 32,
           height: 32,
           scaleSize: 80,
-          speedRatio: 1,
-          w: {row: 1, frames: 6},
-          wa: {row: 1, frames: 6},
-          wd: {row: 2, frames: 6},
-          idle: { row: 6, frames: 1, idleFrame: {column: 1, frames: 0} },
-          a: { row: 1, frames: 5, idleFrame: { column: 1, frames: 0 } }, // Right Movement
-          s: {row: 1, frames: 5}, // Stop the movement 
-          d: { row: 2, frames: 5, idleFrame: { column: 1, frames: 0 } }, // Left Movement 
-          runningLeft: { row: 1, frames: 6, idleFrame: {column: 1, frames: 0} },
-          runningRight: { row: 2, frames: 6, idleFrame: {column: 1, frames: 0} },
+          speedRatio: 0.7,
+          idle: {
+            left: { row: 1, frames: 1 },
+            right: { row: 2, frames: 1 },
+          },
+          walk: {
+            left: { row: 1, frames: 5 },
+            right: { row: 2, frames: 5 },
+          },
+          run: {
+            left: { row: 1, frames: 5 },
+            right: { row: 2, frames: 5 },
+          },
+          jump: {
+            left: { row: 1, frames: 1 },
+            right: { row: 2, frames: 1 },
+          },
+          hitbox: { widthPercentage: 0.3, heightPercentage: 0.8 }
         }        
       },
       enemies: {
@@ -456,7 +463,12 @@ const GameSetup = {
         { name: 'grass', id: 'floor', class: Platform, data: this.assets.platforms.grass },
         { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2, yPercentage: 0.85 },
         { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2368, yPercentage: 0.85 },
-        { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2736, yPercentage: 0.85 },      
+        { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2736, yPercentage: 0.85 },
+	      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.5, yPercentage: 1 },
+        { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.5, yPercentage: 0.92 },
+        { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.5, yPercentage: 0.84 },
+        { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.5, yPercentage: 0.76 },
+        { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.5, yPercentage: 0.68 },      
         { name: 'blocks', id: 'wall', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.6, yPercentage: 1 },
         { name: 'itemBlock', id: 'jumpPlatform', class: JumpPlatform, data: this.assets.platforms.itemBlock, xPercentage: 0.4, yPercentage: 0.65 }, //item block is a platform
         { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage: 0.5, yPercentage: 1, minPosition: 0.05},
@@ -469,7 +481,7 @@ const GameSetup = {
         { name: 'flyingGoomba', id: 'flyingGoomba', class: FlyingGoomba, data: this.assets.enemies.flyingGoomba, xPercentage:  0.9, minPosition: 0.5, difficulties: ["normal","hard","impossible"]},
         { name: 'flyingGoomba', id: 'flyingGoomba', class: FlyingGoomba, data: this.assets.enemies.flyingGoomba, xPercentage:  0.9, minPosition: 0.5, difficulties: ["hard","impossible"]},
         { name: 'flyingGoomba', id: 'flyingGoomba', class: FlyingGoomba, data: this.assets.enemies.flyingGoomba, xPercentage:  0.9, minPosition: 0.5, difficulties: ["impossible"]},
-        { name: 'mushroom', id: 'mushroom', class: Mushroom, data: this.assets.enemies.mushroom, xPercentage: 0.49},
+        //{ name: 'mushroom', id: 'mushroom', class: Mushroom, data: this.assets.enemies.mushroom, xPercentage: 0.49},
         { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.1908, yPercentage: 0.75 },
         { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.2242, yPercentage: 0.75 },
         { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.2575, yPercentage: 0.75 },
