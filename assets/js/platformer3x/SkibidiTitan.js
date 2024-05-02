@@ -1,6 +1,7 @@
 import Character from './Character.js';
 import GameEnv from './GameEnv.js';
 import Player from './PlayerBase.js';
+import Plr from './Player.js';
 import GameControl from './GameControl.js';
 var debounce = 0;
 export class skibidiTitan extends Character {
@@ -34,14 +35,19 @@ export class skibidiTitan extends Character {
         }
         if(debounce < -120){
             debounce += 1;
-        }else if(debounce < 0 && debounce > -120){
+        }else if(debounce < 0 && debounce >= -120){
             debounce += 1;
+            if (GameEnv.PlayerPosition.playerX - 200 == this.x) {
+                //setTimeout(Plr.goombaCollision.bind(this), 50);
+                Plr.Player.goombaCollision();
+                debounce = 0;
+            }
         }
 
         if(debounce == 240){
             debounce = -240;
         }
-        console.log(debounce);
+        console.log((GameEnv.PlayerPosition.playerX - 200) + " " + this.x);
         
         
         
