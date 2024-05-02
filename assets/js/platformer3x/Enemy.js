@@ -49,12 +49,7 @@ export class Enemy extends Character {
         }
     }
 
-    update() {
-        super.update();
-
-        this.setAnimation(this.direction);
-        
-        
+    checkBoundaries(){
         // Check for boundaries
         if (this.x <= this.minPosition || (this.x + this.canvasWidth >= this.maxPosition)) {
             if (this.direction === "a") {
@@ -64,7 +59,9 @@ export class Enemy extends Character {
                 this.direction = "a";
             }
         };
+    }
 
+    updateMovement(){
         if (this.direction === "d") {
             this.speed = Math.abs(this.storeSpeed)
             this.canvas.style.transform = 'none';
@@ -80,6 +77,12 @@ export class Enemy extends Character {
 
         // Move the enemy\
         this.x += this.speed;
+    }
+
+    update() {
+        super.update();
+
+        this.setAnimation(this.direction);
 
         this.playerBottomCollision = false;
     }
