@@ -32,11 +32,11 @@ export class Snowflake extends GameObject {
 
     // Center and set Coin position with adjustable height and width
     size() {
-        const scaledWidth = this.image.width * 0.2;
-        const scaledHeight = this.image.height * 0.169;
+        const scaledWidth = this.image.width*1.5;
+        const scaledHeight = this.image.height*0.75;
 
         const snowflakeX = this.snowflakeX;
-        const snowflakeY = (GameEnv.bottom - scaledHeight) * this.coinY;
+        const snowflakeY = (GameEnv.bottom - scaledHeight) * this.snowflakeY;
 
         // Set variables used in Display and Collision algorithms
         this.bottom = snowflakeY;
@@ -53,7 +53,7 @@ export class Snowflake extends GameObject {
         // check player collision
         if (this.collisionData.touchPoints.other.id === "player") {
             this.destroy();
-            GameControl.gainCoin(10)
+            GameControl.gainCoin(5)
             GameEnv.playSound("coin");
         }
     }
