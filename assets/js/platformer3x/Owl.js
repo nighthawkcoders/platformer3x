@@ -28,7 +28,7 @@ export class Snowman extends FlyingGoomba {
     } else if (GameEnv.difficulty === "hard") {
         this.speed = this.speed * 2;
     } else if (GameEnv.difficulty === "easy") {
-        this.speed = this.speed * 0.5;
+        this.speed = this.speed * 1;
     } else if (GameEnv.difficulty === "impossible") {
         this.speed = this.speed * 3;
     }
