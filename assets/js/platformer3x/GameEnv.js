@@ -83,6 +83,7 @@ export class GameEnv {
     static darkMode = true;
     static isTheme = false; 
 
+    static claimedCoinIds = []
 
     
     // Make the constructor throws an error, or effectively make it a private constructor.
