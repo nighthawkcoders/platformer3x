@@ -198,6 +198,9 @@ const GameControl = {
         GameEnv.destroy();
 
         // Load GameLevel objects
+        if (GameEnv.currentLevel !== newLevel) {
+            GameEnv.claimedCoinIds = [];
+        }
         await newLevel.load();
         GameEnv.currentLevel = newLevel;
 

@@ -1,11 +1,16 @@
 import GameEnv from './GameEnv.js';
 import GameObject from './GameObject.js';
+
 export class BlockPlatform extends GameObject {
     constructor(canvas, image, data, xPercentage, yPercentage) {
         super(canvas, image, data);
         this.platformX = xPercentage * GameEnv.innerWidth;
         this.platformY = yPercentage;
+
+        // Add glow effect
+        this.canvas.style.boxShadow = "0 0 10px 5px rgba(0, 255, 255, 0.7)";
     }
+
     // Required, but no update action
     update() {
         //console.log(this.platformY)
@@ -15,6 +20,7 @@ export class BlockPlatform extends GameObject {
     draw() {
         this.ctx.drawImage(this.image, 0, 0, this.canvas.width, this.canvas.height);
     }
+
     // Set platform position
     size() {
         // Formula for Height should be on constant ratio, using a proportion of 832
@@ -35,4 +41,5 @@ export class BlockPlatform extends GameObject {
         this.canvas.style.top = `${platformY}px`;
     }
 }
+
 export default BlockPlatform;
