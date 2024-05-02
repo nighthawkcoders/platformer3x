@@ -83,36 +83,36 @@
   z-index: 3; // Position on Top of other elements, as well as ID buttons above
   // left: 0; // set the sidebar to be on the left side of the page
   top: 0; // calculated to be below the header and submenu
-  padding-top: 0px;
-  padding-bottom: 0px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   overflow-x: hidden; /* Disable horizontal scroll */
   transition: 0.5s; /* 0.5-second transition effect to slide in the sidebar */
   // following are changed by JavaScript
   width: 0px;
   padding-left: 0px;
   padding-right: 0px;
-  height: 80%;
+  height: 75%;
   scroll-behavior: auto;
 }
 
 #leaderboardTitle {
   text-align: center;
-  color: greenyellow;
+  color: #3d3af2;
   text-decoration: wavy;
   font-weight: 900;
-  font-size: 100px;
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  background-color: rgb(163, 55, 163);
+  font-size: 70px;
+  font-family: "Press Start 2P", system-ui;
+  background-color: #b01a2e;
 }
 
-$dt-leaderboard: #B385EB;
+$dt-leaderboard: #e85252;
 .table.scores, th, tr, td {
   text-align: center;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 .table.scores {
   th {
-    background-color: #5F3692;
+    background-color: #e0b2b2;
   }
   tr {
     td {
@@ -150,6 +150,7 @@ $dt-leaderboard: #B385EB;
 /// @param {Number} border-radius - The border radius of the input field, rounded corners.
 /// @param {Number} padding - The padding inside the input field, space between the border and the text.
 /// @param {String} text-align - The text alignment inside the input field, left, right, or center.
+
 @mixin input {
   @include dark-mode-color; // use the dark mode color scheme
   height: 30px;
