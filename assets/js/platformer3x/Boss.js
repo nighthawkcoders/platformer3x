@@ -14,12 +14,11 @@ export class Boss extends Enemy {
         this.animationSpeed = data?.animationSpeed || 1; //higher "animationSpeed" means slower animation
         this.counter = data?.animationSpeed; 
 
-        this.death = false;
     }
     //overwrite the method
     updateFrameX() {
         // Update animation frameX of the object
-        if(!this.death || this.state.animation != "death"){
+        if(!this.state.isDying || this.state.animation != "death"){
             if (this.frameX < this.maxFrame) {
                 if(this.counter > 0){
                     this.frameX = this.frameX; 
@@ -33,7 +32,7 @@ export class Boss extends Enemy {
                 this.frameX = this.minFrame;
             }
         }
-        else if(this.death && this.state.animation == "death"){
+        else if(this.state.isDying && this.state.animation == "death"){
             this.animationSpeed = 50;
             if (this.frameX < this.maxFrame) {
                 if(this.counter > 0){
@@ -137,10 +136,10 @@ export class Boss extends Enemy {
             }
             else if(this.collisionData.touchPoints.other.bottom && this.immune == 0){
                 this.state.animation = "death";
-                if(!this.death && this.state.animation == "death"){
+                if(!this.state.isDying && this.state.animation == "death"){
                     this.frameX = 0;
                 }
-                this.death = true;
+                this.state.isDying = true;
                 GameEnv.invincible = true;
                 GameEnv.goombaBounce = true;
                 GameEnv.playSound("goombaDeath");
