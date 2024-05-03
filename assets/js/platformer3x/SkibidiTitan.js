@@ -60,9 +60,11 @@ export class skibidiTitan extends Character {
         }
         if(debounce < -120){
             debounce += 1;
+            if(debounce == -235){GameEnv.playSound("laserCharge");}
+            this.canvas.style.filter = `invert(${debounce+240}%)`
         }else if(debounce < 0 && debounce >= -120){
             debounce += 1;
-            
+            this.canvas.style.filter = `invert(0%)`
             laser.style.left = `${this.x + 200}px`;
             if(debounce == -115){GameEnv.playSound("laserSound");}
 

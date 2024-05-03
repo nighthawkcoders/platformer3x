@@ -41,7 +41,7 @@ image: /images/platformer/backgrounds/home.png
   
   <!--Audo for laser -->    
   <audio id = "laserSound" src ="{{site.baseurl}}/assets/audio/laser.mp3" preload="auto"></audio>
-
+  <audio id = "laserCharge" src ="{{site.baseurl}}/assets/audio/charging-laser.mp3" preload="auto"></audio>
   
   
   <!-- Wrap both the controls and gameplay in a container div -->
