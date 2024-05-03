@@ -16,7 +16,7 @@ export class BackgroundHills extends Background {
 
     //Cause of limited bg cutout, keeping just incase it causes issues later
     draw() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
         super.draw();
     }
 
