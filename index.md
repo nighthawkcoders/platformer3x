@@ -78,8 +78,8 @@ image: /images/platformer/backgrounds/home.png
       import SettingsControl from '{{site.baseurl}}/assets/js/platformer3x/SettingsControl.js';
       import GameEnv from '{{site.baseurl}}/assets/js/platformer3x/GameEnv.js';
       import Leaderboard from '{{site.baseurl}}/assets/js/platformer3x/Leaderboard.js';
-      import startCutstory from '{{site.baseurl}}/assets/js/platformer3x/Cutstory.js';
-      import RandomEvent from '{{site.baseurl}}/assets/js/platformer3x/RandomEvent.js';
+      import startCutstory from '{{site.baseurl}}/assets/js/platformer3x/Cutstory.js';;
+  
       /* 
        * ==========================================
        * ========== Game Setup ====================
@@ -123,7 +123,6 @@ image: /images/platformer/backgrounds/home.png
       SettingsControl.sidebar();
       Leaderboard.initializeLeaderboard();
       startCutstory();
-      RandomEvent();
   
       /* 
        * ==========================================
