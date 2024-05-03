@@ -7,24 +7,31 @@ import BackgroundHills from './BackgroundHills.js';
 import BackgroundMountains from './BackgroundMountains.js';
 import BackgroundTransitions from './BackgroundTransitions.js';
 import BackgroundClouds from './BackgroundClouds.js';
+import BackgroundWinter from './BackgroundWinter.js';
+import BackgroundSnow from './BackgroundSnow.js';
 import Platform from './Platform.js';
 import JumpPlatform from './JumpPlatform.js';
 import Player from './Player.js';
 import PlayerHills from './PlayerHills.js';
+import PlayerWinter from './PlayerWinter.js';
 import PlayerMini from './PlayerMini.js';
 import PlayerBase from './PlayerBase.js';
 import Tube from './Tube.js';
 import Tube1 from './Tube1.js';
 import Tree from './Tree.js';
+import Cabin from './Cabin.js';
 import Goomba from './Goomba.js';
 import FlyingGoomba from './FlyingGoomba.js';
 import BlockPlatform from './BlockPlatform.js';
 import Mushroom from './Mushroom.js';
 import Coin from './Coin.js';
+import Snowflake from './Snowflake.js';
 import FlyingUFO from './FlyingUFO.js';
 import Alien from './Alien.js';
 import GameControl from './GameControl.js';
 import Enemy from './Enemy.js';
+import Owl from './Owl.js';
+import Snowman from './Snowman.js';
 import Cerberus from './Cerberus.js';
 import PlayerGreece from './PlayerGreece.js';
 import Flag from './Flag.js';
@@ -209,6 +216,12 @@ const GameSetup = {
         src: "/images/platformer/obstacles/blue-tube-up.png",
         hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 }
       },
+      cabin: {
+        src: "/images/platformer/obstacles/cabin.png",
+        hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 }
+      },
+      coin: { src: "/images/platformer/obstacles/coin.png" },
+      snowflake: { src: "/images/platformer/obstacles/snowflake.png" },
       tubeD: {
         src: "/images/platformer/obstacles/blue-tube.png",
         hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 }
@@ -227,6 +240,8 @@ const GameSetup = {
     },
     platforms: {
       grass: { src: "/images/platformer/platforms/grass.png" },
+      snowyfloor: { src: "/images/platformer/platforms/snowyfloor.png" },
+      snowywood: { src: "/images/platformer/platforms/snowywood.png" },
       alien: { src: "/images/platformer/platforms/alien.png" },
       bricks: { src: "/images/platformer/platforms/brick_wall.png" },
       lava: { src: "/images/platformer/platforms/lava.jpg" },
@@ -256,12 +271,40 @@ const GameSetup = {
       loading: { src: "/images/platformer/backgrounds/greenscreen.png" },
       complete: { src: "/images/platformer/backgrounds/OneStar.png" },
       complete2: { src: "/images/platformer/backgrounds/TwoStar.png" },
+      complete3: { src: "/images/platformer/backgrounds/ThreeStar.png" },
+      end: { src: "/images/platformer/backgrounds/Congratulations!!!.png" },
+      winter: { src: "/images/platformer/backgrounds/winter.png" },
+      snow: { src: "/images/platformer/backgrounds/snowfall.png" },
       mini: { src: "/images/platformer/backgrounds/mini.png" },
       end: { src: "/images/platformer/backgrounds/Congratulations!!!.png" }
     },
     players: {
       mario: {
         src: "/images/platformer/sprites/mario.png",
+        width: 256,
+        height: 256,
+        scaleSize: 80,
+        speedRatio: 0.7,
+        idle: {
+          left: { row: 1, frames: 15 },
+          right: { row: 0, frames: 15 },
+        },
+        walk: {
+          left: { row: 3, frames: 7 },
+          right: { row: 2, frames: 7 },
+        },
+        run: {
+          left: { row: 5, frames: 15 },
+          right: { row: 4, frames: 15 },
+        },
+        jump: {
+          left: { row: 11, frames: 15 },
+          right: { row: 10, frames: 15 },
+        },
+        hitbox: { widthPercentage: 0.3, heightPercentage: 0.8 }
+      },
+      whitemario: {
+        src: "/images/platformer/sprites/white_mario.png",
         width: 256,
         height: 256,
         scaleSize: 80,
@@ -346,6 +389,27 @@ const GameSetup = {
         xPercentage: 0.6,
         hitbox: { widthPercentage: 0.0, heightPercentage: 0.2 }
       },
+      Snowman: {
+        src: "/images/platformer/sprites/snowman.png",
+        width: 308,
+        height: 327,
+        scaleSize: 60,
+        speedRatio: 0.7,
+        xPercentage: 0.6,
+        hitbox: { widthPercentage: 0.0, heightPercentage: 0.2 },
+        wa: { row: 0, frames: 0 }, // Up-Left Movement 
+        wd: { row: 0, frames: 0 }, // Up-Right Movement
+        a: { row: 0, frames: 0, idleFrame: { column: 0, frames: 0 } }, // Left Movement
+        s: { row: 0, frames: 0 }, // Stop the movement 
+        d: { row: 0, frames: 0, idleFrame: { column: 0, frames: 0 } }, // Right Movement 
+      },
+      Owl: {
+        src: "/images/platformer/sprites/owl.png",
+        width: 499,
+        height: 500,
+        scaleSize: 60,
+        speedRatio: 0.8,
+      },
       flyingGoomba: {
         src: "/images/platformer/sprites/flying-goomba.png",
         width: 448,
@@ -378,10 +442,12 @@ const GameSetup = {
         width: 103,
         height: 103,
         scaleSize: 80,
-        speedRatio: 0.3,
-        left: { row: 0, frames: 0, idleFrame: { column: 0, frames: 0 } }, // Left Movement
-        idle: { row: 0, frames: 0 }, // Stop the movement 
-        right: { row: 0, frames: 0, idleFrame: { column: 0, frames: 0 } }, // Right Movement 
+        speedRatio: 0.85,
+        wa: { row: 0, frames: 0 }, // Up-Left Movement 
+        wd: { row: 0, frames: 0 }, // Up-Right Movement
+        a: { row: 0, frames: 0, idleFrame: { column: 0, frames: 0 } }, // Left Movement
+        s: { row: 0, frames: 0 }, // Stop the movement 
+        d: { row: 0, frames: 0, idleFrame: { column: 0, frames: 0 } }, // Right Movement 
       },
       dragon: {
         src: "/images/platformer/sprites/dragon.png",
@@ -661,6 +727,43 @@ const GameSetup = {
     // Space Game Level added to the GameEnv ...
     new GameLevel({ tag: "mini", callback: this.playerOffScreenCallBack, objects: miniGameObjects });
 
+    const winterObjects = [
+      // GameObject(s), the order is important to z-index...
+      { name: 'winter', id: 'background', class: BackgroundWinter, data: this.assets.backgrounds.winter },
+      { name: 'snow', id: 'background', class: BackgroundSnow, data: this.assets.backgrounds.snow },
+      { name: 'snowyfloor', id: 'platform', class: Platform, data: this.assets.platforms.snowyfloor },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.2, yPercentage: 0.82 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.2368, yPercentage: 0.82 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.2736, yPercentage: 0.82 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.3104, yPercentage: 0.82 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.3472, yPercentage: 0.82 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.384, yPercentage: 0.74 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.4208, yPercentage: 0.66 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.5090, yPercentage: 0.56 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.5090, yPercentage: 0.48 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.5090, yPercentage: 0.40 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.5090, yPercentage: 0.32 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.69, yPercentage: 0.76 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.655, yPercentage: 0.68 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.62, yPercentage: 0.68 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.72, yPercentage: 0.76 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.755, yPercentage: 1 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.755, yPercentage: 0.92 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.755, yPercentage: 0.84 },
+      { name: 'snowflake', id: 'snowflake', class: Snowflake, data: this.assets.obstacles.snowflake, xPercentage: 0.2100, yPercentage: 0.75 },
+      { name: 'snowflake', id: 'snowflake', class: Snowflake, data: this.assets.obstacles.snowflake, xPercentage: 0.2619, yPercentage: 0.75 },
+      { name: 'snowflake', id: 'snowflake', class: Snowflake, data: this.assets.obstacles.snowflake, xPercentage: 0.3136, yPercentage: 0.75 },
+      { name: 'owl', id: 'owl', class: Owl, data: this.assets.enemies.Owl, xPercentage: 0.3, minPosition: 0.05 },
+      { name: 'owl', id: 'owl', class: Owl, data: this.assets.enemies.Owl, xPercentage: 0.8, minPosition: 0.05 },
+      { name: 'snowman', id: 'snowman', class: Snowman, data: this.assets.enemies.Snowman, xPercentage: 0.2, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
+      { name: 'snowman', id: 'snowman', class: Snowman, data: this.assets.enemies.Snowman, xPercentage: 0.35, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
+      { name: 'snowman', id: 'snowman', class: Snowman, data: this.assets.enemies.Snowman, xPercentage: 0.5, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
+      { name: 'mario', id: 'player', class: PlayerWinter, data: this.assets.players.whitemario },
+      { name: 'cabin', id: 'cabin', class: Cabin, data: this.assets.obstacles.cabin },
+      { name: 'complete', id: 'background', class: BackgroundTransitions, data: this.assets.backgrounds.complete },
+    ];
+    // Winter Game Level added to the GameEnv ...
+    new GameLevel({ tag: "winter", callback: this.playerOffScreenCallBack, objects: winterObjects });
 
     const bossGameObjects = [
       { name: 'bossbackground', id: 'background', class: Background, data: this.assets.backgrounds.boss },
@@ -672,7 +775,6 @@ const GameSetup = {
     ];
 
     new GameLevel({ tag: "boss", callback: this.playerOffScreenCallBack, objects: bossGameObjects });
-
     // Game Over Level definition...
     const endGameObjects = [
       { name: 'background', class: Background, id: 'background', data: this.assets.backgrounds.end }
