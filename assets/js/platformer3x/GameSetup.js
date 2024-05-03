@@ -397,11 +397,9 @@ const GameSetup = {
         speedRatio: 0.7,
         xPercentage: 0.6,
         hitbox: { widthPercentage: 0.0, heightPercentage: 0.2 },
-        wa: { row: 0, frames: 0 }, // Up-Left Movement 
-        wd: { row: 0, frames: 0 }, // Up-Right Movement
-        a: { row: 0, frames: 0, idleFrame: { column: 0, frames: 0 } }, // Left Movement
-        s: { row: 0, frames: 0 }, // Stop the movement 
-        d: { row: 0, frames: 0, idleFrame: { column: 0, frames: 0 } }, // Right Movement 
+        left: { row: 0, frames: 0, idleFrame: { column: 0, frames: 0 } }, // Left Movement
+        idle: { row: 0, frames: 0 }, // Stop the movement 
+        right: { row: 0, frames: 0, idleFrame: { column: 0, frames: 0 } }, // Right Movement 
       },
       Owl: {
         src: "/images/platformer/sprites/owl.png",
@@ -443,11 +441,9 @@ const GameSetup = {
         height: 103,
         scaleSize: 80,
         speedRatio: 0.85,
-        wa: { row: 0, frames: 0 }, // Up-Left Movement 
-        wd: { row: 0, frames: 0 }, // Up-Right Movement
-        a: { row: 0, frames: 0, idleFrame: { column: 0, frames: 0 } }, // Left Movement
-        s: { row: 0, frames: 0 }, // Stop the movement 
-        d: { row: 0, frames: 0, idleFrame: { column: 0, frames: 0 } }, // Right Movement 
+        left: { row: 0, frames: 0, idleFrame: { column: 0, frames: 0 } }, // Left Movement
+        idle: { row: 0, frames: 0 }, // Stop the movement 
+        right: { row: 0, frames: 0, idleFrame: { column: 0, frames: 0 } }, // Right Movement 
       },
       dragon: {
         src: "/images/platformer/sprites/dragon.png",
