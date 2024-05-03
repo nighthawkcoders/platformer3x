@@ -12,7 +12,7 @@ import GameControl from './GameControl.js';
  * 
  * @extends PlayerBase 
  */
-export class PlayerQuidditch extends PlayerBase {
+export class PlayerMini extends PlayerBase {
 
     /** GameObject instantiation: constructor for PlayerHills object
      * @extends Character 
@@ -22,6 +22,10 @@ export class PlayerQuidditch extends PlayerBase {
      */
     constructor(canvas, image, data) {
         super(canvas, image, data);
+        const scaledHeight = GameEnv.innerHeight * (100 / 832);
+        const tubeX = .01 * GameEnv.innerWidth;
+        this.setX(tubeX);
+        this.hillsStart = true;
 
         // Goomba variables, deprecate?
         this.timer = false;
@@ -43,7 +47,13 @@ export class PlayerQuidditch extends PlayerBase {
         }
         this.setY(this.y - (this.bottom * jumpHeightFactor));
     }
-
+    update(){
+            super.update();
+        if (this.hillsStart) {
+                this.setY(0);
+                this.hillsStart = false;
+            }
+        }
     /**
      * @override
      * gameLoop: Watch for Player collision events 
@@ -52,7 +62,9 @@ export class PlayerQuidditch extends PlayerBase {
         super.handleCollisionStart(); // calls the super class method
         // adds additional collision events
         this.handleCollisionEvent("tube");
-        this.handleCollisionEvent("draco");
+        this.handleCollisionEvent("goomba");
+        this.handleCollisionEvent("mushroom");
+
     }
    
     /**
@@ -65,6 +77,7 @@ export class PlayerQuidditch extends PlayerBase {
         switch (this.state.collision) {
             case "tube":
                 // 1. Caught in tube
+
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
                     // Position player in the center of the tube 
                     this.x = this.collisionData.newX;
@@ -73,6 +86,7 @@ export class PlayerQuidditch extends PlayerBase {
                         // Force end of level condition
                         this.x = GameEnv.innerWidth + 1;
                     }
+
                 // 2. Collision between player right and tube   
                 } else if (this.collisionData.touchPoints.this.right) {
                     this.state.movement.right = false;
@@ -82,8 +96,9 @@ export class PlayerQuidditch extends PlayerBase {
                     this.state.movement.left = false;
                     this.state.movement.right = true;
                 }
+
                 break;
-            case "draco": // Note: Goomba.js and Player.js could be refactored
+            case "goomba": // Note: Goomba.js and Player.js could be refactored
                 // 1. Player jumps on goomba, interaction with Goomba.js
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom && this.state.isDying == false) {
                     // GoombaBounce deals with player.js and goomba.js
@@ -115,10 +130,21 @@ export class PlayerQuidditch extends PlayerBase {
                 
                 }
                 break;
+            case "mushroom": // 
+                // Player touches mushroom   
+                if (GameEnv.destroyedMushroom === false) {
+                    GameEnv.destroyedMushroom = true;
+                    this.canvas.style.filter = 'invert(1)';
+                    // Invert state lasts for 2 seconds
+                    setTimeout(() => {
+                        this.canvas.style.filter = 'invert(0)';
+                    }, 2000); // 2000 milliseconds = 2 seconds
+                }
+                break;  
         }
 
     }
 
 }
 
-export default PlayerQuidditch;
+export default PlayerMini;

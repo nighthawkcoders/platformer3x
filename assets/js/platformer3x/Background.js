@@ -2,9 +2,22 @@ import GameEnv from './GameEnv.js';
 import GameObject from './GameObject.js';
 import GameControl from './GameControl.js';
 
+
 export class Background extends GameObject {
     constructor(canvas, image, data) {
         super(canvas, image, data);
+
+        this.canvasWidth = GameEnv.innerWidth;
+        
+        if (this.canvasWidth > GameEnv.innerHeight) {
+            this.canvasHeight = GameEnv.innerHeight * 0.7
+        }
+
+        else {
+            this.canvasHeight = this.canvasWidth / (16/9) // force 16:9
+        }
+
+        console.log(`width:${this.canvasWidth}, height:${this.canvasHeight}`)
     }
 
     /* Update uses modulo math to cycle to start at width extent
@@ -14,6 +27,7 @@ export class Background extends GameObject {
     */
     update() {
         this.x = (this.x - this.speed) % this.width;
+        // console.log(this.x)
         if (GameControl.randomEventId === 1 && GameControl.randomEventState === 1) {
             this.canvas.style.filter = "invert(100)";
             GameControl.endRandomEvent();
@@ -25,15 +39,26 @@ export class Background extends GameObject {
      * x + width to y is wrap around draw
     */
     draw() {
-        // Draw the primary segment
-        this.ctx.drawImage(this.image, this.x, this.y);
-        
-        // Draw the wrap-around segment for the left side
-        this.ctx.drawImage(this.image, this.x - this.width, this.y);
+        const canvasWidth = this.canvasWidth;
     
-        // Draw the wrap-around segment for the right side
-        this.ctx.drawImage(this.image, this.x + this.width, this.y);
+        // Normalize the x position for seamless wrapping
+        let xWrapped = this.x % this.width;
+        if (xWrapped > 0) {
+            xWrapped -= this.width;
+        }
+    
+        // Calculate how many times to potentially draw the image to cover wide viewports
+        let numDraws = Math.ceil(canvasWidth / this.width) + 1; // +1 to ensure overlap coverage
+    
+        // Draw the image multiple times to cover the entire canvas
+        for (let i = 0; i < numDraws; i++) {
+            this.ctx.drawImage(this.image, 0, this.y, this.width, this.height, xWrapped + i * this.width, this.y, this.width, this.height);
+        }
     }
+    
+    
+    
+    
 
     /* Background camvas is set to screen
      * the ADJUST contant elements portions of image that don't wrap well
@@ -44,8 +69,9 @@ export class Background extends GameObject {
         // Update canvas size
         const ADJUST = 1 // visual layer adjust; alien_planet.jpg: 1.42, try 1 for others
 
-        const canvasWidth = GameEnv.innerWidth;
-        const canvasHeight = canvasWidth / this.aspect_ratio;
+        // const canvasHeight = canvasWidth / this.aspect_ratio
+        const canvasHeight = this.canvasHeight;
+        const canvasWidth = this.canvasWidth;
         GameEnv.backgroundHeight = canvasHeight;
         const canvasLeft = 0;
 

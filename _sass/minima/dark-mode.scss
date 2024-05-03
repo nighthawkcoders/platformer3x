@@ -1,109 +1,137 @@
-:root {
-    --default-canvas-filter: invert(100%);
-}
 
-$high-emph: rgba(white, 0.87);
-$med-emph: rgba(white, 0.69); 
-$low-emph: rgba(white, 0.38);
-$dark-grey : #121212; 
-// $dark-grey : #1F1B24;
-$overlay: mix($dark-grey, white, 95%);
-$overlay-light: mix($dark-grey, white, 86%);
+.dark-mode {  
+    background-color: black;
 
-html, body, input, textarea, select, button {   
-  color: $high-emph !important;
-  background-color: $dark-grey !important;
-}
-
-a {
-    color: rgb(75, 186, 255) !important;
-}
-
-a:hover {
-    color:$high-emph !important;
-}
-
-.site-title, .site-title:visited, .site-nav, .page-link {
-    color: $high-emph !important;
-}
-
-.site-nav {
-    background-color: $dark-grey;
-    border-color: $overlay-light;
-}
-
-* {
-    scrollbar-color: $dark-grey $overlay-light;
-}
-
-pre, code {
-    // BVas a lighter colour to better highlight short code words
-    border-color: $overlay-light;
-    background-color: $overlay;
-}
-
-.page-description {
-    color: $med-emph;
-}
-
-.post-meta {
-    color: $low-emph;
-}
-
-.post-content p, .post-content li {
-    color: $med-emph;
-}
-
-.btn {
-    background-color: $overlay !important;
-    color: $high-emph !important;
-    border-color: $overlay-light !important;
-}
-
-.btn:hover {
-    background-color: $dark-grey !important;
-}
-
-table th{
-    background-color: $overlay;
-    border-color: $overlay-light;
-    color: $high-emph;
-}
-
-table td{
-    background-color: $dark-grey;
-    border-color: $overlay-light;
-    color: $med-emph;
-}
-
-.flash {
-    color: $dark-grey !important;
-    filter: brightness(80%);
-}
-
-canvas {
-    filter: var(--default-canvas-filter);
-}
-
-.post-list > li > div {
-    box-shadow: none !important;
-    background-color: $overlay;
-    border: none !important;
-}
-
-li .post-meta-description {
-    color: $med-emph !important;
-}
-
-.search-result-preview{
-    color: lightgray !important; 
-}
-
-.search-result-highlight {
-    color:yellow !important;
-    font-weight:bold !important;
-}
-
-.search-results-list-item .search-result-title {
-    color: cornflowerblue !important;
+    a {
+        color: rgb(75, 186, 255);
+    }
+    
+    a:hover {
+        color: #7a7976;
+    }
+    .site-title, .site-title:visited, .site-nav, .page-link {
+        color: #FFFFFF;
+    }
+    
+    .site-nav {
+        background-color: #000000;
+        border-color: #FFFFFF;
+    }
+    
+    * {
+        scrollbar-color: #FFFFFF; 
+    }
+    
+    pre, code {
+        // BVas a lighter colour to better highlight short code words
+        border-color: #FFFFFF;
+        background-color:#000000 ;
+    }
+    
+    .page-description {
+        color: #FFFFFF
+    }
+    
+    .post-meta {
+        color: #FFFFFF;
+    }
+    
+    .post-content p, .post-content li {
+        color: #FFFFFF;
+    }
+    
+    .btn {
+        background-color: #000000;
+        color: #FFFFFF;
+        border-color: #FFFFFF;
+    }
+    
+    .btn:hover {
+        background-color: #7a7976;
+    }
+    
+    table th{
+        background-color: #000000;
+        border-color: #FFFFFF;
+        color: #FFFFFF;
+    }
+    
+    table td{
+        background-color: #000000;
+        border-color: #FFFFFF;
+        color: #FFFFFF;
+    }
+    
+    .flash {
+        color: #5e5d5b;
+        filter: brightness(80%);
+    }
+    
+    .post-list > li > div {
+        box-shadow: none;
+        background-color: #FFFFFF;
+        border: none;
+    }
+    
+    li .post-meta-description {
+        color: #FFFFFF;
+    }
+    
+    .search-result-preview{
+        color: #FFFFFF; 
+    }
+    
+    .search-result-highlight {
+        color:yellow !important;
+        font-weight:bold !important;
+    }
+    
+    .search-results-list-item .search-result-title {
+        color: cornflowerblue !important;
+    }
+    
+    .button#startGame {
+        color:#FFFFFF;
+        background-color: #000000;
+    }
+    
+    .leaderboard-button {
+        color:#FFFFFF;
+        background-color: #000000;
+    }
+    
+    .input.userID {
+        background: #000000;
+    }
+    
+    .table.levels {
+        background-color: #000000;
+    }
+    
+    .sidebar {
+        color:#000000;
+        background-color: #FFFFFF;
+    }
+    .p {
+        color: #FFFFFF;
+    }
+    
+    .submenu {
+        color: #FFFFFF;
+        background-color: #000000
+    }
+    
+    .menu-icon {
+        color: #000000;
+    }
+    
+    .div {
+        color:#000000;
+        background-color:#FFFFFF;
+    }
+    .container canvas {
+        /* Reset styles for canvases within .container */
+        background: none;
+        /* Add any other styles you want to reset */
+    }
 }

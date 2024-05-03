@@ -12,7 +12,7 @@ import GameControl from './GameControl.js';
  * 
  * @extends PlayerBase 
  */
-export class PlayerQuidditch extends PlayerBase {
+export class PlayerWinter extends PlayerBase {
 
     /** GameObject instantiation: constructor for PlayerHills object
      * @extends Character 
@@ -51,8 +51,8 @@ export class PlayerQuidditch extends PlayerBase {
     handleCollisionStart() {
         super.handleCollisionStart(); // calls the super class method
         // adds additional collision events
-        this.handleCollisionEvent("tube");
-        this.handleCollisionEvent("draco");
+        this.handleCollisionEvent("cabin");
+        this.handleCollisionEvent("snowman");
     }
    
     /**
@@ -63,7 +63,7 @@ export class PlayerQuidditch extends PlayerBase {
         super.handlePlayerReaction(); // calls the super class method
         // handles additional player reactions
         switch (this.state.collision) {
-            case "tube":
+            case "cabin":
                 // 1. Caught in tube
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
                     // Position player in the center of the tube 
@@ -83,7 +83,7 @@ export class PlayerQuidditch extends PlayerBase {
                     this.state.movement.right = true;
                 }
                 break;
-            case "draco": // Note: Goomba.js and Player.js could be refactored
+            case "snowman": // Note: Goomba.js and Player.js could be refactored
                 // 1. Player jumps on goomba, interaction with Goomba.js
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom && this.state.isDying == false) {
                     // GoombaBounce deals with player.js and goomba.js
@@ -121,4 +121,4 @@ export class PlayerQuidditch extends PlayerBase {
 
 }
 
-export default PlayerQuidditch;
+export default PlayerWinter;
