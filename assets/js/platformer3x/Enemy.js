@@ -8,7 +8,6 @@ export class Enemy extends Character {
         // Enemy
         animation: 'right',
         direction: 'right',
-        movement: {up: false, down: false, left: true, right: true, falling: false},
         isDying: false,
     };
 
