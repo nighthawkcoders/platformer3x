@@ -52,7 +52,7 @@ export class Star extends GameObject {
         // check player collision
         if (this.collisionData.touchPoints.other.id === "player") {
             this.destroy();
-            GameEnv.playSound("coin");
+            GameEnv.playSound("star");
         }
     }
     
