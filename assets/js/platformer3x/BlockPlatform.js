@@ -42,4 +42,6 @@ export class BlockPlatform extends GameObject {
     }
 }
 
-export default BlockPlatform;
+export default BlockPlatform;  
+
+// comment so that i can actually push this damn thing
