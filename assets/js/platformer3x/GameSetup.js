@@ -17,6 +17,7 @@ import Player from './Player.js';
 import PlayerHills from './PlayerHills.js';
 import PlayerWinter from './PlayerWinter.js';
 import PlayerMini from './PlayerMini.js';
+import PlayerQuidditch from './PlayerQuidditch.js';
 import PlayerBase from './PlayerBase.js';
 import Tube from './Tube.js';
 import Tube1 from './Tube1.js';
@@ -231,6 +232,10 @@ const GameSetup = {
         flag: { src: "/images/platformer/obstacles/flag.png",
               hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
             },
+        snitch: { src: "/images/platformer/obstacles/snitch.png"},
+        whompingwillow: { src: "/images/platformer/obstacles/whompingwillowtree.png",
+                      hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
+              },
       },
       platforms: {
         grass: { src: "/images/platformer/platforms/grass.png" },
@@ -241,6 +246,10 @@ const GameSetup = {
         bricks: { src: "/images/platformer/platforms/brick_wall.png" },
         lava: { src: "/images/platformer/platforms/lava.jpg" },
         sandstone: { src: "/images/platformer/platforms/sandstone.png" },
+        cobblestone: { src: "/images/platformer/platforms/cobblestone.png"},
+        yellowpattern: { src: "/images/platformer/platforms/yellowtowerpattern.jpg"},
+        yellowredpattern: { src: "/images/platformer/platforms/yellowredpattern.jpg"},
+        lionpattern: {src: "/images/platformer/platforms/lionpattern.jpg"},
         block: { src: "/images/platformer/platforms/brick_block.png" }, //MAY need 3 new variables: sizeRatio, widthRatio, and heightRatio
         itemBlock: {
           src: "/images/platformer/platforms/mario_block_spritesheet_v2.png",
@@ -263,7 +272,7 @@ const GameSetup = {
         water: { src: "/images/platformer/backgrounds/water.png" },
         fish : { src: "/images/platformer/backgrounds/school-fish.png"},
         reef: { src: "/images/platformer/backgrounds/reef.png" },
-        
+        quidditch: { src: "/images/platformer/backgrounds/quidditch2.jpg"},
         space: { src: "/images/platformer/backgrounds/planet.jpg" },
         castles: { src: "/images/platformer/backgrounds/castles.png" },
         loading: { src: "/images/platformer/backgrounds/greenscreen.png" },
@@ -359,6 +368,29 @@ const GameSetup = {
               right: { row: 2, frames: 23 },
           },
           hitbox: { widthPercentage: 0.3, heightPercentage: 0.8 }
+        }, 				harry: {
+          src: "/images/platformer/sprites/harryanimation3.png", 
+          width: 32,
+          height: 32,
+          scaleSize: 80,
+          speedRatio: 0.7,
+          idle: {
+            left: { row: 1, frames: 1 },
+            right: { row: 2, frames: 1 },
+          },
+          walk: {
+            left: { row: 1, frames: 5 },
+            right: { row: 2, frames: 5 },
+          },
+          run: {
+            left: { row: 1, frames: 5 },
+            right: { row: 2, frames: 5 },
+          },
+          jump: {
+            left: { row: 1, frames: 1 },
+            right: { row: 2, frames: 1 },
+          },
+          hitbox: { widthPercentage: 0.3, heightPercentage: 0.8 }
         },
         lopez: {
           src: "/images/platformer/sprites/lopezanimation.png", 
@@ -452,7 +484,21 @@ const GameSetup = {
           height: 119,
           scaleSize: 60,
           speedRatio: 0.7,
+        }, 		dementor: {
+          src: "/images/platformer/sprites/dementor2.png",
+          width: 400,
+          height: 400,
+          scaleSize: 80,
+          speedRatio: 0.7,
         },
+        draco: {
+          src: "/images/platformer/sprites/dracomalfoy.png",
+          width: 301,
+          height: 261,
+          scaleSize: 80,
+          speedRatio: 0.7,
+          xPercentage: 0.6,
+      },
       }
     },
 
@@ -784,6 +830,48 @@ const GameSetup = {
     ];
     // Winter Game Level added to the GameEnv ...
     new GameLevel( {tag: "winter", callback: this.playerOffScreenCallBack, objects: winterObjects} );
+
+    // Quidditch Game Level definition...
+    const quidditchGameObjects = [
+      // GameObject(s), the order is important to z-index...
+      { name: 'quidditch', id: 'background', class: Background, data: this.assets.backgrounds.quidditch },
+      { name: 'turf', id: 'platform', class: Platform, data: this.assets.platforms.turf },
+      //blocks on left side of wall/tower
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.2, yPercentage: 0.90 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.28, yPercentage: 0.81 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.36, yPercentage: 0.72 },
+      //blocks on rights side of wall/tower
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.536, yPercentage: 0.72 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.616, yPercentage: 0.81 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.696, yPercentage: 0.90 },
+      //wall/tower
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lionpattern, xPercentage: 0.456, yPercentage: 0.62 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.yellowpattern, xPercentage: 0.456, yPercentage: 0.683 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.yellowredpattern, xPercentage: 0.456, yPercentage: 0.746 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.yellowpattern, xPercentage: 0.456, yPercentage: 0.809 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.lionpattern, xPercentage: 0.456, yPercentage: 0.872 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.yellowpattern, xPercentage: 0.456, yPercentage: 0.935 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.yellowredpattern, xPercentage: 0.456, yPercentage: 0.998 },
+      { name: 'itemBlock', id: 'jumpPlatform', class: JumpPlatform, data: this.assets.platforms.itemBlock, xPercentage: 0.45, yPercentage: 0.55 }, //item block is a platform
+      { name: 'draco', id: 'draco', class: Goomba, data: this.assets.enemies.draco, xPercentage: 0.3, minPosition: 0.05},
+      { name: 'draco', id: 'draco', class: Goomba, data: this.assets.enemies.draco, xPercentage:  0.5, minPosition: 0.3 },
+      { name: 'draco', id: 'draco', class: Goomba, data: this.assets.enemies.draco, xPercentage:  0.75, minPosition: 0.5 }, //this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
+      { name: 'dementor', id: 'dementor', class: FlyingGoomba, data: this.assets.enemies.dementor, xPercentage:  0.5, minPosition:  0.05},
+      { name: 'dementor', id: 'dementor', class: FlyingGoomba, data: this.assets.enemies.dementor, xPercentage:  0.9, minPosition: 0.5},
+      // coins on left blocks
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.19, yPercentage: 0.83, },
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.27, yPercentage: 0.74 },
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.35, yPercentage: 0.65 },
+      // coins on right blocks
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.687, yPercentage: 0.83, },
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.611, yPercentage: 0.74 },
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.529, yPercentage: 0.65 },
+      { name: 'harry', id: 'player', class: PlayerQuidditch, data: this.assets.players.harry },
+      { name: 'tree', id: 'tree', class: Tree, data: this.assets.obstacles.whompingwillow },
+      { name: 'loading', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.loading },
+      ];
+      // Quidditch Game Level added to the GameEnv ...
+      new GameLevel( {tag: "quidditch", callback: this.playerOffScreenCallBack, objects: quidditchGameObjects } );
 
     
     // Game Over Level definition...
