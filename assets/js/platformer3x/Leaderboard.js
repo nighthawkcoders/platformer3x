@@ -112,7 +112,7 @@ const Leaderboard = {
         }
         document.getElementById("leaderboardDropDown").append(Leaderboard.updateLeaderboardTable())
     },
-
+    
     updateLeaderboardTable () {
         const data = this.getSortedLeaderboardData()
         const table = this.createLeaderboardDisplayTable()
