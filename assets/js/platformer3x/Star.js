@@ -1,3 +1,4 @@
+import GameControl from './GameControl.js';
 import GameEnv from './GameEnv.js';
 import GameObject from './GameObject.js';
 
@@ -7,6 +8,13 @@ export class Star extends GameObject {
         this.starX = xPercentage * GameEnv.innerWidth;
         this.starY = yPercentage;
         this.size();
+        this.id = this.initiateId()
+    }
+
+    initiateId() {
+        const currentStars = GameEnv.gameObjects
+
+        return currentStars.length //assign id to the coin's position in the gameObject Array (is unique to the coin)
     }
 
     // Required, but no update action
@@ -31,8 +39,14 @@ export class Star extends GameObject {
 
     // Center and set Coin position with adjustable height and width
     size() {
+        if (this.id) {
+            if (GameEnv.claimedStarIds.includes(this.id)) {
+                this.hide()
+            }
+        }
+
         const scaledWidth = this.image.width * 0.2;
-        const scaledHeight = this.image.height * 0.2;
+        const scaledHeight = this.image.height * 0.169;
 
         const starX = this.starX;
         const starY = (GameEnv.bottom - scaledHeight) * this.starY;
@@ -51,8 +65,12 @@ export class Star extends GameObject {
     collisionAction() {
         // check player collision
         if (this.collisionData.touchPoints.other.id === "player") {
+            if (this.id) {
+                GameEnv.claimedStarIds.push(this.id)
+            }
             this.destroy();
-            GameEnv.playSound("coin");
+            GameControl.gainCoin(5)
+            GameEnv.playSound("star");
         }
     }
     
