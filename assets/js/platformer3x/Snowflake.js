@@ -2,19 +2,12 @@ import GameControl from './GameControl.js';
 import GameEnv from './GameEnv.js';
 import GameObject from './GameObject.js';
 
-export class Coin extends GameObject {
+export class Snowflake extends GameObject {
     constructor(canvas, image, data, xPercentage, yPercentage) {
         super(canvas, image, data, 0.5, 0.5);
-        this.coinX = xPercentage * GameEnv.innerWidth;
-        this.coinY = yPercentage;
+        this.snowflakeX = xPercentage * GameEnv.innerWidth;
+        this.snowflakeY = yPercentage;
         this.size();
-        this.id = this.initiateId()
-    }
-
-    initiateId() {
-        const currentCoins = GameEnv.gameObjects
-
-        return currentCoins.length //assign id to the coin's position in the gameObject Array (is unique to the coin)
     }
 
     // Required, but no update action
@@ -39,35 +32,26 @@ export class Coin extends GameObject {
 
     // Center and set Coin position with adjustable height and width
     size() {
-        if (this.id) {
-            if (GameEnv.claimedCoinIds.includes(this.id)) {
-                this.hide()
-            }
-        }
+        const scaledWidth = this.image.width*1.5;
+        const scaledHeight = this.image.height*0.75;
 
-        const scaledWidth = this.image.width * 0.2;
-        const scaledHeight = this.image.height * 0.169;
-
-        const coinX = this.coinX;
-        const coinY = (GameEnv.bottom - scaledHeight) * this.coinY;
+        const snowflakeX = this.snowflakeX;
+        const snowflakeY = (GameEnv.bottom - scaledHeight) * this.snowflakeY;
 
         // Set variables used in Display and Collision algorithms
-        this.bottom = coinY;
+        this.bottom = snowflakeY;
         this.collisionHeight = scaledHeight;
         this.collisionWidth = scaledWidth;
 
         this.canvas.style.width = `${scaledWidth}px`;
         this.canvas.style.height = `${scaledHeight}px`;
         this.canvas.style.position = 'absolute';
-        this.canvas.style.left = `${coinX}px`;
-        this.canvas.style.top = `${coinY}px`;
+        this.canvas.style.left = `${snowflakeX}px`;
+        this.canvas.style.top = `${snowflakeY}px`;
     }
     collisionAction() {
         // check player collision
         if (this.collisionData.touchPoints.other.id === "player") {
-            if (this.id) {
-                GameEnv.claimedCoinIds.push(this.id)
-            }
             this.destroy();
             GameControl.gainCoin(5)
             GameEnv.playSound("coin");
@@ -85,4 +69,4 @@ export class Coin extends GameObject {
     }
 }
 
-export default Coin;
+export default Snowflake;
