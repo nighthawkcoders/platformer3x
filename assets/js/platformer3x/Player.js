@@ -263,7 +263,7 @@ export class Player extends Character {
 
         // Goomba collision check
         // Checks if collision touchpoint id is either "goomba" or "flyingGoomba"
-        if (this.collisionData.touchPoints.other.id === "goomba" || this.collisionData.touchPoints.other.id === "flyingGoomba" || this.collisionData.touchPoints.other.id === "flyingUFO" || this.collisionData.touchPoints.other.id === "alien" ) {
+        if (this.collisionData.touchPoints.other.id === "goomba" || this.collisionData.touchPoints.other.id === "flyingGoomba" || this.collisionData.touchPoints.other.id === "flyingUFO" || this.collisionData.touchPoints.other.id === "alien" || this.collisionData.touchPoints.other.id === "SkibidiToilet" ) {
             if (GameEnv.invincible === false) {
                 GameEnv.goombaInvincible = true;
                 // Collision with the left side of the Enemy
