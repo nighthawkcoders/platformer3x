@@ -31,26 +31,8 @@ export class Cerberus extends Enemy {
         }
     }
 
-    updateMovement(){
-        if (this.direction === "d") {
-            this.speed = Math.abs(this.storeSpeed)
-        }
-        else if (this.direction === "a") {
-            this.speed = -Math.abs(this.storeSpeed);
-        }
-        else if (this.direction === "idle") {
-            this.speed = 0
-        }
-
-
-        // Move the enemy\
-        this.x += this.speed;
-    }
-
     update() {
         super.update();
-        super.checkBoundaries();
-        this.updateMovement();
     }
 
 
