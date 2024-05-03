@@ -6,9 +6,6 @@ export class BlockPlatform extends GameObject {
         super(canvas, image, data);
         this.platformX = xPercentage * GameEnv.innerWidth;
         this.platformY = yPercentage;
-
-        // Add glow effect
-        this.canvas.style.boxShadow = "0 0 10px 5px rgba(0, 255, 255, 0.7)";
     }
 
     // Required, but no update action
@@ -19,6 +16,9 @@ export class BlockPlatform extends GameObject {
     // Draw position is always 0,0
     draw() {
         this.ctx.drawImage(this.image, 0, 0, this.canvas.width, this.canvas.height);
+
+        // add glow effect
+        this.canvas.style.boxShadow = "0 0 10px 5px rgba(0, 255, 255, 0.7)";
     }
 
     // Set platform position
