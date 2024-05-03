@@ -30,15 +30,6 @@ export class Enemy extends Character {
         this.maxPosition = this.x + xPercentage * GameEnv.innerWidth;
 
         this.immune = 0;
-
-        //Define Speed of Enemy
-        if (["easy", "normal"].includes(GameEnv.difficulty)) {
-            this.speed = this.speed * Math.floor(Math.random() * 1.5 + 2);
-        } else if (GameEnv.difficulty === "hard") {
-            this.speed = this.speed * Math.floor(Math.random() * 3 + 3);
-        } else {
-            this.speed = this.speed * 5
-        }
     }
 
     setAnimation(key) {
@@ -52,6 +43,17 @@ export class Enemy extends Character {
         if (this.isIdle && animation.idleFrame) {
             this.setFrameX(animation.idleFrame.column)
             this.setMinFrame(animation.idleFrame.frames);
+        }
+    }
+
+    enemySpeed(){ //if you want the enemy speed to change based on different 'difficulty', you can include this function to the update function
+        //Define Speed of Enemy
+        if (["easy", "normal"].includes(GameEnv.difficulty)) {
+            this.speed = this.speed * Math.floor(Math.random() * 1.5 + 2);
+        } else if (GameEnv.difficulty === "hard") {
+            this.speed = this.speed * Math.floor(Math.random() * 3 + 3);
+        } else {
+            this.speed = this.speed * 5
         }
     }
 

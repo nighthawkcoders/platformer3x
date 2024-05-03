@@ -13,6 +13,8 @@ export class Boss extends Enemy {
 
         this.animationSpeed = data?.animationSpeed || 1; //higher "animationSpeed" means slower animation
         this.counter = data?.animationSpeed; 
+
+        this.enemySpeed();
     }
     //overwrite the method
     updateFrameX() {

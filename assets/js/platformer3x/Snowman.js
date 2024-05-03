@@ -21,14 +21,7 @@ export class Snowman extends Enemy {
 
         this.immune = 0;
 
-        //Define Speed of Enemy
-        if (["easy", "normal"].includes(GameEnv.difficulty)) {
-            this.speed = this.speed * Math.floor(Math.random() * 1.5 + 2);
-        } else if (GameEnv.difficulty === "hard", "impossible") {
-            this.speed = this.speed * Math.floor(Math.random() * 3 + 4);
-        } else {
-            this.speed = this.speed * 5
-        }
+        this.enemySpeed();
     }
 
 
