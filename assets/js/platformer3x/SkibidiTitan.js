@@ -25,6 +25,28 @@ export class skibidiTitan extends Character {
 
     }
     
+    killBeam(target) {
+        if (target.timer === false) {
+            target.timer = true;
+            if (GameEnv.difficulty === "normal" || GameEnv.difficulty === "hard") {
+                target.canvas.style.transition = "transform 0.5s";
+                target.canvas.style.transform = "rotate(-90deg) translate(-26px, 0%)";
+                GameEnv.playSound("PlayerDeath");
+
+                if (target.state.isDying == false) {
+                    target.state.isDying = true;
+                    setTimeout(async() => {
+                        await GameControl.transitionToLevel(GameEnv.levels[GameEnv.levels.indexOf(GameEnv.currentLevel)]);
+                        console.log("level restart")
+                        target.state.isDying = false;
+                    }, 900); 
+                }
+            } else if (GameEnv.difficulty === "easy") {
+                this.x += 10;
+            }
+        }
+    }
+
     update() {
         super.update();
         this.immune = 1;
@@ -39,7 +61,9 @@ export class skibidiTitan extends Character {
             debounce += 1;
             if (GameEnv.PlayerPosition.playerX - 200 == this.x) {
                 //setTimeout(Plr.goombaCollision.bind(this), 50);
-                Plr.Player.goombaCollision();
+                console.log(Plr)
+                
+                this.killBeam(GameEnv.player);
                 debounce = 0;
             }
         }
@@ -47,7 +71,7 @@ export class skibidiTitan extends Character {
         if(debounce == 240){
             debounce = -240;
         }
-        console.log((GameEnv.PlayerPosition.playerX - 200) + " " + this.x);
+        //console.log((GameEnv.PlayerPosition.playerX - 200) + " " + this.x);
         
         
         
