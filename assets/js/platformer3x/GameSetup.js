@@ -281,16 +281,27 @@ const GameSetup = {
           hitbox: { widthPercentage: 0.3, heightPercentage: 0.8 }
         },
         escaper: {
-          src: "/images/platformer/sprites/escaper.png",
-          width: 50,
-          height: 50,
+          src: "images/platformer/sprites/escaper.png",
+          width: 91.4285714,
+          height: 179.2,
           scaleSize: 60,
           speedRatio: 0.7,
-          wa: { row: 9, min: 8, frames: 15 },
-          wd: { row: 9, min: 0, frames: 7 },
-          a: { row: 1, frames: 15, idleFrame: { column: 7, frames: 0 } },
-          s: { row: 12, frames: 15 },
-          d: { row: 0, frames: 15, idleFrame: { column: 7, frames: 0 } }
+          idle: {
+              left: { row: 0, frames: 6 },
+              right: { row: 0, frames: 6},
+          },
+          walk: {
+              left: { row: 1, frames: 7 },
+              right: { row: 1, frames: 7 },
+          },
+          run: {
+              left: { row: 2, frames: 8 },
+              right: { row: 2, frames: 8 },
+          },
+          jump: {
+              left: { row: 3, frames: 9 },
+              right: { row: 3, frames: 9 },
+          },
         },
         monkey: {
           src: "/images/platformer/sprites/monkey.png",
@@ -647,9 +658,9 @@ const GameSetup = {
           { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.vbucks, xPercentage: -0.0125, yPercentage: 0.4 },
           { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.vbucks, xPercentage: 0.0125, yPercentage: 0.4 },
           { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.vbucks, xPercentage: 0.0325, yPercentage: 0.4 },
-          { name: 'skibidiToilet', id: 'SkibidiToilet', class: SkibidiToilet, data: this.assets.enemies.skibidiToilet, xPercentage:  0.3, minPosition: 0.07 },
-          { name: 'skibidiToilet', id: 'SkibidiToilet', class: SkibidiToilet, data: this.assets.enemies.skibidiToilet, xPercentage:  0.5, minPosition: 0.3 },
-          { name: 'skibidiToilet', id: 'SkibidiToilet', class: SkibidiToilet, data: this.assets.enemies.skibidiToilet, xPercentage:  0.75, minPosition: 0.5 }, //this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
+          { name: 'skibidiToilet', id: 'Alien', class: Alien, data: this.assets.enemies.skibidiToilet, xPercentage:  0.3, minPosition: 0.07 },
+          { name: 'skibidiToilet', id: 'Alien', class: Alien, data: this.assets.enemies.skibidiToilet, xPercentage:  0.5, minPosition: 0.3 },
+          { name: 'skibidiToilet', id: 'Alien', class: Alien, data: this.assets.enemies.skibidiToilet, xPercentage:  0.75, minPosition: 0.5 }, //this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
           { name: 'monkey', id: 'player', class: Player, data: this.assets.players.monkey },
           { name: 'laser', id: 'Laser', class: Laser, data: this.assets.obstacles.laser, xPercentage:  0.75, yPercentage: 0.5 },
           { name: 'toiletTube', id: 'toiletEnd', class: Tree, data: this.assets.obstacles.toilet },
