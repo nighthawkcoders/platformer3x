@@ -619,8 +619,8 @@ const GameSetup = {
         //Skibidi Toilet Level
         const skibidiGameObjects = [
           // GameObject(s), the order is important to z-index...
-          { name: 'complete3', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.complete3 },
           { name: 'desert', id: 'background', class: Background, data: this.assets.backgrounds.desert },
+          //{ name: 'clouds', id: 'background', class: BackgroundClouds, data: this.assets.backgrounds.clouds },
           { name: 'skibidiTitan', id: 'skibidiTitan', class: skibidiTitan, data: this.assets.enemies.skibidiTitan, xPercentage:  0.35, minPosition: 0.5 }, 
           { name: 'sand', id: 'platform', class: Platform, data: this.assets.platforms.sand },
           { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.skibidiSand, xPercentage: 0.2, yPercentage: 1 },
@@ -641,6 +641,7 @@ const GameSetup = {
           { name: 'monkey', id: 'player', class: Player, data: this.assets.players.monkey },
           { name: 'laser', id: 'Laser', class: Laser, data: this.assets.obstacles.laser, xPercentage:  0.75, yPercentage: 0.5 },
           { name: 'toiletTube', id: 'toiletEnd', class: Tree, data: this.assets.obstacles.toilet },
+          { name: 'complete3', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.complete3 },
         ];
 
         new GameLevel( {tag: "skibidi", callback: this.playerOffScreenCallBack, objects: skibidiGameObjects} );
