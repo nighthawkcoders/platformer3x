@@ -39,6 +39,8 @@ image: /images/platformer/backgrounds/home.png
   <!--Audo for flushing -->    
   <audio id = "flush" src ="{{site.baseurl}}/assets/audio/toilet-flushing.mp3" preload="auto"></audio>
   
+  <!--Audo for laser -->    
+  <audio id = "laserSound" src ="{{site.baseurl}}/assets/audio/laser.mp3" preload="auto"></audio>
 
   
   

@@ -3,7 +3,9 @@ import GameEnv from './GameEnv.js';
 import Player from './PlayerBase.js';
 import Plr from './Player.js';
 import GameControl from './GameControl.js';
+import Laser from './Laser.js';
 var debounce = 0;
+
 export class skibidiTitan extends Character {
     // constructors sets up Character object 
     constructor(canvas, image, data, xPercentage, yPercentage, name, minPosition){
@@ -50,8 +52,9 @@ export class skibidiTitan extends Character {
     update() {
         super.update();
         this.immune = 1;
-        
+        var laser = document.getElementById("Laser")
         if(debounce < 240 && debounce > -1){
+            laser.style.left = `-200px`;
             this.x = GameEnv.PlayerPosition.playerX - 200;
             debounce += 1;
         }
@@ -59,12 +62,18 @@ export class skibidiTitan extends Character {
             debounce += 1;
         }else if(debounce < 0 && debounce >= -120){
             debounce += 1;
-            if (GameEnv.PlayerPosition.playerX - 200 == this.x) {
+            
+            laser.style.left = `${this.x + 200}px`;
+            if(debounce == -115){GameEnv.playSound("laserSound");}
+
+            var plrPos = GameEnv.PlayerPosition.playerX
+
+            
+            if (this.x >= plrPos - 250 && this.x <= plrPos - 150) {
                 //setTimeout(Plr.goombaCollision.bind(this), 50);
-                console.log(Plr)
-                
                 this.killBeam(GameEnv.player);
                 debounce = 0;
+                laser.style.left = `${this.x+200}px`;
             }
         }
 
