@@ -1,7 +1,6 @@
 import GameEnv from './GameEnv.js';
 import PlayerBase from './PlayerBase.js';
 import GameControl from './GameControl.js';
-import GameSetup from './GameSetup.js';
 
 /**
  * @class PlayerHills class
@@ -39,9 +38,8 @@ export class PlayerHills extends PlayerBase {
             jumpHeightFactor = 0.50;
         } else if (GameEnv.difficulty === "normal") {
             jumpHeightFactor = 0.40;
-        }
-        if(GameEnv.currentLevel.tag == "boss"){
-            jumpHeightFactor = 0.70;
+        } else {
+            jumpHeightFactor = 0.30;
         }
         this.setY(this.y - (this.bottom * jumpHeightFactor));
     }
@@ -56,7 +54,6 @@ export class PlayerHills extends PlayerBase {
         this.handleCollisionEvent("tube");
         this.handleCollisionEvent("goomba");
         this.handleCollisionEvent("mushroom");
-        this.handleCollisionEvent("boss");
     }
    
     /**
@@ -88,38 +85,6 @@ export class PlayerHills extends PlayerBase {
                 }
                 break;
             case "goomba": // Note: Goomba.js and Player.js could be refactored
-                // 1. Player jumps on goomba, interaction with Goomba.js
-                if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom && this.state.isDying == false) {
-                    // GoombaBounce deals with player.js and goomba.js
-                    if (GameEnv.goombaBounce === true) {
-                        GameEnv.goombaBounce = false;
-                        this.y = this.y - 100;
-                    }
-                    if (GameEnv.goombaBounce1 === true) {
-                        GameEnv.goombaBounce1 = false; 
-                        this.y = this.y - 250
-                    }
-                // 2. Player touches goomba sides of goomba 
-                } else if (this.collisionData.touchPoints.this.right || this.collisionData.touchPoints.this.left) {
-                    if (GameEnv.difficulty === "normal" || GameEnv.difficulty === "hard") {
-                        if (this.state.isDying == false) {
-                            this.state.isDying = true;
-                            this.canvas.style.transition = "transform 0.5s";
-                            this.canvas.style.transform = "rotate(-90deg) translate(-26px, 0%)";
-                            GameEnv.playSound("PlayerDeath");
-                            setTimeout(async() => {
-                                await GameControl.transitionToLevel(GameEnv.levels[GameEnv.levels.indexOf(GameEnv.currentLevel)]);
-                            }, 900); 
-                        }
-                    } else if (GameEnv.difficulty === "easy" && this.collisionData.touchPoints.this.right) {
-                        this.x -= 10;
-                    } else if (GameEnv.difficulty === "easy" && this.collisionData.touchPoints.this.left) {
-                       this.x += 10;
-                    }
-                
-                }
-                break;
-            case "boss": // Note: Goomba.js and Player.js could be refactored
                 // 1. Player jumps on goomba, interaction with Goomba.js
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom && this.state.isDying == false) {
                     // GoombaBounce deals with player.js and goomba.js

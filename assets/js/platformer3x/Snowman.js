@@ -32,10 +32,10 @@ export class Snowman extends Enemy {
     }
 
     updateMovement(){
-        if (this.direction === "right") {
+        if (this.direction === "d") {
             this.speed = Math.abs(this.storeSpeed)
         }
-        else if (this.direction === "left") {
+        else if (this.direction === "a") {
             this.speed = -Math.abs(this.storeSpeed);
         }
         else if (this.direction === "idle") {
@@ -58,7 +58,9 @@ export class Snowman extends Enemy {
     }
 
     update() {
-        super.update();;
+        super.update();
+        super.checkBoundaries();
+        this.updateMovement();
     }
 
 
