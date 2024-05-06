@@ -93,7 +93,7 @@ export class PlayerBase extends Character {
         // player methods
         this.updateAnimation();
         this.updateMovement();
- 
+        GameEnv.PlayerPosition.playerX = this.x
         // super actions need to be after; this is to preserve player order of operations
         super.update();
     }
