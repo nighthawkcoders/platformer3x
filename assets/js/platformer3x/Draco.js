@@ -21,12 +21,36 @@ export class Draco extends Enemy {
 
         this.immune = 0;
 
-        this.enemySpeed();
+        //Define Speed of Enemy
+        if (["easy", "normal"].includes(GameEnv.difficulty)) {
+            this.speed = this.speed * Math.floor(Math.random() * 1.5 + 2);
+        } else if (GameEnv.difficulty === "hard") {
+            this.speed = this.speed * Math.floor(Math.random() * 3 + 3);
+        } else {
+            this.speed = this.speed * 5
+        }
     }
 
+    updateMovement(){
+        if (this.direction === "d") {
+            this.speed = Math.abs(this.storeSpeed)
+        }
+        else if (this.direction === "a") {
+            this.speed = -Math.abs(this.storeSpeed);
+        }
+        else if (this.direction === "idle") {
+            this.speed = 0
+        }
+
+
+        // Move the enemy\
+        this.x += this.speed;
+    }
 
     update() {
         super.update();
+        super.checkBoundaries();
+        this.updateMovement();
     }
 
 
