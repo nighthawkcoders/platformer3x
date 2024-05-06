@@ -244,30 +244,6 @@ const GameSetup = {
       whompingwillow: {
         src: "/images/platformer/obstacles/whompingwillowtree.png",
         hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 }
-      backgrounds: {
-        start: { src: "/images/platformer/backgrounds/home.png" },
-        hills: { src: "/images/platformer/backgrounds/hills.png" },
-        greece: { src: "/images/platformer/backgrounds/greek.png"},
-        mountains: { src: "/images/platformer/backgrounds/mountains.jpg" },
-        clouds : { src: "/images/platformer/backgrounds/clouds.png"},
-        water: { src: "/images/platformer/backgrounds/water.png" },
-        fish : { src: "/images/platformer/backgrounds/school-fish.png"},
-        reef: { src: "/images/platformer/backgrounds/reef.png" },
-        quidditch: { src: "/images/platformer/backgrounds/quidditch2.jpg"},
-        space: { src: "/images/platformer/backgrounds/planet.jpg" },
-        castles: { src: "/images/platformer/backgrounds/castles.png" },
-        winter: {src: "/images/platformer/backgrounds/winter.png" },
-        snow: {src: "/images/platformer/backgrounds/snowfall.png" },
-        mini: { src: "/images/platformer/backgrounds/mini.png" },
-      },      
-      transitions: {
-        loading: { src: "/images/platformer/transitions/greenscreen.png" },
-        hillsEnd: { src: "/images/platformer/transitions/hillsEnd.png" },
-        winterEnd: { src: "/images/platformer/transitions/winterEnd.png" },
-        greeceEnd: { src: "/images/platformer/transitions/greeceEnd.png" },
-        waterEnd: { src: "/images/platformer/transitions/waterEnd.png" },
-        quidditchEnd: { src: "/images/platformer/transitions/quidditchEnd.png" },
-        miniEnd: { src: "/images/platformer/transitions/miniEnd.png" },
       },
     },
     platforms: {
@@ -657,7 +633,7 @@ const GameSetup = {
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.5898, yPercentage: 0.900 },
       { name: 'mario', id: 'player', class: PlayerHills, data: this.assets.players.mario },
       { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
-      { name: 'loading', id: 'background', class: BackgroundTransitions,  data: this.assets.transitions.loading },
+      { name: 'loading', id: 'background', class: BackgroundTransitions, data: this.assets.backgrounds.loading },
     ];
     let hillsGameObjects = allHillsGameObjects.filter(obj => !obj.difficulties || obj.difficulties.includes(difficulty));
     // Hills Game Level added to the GameEnv ...
@@ -721,7 +697,7 @@ const GameSetup = {
       { name: 'dragon', id: 'dragon', class: Dragon, data: this.assets.enemies.dragon, xPercentage: 0.5, minPosition: 0.05 },
       { name: 'knight', id: 'player', class: PlayerGreece, data: this.assets.players.knight },
       { name: 'flag', id: 'flag', class: Flag, data: this.assets.obstacles.flag },
-      { name: 'hillsEnd', id: 'background', class: BackgroundTransitions,  data: this.assets.transitions.hillsEnd },
+      { name: 'complete2', id: 'background', class: BackgroundTransitions, data: this.assets.backgrounds.complete2 },
     ];
     // Greece Game Level added to the GameEnv ...
     new GameLevel({ tag: "ancient greece", callback: this.playerOffScreenCallBack, objects: greeceGameObjects });
@@ -799,7 +775,7 @@ const GameSetup = {
       { name: 'mario', id: 'player', class: PlayerMini, data: this.assets.players.mario },
       { name: 'tubeD', id: 'tubeD', class: Tube1, data: this.assets.obstacles.tubeD },
       { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
-      { name: 'greeceEnd', id: 'background', class: BackgroundTransitions,  data: this.assets.transitions.greeceEnd },
+      // { name: 'complete', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.complete },
     ];
     // Space Game Level added to the GameEnv ...
     new GameLevel({ tag: "mini", callback: this.playerOffScreenCallBack, objects: miniGameObjects });
@@ -833,7 +809,7 @@ const GameSetup = {
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.5898, yPercentage: 0.900 },
       { name: 'mario', id: 'player', class: PlayerHills, data: this.assets.players.mario },
       { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
-      { name: 'miniEnd', id: 'background', class: BackgroundTransitions,  data: this.assets.transitions.miniEnd },
+      { name: 'loading', id: 'background', class: BackgroundTransitions, data: this.assets.backgrounds.loading },
     ];
     let waterGameObjects = allWaterGameObjects.filter(obj => !obj.difficulties || obj.difficulties.includes(difficulty));
     // Water Game Level added to the GameEnv ...
@@ -845,6 +821,7 @@ const GameSetup = {
       // GameObject(s), the order is important to z-index...
       { name: 'quidditch', id: 'background', class: Background, data: this.assets.backgrounds.quidditch },
       { name: 'turf', id: 'platform', class: Platform, data: this.assets.platforms.turf },
+
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.1, yPercentage: 0.81 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.14, yPercentage: 0.81 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.18, yPercentage: 0.81 },
@@ -892,8 +869,8 @@ const GameSetup = {
 
       { name: 'harry', id: 'player', class: PlayerQuidditch, data: this.assets.players.harry },
       { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
-      { name: 'waterEnd', id: 'background', class: BackgroundTransitions,  data: this.assets.transitions.waterEnd },
-      ];
+      //{ name: 'loading', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.loading },
+    ];
 
     // Quidditch Game Level added to the GameEnv ...
     new GameLevel({ tag: "quidditch", callback: this.playerOffScreenCallBack, objects: quidditchGameObjects });
@@ -932,7 +909,7 @@ const GameSetup = {
       { name: 'snowman', id: 'snowman', class: Snowman, data: this.assets.enemies.Snowman, xPercentage: 0.5, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
       { name: 'mario', id: 'player', class: PlayerWinter, data: this.assets.players.whitemario },
       { name: 'cabin', id: 'cabin', class: Cabin, data: this.assets.obstacles.cabin },
-      { name: 'quidditchEnd', id: 'background', class: BackgroundTransitions,  data: this.assets.transitions.quidditchEnd },
+      { name: 'complete', id: 'background', class: BackgroundTransitions, data: this.assets.backgrounds.complete },
     ];
     // Winter Game Level added to the GameEnv ...
     new GameLevel({ tag: "winter", callback: this.playerOffScreenCallBack, objects: winterObjects });
@@ -951,7 +928,7 @@ const GameSetup = {
 
     // Game Over Level definition...
     const endGameObjects = [
-      { name:'background', class: Background, id: 'background', data: this.assets.transitions.winterEnd}
+      { name: 'background', class: Background, id: 'background', data: this.assets.backgrounds.end }
     ];
     // Game Over screen added to the GameEnv ...
     new GameLevel({ tag: "end", callback: this.gameOverCallBack, objects: endGameObjects });
