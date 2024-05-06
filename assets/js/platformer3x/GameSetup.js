@@ -11,7 +11,6 @@ import BackgroundClouds from './BackgroundClouds.js';
 import BackgroundFish from './BackgroundFish.js';
 import BackgroundWinter from './BackgroundWinter.js';
 import BackgroundSnow from './BackgroundSnow.js';
-import BackgroundFish from './BackgroundFish.js';
 import Platform from './Platform.js';
 import JumpPlatform from './JumpPlatform.js';
 import Player from './Player.js';
