@@ -3,7 +3,7 @@ import GameEnv from './GameEnv.js';
 import GameControl from './GameControl.js';
 import Enemy from './Enemy.js';
 
-export class Cerberus extends Enemy {
+export class Draco extends Enemy {
     // constructors sets up Character object 
     constructor(canvas, image, data, xPercentage, yPercentage, name, minPosition){
         super(canvas, image, data);
@@ -20,7 +20,7 @@ export class Cerberus extends Enemy {
         this.maxPosition = this.x + xPercentage * GameEnv.innerWidth;
 
         this.immune = 0;
-        
+
         this.enemySpeed();
     }
 
@@ -32,4 +32,4 @@ export class Cerberus extends Enemy {
 
 }
 
-export default Cerberus;
+export default Draco;

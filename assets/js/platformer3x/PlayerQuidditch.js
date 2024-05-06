@@ -12,7 +12,7 @@ import GameControl from './GameControl.js';
  * 
  * @extends PlayerBase 
  */
-export class PlayerHills extends PlayerBase {
+export class PlayerQuidditch extends PlayerBase {
 
     /** GameObject instantiation: constructor for PlayerHills object
      * @extends Character 
@@ -38,9 +38,8 @@ export class PlayerHills extends PlayerBase {
             jumpHeightFactor = 0.50;
         } else if (GameEnv.difficulty === "normal") {
             jumpHeightFactor = 0.40;
-        }
-        if(GameEnv.currentLevel.tag == "boss"){
-            jumpHeightFactor = 0.70;
+        } else {
+            jumpHeightFactor = 0.30;
         }
         this.setY(this.y - (this.bottom * jumpHeightFactor));
     }
@@ -53,9 +52,7 @@ export class PlayerHills extends PlayerBase {
         super.handleCollisionStart(); // calls the super class method
         // adds additional collision events
         this.handleCollisionEvent("tube");
-        this.handleCollisionEvent("goomba");
-        this.handleCollisionEvent("mushroom");
-        this.handleCollisionEvent("boss");
+        this.handleCollisionEvent("draco");
     }
    
     /**
@@ -86,7 +83,7 @@ export class PlayerHills extends PlayerBase {
                     this.state.movement.right = true;
                 }
                 break;
-            case "goomba": // Note: Goomba.js and Player.js could be refactored
+            case "draco": // Note: Goomba.js and Player.js could be refactored
                 // 1. Player jumps on goomba, interaction with Goomba.js
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom && this.state.isDying == false) {
                     // GoombaBounce deals with player.js and goomba.js
@@ -118,53 +115,10 @@ export class PlayerHills extends PlayerBase {
                 
                 }
                 break;
-            case "boss": // Note: Goomba.js and Player.js could be refactored
-                // 1. Player jumps on goomba, interaction with Goomba.js
-                if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom && this.state.isDying == false) {
-                    // GoombaBounce deals with player.js and goomba.js
-                    if (GameEnv.goombaBounce === true) {
-                        GameEnv.goombaBounce = false;
-                        this.y = this.y - 100;
-                    }
-                    if (GameEnv.goombaBounce1 === true) {
-                        GameEnv.goombaBounce1 = false; 
-                        this.y = this.y - 250
-                    }
-                // 2. Player touches goomba sides of goomba 
-                } else if (this.collisionData.touchPoints.this.right || this.collisionData.touchPoints.this.left) {
-                    if (GameEnv.difficulty === "normal" || GameEnv.difficulty === "hard") {
-                        if (this.state.isDying == false) {
-                            this.state.isDying = true;
-                            this.canvas.style.transition = "transform 0.5s";
-                            this.canvas.style.transform = "rotate(-90deg) translate(-26px, 0%)";
-                            GameEnv.playSound("PlayerDeath");
-                            setTimeout(async() => {
-                                await GameControl.transitionToLevel(GameEnv.levels[GameEnv.levels.indexOf(GameEnv.currentLevel)]);
-                            }, 900); 
-                        }
-                    } else if (GameEnv.difficulty === "easy" && this.collisionData.touchPoints.this.right) {
-                        this.x -= 10;
-                    } else if (GameEnv.difficulty === "easy" && this.collisionData.touchPoints.this.left) {
-                       this.x += 10;
-                    }
-                
-                }
-                break;
-            case "mushroom": // 
-                // Player touches mushroom   
-                if (GameEnv.destroyedMushroom === false) {
-                    GameEnv.destroyedMushroom = true;
-                    this.canvas.style.filter = 'invert(1)';
-                    // Invert state lasts for 2 seconds
-                    setTimeout(() => {
-                        this.canvas.style.filter = 'invert(0)';
-                    }, 2000); // 2000 milliseconds = 2 seconds
-                }
-                break;  
         }
 
     }
 
 }
 
-export default PlayerHills;
+export default PlayerQuidditch;
