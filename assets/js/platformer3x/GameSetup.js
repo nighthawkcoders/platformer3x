@@ -244,6 +244,21 @@ const GameSetup = {
       whompingwillow: {
         src: "/images/platformer/obstacles/whompingwillowtree.png",
         hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 }
+      backgrounds: {
+        start: { src: "/images/platformer/backgrounds/home.png" },
+        hills: { src: "/images/platformer/backgrounds/hills.png" },
+        greece: { src: "/images/platformer/backgrounds/greek.png"},
+        mountains: { src: "/images/platformer/backgrounds/mountains.jpg" },
+        clouds : { src: "/images/platformer/backgrounds/clouds.png"},
+        water: { src: "/images/platformer/backgrounds/water.png" },
+        fish : { src: "/images/platformer/backgrounds/school-fish.png"},
+        reef: { src: "/images/platformer/backgrounds/reef.png" },
+        quidditch: { src: "/images/platformer/backgrounds/quidditch2.jpg"},
+        space: { src: "/images/platformer/backgrounds/planet.jpg" },
+        castles: { src: "/images/platformer/backgrounds/castles.png" },
+        winter: {src: "/images/platformer/backgrounds/winter.png" },
+        snow: {src: "/images/platformer/backgrounds/snowfall.png" },
+        mini: { src: "/images/platformer/backgrounds/mini.png" },
       },      
       transitions: {
         loading: { src: "/images/platformer/transitions/greenscreen.png" },
