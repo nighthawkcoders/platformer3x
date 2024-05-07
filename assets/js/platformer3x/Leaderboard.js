@@ -7,6 +7,7 @@ const Leaderboard = {
     currentPage: 1,
     rowsPerPage: 10,
     isOpen: false,
+    detailed: false,
 
     getSortedLeaderboardData () {
         const localData = JSON.parse(localStorage.getItem(this.currentKey))
@@ -39,11 +40,35 @@ const Leaderboard = {
         header.append(th2);
         table.append(header);
         const th3 = document.createElement("th");
-        th3.innerText = "Score";
+        th3.innerText = "Score  ";
+        const detailToggle = document.createElement("button")
+        detailToggle.innerText = "..."
+        th3.append(detailToggle)
         header.append(th3);
         table.append(header);
+        const th4 = document.createElement("th");
+        th4.innerText = "Difficulty";
+        th4.hidden = !Leaderboard.detailed
+        header.append(th4);
+        table.append(header);
+        const th5 = document.createElement("th");
+        th5.innerText = "Game Speed";
+        th5.hidden = !Leaderboard.detailed
+        header.append(th5);
+        table.append(header);
 
+        detailToggle.addEventListener("click", this.toggleDetails)
         return table
+    },
+
+    toggleDetails() {
+        const table = document.getElementsByClassName("table scores")[0]
+        Leaderboard.detailed = !Leaderboard.detailed
+
+        if (table) {
+            table.remove() //remove old table if it is there
+        }
+        document.getElementById("leaderboardDropDown").append(Leaderboard.updateLeaderboardTable()) //update new leaderboard
     },
 
     createPagingButtonsRow(table) {
