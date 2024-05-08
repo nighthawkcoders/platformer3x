@@ -287,6 +287,7 @@ const GameSetup = {
           height: 140,
           scaleSize: 150,
           speedRatio: 0.7,
+          ///animationSpeed: 6
           idle: {
               left: { row: 0, frames: 5 },
               right: { row: 0, frames: 5},
