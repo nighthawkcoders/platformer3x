@@ -137,10 +137,16 @@ const GameControl = {
     },
 
     saveTime() {
+        const date = new Date()
+        date.getDate()
+
         const data = {
             userID: GameEnv.userID,
             time: GameEnv.time - 10,
-            coinScore: GameEnv.coinScore
+            coinScore: GameEnv.coinScore,
+            difficulty: GameEnv.difficulty,
+            gameSpeed: GameEnv.gameSpeed,
+            date: `${date.getMonth()+1}/${date.getDate()}`
         }
 
         const currDataList = JSON.parse(localStorage.getItem(this.localStorageTimeKey))

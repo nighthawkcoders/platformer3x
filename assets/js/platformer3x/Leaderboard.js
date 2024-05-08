@@ -55,6 +55,10 @@ const Leaderboard = {
         th5.innerText = "Game Speed";
         th5.hidden = !Leaderboard.detailed
         header.append(th5);
+        const th6 = document.createElement("th");
+        th6.innerText = "Date";
+        th6.hidden = !Leaderboard.detailed
+        header.append(th6);
         table.append(header);
 
         detailToggle.addEventListener("click", this.toggleDetails)
@@ -104,7 +108,6 @@ const Leaderboard = {
         const breakRow = document.createElement("br")
         table.append(breakRow)
         const clearButtonRow = document.createElement("tr")
-
         const td1 = document.createElement("td");
         td1.style.textAlign = "end"
         const space1 = document.createElement("tr")
@@ -155,6 +158,20 @@ const Leaderboard = {
             const td3 = document.createElement("td");
             td3.innerText = score.coinScore;
             row.append(td3);
+            table.append(row);
+            const td4 = document.createElement("td");
+            td4.innerText = score.difficulty;
+            td4.hidden = !this.detailed
+            row.append(td4);
+            table.append(row);
+            const td5 = document.createElement("td");
+            td5.innerText = score.gameSpeed;
+            td5.hidden = !this.detailed
+            row.append(td5);
+            const td6 = document.createElement("td");
+            td6.innerText = score.date
+            td6.hidden = !this.detailed
+            row.append(td6);
             table.append(row);
         });
 
