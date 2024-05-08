@@ -26,7 +26,7 @@ export class JumpPlatform extends GameObject {
         if (this.collisionData.touchPoints.other.id === "player" && this.name === "itemBlock") {
             if (this.relativeX === 0 || this.relativeX === this.canvas.width) {
                 if (this.relativeX === 0) {
-                    GameControl.startRandomEvent();
+                    GameControl.startRandomEvent("game");
                     //console.log("randomEventtriggered", GameControl.randomEventId);
                 };
                 this.relativeX = -1 * this.canvas.width;
