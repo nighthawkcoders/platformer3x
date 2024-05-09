@@ -82,6 +82,7 @@ export class GameEnv {
     static time = 0;
     static darkMode = true
 
+    static claimedCoinIds = []
 
     
     // Make the constructor throws an error, or effectively make it a private constructor.
@@ -206,6 +207,21 @@ export class GameEnv {
             case "d":
                 if (GameEnv.player?.x < (GameEnv.innerWidth - 2)) {
                     GameEnv.backgroundDirection = 1;
+                }
+                break;
+            case "s":
+                if (keys.includes("a") && keys.includes("s")) {
+                // If both "a" and "s" are clicked
+                    if (GameEnv.player?.x > 2) {
+                    GameEnv.backgroundDirection = -5;
+                    }
+                } else if (keys.includes("d") && keys.includes("s")) {
+                // If both "d" and "s" are clicked
+                    if (GameEnv.player?.x < (GameEnv.innerWidth - 2)) {
+                        GameEnv.backgroundDirection = 5;
+                    }
+                } else {
+                    GameEnv.backgroundDirection = 0;
                 }
                 break;
             default:

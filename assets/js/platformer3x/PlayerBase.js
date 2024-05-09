@@ -326,12 +326,23 @@ export class PlayerBase extends Character {
         switch (this.state.collision) {
             // 1. Player is on a jump platform
             case "jumpPlatform":
-                // Player is on top of the jump platform
-                if (this.collisionData.touchPoints.this.top) {
+                // Player is on top of wall
+                if (this.collisionData.touchPoints.this.onTopofOther) {
                     this.state.movement = { up: false, down: false, left: true, right: true, falling: false};
                     this.gravityEnabled = false;
+
+                // Player is touching the wall with right side
+                } else if (this.collisionData.touchPoints.this.right) {
+                    this.state.movement = { up: false, down: false, left: true, right: false, falling: false};
+                    this.y -= 4;
+                
+                // Player is touching the wall with left side
+                } else if (this.collisionData.touchPoints.this.left) {
+                    this.state.movement = { up: false, down: false, left: false, right: true, falling: false};
+                    this.y -= 4;
                 }
                 break;
+               
             // 2. Player is on or touching a wall 
             case "wall":
                 // Player is on top of the wall
@@ -346,22 +357,7 @@ export class PlayerBase extends Character {
                     this.state.movement = { up: false, down: false, left: false, right: true, falling: false};
                 }
                 break;
-            // 3. Player is climbing a wall
-            case "climbingWall":
-                // Player is climbing up the wall
-                if (this.collisionData.touchPoints.this.left) {
-                    this.state.movement = { up: true, down: false, left: false, right: false, falling: false };
-                    this.gravityEnabled = false;
-                // Player is climbing down the wall
-                } else if (this.collisionData.touchPoints.this.top) {
-                    this.state.movement = { up: false, down: true, left: false, right: false, falling: false };
-                    this.gravityEnabled = false;
-                // Player is not moving vertically on the wall
-                } else {
-                    this.state.movement = { up: false, down: false, left: false, right: false, falling: false };
-                    this.gravityEnabled = true; // Gravity is enabled when not climbing
-                }
-                break;
+
             
             // 4. Player is in default state
             case "floor":

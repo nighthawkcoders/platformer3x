@@ -37,8 +37,8 @@
 /// Color mixin
 /// @description This mixin is defined to share colors with classes in this stylesheet.
 @mixin dark-mode-color {
-  color: $high-emph !important; // use the high-emphasis color for the text
-  background-color: $dark-grey !important; // use the dark grey color for the background
+  color: #FFFFFF!important; // use the high-emphasis color for the text
+  background-color: #000000 !important; // use the dark grey color for the background
   border: 1px solid $dt-blue; // from dracula-highlight.scss
 }
 /// Horizontal Submenu
@@ -83,15 +83,15 @@
   z-index: 3; // Position on Top of other elements, as well as ID buttons above
   // left: 0; // set the sidebar to be on the left side of the page
   top: 0; // calculated to be below the header and submenu
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 0px;
+  padding-bottom: 0px;
   overflow-x: hidden; /* Disable horizontal scroll */
   transition: 0.5s; /* 0.5-second transition effect to slide in the sidebar */
   // following are changed by JavaScript
   width: 0px;
   padding-left: 0px;
   padding-right: 0px;
-  height: 75%;
+  height: 80%;
   scroll-behavior: auto;
 }
 

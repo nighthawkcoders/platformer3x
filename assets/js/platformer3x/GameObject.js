@@ -184,7 +184,10 @@ class GameObject {
         const thisTop = thisRect.top + heightReduction;
         const thisRight = thisRect.right - widthReduction;
         const thisBottom = thisRect.bottom;
-    
+        const tolerance = 10; // Adjust as needed
+
+        // Determine if this object's bottom exactly aligns with the other object's top
+        const onTopofOther = Math.abs(thisBottom - otherRect.top) <= tolerance;
         // Determine hit and touch points of hit
         this.collisionData = {
             newX: thisRectLeftNew, // proportionally adjust left to center over other object
@@ -202,6 +205,7 @@ class GameObject {
                     bottom: (thisRect.bottom <= otherRect.top) && !(Math.abs(thisRect.bottom - otherRect.bottom) <= GameEnv.gravity),
                     left: thisCenterX > otherCenterX,
                     right: thisCenterX < otherCenterX,
+                    onTopofOther: onTopofOther
                 },
                 other: {
                     id: other.canvas.id,

@@ -12,7 +12,7 @@ image: /images/platformer/backgrounds/home.png
     <a href="javascript:void(0)" id="sidebar-header">&times; Settings</a>
   </div>
   <div id="leaderboardDropDown" class="leaderboardDropDown">
-    <a href="javascript:void(0)" id="leaderboard-header">&times; Leaderboard</a>
+    <!-- <a href="javascript:void(0)" id="leaderboard-header">&times; Leaderboard</a> -->
   </div>
   
   <!--Audio for Mushroom -->
@@ -41,6 +41,9 @@ image: /images/platformer/backgrounds/home.png
     <div class="submenu">
       <div id="score">
           Timer: <span id="timeScore">0</span>
+      </div>
+      <div id="score">
+          Coins: <span id="coinScore">0</span>
       </div>
       <div id="gameBegin" hidden>
           <button id="startGame">Start Game</button>
@@ -77,6 +80,8 @@ image: /images/platformer/backgrounds/home.png
       import Leaderboard from '{{site.baseurl}}/assets/js/platformer3x/Leaderboard.js';
       import startCutstory from '{{site.baseurl}}/assets/js/platformer3x/Cutstory.js';;
   
+
+      import RandomEvent from '{{site.baseurl}}/assets/js/platformer3x/RandomEvent.js';
       /* 
        * ==========================================
        * ========== Game Setup ====================
@@ -118,9 +123,9 @@ image: /images/platformer/backgrounds/home.png
   
       // Construct settings sidebar, MVC variable paradigm, and async events to trigger user interaction
       SettingsControl.sidebar();
-      Leaderboard.leaderboardDropDown();
+      Leaderboard.initializeLeaderboard();
       startCutstory();
-  
+      RandomEvent();
       /* 
        * ==========================================
        *  ========== Event / Listeners =============

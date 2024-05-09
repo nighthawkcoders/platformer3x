@@ -9,7 +9,7 @@ export class BackgroundTransitions extends Background {
 
     
     update() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
         super.update();
         if (GameEnv.transitionHide === true) {
             //this.ctx.globalAlpha = 0;
