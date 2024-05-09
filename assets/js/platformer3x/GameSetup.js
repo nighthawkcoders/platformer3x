@@ -270,6 +270,7 @@ const GameSetup = {
       yellowredpattern: { src: "/images/platformer/platforms/yellowredpattern.jpg" },
       lionpattern: { src: "/images/platformer/platforms/lionpattern.jpg" },
       turf: { src: "/images/platformer/platforms/turf.png" },
+      stone: {src: "/images/platformer/platforms/stone.jpg"},
       block: { src: "/images/platformer/platforms/brick_block.png" }, //MAY need 3 new variables: sizeRatio, widthRatio, and heightRatio
       itemBlock: {
         src: "/images/platformer/platforms/mario_block_spritesheet_v2.png",
@@ -294,6 +295,8 @@ const GameSetup = {
       fish: { src: "/images/platformer/backgrounds/school-fish.png" },
       reef: { src: "/images/platformer/backgrounds/reef.png" },
       quidditch: { src: "/images/platformer/backgrounds/quidditch2.jpg" },
+      miniHogwarts: { src: "/images/platformer/backgrounds/miniHogwarts.png"},
+      bats: { src: "images/platformer/backgrounds/bat.png"},
       space: { src: "/images/platformer/backgrounds/planet.jpg" },
       castles: { src: "/images/platformer/backgrounds/castles.png" },
       winter: { src: "/images/platformer/backgrounds/winter.png" },
