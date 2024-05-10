@@ -2,6 +2,7 @@ import GameEnv from './GameEnv.js';
 import Character from './Character.js';
 import GameControl from './GameControl.js';
 import Enemy from './Enemy.js';
+import GameLevel from './GameLevel.js';
 
 
 export class Boss extends Enemy {
@@ -15,7 +16,42 @@ export class Boss extends Enemy {
         this.counter = data?.animationSpeed; 
 
         this.enemySpeed();
+
+        //Hp Bar
+        this.maxHp = 100; // Maximum health points
+        this.currentHp = 100; // Current health points
+        this.hpBar = document.createElement("canvas");
+        document.querySelector("#canvasContainer").appendChild(this.hpBar);
     }
+
+    drawHpBox() { //Hp box
+        // Position and size of the health bar
+        const hpBarWidth = this.width; // The width of the health bar matches the boss's width
+        const hpBarHeight = 15; // A fixed height for the health bar
+        const hpBarX = this.x; // Position above the boss
+        const hpBarY = this.y - 20; // 20 pixels above the boss
+
+        this.hpBar.id = "hpBar";
+      
+        // Calculate health percentage
+        const hpPercentage = this.currentHp / this.maxHp;
+      
+        // Draw the background (gray)
+        this.hpBar.getContext('2d').fillStyle = 'gray';
+        this.hpBar.getContext('2d').fillRect(0, 0, hpBarWidth, hpBarHeight);
+      
+        // Draw the health bar (green, based on current health)
+        this.hpBar.getContext('2d').fillStyle = 'green';
+        this.hpBar.getContext('2d').fillRect(0, 0, hpBarWidth * hpPercentage, hpBarHeight);
+
+        this.hpBar.style.Width = `${hpBarWidth}px`;
+        this.hpBar.style.Height = `${hpBarHeight}px`;
+        this.hpBar.style.position = 'absolute';  //code from Flag.js, define the style of the Hp Bar
+        this.hpBar.style.left = `${hpBarX}px`;
+        this.hpBar.style.top = `${hpBarY}px`; 
+
+      }
+
     //overwrite the method
     updateFrameX() {
         // Update animation frameX of the object
@@ -103,7 +139,7 @@ export class Boss extends Enemy {
 
         this.randomEvent();
 
-
+        this.drawHpBox();
     }
 
     //overwrite the method
@@ -135,15 +171,21 @@ export class Boss extends Enemy {
                 this.state.animation = "attackR"; 
                 this.speed = 0;
             }
-            else if(this.collisionData.touchPoints.other.bottom && this.immune == 0){
-                this.state.animation = "death";
-                if(!this.state.isDying && this.state.animation == "death"){
-                    this.frameX = 0;
+            else if(this.collisionData.touchPoints.other.bottom && this.immune == 0){ 
+                if(this.currentHp == 0){
+                    this.state.animation = "death";
+                    if(!this.state.isDying && this.state.animation == "death"){
+                        this.frameX = 0;
+                    }
+                    this.state.isDying = true;
+                    GameEnv.invincible = true;
+                    GameEnv.goombaBounce = true;
+                    GameEnv.playSound("goombaDeath");
                 }
-                this.state.isDying = true;
-                GameEnv.invincible = true;
-                GameEnv.goombaBounce = true;
-                GameEnv.playSound("goombaDeath");
+                else{
+                    this.currentHp -= 10;
+                }
+
             }
             
         }
