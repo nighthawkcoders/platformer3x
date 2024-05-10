@@ -840,6 +840,7 @@ const GameSetup = {
       // GameObject(s), the order is important to z-index...
       { name: 'quidditch', id: 'background', class: Background, data: this.assets.backgrounds.quidditch },
       { name: 'turf', id: 'platform', class: Platform, data: this.assets.platforms.turf },
+      { name: 'clouds', id: 'background', class: BackgroundClouds, data:this.assets.backgrounds.clouds }, 
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.1, yPercentage: 0.81 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.14, yPercentage: 0.81 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.18, yPercentage: 0.81 },
