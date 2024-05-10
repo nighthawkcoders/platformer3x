@@ -64,6 +64,9 @@ export class PlayerBase extends Character {
         this.keydownListener = this.handleKeyDown.bind(this);
         this.keyupListener = this.handleKeyUp.bind(this);
 
+        this.animationSpeed = data?.animationSpeed;
+        this.counter = this.animationSpeed;
+
         // Add event listeners
         document.addEventListener('keydown', this.keydownListener);
         document.addEventListener('keyup', this.keyupListener);
@@ -104,6 +107,22 @@ export class PlayerBase extends Character {
     updateJump() {
         // Jump height is 35% of the screen bottom, same as screen height
         this.setY(this.y - (this.bottom * 0.35)); 
+    }
+
+    updateFrameX() {
+        if (this.frameX < this.maxFrame) {
+            if(this.counter > 0){
+                this.frameX = this.frameX;
+                this.counter--;
+
+            }
+            else{
+                this.frameX++;
+                this.counter = this.animationSpeed;
+            }
+        } else {
+            this.frameX = this.minFrame;
+        }
     }
 
     /**
