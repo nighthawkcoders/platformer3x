@@ -28,8 +28,10 @@ export class Boss extends Enemy {
         // Position and size of the health bar
         const hpBarWidth = (this.width * (1/8)); // The width of the health bar matches the boss's width
         const hpBarHeight = 15; // A fixed height for the health bar
-        const hpBarX = this.x + 80; // Position above the boss
-        const hpBarY = this.y - 20; // 20 pixels above the boss
+        console.log("this.width", this.width)
+        console.log("this.x", this.x)
+        const hpBarX = this.x + (this.width * (1/10)); // Position above the boss
+        const hpBarY = this.y - (this.width * (1/40)); // 20 pixels above the boss
 
         this.hpBar.id = "hpBar";
         // Calculate health percentage
