@@ -26,13 +26,12 @@ export class Boss extends Enemy {
 
     drawHpBox() { //Hp box
         // Position and size of the health bar
-        const hpBarWidth = this.width; // The width of the health bar matches the boss's width
+        const hpBarWidth = (this.width * (1/8)); // The width of the health bar matches the boss's width
         const hpBarHeight = 15; // A fixed height for the health bar
-        const hpBarX = this.x; // Position above the boss
+        const hpBarX = this.x + 80; // Position above the boss
         const hpBarY = this.y - 20; // 20 pixels above the boss
 
         this.hpBar.id = "hpBar";
-      
         // Calculate health percentage
         const hpPercentage = this.currentHp / this.maxHp;
       
@@ -184,6 +183,7 @@ export class Boss extends Enemy {
                 }
                 else{
                     this.currentHp -= 10;
+                    GameEnv.goombaBounce = true;
                 }
 
             }
