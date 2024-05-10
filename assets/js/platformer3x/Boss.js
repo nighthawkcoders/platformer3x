@@ -46,6 +46,7 @@ export class Boss extends Enemy {
                 }
             } else {
                 this.destroy();
+                console.log("log ticks here")
             }
         }
 
