@@ -184,6 +184,7 @@ export class Boss extends Enemy {
                 }
                 else{
                     this.currentHp -= 10;
+                    GameEnv.goombaBounce = true;
                 }
 
             }
