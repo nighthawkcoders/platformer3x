@@ -11,7 +11,7 @@ image: /images/platformer/backgrounds/home.png
 <div id="sidebar" class="sidebar">
     <a href="javascript:void(0)" id="sidebar-header">&times; Settings</a>
   </div>
-  <div id="leaderboardDropDown" class="leaderboardDropDown">
+  <div id="leaderboardDropDown" class="leaderboardDropDown" style="z-index: 9999">
     <!-- <a href="javascript:void(0)" id="leaderboard-header">&times; Leaderboard</a> -->
   </div>
   

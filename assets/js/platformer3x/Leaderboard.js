@@ -8,6 +8,7 @@ const Leaderboard = {
     rowsPerPage: 10,
     isOpen: false,
     detailed: false,
+    dim: false,
 
     getSortedLeaderboardData () {
         const localData = JSON.parse(localStorage.getItem(this.currentKey))
@@ -21,9 +22,20 @@ const Leaderboard = {
 
     backgroundDim: {
         create () {
+            this.dim = true
             console.log("CREATE DIM")
+            const dimDiv = document.createElement ("div");
+            dimDiv.style.backgroundColor = "black";
+            dimDiv.style.width = "100%";
+            dimDiv.style.height = "100%";
+            dimDiv.style.position = "absolute";
+            dimDiv.style.opacity = "0.8";
+            document.body.append(dimDiv);
+            dimDiv.style.zIndex = "9998"
+            dimDiv.addEventListener("click", Leaderboard.openLeaderboardPanel)
         },
         remove () {
+            this.dim = false
             console.log("REMOVE DIM");
         }
     },
