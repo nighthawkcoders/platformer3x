@@ -22,7 +22,7 @@ const Leaderboard = {
 
     backgroundDim: {
         create () {
-            this.dim = true
+            this.dim = true // sets the dim to be true when the leaderboard is opened
             console.log("CREATE DIM")
             const dimDiv = document.createElement ("div");
             dimDiv.style.backgroundColor = "black";
