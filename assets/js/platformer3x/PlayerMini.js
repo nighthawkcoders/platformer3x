@@ -61,7 +61,7 @@ export class PlayerMini extends PlayerBase {
     handleCollisionStart() {
         super.handleCollisionStart(); // calls the super class method
         // adds additional collision events
-        this.handleCollisionEvent("tube");
+        this.handleCollisionEvent("tubeU");
         this.handleCollisionEvent("goomba");
         this.handleCollisionEvent("mushroom");
 
@@ -75,7 +75,7 @@ export class PlayerMini extends PlayerBase {
         super.handlePlayerReaction(); // calls the super class method
         // handles additional player reactions
         switch (this.state.collision) {
-            case "tube":
+            case "tubeU":
                 // 1. Caught in tube
 
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
@@ -84,7 +84,9 @@ export class PlayerMini extends PlayerBase {
                     // Using natural gravity wait for player to reach floor
                     if (Math.abs(this.y - this.bottom) <= GameEnv.gravity) {
                         // Force end of level condition
-                        this.x = GameEnv.innerWidth + 1;
+                        //this.x = GameEnv.innerWidth + 1;
+                        GameControl.transitionToLevel(GameEnv.levels[3])
+                        return                    
                     }
 
                 // 2. Collision between player right and tube   

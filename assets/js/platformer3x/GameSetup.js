@@ -10,6 +10,7 @@ import BackgroundTransitions from './BackgroundTransitions.js';
 import BackgroundClouds from './BackgroundClouds.js';
 import BackgroundFish from './BackgroundFish.js';
 import BackgroundWinter from './BackgroundWinter.js';
+import BackgroundNarwhal from './BackgroundNarwhal.js';
 import BackgroundSnow from './BackgroundSnow.js';
 import Platform from './Platform.js';
 import JumpPlatform from './JumpPlatform.js';
@@ -21,6 +22,7 @@ import PlayerQuidditch from './PlayerQuidditch.js';
 import PlayerBase from './PlayerBase.js';
 import Tube from './Tube.js';
 import Tube1 from './Tube1.js';
+import TubeGreece from './TubeGreece.js';
 import Tree from './Tree.js';
 import Cabin from './Cabin.js';
 import Goomba from './Goomba.js';
@@ -217,9 +219,17 @@ const GameSetup = {
 
   assets: {
     obstacles: {
-      tube: {
-        src: "/images/platformer/obstacles/blue-tube-up.png",
-        hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 }
+      tube: { src: "/images/platformer/obstacles/tube.png",
+      hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
+      },
+      tubeU: { src: "/images/platformer/obstacles/blue-tube-up.png",
+      hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
+      },
+      tubeD: { src: "/images/platformer/obstacles/blue-tube.png",
+    hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
+      },
+      tubeGreece: {src: "/images/platformer/obstacles/blue-tube-up.png",
+      hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
       },
       cabin: {
         src: "/images/platformer/obstacles/cabin.png",
@@ -288,6 +298,7 @@ const GameSetup = {
       castles: { src: "/images/platformer/backgrounds/castles.png" },
       winter: { src: "/images/platformer/backgrounds/winter.png" },
       snow: { src: "/images/platformer/backgrounds/snowfall.png" },
+      narwhal: { src: "/images/platformer/backgrounds/narwhal.png" },
       mini: { src: "/images/platformer/backgrounds/mini.png" },
     },
     transitions: {
@@ -701,6 +712,7 @@ const GameSetup = {
       { name: 'dragon', id: 'dragon', class: Dragon, data: this.assets.enemies.dragon, xPercentage: 0.5, minPosition: 0.05 },
       { name: 'knight', id: 'player', class: PlayerGreece, data: this.assets.players.knight },
       { name: 'flag', id: 'flag', class: Flag, data: this.assets.obstacles.flag },
+      { name: 'tubeU', id: 'tubeU', class: TubeGreece, data: this.assets.obstacles.tubeU, xPercentage: 0.66, yPercentage: 1.13 },
       { name: 'hillsEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.hillsEnd },
     ];
     // Greece Game Level added to the GameEnv ...
@@ -776,9 +788,9 @@ const GameSetup = {
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.7675, yPercentage: 0.5 },
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.7875, yPercentage: 0.5 },
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.8075, yPercentage: 0.5 },
-      { name: 'mario', id: 'player', class: PlayerMini, data: this.assets.players.mario },
-      { name: 'tubeD', id: 'tubeD', class: Tube1, data: this.assets.obstacles.tubeD },
-      { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
+      { name: 'knight', id: 'player', class: PlayerMini, data: this.assets.players.knight },
+      { name: 'tubeD', id: 'tubeD', class: Tube1, data: this.assets.obstacles.tubeD},
+      { name: 'tubeU', id: 'tubeU', class: Tube, data: this.assets.obstacles.tubeU},
       { name: 'greeceEnd', id: 'background', class: BackgroundTransitions,  data: this.assets.transitions.greeceEnd },
     ];
     // Space Game Level added to the GameEnv ...
@@ -887,6 +899,7 @@ const GameSetup = {
     const winterObjects = [
       // GameObject(s), the order is important to z-index...
       { name: 'winter', id: 'background', class: BackgroundWinter, data: this.assets.backgrounds.winter },
+      { name: 'narwhal', id: 'background', class: BackgroundNarwhal, data: this.assets.backgrounds.narwhal },
       { name: 'snow', id: 'background', class: BackgroundSnow, data: this.assets.backgrounds.snow },
       { name: 'snowyfloor', id: 'platform', class: Platform, data: this.assets.platforms.snowyfloor },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.2, yPercentage: 0.82 },
