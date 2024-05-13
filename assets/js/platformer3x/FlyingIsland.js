@@ -1,5 +1,6 @@
 import GameObject from './GameObject.js';
 import GameEnv from './GameEnv.js';
+import GameControl from './GameControl.js';
 
 export class FlyingIsland extends GameObject {
     constructor(canvas, image, data, xPercentage, yPercentage, bobbingHeight, bobbingSpeed) {
@@ -11,7 +12,6 @@ export class FlyingIsland extends GameObject {
         this.bobbingDirection = 1; // 1 for up, -1 for down
         this.relativeX = ""; //used for the item block's spritesheet.
         // Add glow effect
-        this.canvas.style.boxShadow = "0 0 10px 5px rgba(255, 255, 0, 0.7)";
     }
 
     update() {
@@ -44,7 +44,7 @@ export class FlyingIsland extends GameObject {
 
     collisionAction() {
         //collision only detects mario and it only applies to the item block
-        if (this.collisionData.touchPoints.other.id === "player" && this.name === "flyingIsland") {
+        if (this.collisionData.touchPoints.other.id === "player") {
             console.log("yes")
             if (this.relativeX === 0 || this.relativeX === this.canvas.width) {
                 if (this.relativeX === 0) {
