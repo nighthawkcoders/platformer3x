@@ -239,10 +239,10 @@ const Leaderboard = {
             leaderboardTitle.innerHTML = "Local Leaderboard";
 
             // toggle isOpen
-            this.isOpen = !this.isOpen;
+            this.isOpen = true
             // open and close properties for sidebar based on isOpen
             const table = document.getElementsByClassName("table scores")[0]
-            
+
             if (this.isOpen) {
                 Leaderboard.backgroundDim.create()
                 if (table) {
