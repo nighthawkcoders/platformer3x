@@ -44,6 +44,7 @@ import Star from './Star.js';
 import Dementor from './Dementor.js';
 import Draco from './Draco.js';
 import Boss from './Boss.js';
+import FlyingIsland from './FlyingIsland.js';
 
 //test comment
 
@@ -269,6 +270,7 @@ const GameSetup = {
       yellowredpattern: { src: "/images/platformer/platforms/yellowredpattern.jpg" },
       lionpattern: { src: "/images/platformer/platforms/lionpattern.jpg" },
       turf: { src: "/images/platformer/platforms/turf.png" },
+      island: { src: "/images/platformer/platforms/island.png" },
       block: { src: "/images/platformer/platforms/brick_block.png" }, //MAY need 3 new variables: sizeRatio, widthRatio, and heightRatio
       itemBlock: {
         src: "/images/platformer/platforms/mario_block_spritesheet_v2.png",
@@ -704,12 +706,13 @@ const GameSetup = {
       //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.16 },
       //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.1 },
       //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.06 },
-      { name: 'cerberus', id: 'cerberus', class: Cerberus, data: this.assets.enemies.cerberus, xPercentage: 0.2, minPosition: 0.05, difficulties: ["normal", "hard", "impossible"] },
+      { name: 'cerberus', id: 'cerberus', class: Cerberus, data: this.assets.enemies.cerberus, xPercentage: 0.2, minPosition: 0.09, difficulties: ["normal", "hard", "impossible"] },
       { name: 'cerberus', id: 'cerberus', class: Cerberus, data: this.assets.enemies.cerberus, xPercentage: 0.5, minPosition: 0.3, difficulties: ["normal", "hard", "impossible"] },
       { name: 'cerberus', id: 'cerberus', class: Cerberus, data: this.assets.enemies.cerberus, xPercentage: 0.7, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },//this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
       { name: 'dragon', id: 'dragon', class: Dragon, data: this.assets.enemies.dragon, xPercentage: 0.5, minPosition: 0.05 },
       { name: 'knight', id: 'player', class: PlayerGreece, data: this.assets.players.knight },
       { name: 'flag', id: 'flag', class: Flag, data: this.assets.obstacles.flag },
+      { name: 'flyingIsland', id: 'flyingPlatform', class: FlyingIsland, data: this.assets.platforms.island, xPercentage: 0.5, yPercentage: 0.22 },
       { name: 'tubeU', id: 'tubeU', class: TubeGreece, data: this.assets.obstacles.tubeU, xPercentage: 0.66, yPercentage: 1.13 },
       { name: 'hillsEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.hillsEnd },
     ];
