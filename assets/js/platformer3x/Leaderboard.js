@@ -24,7 +24,8 @@ const Leaderboard = {
         create () {
             this.dim = true // sets the dim to be true when the leaderboard is opened
             console.log("CREATE DIM")
-            const dimDiv = document.createElement ("div");
+            const dimDiv = document.createElement("div");
+            dimDiv.id = "dim";
             dimDiv.style.backgroundColor = "black";
             dimDiv.style.width = "100%";
             dimDiv.style.height = "100%";
@@ -32,12 +33,18 @@ const Leaderboard = {
             dimDiv.style.opacity = "0.8";
             document.body.append(dimDiv);
             dimDiv.style.zIndex = "9998"
-            dimDiv.addEventListener("click", Leaderboard.openLeaderboardPanel)
+            dimDiv.addEventListener("click", Leaderboard.backgroundDim.remove)
         },
         remove () {
             this.dim = false
             console.log("REMOVE DIM");
-        }
+            const dimDiv = document.getElementById("dim");
+            dimDiv.remove();
+            Leaderboard.isOpen = false
+            leaderboardDropDown.style.width = this.isOpen?"70%":"0px";
+            leaderboardDropDown.style.top = this.isOpen?"15%":"0px";
+            leaderboardDropDown.style.left = this.isOpen?"15%":"0px";
+        },
     },
 
     createLeaderboardDisplayTable () {
@@ -235,9 +242,7 @@ const Leaderboard = {
             this.isOpen = !this.isOpen;
             // open and close properties for sidebar based on isOpen
             const table = document.getElementsByClassName("table scores")[0]
-            if (!this.isOpen) {
-                Leaderboard.backgroundDim.remove()
-            }
+            
             if (this.isOpen) {
                 Leaderboard.backgroundDim.create()
                 if (table) {
@@ -251,7 +256,7 @@ const Leaderboard = {
             leaderboardDropDown.style.top = this.isOpen?"15%":"0px";
             leaderboardDropDown.style.left = this.isOpen?"15%":"0px";
     },
-
+    
     initializeLeaderboard () {
         const leaderboardTitle = document.createElement("div");
         leaderboardTitle.id = "leaderboardTitle";
