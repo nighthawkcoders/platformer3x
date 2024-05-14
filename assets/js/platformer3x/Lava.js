@@ -7,7 +7,7 @@ export class Lava extends GameObject {
         super(canvas, image, data);
         this.islandX = xPercentage * GameEnv.innerWidth;
         this.islandY = yPercentage * GameEnv.innerHeight; // Initialize islandY with a pixel value
-        this.risingSpeed = 20; // Adjust the rising speed as needed
+        this.risingSpeed = 19; // Adjust the rising speed as needed
         this.lastUpdateTime = Date.now(); // Initialize last update time to current time
     }
 
