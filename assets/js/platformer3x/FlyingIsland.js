@@ -33,8 +33,8 @@ export class FlyingIsland extends GameObject {
     }
 
     size() {
-        const scaledWidth = this.canvas.width;
-        const scaledHeight = this.canvas.height;
+        const scaledWidth = this.canvas.width*0.75;
+        const scaledHeight = this.canvas.height*0.75;
         this.canvas.style.width = `${scaledWidth}px`;
         this.canvas.style.height = `${scaledHeight}px`;
         this.canvas.style.position = 'absolute';
