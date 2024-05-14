@@ -1,3 +1,4 @@
+
 import GameControl from './GameControl.js';
 import GameEnv from './GameEnv.js';
 import GameObject from './GameObject.js';
@@ -86,4 +87,3 @@ export class JumpPlatform extends GameObject {
 }
 
 export default JumpPlatform;
-

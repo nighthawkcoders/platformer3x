@@ -7,7 +7,7 @@ import BackgroundHills from './BackgroundHills.js';
 import BackgroundCoral from './BackgroundCoral.js';
 import BackgroundMountains from './BackgroundMountains.js';
 import BackgroundTransitions from './BackgroundTransitions.js';
-import BackgroundClouds from './BackgroundClouds .js';
+import BackgroundClouds from './BackgroundClouds.js';
 import BackgroundWinter from './BackgroundWinter.js';
 import BackgroundNarwhal from './BackgroundNarwhal.js';
 import BackgroundSnow from './BackgroundSnow.js';
@@ -28,6 +28,7 @@ import Cabin from './Cabin.js';
 import Goomba from './Goomba.js';
 import FlyingGoomba from './FlyingGoomba.js';
 import BlockPlatform from './BlockPlatform.js';
+import SpawnPlatform from './SpawnPlatform.js'
 import Mushroom from './Mushroom.js';
 import Coin from './Coin.js';
 import Snowflake from './Snowflake.js';
@@ -45,6 +46,7 @@ import Star from './Star.js';
 import Dementor from './Dementor.js';
 import Draco from './Draco.js';
 import Boss from './Boss.js';
+
 
 //test comment
 
@@ -270,7 +272,6 @@ const GameSetup = {
       yellowredpattern: { src: "/images/platformer/platforms/yellowredpattern.jpg" },
       lionpattern: { src: "/images/platformer/platforms/lionpattern.jpg" },
       turf: { src: "/images/platformer/platforms/turf.png" },
-      stone: {src: "/images/platformer/platforms/stone.jpg"},
       block: { src: "/images/platformer/platforms/brick_block.png" }, //MAY need 3 new variables: sizeRatio, widthRatio, and heightRatio
       itemBlock: {
         src: "/images/platformer/platforms/mario_block_spritesheet_v2.png",
@@ -295,8 +296,6 @@ const GameSetup = {
       fish: { src: "/images/platformer/backgrounds/school-fish.png" },
       reef: { src: "/images/platformer/backgrounds/reef.png" },
       quidditch: { src: "/images/platformer/backgrounds/quidditch2.jpg" },
-      miniHogwarts: { src: "/images/platformer/backgrounds/miniHogwarts.png"},
-      bats: { src: "images/platformer/backgrounds/bat.png"},
       space: { src: "/images/platformer/backgrounds/planet.jpg" },
       castles: { src: "/images/platformer/backgrounds/castles.png" },
       winter: { src: "/images/platformer/backgrounds/winter.png" },
@@ -632,7 +631,7 @@ const GameSetup = {
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2, yPercentage: 0.85 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2368, yPercentage: 0.85 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2736, yPercentage: 0.85 },
-      { name: 'blocks', id: 'wall', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.6, yPercentage: 1 },
+      { name: 'blocks', id: 'wall', class: SpawnPlatform, data: this.assets.platforms.block, xPercentage: 0.6, yPercentage: 1 },
       { name: 'itemBlock', id: 'jumpPlatform', class: JumpPlatform, data: this.assets.platforms.itemBlock, xPercentage: 0.4, yPercentage: 0.65 }, //item block is a platform
       { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage: 0.5, yPercentage: 1, minPosition: 0.05 },
       { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage: 0.4, yPercentage: 1, minPosition: 0.05, difficulties: ["normal", "hard", "impossible"] },
@@ -840,7 +839,6 @@ const GameSetup = {
       // GameObject(s), the order is important to z-index...
       { name: 'quidditch', id: 'background', class: Background, data: this.assets.backgrounds.quidditch },
       { name: 'turf', id: 'platform', class: Platform, data: this.assets.platforms.turf },
-      { name: 'clouds', id: 'background', class: BackgroundClouds, data:this.assets.backgrounds.clouds }, 
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.1, yPercentage: 0.81 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.14, yPercentage: 0.81 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.18, yPercentage: 0.81 },
@@ -899,24 +897,6 @@ const GameSetup = {
     // Quidditch Game Level added to the GameEnv ...
     new GameLevel({ tag: "quidditch", callback: this.playerOffScreenCallBack, objects: quidditchGameObjects });
 
-    const miniHogwartsObjects = [
-      // GameObject(s), the order is important to z-index...
-      { name: 'miniHogwarts', id: 'background', class: Background, data: this.assets.backgrounds.miniHogwarts },
-      // { name: 'rock', id: 'platform', class: Platform, data: this.assets.platforms.rock },
-      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.017, yPercentage: 0.68 },
-      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.051, yPercentage: 0.68 },
-      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.09, yPercentage: 0.75 },
-      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.6268, yPercentage: 0.35 },
-      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.3, yPercentage: 0.35 },
-      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.3368, yPercentage: 0.35 },
-      { name: 'harry', id: 'player', class: PlayerQuidditch, data: this.assets.players.harry },
-      { name: 'tubeD', id: 'tubeD', class: Tube1, data: this.assets.obstacles.tubeD},
-      { name: 'tubeU', id: 'tubeU', class: Tube, data: this.assets.obstacles.tubeU},
-      { name: 'quidditchEnd', id: 'background', class: BackgroundTransitions,  data: this.assets.transitions.quidditchEnd },
-    ];
-      // Quidditch Game Level added to the GameEnv ...
-    new GameLevel({ tag: "mini hogwarts", callback: this.playerOffScreenCallBack, objects: miniHogwartsObjects });
-    
 
     const winterObjects = [
       // GameObject(s), the order is important to z-index...

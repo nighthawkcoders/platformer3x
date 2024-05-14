@@ -1,7 +1,6 @@
 import GameEnv from './GameEnv.js';
 import Character from './Character.js';
 import GameControl from './GameControl.js';
-import BlockPlatform from './BlockPlatform.js'; 
 
 /**
  * @class PlayerBase class
@@ -46,7 +45,6 @@ export class PlayerBase extends Character {
      * @param {HTMLCanvasElement} canvas - The canvas element to draw the player on.
      * @param {HTMLImageElement} image - The image to draw the player with.
      * @param {Object} data - The data object containing the player's properties.
-     * @param {BlockPlatform} jumpPlatform - The jump platform object.
      */
     constructor(canvas, image, data) {
         super(canvas, image, data); // Call the Character class's constructor
@@ -68,7 +66,7 @@ export class PlayerBase extends Character {
 
         // Add event listeners
         document.addEventListener('keydown', this.keydownListener);
-        document.addEventListener('keyup', this.keyupListener);        
+        document.addEventListener('keyup', this.keyupListener);
     }
 
     /**
@@ -135,7 +133,7 @@ export class PlayerBase extends Character {
                     // Increase the player's x position according to run or walk animation and related speed
                     this.setX(this.x + (this.state.animation === 'run' ? this.runSpeed : this.speed));
                 }
-        }       
+        }
     }
 
     /**
@@ -187,7 +185,6 @@ export class PlayerBase extends Character {
                 break;
         }
     }
-
 
     /**
      * User Event: Handles the keydown event.
@@ -360,7 +357,7 @@ export class PlayerBase extends Character {
                     this.state.movement = { up: false, down: false, left: false, right: true, falling: false};
                 }
                 break;
-    
+
             
             // 4. Player is in default state
             case "floor":
@@ -372,13 +369,7 @@ export class PlayerBase extends Character {
                     this.state.movement = { up: false, down: false, left: true, right: true, falling: true};
                 }
                 break;
-
-            case "ascendingPlatform":
-                if (this.onTopofOther) {
-                    this.platformY = this.y-=4 
-                }
-
-
+            
             
         }
     }

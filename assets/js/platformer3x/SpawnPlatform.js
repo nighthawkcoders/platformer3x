@@ -1,11 +1,15 @@
 import GameEnv from './GameEnv.js';
 import GameObject from './GameObject.js';
 
-export class BlockPlatform extends GameObject {
+export class SpawnPlatform extends GameObject {
     constructor(canvas, image, data, xPercentage, yPercentage) {
         super(canvas, image, data);
         this.platformX = xPercentage * GameEnv.innerWidth;
         this.platformY = yPercentage;
+        this.direction = 1;
+        this.speed = 1;
+        this.minBottom = 150; // Minimum bottom position for the platform
+        this.maxBottom = 300; // Maximum bottom position for the platform
 
         // Add glow effect
         this.canvas.style.boxShadow = "0 0 10px 5px rgba(0, 255, 255, 0.7)";
@@ -13,8 +17,12 @@ export class BlockPlatform extends GameObject {
 
     // Required, but no update action
     update() {
-        //console.log(this.platformY)
-    }
+        // .log(this.platformY);
+        this.canvas.style.visibility = 'hidden';
+        if (GameEnv.destroyedMushroom === true) {
+            this.canvas.style.visibility = 'visible';
+        }
+          }
 
     // Draw position is always 0,0
     draw() {
@@ -42,4 +50,4 @@ export class BlockPlatform extends GameObject {
     }
 }
 
-export default BlockPlatform;
+export default SpawnPlatform;
