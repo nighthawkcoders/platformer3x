@@ -1,7 +1,7 @@
 import GameEnv from './GameEnv.js';
 import GameObject from './GameObject.js';
 
-export class BlockPlatform extends GameObject {
+export class SpawnPlatform extends GameObject {
     constructor(canvas, image, data, xPercentage, yPercentage) {
         super(canvas, image, data);
         this.platformX = xPercentage * GameEnv.innerWidth;
@@ -18,7 +18,11 @@ export class BlockPlatform extends GameObject {
     // Required, but no update action
     update() {
         // .log(this.platformY);
-    }
+        this.canvas.style.visibility = 'hidden';
+        if (GameEnv.destroyedMushroom === true) {
+            this.canvas.style.visibility = 'visible';
+        }
+          }
 
     // Draw position is always 0,0
     draw() {
@@ -46,4 +50,4 @@ export class BlockPlatform extends GameObject {
     }
 }
 
-export default BlockPlatform;
+export default SpawnPlatform;
