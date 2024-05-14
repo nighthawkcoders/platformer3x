@@ -713,7 +713,7 @@ const GameSetup = {
       { name: 'dragon', id: 'dragon', class: Dragon, data: this.assets.enemies.dragon, xPercentage: 0.5, minPosition: 0.05 },
       { name: 'knight', id: 'player', class: PlayerGreece, data: this.assets.players.knight },
       { name: 'flag', id: 'flag', class: Flag, data: this.assets.obstacles.flag },
-      { name: 'flyingIsland', id: 'flyingIsland', class: FlyingIsland, data: this.assets.platforms.island, xPercentage: 0.85, yPercentage: 0.35 },
+      { name: 'flyingIsland', id: 'flyingIsland', class: FlyingIsland, data: this.assets.platforms.island, xPercentage: 0.82, yPercentage: 0.55 },
       { name: 'tubeU', id: 'tubeU', class: TubeGreece, data: this.assets.obstacles.tubeU, xPercentage: 0.66, yPercentage: 1.13 },
       { name: 'hillsEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.hillsEnd },
       { name: 'lava', id: 'lava', class: Lava, data: this.assets.platforms.lava, xPercentage: 0, yPercentage: 1 },
