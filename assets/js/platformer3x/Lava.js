@@ -13,9 +13,19 @@ export class Lava extends GameObject {
         this.timeUntilRise = this.initialDelay; // Time until lava rises
         this.timerElement = document.createElement('div'); // Create a timer element
         this.timerElement.style.position = 'absolute';
-        this.timerElement.style.top = '10px';
-        this.timerElement.style.left = '10px';
+        this.timerElement.style.top = '70%';
+        this.timerElement.style.left = '50%';
+        this.timerElement.style.transform = 'translate(-50%, -50%)';
+        this.timerElement.style.display = 'none'; // Initially hidden
         document.body.appendChild(this.timerElement); // Append timer element to the body
+        this.warningSymbol = document.createElement('img');
+        this.warningSymbol.src = "/platformer3x/images/platformer/sprites/alert.gif";
+        this.warningSymbol.style.position = 'absolute';
+        this.warningSymbol.style.top = '35%';
+        this.warningSymbol.style.left = '50%';
+        this.warningSymbol.style.transform = 'translate(-50%, -50%)';
+        this.warningSymbol.style.display = 'none'; // Initially hidden
+        document.body.appendChild(this.warningSymbol);
         this.initialDelayElapsed = false; // Flag to track if initial delay has elapsed
         this.startTimer(); // Start the timer
     }
@@ -26,6 +36,11 @@ export class Lava extends GameObject {
             if (this.timeUntilRise <= 0) {
                 this.timeUntilRise = 0;
                 this.initialDelayElapsed = true; // Set the flag to true when initial delay is over
+                this.warningSymbol.style.display = 'none'; // Hide the warning symbol
+                this.timerElement.style.display = 'none'; // Initially hidden
+            } else if (this.timeUntilRise <= this.initialDelay) {
+                this.timerElement.style.display = 'block'; // Initially hidden
+                this.warningSymbol.style.display = 'block'; // Show the warning symbol
             }
             this.timerElement.innerText = `Time until lava rises: ${this.timeUntilRise / 1000}s`;
         }, 1000);
@@ -53,6 +68,10 @@ export class Lava extends GameObject {
         // Reset the timer back to 5 seconds
         this.timeUntilRise = this.initialDelay;
         this.initialDelayElapsed = false; // Reset the flag
+        this.timeUntilRise = this.initialDelay;
+        this.initialDelayElapsed = false; // Reset the flag
+        this.timerElement.style.display = 'none'; // Initially hidden
+        this.warningSymbol.style.display = 'none'; // Hide the warning symbol
     }
     
     draw() {
