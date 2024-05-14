@@ -54,6 +54,7 @@ export class PlayerGreece extends PlayerBase {
         this.handleCollisionEvent("tubeU");
         this.handleCollisionEvent("flag");
         this.handleCollisionEvent("cerberus");
+        this.handleCollisionEvent("flyingIsland");
     }
    
     /**
@@ -140,6 +141,23 @@ export class PlayerGreece extends PlayerBase {
                     }
                 
                 }
+                break;
+                case "flyingIsland":
+                    // Player is on top of the island
+                    if (this.collisionData.touchPoints.this.onTopofOther) {
+                        this.state.movement = { up: false, down: false, left: true, right: true, falling: false};
+                        this.gravityEnabled = false;
+    
+                    // Player is touching the wall with right side
+                    } else if (this.collisionData.touchPoints.this.right) {
+                        this.state.movement = { up: false, down: false, left: true, right: false, falling: false};
+                        this.y -= 4;
+                    
+                    // Player is touching the wall with left side
+                    } else if (this.collisionData.touchPoints.this.left) {
+                        this.state.movement = { up: false, down: false, left: false, right: true, falling: false};
+                        this.y -= 4;
+                    }
                 break;
         }
 
