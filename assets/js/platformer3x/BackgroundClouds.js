@@ -1,11 +1,11 @@
 import GameEnv from './GameEnv.js';
 import Background from './Background.js';
 
-export class BackgroundClouds extends Background {
+export class BackgroundClouds extends Background  {
     constructor(canvas, image, data) {
         super(canvas, image, data);
 
-        this.parallaxSpeed = 2; 
+        this.parallaxSpeed = 1; 
     }
 
     // speed is used to background parallax behavior

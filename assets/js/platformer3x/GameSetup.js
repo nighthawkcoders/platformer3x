@@ -898,6 +898,24 @@ const GameSetup = {
     // Quidditch Game Level added to the GameEnv ...
     new GameLevel({ tag: "quidditch", callback: this.playerOffScreenCallBack, objects: quidditchGameObjects });
 
+    const miniHogwartsObjects = [
+      // GameObject(s), the order is important to z-index...
+      { name: 'miniHogwarts', id: 'background', class: Background, data: this.assets.backgrounds.miniHogwarts },
+      // { name: 'rock', id: 'platform', class: Platform, data: this.assets.platforms.rock },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.017, yPercentage: 0.68 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.051, yPercentage: 0.68 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.09, yPercentage: 0.75 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.6268, yPercentage: 0.35 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.3, yPercentage: 0.35 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.3368, yPercentage: 0.35 },
+      { name: 'harry', id: 'player', class: PlayerQuidditch, data: this.assets.players.harry },
+      { name: 'tubeD', id: 'tubeD', class: Tube1, data: this.assets.obstacles.tubeD},
+      { name: 'tubeU', id: 'tubeU', class: Tube, data: this.assets.obstacles.tubeU},
+      { name: 'quidditchEnd', id: 'background', class: BackgroundTransitions,  data: this.assets.transitions.quidditchEnd },
+    ];
+      // Quidditch Game Level added to the GameEnv ...
+    new GameLevel({ tag: "mini hogwarts", callback: this.playerOffScreenCallBack, objects: miniHogwartsObjects });
+
 
     const winterObjects = [
       // GameObject(s), the order is important to z-index...
