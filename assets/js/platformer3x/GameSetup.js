@@ -39,6 +39,7 @@ import Snowman from './Snowman.js';
 import Cerberus from './Cerberus.js';
 import PlayerGreece from './PlayerGreece.js';
 import Flag from './Flag.js';
+import Lava from './Lava.js';
 import Dragon from './Dragon.js';
 import Star from './Star.js';
 import Dementor from './Dementor.js';
@@ -715,6 +716,7 @@ const GameSetup = {
       { name: 'flyingIsland', id: 'flyingIsland', class: FlyingIsland, data: this.assets.platforms.island, xPercentage: 0.85, yPercentage: 0.35 },
       { name: 'tubeU', id: 'tubeU', class: TubeGreece, data: this.assets.obstacles.tubeU, xPercentage: 0.66, yPercentage: 1.13 },
       { name: 'hillsEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.hillsEnd },
+      { name: 'lava', id: 'lava', class: Lava, data: this.assets.platforms.lava, xPercentage: 0, yPercentage: 1 },
     ];
     // Greece Game Level added to the GameEnv ...
     new GameLevel({ tag: "ancient greece", callback: this.playerOffScreenCallBack, objects: greeceGameObjects });
