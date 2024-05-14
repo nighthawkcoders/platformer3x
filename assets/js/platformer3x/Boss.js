@@ -86,6 +86,7 @@ export class Boss extends Enemy {
                 }
             } else {
                 this.destroy();
+                this.hpBar.remove();
             }
         }
 
