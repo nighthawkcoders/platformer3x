@@ -20,11 +20,6 @@ import PlayerWinter from './PlayerWinter.js';
 import PlayerMini from './PlayerMini.js';
 import PlayerQuidditch from './PlayerQuidditch.js';
 import PlayerBase from './PlayerBase.js';
-import Tube from './Tube.js';
-import Tube1 from './Tube1.js';
-import TubeGreece from './TubeGreece.js';
-import Tree from './Tree.js';
-import Cabin from './Cabin.js';
 import Goomba from './Goomba.js';
 import FlyingGoomba from './FlyingGoomba.js';
 import BlockPlatform from './BlockPlatform.js';
@@ -35,11 +30,11 @@ import FlyingUFO from './FlyingUFO.js';
 import Alien from './Alien.js';
 import GameControl from './GameControl.js';
 import Enemy from './Enemy.js';
+import FinishLine from './FinishLine.js';
 import Owl from './Owl.js';
 import Snowman from './Snowman.js';
 import Cerberus from './Cerberus.js';
 import PlayerGreece from './PlayerGreece.js';
-import Flag from './Flag.js';
 import Dragon from './Dragon.js';
 import Star from './Star.js';
 import Dementor from './Dementor.js';
@@ -220,35 +215,46 @@ const GameSetup = {
   assets: {
     obstacles: {
       tube: { src: "/images/platformer/obstacles/tube.png",
-      hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
+      hitbox: { widthPercentage: 0.5, heightPercentage: 0.5},
+      width: 300,
+      height: 300,
+      scaleSize: 100,
       },
       tubeU: { src: "/images/platformer/obstacles/blue-tube-up.png",
-      hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
+      hitbox: { widthPercentage: 0.5, heightPercentage: 0.5},
+      width: 300,
+      height: 300,
+      scaleSize: 100,
       },
       tubeD: { src: "/images/platformer/obstacles/blue-tube.png",
-    hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
-      },
-      tubeGreece: {src: "/images/platformer/obstacles/blue-tube-up.png",
-      hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
+      hitbox: { widthPercentage: 0.5, heightPercentage: 0.5},
+      width: 300,
+      height: 300,
+      scaleSize: 100,
       },
       cabin: {
         src: "/images/platformer/obstacles/cabin.png",
-        hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 }
+        hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 },
+        width: 300,
+        height: 300,
+        scaleSize: 150,
       },
       coin: { src: "/images/platformer/obstacles/coin.png" },
       snowflake: { src: "/images/platformer/obstacles/snowflake.png" },
       tubeD: {
         src: "/images/platformer/obstacles/blue-tube.png",
-        hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 }
+        hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 },
+        width: 300,
+        height: 300,
+        scaleSize: 100,
       },
       star: { src: "/images/platformer/obstacles/star.png" },
-      tree: {
-        src: "/images/platformer/obstacles/tree.png",
-        hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 }
-      },
       flag: {
         src: "/images/platformer/obstacles/flag.png",
-        hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 }
+        hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 },
+        width: 300,
+        height: 300,
+        scaleSize: 120,
       },
       snitch: { src: "/images/platformer/obstacles/snitch.png" },
       whompingwillow: {
@@ -648,7 +654,7 @@ const GameSetup = {
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.2575, yPercentage: 0.75 },
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.5898, yPercentage: 0.900 },
       { name: 'mario', id: 'player', class: PlayerHills, data: this.assets.players.mario },
-      { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
+      { name: 'tube', id: 'finishline', class: FinishLine, data: this.assets.obstacles.tube, xPercentage: 0.85, yPercentage: 0.65 },
       { name: 'loading', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.loading },
     ];
     let hillsGameObjects = allHillsGameObjects.filter(obj => !obj.difficulties || obj.difficulties.includes(difficulty));
@@ -712,8 +718,8 @@ const GameSetup = {
       { name: 'cerberus', id: 'cerberus', class: Cerberus, data: this.assets.enemies.cerberus, xPercentage: 0.7, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },//this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
       { name: 'dragon', id: 'dragon', class: Dragon, data: this.assets.enemies.dragon, xPercentage: 0.5, minPosition: 0.05 },
       { name: 'knight', id: 'player', class: PlayerGreece, data: this.assets.players.knight },
-      { name: 'flag', id: 'flag', class: Flag, data: this.assets.obstacles.flag },
-      { name: 'tubeU', id: 'tubeU', class: TubeGreece, data: this.assets.obstacles.tubeU, xPercentage: 0.66, yPercentage: 1.13 },
+      { name: 'tubeU', id: 'minifinishline', class: FinishLine, data: this.assets.obstacles.tubeU, xPercentage: 0.66, yPercentage: 0.71 },
+      { name: 'flag', id: 'finishline', class: FinishLine, data: this.assets.obstacles.flag, xPercentage: 0.85, yPercentage: 0.616 },
       { name: 'hillsEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.hillsEnd },
     ];
     // Greece Game Level added to the GameEnv ...
@@ -790,8 +796,8 @@ const GameSetup = {
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.7875, yPercentage: 0.5 },
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.8075, yPercentage: 0.5 },
       { name: 'knight', id: 'player', class: PlayerMini, data: this.assets.players.knight },
-      { name: 'tubeD', id: 'tubeD', class: Tube1, data: this.assets.obstacles.tubeD},
-      { name: 'tubeU', id: 'tubeU', class: Tube, data: this.assets.obstacles.tubeU},
+      { name: 'tubeD', id: 'finishline', class: FinishLine, data: this.assets.obstacles.tubeD, xPercentage: 0, yPercentage: 0.052 },
+      { name: 'tubeU', id: 'finishline', class: FinishLine, data: this.assets.obstacles.tubeU, xPercentage: 0.85, yPercentage: 0.646 },
       { name: 'greeceEnd', id: 'background', class: BackgroundTransitions,  data: this.assets.transitions.greeceEnd },
     ];
     // Space Game Level added to the GameEnv ...
@@ -825,7 +831,7 @@ const GameSetup = {
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.2575, yPercentage: 0.75 },
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.5898, yPercentage: 0.900 },
       { name: 'mario', id: 'player', class: PlayerHills, data: this.assets.players.mario },
-      { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
+      { name: 'tube', id: 'finishline', class: FinishLine, data: this.assets.obstacles.tube, xPercentage: 0.85, yPercentage: 0.65 },
       { name: 'miniEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.miniEnd },
     ];
     let waterGameObjects = allWaterGameObjects.filter(obj => !obj.difficulties || obj.difficulties.includes(difficulty));
@@ -889,7 +895,7 @@ const GameSetup = {
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.529, yPercentage: 0.61 },
 
       { name: 'harry', id: 'player', class: PlayerQuidditch, data: this.assets.players.harry },
-      { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
+      { name: 'tube', id: 'finishline', class: FinishLine, data: this.assets.obstacles.tube, xPercentage: 0.85, yPercentage: 0.65 },
       { name: 'waterEnd', id: 'background', class: BackgroundTransitions,  data: this.assets.transitions.waterEnd },
     ];
 
@@ -930,7 +936,7 @@ const GameSetup = {
       { name: 'snowman', id: 'snowman', class: Snowman, data: this.assets.enemies.Snowman, xPercentage: 0.35, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
       { name: 'snowman', id: 'snowman', class: Snowman, data: this.assets.enemies.Snowman, xPercentage: 0.5, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
       { name: 'mario', id: 'player', class: PlayerWinter, data: this.assets.players.whitemario },
-      { name: 'cabin', id: 'cabin', class: Cabin, data: this.assets.obstacles.cabin },
+      { name: 'cabin', id: 'finishline', class: FinishLine, data: this.assets.obstacles.cabin, xPercentage: 0.85, yPercentage: 0.603 },
       { name: 'quidditchEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.quidditchEnd },
     ];
 
@@ -970,7 +976,7 @@ const GameSetup = {
       { name: 'snowman', id: 'snowman', class: Snowman, data: this.assets.enemies.Snowman, xPercentage: 0.35, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
       { name: 'snowman', id: 'snowman', class: Snowman, data: this.assets.enemies.Snowman, xPercentage: 0.5, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
       { name: 'mario', id: 'player', class: PlayerWinter, data: this.assets.players.whitemario },
-      { name: 'cabin', id: 'cabin', class: Cabin, data: this.assets.obstacles.cabin },
+      { name: 'cabin', id: 'finishline', class: FinishLine, data: this.assets.obstacles.cabin, xPercentage: 0.85, yPercentage: 0.603 },
       { name: 'winterEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.winterEnd },
     ];
     // Winter Game Level added to the GameEnv ...
@@ -981,7 +987,7 @@ const GameSetup = {
       { name: 'boss', id: 'boss', class: Boss, data: this.assets.enemies.boss, xPercentage: 0.5, minPosition: 0.3 },
       { name: 'boss1', id: 'boss', class: Boss, data: this.assets.enemies.boss, xPercentage: 0.3, minPosition: 0.07 },
       { name: 'mario', id: 'player', class: PlayerHills, data: this.assets.players.mario },
-      { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
+      { name: 'tube', id: 'finishline', class: FinishLine, data: this.assets.obstacles.tube, xPercentage: 0.85, yPercentage: 0.65 },
       { name: 'grass', id: 'platform', class: Platform, data: this.assets.platforms.grass }
     ];
 
