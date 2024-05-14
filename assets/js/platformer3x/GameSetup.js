@@ -28,7 +28,8 @@ import Cabin from './Cabin.js';
 import Goomba from './Goomba.js';
 import FlyingGoomba from './FlyingGoomba.js';
 import BlockPlatform from './BlockPlatform.js';
-import SpawnPlatform from './SpawnPlatform.js'
+import SpawnPlatform from './SpawnPlatform.js';
+import MovingPlatform from './MovingPlatform.js'
 import Mushroom from './Mushroom.js';
 import Coin from './Coin.js';
 import Snowflake from './Snowflake.js';
