@@ -7,29 +7,54 @@ export class Lava extends GameObject {
         super(canvas, image, data);
         this.islandX = xPercentage * GameEnv.innerWidth;
         this.islandY = yPercentage * GameEnv.innerHeight; // Initialize islandY with a pixel value
+        this.initialDelay = 5000; // 5 seconds delay
         this.risingSpeed = 19; // Adjust the rising speed as needed
         this.lastUpdateTime = Date.now(); // Initialize last update time to current time
+        this.timeUntilRise = this.initialDelay; // Time until lava rises
+        this.timerElement = document.createElement('div'); // Create a timer element
+        this.timerElement.style.position = 'absolute';
+        this.timerElement.style.top = '10px';
+        this.timerElement.style.left = '10px';
+        document.body.appendChild(this.timerElement); // Append timer element to the body
+        this.initialDelayElapsed = false; // Flag to track if initial delay has elapsed
+        this.startTimer(); // Start the timer
+    }
+
+    startTimer() {
+        setInterval(() => {
+            this.timeUntilRise -= 1000;
+            if (this.timeUntilRise <= 0) {
+                this.timeUntilRise = 0;
+                this.initialDelayElapsed = true; // Set the flag to true when initial delay is over
+            }
+            this.timerElement.innerText = `Time until lava rises: ${this.timeUntilRise / 1000}s`;
+        }, 1000);
     }
 
     update() {
-        // Calculate time passed since the last update
-        const currentTime = Date.now();
-        const deltaTime = currentTime - this.lastUpdateTime;
+        if (this.initialDelayElapsed) {
+            // Calculate time passed since the last update
+            const currentTime = Date.now();
+            const deltaTime = currentTime - this.lastUpdateTime;
 
-        // Update the lava's position based on rising speed and delta time
-        this.islandY -= (this.risingSpeed * deltaTime) / 1000;
+            // Update the lava's position based on rising speed and delta time
+            this.islandY -= (this.risingSpeed * deltaTime) / 1000;
 
-        // Log the Y position every time it changes
-        //console.log("Lava Y Position:", this.islandY);
+            // Update last update time
+            this.lastUpdateTime = currentTime;
 
-        // Update last update time
-        this.lastUpdateTime = currentTime;
-
-        // Call collision checks
-        this.collisionChecks();
-        this.size();
+            // Call collision checks
+            this.collisionChecks();
+            this.size();
+        }
     }
 
+    resetTimer() {
+        // Reset the timer back to 5 seconds
+        this.timeUntilRise = this.initialDelay;
+        this.initialDelayElapsed = false; // Reset the flag
+    }
+    
     draw() {
         // Draw the lava block on the canvas
         this.ctx.drawImage(this.image, 0, 0, this.canvas.width, this.canvas.height);
@@ -50,7 +75,6 @@ export class Lava extends GameObject {
         // Placeholder logic for collision action
         if (this.collisionData.touchPoints.other.id === "player") {
             console.log("Player touched lava. Game over!"); // Placeholder action, you can replace it with game over logic
-            // Add game over logic here
         }
     }
 }
