@@ -45,7 +45,10 @@ export class MagicBeam extends Character {
             if (this.collisionData.touchPoints.other.bottom && this.immune == 0) {
                 GameEnv.invincible = true;
                 GameEnv.goombaBounce1 = true;
-               
+                this.canvas.style.transition = "transform 1.5s, opacity 1s";
+                this.canvas.style.transition = "transform 2s, opacity 1s";
+                this.canvas.style.transformOrigin = "bottom"; 
+                this.canvas.style.transform = "scaleY(0)"; 
                 this.speed = 0;
 
                 setTimeout((function() {
