@@ -1,7 +1,7 @@
 import GameEnv from './GameEnv.js';
 import GameObject from './GameObject.js';
 
-export class BlockPlatform extends GameObject {
+export class MovingPlatform extends GameObject {
     constructor(canvas, image, data, xPercentage, yPercentage) {
         super(canvas, image, data);
         this.platformX = xPercentage * GameEnv.innerWidth;
@@ -18,8 +18,10 @@ export class BlockPlatform extends GameObject {
     // Required, but no update action
     update() {
         //console.log(this.platformY);
-        this.movePlatform();
+        if (GameEnv.destroyedMagicBeam === true) {     
+            this.movePlatform();
     }
+}
 
     movePlatform() {
         let currentPosition = parseInt(this.canvas.style.top) || 0;
@@ -60,4 +62,4 @@ export class BlockPlatform extends GameObject {
     }
 }
 
-export default BlockPlatform;
+export default MovingPlatform;
