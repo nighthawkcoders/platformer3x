@@ -13,6 +13,13 @@ export class Lava extends GameObject {
         this.timeUntilRise = this.initialDelay; // Time until lava rises
         this.timerElement = document.createElement('div'); // Create a timer element
         this.timerElement.style.position = 'absolute';
+        this.timerElement.style.fontFamily = 'Arial, sans-serif';
+        this.timerElement.style.fontSize = '24px';
+        this.timerElement.style.color = 'white';
+        this.timerElement.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+        this.timerElement.style.padding = '10px 20px';
+        this.timerElement.style.borderRadius = '10px';
+        this.timerElement.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)';
         this.timerElement.style.top = '70%';
         this.timerElement.style.left = '50%';
         this.timerElement.style.transform = 'translate(-50%, -50%)';
