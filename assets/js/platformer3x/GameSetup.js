@@ -31,6 +31,7 @@ import BlockPlatform from './BlockPlatform.js';
 import SpawnPlatform from './SpawnPlatform.js';
 import MovingPlatform from './MovingPlatform.js'
 import Mushroom from './Mushroom.js';
+import MagicBeam from './MagicBeam.js'
 import Coin from './Coin.js';
 import Snowflake from './Snowflake.js';
 import FlyingUFO from './FlyingUFO.js';
@@ -479,6 +480,12 @@ const GameSetup = {
         height: 180,
         hitbox: { widthPercentage: 0.0, heightPercentage: 0.2 }
       },
+      magicBeam: {
+        src: "/images/platformer/platforms/magic_beam.png",
+        width: 450,
+        height: 400,
+        hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 }
+      },
       alien: {
         src: "/images/platformer/sprites/alien.png",
         width: 444,
@@ -644,7 +651,7 @@ const GameSetup = {
       { name: 'flyingGoomba', id: 'flyingGoomba', class: FlyingGoomba, data: this.assets.enemies.flyingGoomba, xPercentage: 0.9, minPosition: 0.5, difficulties: ["normal", "hard", "impossible"] },
       { name: 'flyingGoomba', id: 'flyingGoomba', class: FlyingGoomba, data: this.assets.enemies.flyingGoomba, xPercentage: 0.9, minPosition: 0.5, difficulties: ["hard", "impossible"] },
       { name: 'flyingGoomba', id: 'flyingGoomba', class: FlyingGoomba, data: this.assets.enemies.flyingGoomba, xPercentage: 0.9, minPosition: 0.5, difficulties: ["impossible"] },
-      { name: 'mushroom', id: 'mushroom', class: Mushroom, data: this.assets.enemies.mushroom, xPercentage: 0.49 },
+      { name: 'magicBeam', id: 'magicBeam', class: MagicBeam, data: this.assets.enemies.magicBeam, xPercentage: 0.49 },
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.1908, yPercentage: 0.75 },
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.2242, yPercentage: 0.75 },
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.2575, yPercentage: 0.75 },
