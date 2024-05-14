@@ -55,6 +55,7 @@ export class PlayerGreece extends PlayerBase {
         this.handleCollisionEvent("flag");
         this.handleCollisionEvent("cerberus");
         this.handleCollisionEvent("flyingIsland");
+        this.handleCollisionEvent("lava");
     }
    
     /**
@@ -140,6 +141,26 @@ export class PlayerGreece extends PlayerBase {
                        this.x += 10;
                     }
                 
+                }
+                break;
+                case "lava": // Note: Goomba.js and Player.js could be refactored
+                
+                if (this.collisionData.touchPoints.other.id === "lava") {
+                    if (GameEnv.difficulty === "normal" || GameEnv.difficulty === "hard") {
+                        if (this.state.isDying == false) {
+                            this.state.isDying = true;
+                            this.canvas.style.transition = "transform 0.5s";
+                            this.canvas.style.transform = "rotate(-90deg) translate(-26px, 0%)";
+                            GameEnv.playSound("PlayerDeath");
+                            setTimeout(async() => {
+                                await GameControl.transitionToLevel(GameEnv.levels[GameEnv.levels.indexOf(GameEnv.currentLevel)]);
+                            }, 900); 
+                        }
+                    } else if (GameEnv.difficulty === "easy" && this.collisionData.touchPoints.this.right) {
+                        this.x -= 10;
+                    } else if (GameEnv.difficulty === "easy" && this.collisionData.touchPoints.this.left) {
+                       this.x += 10;
+                    }
                 }
                 break;
                 case "flyingIsland":
