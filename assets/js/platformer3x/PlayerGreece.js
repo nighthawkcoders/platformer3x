@@ -51,8 +51,8 @@ export class PlayerGreece extends PlayerBase {
     handleCollisionStart() {
         super.handleCollisionStart(); // calls the super class method
         // adds additional collision events
-        this.handleCollisionEvent("tubeU");
-        this.handleCollisionEvent("flag");
+        this.handleCollisionEvent("finishline");
+        this.handleCollisionEvent("minifinishline");
         this.handleCollisionEvent("cerberus");
     }
    
@@ -64,33 +64,32 @@ export class PlayerGreece extends PlayerBase {
         super.handlePlayerReaction(); // calls the super class method
         // handles additional player reactions
         switch (this.state.collision) {
-            case "tubeU":
-                // 1. Caught in tube
+            case "minifinishline":
+                // 1. Caught in finishline
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
-                    // Position player in the center of the tube 
+                    // Position player in the center of the finishline 
                     this.x = this.collisionData.newX;
                     // Using natural gravity wait for player to reach floor
                     if (Math.abs(this.y - this.bottom) <= GameEnv.gravity) {
                         // Force end of level condition
-                        // this.x = GameEnv.innerWidth + 1;
+                        //this.x = GameEnv.innerWidth + 1;
                         GameControl.transitionToLevel(GameEnv.levels[4])
                         return
                     }
-                    // 2. Collision between player right and tube   
+                // 2. Collision between player right and finishline   
                 } else if (this.collisionData.touchPoints.this.right) {
                     this.state.movement.right = false;
                     this.state.movement.left = true;
-                // 3. Collision between player left and tube
+                // 3. Collision between player left and finishline
                 } else if (this.collisionData.touchPoints.this.left) {
                     this.state.movement.left = false;
                     this.state.movement.right = true;
                 }
                 break;
-
-            case "flag":
-                // 1. Caught in tube
+            case "finishline":
+                // 1. Caught in finishline
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
-                    // Position player in the center of the tube 
+                    // Position player in the center of the finishline 
                     this.x = this.collisionData.newX;
                     // Using natural gravity wait for player to reach floor
                     if (Math.abs(this.y - this.bottom) <= GameEnv.gravity) {
@@ -99,11 +98,11 @@ export class PlayerGreece extends PlayerBase {
                         GameControl.transitionToLevel(GameEnv.levels[5])
                         return
                     }
-                // 2. Collision between player right and tube   
+                // 2. Collision between player right and finishline   
                 } else if (this.collisionData.touchPoints.this.right) {
                     this.state.movement.right = false;
                     this.state.movement.left = true;
-                // 3. Collision between player left and tube
+                // 3. Collision between player left and finishline
                 } else if (this.collisionData.touchPoints.this.left) {
                     this.state.movement.left = false;
                     this.state.movement.right = true;
