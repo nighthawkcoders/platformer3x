@@ -92,7 +92,7 @@ export class Goomba extends Character {
     
     // Player action on collisions
     collisionAction() {
-        if (this.collisionData.touchPoints.other.id === "finishline") {
+        if (this.collisionData.touchPoints.other.id === "tube") {
             if (this.collisionData.touchPoints.other.left || this.collisionData.touchPoints.other.right) {
                 this.speed = -this.speed;            
             }

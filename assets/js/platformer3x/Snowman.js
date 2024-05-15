@@ -1,4 +1,6 @@
+import Character from './Character.js';
 import GameEnv from './GameEnv.js';
+import GameControl from './GameControl.js';
 import Enemy from './Enemy.js';
 
 export class Snowman extends Enemy {

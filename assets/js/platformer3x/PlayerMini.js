@@ -23,8 +23,8 @@ export class PlayerMini extends PlayerBase {
     constructor(canvas, image, data) {
         super(canvas, image, data);
         const scaledHeight = GameEnv.innerHeight * (100 / 832);
-        const finishlineX = .01 * GameEnv.innerWidth;
-        this.setX(finishlineX);
+        const tubeX = .01 * GameEnv.innerWidth;
+        this.setX(tubeX);
         this.hillsStart = true;
 
         // Goomba variables, deprecate?
@@ -62,7 +62,6 @@ export class PlayerMini extends PlayerBase {
         super.handleCollisionStart(); // calls the super class method
         // adds additional collision events
         this.handleCollisionEvent("tubeU");
-        this.handleCollisionEvent("finishline");
         this.handleCollisionEvent("goomba");
         this.handleCollisionEvent("mushroom");
 
@@ -76,10 +75,11 @@ export class PlayerMini extends PlayerBase {
         super.handlePlayerReaction(); // calls the super class method
         // handles additional player reactions
         switch (this.state.collision) {
-            case "finishline":
-                // 1. Caught in finishline
+            case "tubeU":
+                // 1. Caught in tube
+
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
-                    // Position player in the center of the finishline 
+                    // Position player in the center of the tube 
                     this.x = this.collisionData.newX;
                     // Using natural gravity wait for player to reach floor
                     if (Math.abs(this.y - this.bottom) <= GameEnv.gravity) {
@@ -89,11 +89,11 @@ export class PlayerMini extends PlayerBase {
                         return                    
                     }
 
-                // 2. Collision between player right and finishline   
+                // 2. Collision between player right and tube   
                 } else if (this.collisionData.touchPoints.this.right) {
                     this.state.movement.right = false;
                     this.state.movement.left = true;
-                // 3. Collision between player left and finishline
+                // 3. Collision between player left and tube
                 } else if (this.collisionData.touchPoints.this.left) {
                     this.state.movement.left = false;
                     this.state.movement.right = true;

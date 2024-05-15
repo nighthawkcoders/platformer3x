@@ -104,7 +104,7 @@ export class Enemy extends Character {
 
     // Player action on collisions
     collisionAction() {
-        if (this.collisionData.touchPoints.other.id === "finishline") {
+        if (this.collisionData.touchPoints.other.id === "tube") {
             if (this.state.direction === "left" && this.collisionData.touchPoints.other.right) {
                 this.state.animation = "right";
                 this.state.direction = "right";
