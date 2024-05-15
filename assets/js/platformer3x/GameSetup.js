@@ -235,6 +235,10 @@ const GameSetup = {
         src: "/images/platformer/obstacles/cabin.png",
         hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 }
       },
+      chest: {
+        src: "/images/platformer/obstacles/Chest.png",
+        hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 }
+      },
       coin: { src: "/images/platformer/obstacles/coin.png" },
       snowflake: { src: "/images/platformer/obstacles/snowflake.png" },
       tubeD: {
@@ -824,7 +828,7 @@ const GameSetup = {
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.2575, yPercentage: 0.75 },
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.5898, yPercentage: 0.900 },
       { name: 'mario', id: 'player', class: PlayerHills, data: this.assets.players.mario },
-      { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
+      { name: 'Chest', id: 'finishline', class: FinishLine, data: this.assets.obstacles.chest },
       { name: 'miniEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.miniEnd },
     ];
     let waterGameObjects = allWaterGameObjects.filter(obj => !obj.difficulties || obj.difficulties.includes(difficulty));
