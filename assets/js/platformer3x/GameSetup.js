@@ -946,11 +946,8 @@ const GameSetup = {
     
     const narwhalObjects = [
       // GameObject(s), the order is important to z-index...
-<<<<<<< HEAD
       { name: 'Icewater', id: 'background', class: BackgroundIce, data: this.assets.backgrounds.icewater },
-=======
       { name: 'icewater', id: 'background', class: BackgroundIcewater, data: this.assets.backgrounds.icewater },
->>>>>>> 17d52b398950ff92a878397c3c524042721b4c64
       { name: 'narwhal', id: 'background', class: BackgroundNarwhal, data: this.assets.backgrounds.narwhal },
       { name: 'narwhalfloor', id: 'platform', class: Platform, data: this.assets.platforms.narwhalfloor },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.2, yPercentage: 0.82 },
