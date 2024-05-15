@@ -867,9 +867,9 @@ const GameSetup = {
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.38, yPercentage: 0.27 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.38, yPercentage: 0.17 },
 
-      // { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.536, yPercentage: 0.99 },
-      { name: 'blocks', id: 'jumpPlatform', class: MovingPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.616, yPercentage: 0.81 },
-      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.696, yPercentage: 0.90 },
+      { name: 'blocks', id: 'jumpPlatform', class: MovingPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.626, yPercentage: 0.92 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.663, yPercentage: 0.586 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.700, yPercentage: 0.586 },
 
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.yellowpattern, xPercentage: 0.456, yPercentage: 1.08 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.yellowredpattern, xPercentage: 0.456, yPercentage: 0.985 },
@@ -895,9 +895,9 @@ const GameSetup = {
 
       { name: 'magicBeam', id: 'magicBeam', class: MagicBeam, data: this.assets.enemies.magicBeam, xPercentage: 0.529, yPercentage: 0.61 },
 
-      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.687, yPercentage: 0.79 },
-      // { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.611, yPercentage: 0.7 },
-      //{ name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.529, yPercentage: 0.61 },
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.656, yPercentage: 0.46 },
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.611, yPercentage: 0.46 },
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.700, yPercentage: 0.46 },
 
       { name: 'harry', id: 'player', class: PlayerQuidditch, data: this.assets.players.harry },
       { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },

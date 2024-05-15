@@ -6,30 +6,29 @@ export class MovingPlatform extends GameObject {
         super(canvas, image, data);
         this.platformX = xPercentage * GameEnv.innerWidth;
         this.platformY = yPercentage;
-        this.direction = 1;
-        this.speed = 1;
-        this.minBottom = 50; // Minimum bottom position for the platform
-        this.maxBottom = 300; // Maximum bottom position for the platform
-
+        this.direction = -1; // Move up
+        this.speed = 0.5; // Reduced speed
+        this.maxTop =  300
+    
         // Add glow effect
         this.canvas.style.boxShadow = "0 0 10px 5px rgba(0, 255, 255, 0.7)";
     }
 
     // Required, but no update action
     update() {
-        //console.log(this.platformY);
         if (GameEnv.destroyedMagicBeam === true) {     
             this.movePlatform();
+        }
     }
-}
 
     movePlatform() {
         let currentPosition = parseInt(this.canvas.style.top) || 0;
 
-        if (currentPosition >= this.maxBottom) {
+        // Only move up
+        if (currentPosition <= this.maxTop) { // Changed condition to check if it's below maxTop
+            this.direction = 1; // Change direction to move down
+        } else if (currentPosition >= (GameEnv.bottom - this.canvas.height)) { // Ensure it stays within the bottom of the game environment
             this.direction = -1;
-        } else if (currentPosition <= this.minBottom) {
-            this.direction = 1;
         }
 
         this.canvas.style.top = currentPosition + this.direction * this.speed + 'px';
