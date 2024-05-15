@@ -258,7 +258,7 @@ const GameSetup = {
     },
     platforms: {
       grass: { src: "/images/platformer/platforms/grass.png" },
-      narwhalfloor: { src: "/images/platformer/narwhalfloor.png"},
+      narwhalfloor: { src: "/images/platformer/platforms/narwhalfloor.png"},
       sand: { src: "/images/platformer/platforms/sand.png" },
       snowyfloor: { src: "/images/platformer/platforms/snowyfloor.png" },
       snowywood: { src: "/images/platformer/platforms/snowywood.png" },
@@ -939,7 +939,7 @@ const GameSetup = {
     
     const narwhalObjects = [
       // GameObject(s), the order is important to z-index...
-      { name: 'winter', id: 'background', class: BackgroundWinter, data: this.assets.backgrounds.winter },
+      { name: 'Icewater', id: 'background', class: BackgroundIce, data: this.assets.backgrounds.icewater },
       { name: 'narwhal', id: 'background', class: BackgroundNarwhal, data: this.assets.backgrounds.narwhal },
       { name: 'snow', id: 'background', class: BackgroundNarwhal, data: this.assets.backgrounds.snow },
       { name: 'narwhalfloor', id: 'platform', class: Platform, data: this.assets.platforms.narwhalfloor },
