@@ -947,7 +947,6 @@ const GameSetup = {
     
     const narwhalObjects = [
       // GameObject(s), the order is important to z-index...
-      { name: 'Icewater', id: 'background', class: BackgroundIce, data: this.assets.backgrounds.icewater },
       { name: 'icewater', id: 'background', class: BackgroundIcewater, data: this.assets.backgrounds.icewater },
       { name: 'narwhal', id: 'background', class: BackgroundNarwhal, data: this.assets.backgrounds.narwhal },
       { name: 'narwhalfloor', id: 'platform', class: Platform, data: this.assets.platforms.narwhalfloor },
@@ -979,7 +978,7 @@ const GameSetup = {
       { name: 'snowman', id: 'snowman', class: Snowman, data: this.assets.enemies.Snowman, xPercentage: 0.5, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
       { name: 'mario', id: 'player', class: PlayerWinter, data: this.assets.players.whitemario },
       { name: 'cabin', id: 'finishline', class: FinishLine, data: this.assets.obstacles.cabin, xPercentage: 0.85, yPercentage: 0.603 },
-      { name: 'winterEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.winterEnd },
+      { name: 'iceminiEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.iceminiEnd },
     ];
     // Winter Game Level added to the GameEnv ...
     new GameLevel({ tag: "narwhal", callback: this.playerOffScreenCallBack, objects: narwhalObjects });
