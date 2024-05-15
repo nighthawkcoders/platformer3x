@@ -52,7 +52,7 @@ export class PlayerHills extends PlayerBase {
     handleCollisionStart() {
         super.handleCollisionStart(); // calls the super class method
         // adds additional collision events
-        this.handleCollisionEvent("finishline");
+        this.handleCollisionEvent("tube");
         this.handleCollisionEvent("goomba");
         this.handleCollisionEvent("mushroom");
         this.handleCollisionEvent("boss");
@@ -66,21 +66,21 @@ export class PlayerHills extends PlayerBase {
         super.handlePlayerReaction(); // calls the super class method
         // handles additional player reactions
         switch (this.state.collision) {
-            case "finishline":
-                // 1. Caught in finishline
+            case "tube":
+                // 1. Caught in tube
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
-                    // Position player in the center of the finishline 
+                    // Position player in the center of the tube 
                     this.x = this.collisionData.newX;
                     // Using natural gravity wait for player to reach floor
                     if (Math.abs(this.y - this.bottom) <= GameEnv.gravity) {
                         // Force end of level condition
                         this.x = GameEnv.innerWidth + 1;
                     }
-                // 2. Collision between player right and finishline   
+                // 2. Collision between player right and tube   
                 } else if (this.collisionData.touchPoints.this.right) {
                     this.state.movement.right = false;
                     this.state.movement.left = true;
-                // 3. Collision between player left and finishline
+                // 3. Collision between player left and tube
                 } else if (this.collisionData.touchPoints.this.left) {
                     this.state.movement.left = false;
                     this.state.movement.right = true;
