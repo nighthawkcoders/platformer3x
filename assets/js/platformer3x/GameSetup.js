@@ -318,6 +318,7 @@ const GameSetup = {
       waterEnd: { src: "/images/platformer/transitions/waterEnd.png" },
       quidditchEnd: { src: "/images/platformer/transitions/quidditchEnd.png" },
       miniEnd: { src: "/images/platformer/transitions/miniEnd.png" },
+      iceminiEnd: { src: "/images/platformer/transitions/IceMinigameEnd.png"},
     },
     players: {
       mario: {
