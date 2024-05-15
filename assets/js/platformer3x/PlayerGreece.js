@@ -27,8 +27,8 @@ export class PlayerGreece extends PlayerBase {
         this.timer = false;
         GameEnv.invincible = false; // Player is not invincible 
         //Hp Bar
-        this.maxHp = 100; // Maximum health points
-        this.currentHp = 100; // Current health points
+        this.maxHp = 99; // Maximum health points
+        this.currentHp = 99; // Current health points
         this.hpBar = document.createElement("canvas");
         this.hpBar.width = 100;
         this.hpBar.height = 15;
@@ -177,7 +177,9 @@ export class PlayerGreece extends PlayerBase {
                 if (this.collisionData.touchPoints.other.id === "lava") {
                     if (GameEnv.difficulty === "normal" || GameEnv.difficulty === "hard") {
                         if (this.state.isDying == false) {
-                            if(this.currentHp == 0){
+                            if(this.currentHp == 33){
+                                this.currentHp -= 33;
+                                this.drawHpBox();
                                 this.state.isDying = true;
                                 this.canvas.style.transition = "transform 0.5s";
                                 this.canvas.style.transform = "rotate(-90deg) translate(-26px, 0%)";
@@ -186,7 +188,8 @@ export class PlayerGreece extends PlayerBase {
                                     await GameControl.transitionToLevel(GameEnv.levels[GameEnv.levels.indexOf(GameEnv.currentLevel)]);
                                 }, 900); 
                             } else{
-                                this.currentHp -= 20;
+                                this.setY(this.y - (this.bottom * 0.6));
+                                this.currentHp -= 33;
                             }
                         }
                     } else if (GameEnv.difficulty === "easy" && this.collisionData.touchPoints.this.right) {
