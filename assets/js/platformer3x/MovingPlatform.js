@@ -8,7 +8,7 @@ export class MovingPlatform extends GameObject {
         this.platformY = yPercentage;
         this.direction = 1;
         this.speed = 1;
-        this.minBottom = 150; // Minimum bottom position for the platform
+        this.minBottom = 50; // Minimum bottom position for the platform
         this.maxBottom = 300; // Maximum bottom position for the platform
 
         // Add glow effect
