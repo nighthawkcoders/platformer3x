@@ -12,7 +12,7 @@ import GameControl from './GameControl.js';
  * 
  * @extends PlayerBase 
  */
-export class PlayerHills extends PlayerBase {
+export class PlayerBoss extends PlayerBase {
 
     /** GameObject instantiation: constructor for PlayerHills object
      * @extends Character 
@@ -40,7 +40,7 @@ export class PlayerHills extends PlayerBase {
             jumpHeightFactor = 0.40;
         }
         if(GameEnv.currentLevel.tag == "boss"){
-            jumpHeightFactor = 0;
+            jumpHeightFactor = 0.70;
         }
         this.setY(this.y - (this.bottom * jumpHeightFactor));
     }
@@ -53,10 +53,39 @@ export class PlayerHills extends PlayerBase {
         super.handleCollisionStart(); // calls the super class method
         // adds additional collision events
         this.handleCollisionEvent("tube");
-        this.handleCollisionEvent("goomba");
-        this.handleCollisionEvent("mushroom");
         this.handleCollisionEvent("boss");
     }
+
+        /**
+ * @override
+ * gameLoop: Watch for Player collision events 
+ */
+        draw() {
+            // Set fixed dimensions and position for the Character
+            this.canvas.width = this.canvasWidth;
+            this.canvas.height = this.canvasHeight;
+            this.canvas.style.width = `${this.canvas.width}px`;
+            this.canvas.style.height = `${this.canvas.height}px`;
+            this.canvas.style.position = 'absolute';
+            this.canvas.style.left = `${this.x}px`; // Set character horizontal position based on its x-coordinate
+            this.canvas.style.top = `${this.y}px`; // Set character up and down position based on its y-coordinate
+            this.ctx.fillStyle = "black";
+            this.ctx.font = "10px Arial";
+            if (!GameEnv.playerChange) {
+                this.ctx.fillText(this.name, 0, this.canvas.height / 4);
+                this.ctx.drawImage(
+                    this.image,
+                    this.frameX * this.spriteWidth,
+                    this.frameY * this.spriteHeight,
+                    this.spriteWidth,
+                    this.spriteHeight,
+                    0,
+                    0,
+                    this.canvas.width,
+                    this.canvas.height
+                );
+            }
+        }
    
     /**
      * @override
@@ -84,38 +113,6 @@ export class PlayerHills extends PlayerBase {
                 } else if (this.collisionData.touchPoints.this.left) {
                     this.state.movement.left = false;
                     this.state.movement.right = true;
-                }
-                break;
-            case "goomba": // Note: Goomba.js and Player.js could be refactored
-                // 1. Player jumps on goomba, interaction with Goomba.js
-                if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom && this.state.isDying == false) {
-                    // GoombaBounce deals with player.js and goomba.js
-                    if (GameEnv.goombaBounce === true) {
-                        GameEnv.goombaBounce = false;
-                        this.y = this.y - 100;
-                    }
-                    if (GameEnv.goombaBounce1 === true) {
-                        GameEnv.goombaBounce1 = false; 
-                        this.y = this.y - 250
-                    }
-                // 2. Player touches goomba sides of goomba 
-                } else if (this.collisionData.touchPoints.this.right || this.collisionData.touchPoints.this.left) {
-                    if (GameEnv.difficulty === "normal" || GameEnv.difficulty === "hard") {
-                        if (this.state.isDying == false) {
-                            this.state.isDying = true;
-                            this.canvas.style.transition = "transform 0.5s";
-                            this.canvas.style.transform = "rotate(-90deg) translate(-26px, 0%)";
-                            GameEnv.playSound("PlayerDeath");
-                            setTimeout(async() => {
-                                await GameControl.transitionToLevel(GameEnv.levels[GameEnv.levels.indexOf(GameEnv.currentLevel)]);
-                            }, 900); 
-                        }
-                    } else if (GameEnv.difficulty === "easy" && this.collisionData.touchPoints.this.right) {
-                        this.x -= 10;
-                    } else if (GameEnv.difficulty === "easy" && this.collisionData.touchPoints.this.left) {
-                       this.x += 10;
-                    }
-                
                 }
                 break;
             case "boss": // Note: Goomba.js and Player.js could be refactored
@@ -150,21 +147,10 @@ export class PlayerHills extends PlayerBase {
                 
                 }
                 break;
-            case "mushroom": // 
-                // Player touches mushroom   
-                if (GameEnv.destroyedMushroom === false) {
-                    GameEnv.destroyedMushroom = true;
-                    this.canvas.style.filter = 'invert(1)';
-                    // Invert state lasts for 2 seconds
-                    setTimeout(() => {
-                        this.canvas.style.filter = 'invert(0)';
-                    }, 2000); // 2000 milliseconds = 2 seconds
-                }
-                break;  
         }
 
     }
 
 }
 
-export default PlayerHills;
+export default PlayerBoss;
