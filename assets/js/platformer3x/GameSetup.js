@@ -963,6 +963,9 @@ const GameSetup = {
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.43, yPercentage: 0.82 },
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.47, yPercentage: 0.24 },
 
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.799, yPercentage: 0.81 },
+      
+
       { name: 'harry', id: 'player', class: PlayerMini, data: this.assets.players.harry },
       { name: 'tubeD', id: 'tubeD', class: Tube1, data: this.assets.obstacles.tubeD},
       { name: 'tubeU', id: 'tubeU', class: Tube, data: this.assets.obstacles.tubeU},
