@@ -7,7 +7,10 @@
  * - call or add listener to GameControl.startTimer() to start the game timer.
  */
 import GameEnv from './GameEnv.js';
+import GameLevel from './GameLevel.js';
+import GameSetup from './GameSetup.js';
 import Socket from './Multiplayer.js';
+import PlayerZombie from './PlayerZombie.js';
 import SettingsControl from "./SettingsControl.js";
 
 /**
@@ -191,6 +194,9 @@ const GameControl = {
              * 2: Let the boss to walk left
              * 3: Let the boss to walk right
             */
+        }
+        else if (event === "zombie"){
+            GameEnv.playerChange = true;
         }
     },
 

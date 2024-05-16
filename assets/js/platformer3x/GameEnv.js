@@ -82,6 +82,8 @@ export class GameEnv {
     static time = 0;
     static darkMode = true
 
+    static playerChange = false;
+
     static claimedCoinIds = []
 
     

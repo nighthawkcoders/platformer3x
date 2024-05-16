@@ -44,6 +44,10 @@ import Star from './Star.js';
 import Dementor from './Dementor.js';
 import Draco from './Draco.js';
 import Boss from './Boss.js';
+import PlayerBaseOneD from './PlayerBaseOneD.js';
+import PlayerZombie from './PlayerZombie.js';
+import BossItem from './BossItem.js';
+import PlayerBoss from './PlayerBoss.js';
 
 //test comment
 
@@ -430,6 +434,21 @@ const GameSetup = {
         d: { row: 2, frames: 3, idleFrame: { column: 1, frames: 0 } }, // Right Movement 
         runningLeft: { row: 5, frames: 3, idleFrame: { column: 1, frames: 0 } },
         runningRight: { row: 4, frames: 3, idleFrame: { column: 1, frames: 0 } },
+      },
+      zombie: { //one direction player
+        src: "/images/platformer/sprites/zombie.png",
+        width: 130,
+        height: 70,
+        scaleSize: 60,
+        speedRatio: 0.7,
+        idle: { row: 2, frames: 11, idleFrame: { column: 1, frames: 0 } },
+        walk: { row: 3, frames: 11 }, // default - right Movement
+        run: { row: 3, frames: 11 }, // default - right Movement
+        jump: { row: 3, frames: 11 }, // default - right Movement
+        attack: { row: 4, min: 6,frames: 11 }, 
+        jumpAttack : { row: 6, frames: 11 }, 
+        death : { row: 11, frames: 11 }, 
+        hitbox: { widthPercentage: 0.3, heightPercentage: 0.8 }
       },
     },
     enemies: {
@@ -937,7 +956,9 @@ const GameSetup = {
       { name: 'bossbackground', id: 'background', class: Background, data: this.assets.backgrounds.boss },
       { name: 'boss', id: 'boss', class: Boss, data: this.assets.enemies.boss, xPercentage: 0.5, minPosition: 0.3 },
       { name: 'boss1', id: 'boss', class: Boss, data: this.assets.enemies.boss, xPercentage: 0.3, minPosition: 0.07 },
-      { name: 'mario', id: 'player', class: PlayerHills, data: this.assets.players.mario },
+      { name: 'itemBlock', id: 'jumpPlatform', class: BossItem, data: this.assets.platforms.itemBlock, xPercentage: 0.2, yPercentage: 0.65 }, //item block is a platform
+      { name: 'mario', id: 'player', class: PlayerBoss, data: this.assets.players.mario },
+      { name: 'zombie', id: 'player', class: PlayerZombie, data: this.assets.players.zombie },
       { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
       { name: 'grass', id: 'platform', class: Platform, data: this.assets.platforms.grass }
     ];
