@@ -41,6 +41,8 @@ import Star from './Star.js';
 import Dementor from './Dementor.js';
 import Draco from './Draco.js';
 import Boss from './Boss.js';
+import Jellyfish from './Jellyfish.js';
+import Penguin from './Penguin.js';
 
 //test comment
 
@@ -466,6 +468,18 @@ const GameSetup = {
         idle: { row: 0, frames: 0 }, // Stop the movement 
         right: { row: 0, frames: 0, idleFrame: { column: 0, frames: 0 } }, // Right Movement 
       },
+      Penguin: {
+        src: "/images/platformer/sprites/penguin.png",
+        width: 308,
+        height: 327,
+        scaleSize: 60,
+        speedRatio: 0.7,
+        xPercentage: 0.6,
+        hitbox: { widthPercentage: 0.0, heightPercentage: 0.2 },
+        left: { row: 0, frames: 0, idleFrame: { column: 0, frames: 0 } }, // Left Movement
+        idle: { row: 0, frames: 0 }, // Stop the movement 
+        right: { row: 0, frames: 0, idleFrame: { column: 0, frames: 0 } }, // Right Movement 
+      },
       Owl: {
         src: "/images/platformer/sprites/owl.png",
         width: 499,
@@ -473,6 +487,13 @@ const GameSetup = {
         scaleSize: 60,
         speedRatio: 0.8,
       },
+      Jellyfish: {
+        src: "/images/platformer/sprites/jellyfish.png",
+        width: 499, 
+        height: 500,
+        scaleSize: 60,
+        speedRatio: 0.8,
+      },  
       flyingGoomba: {
         src: "/images/platformer/sprites/flying-goomba.png",
         width: 448,
@@ -971,11 +992,11 @@ const GameSetup = {
       { name: 'snowflake', id: 'snowflake', class: Snowflake, data: this.assets.obstacles.snowflake, xPercentage: 0.2100, yPercentage: 0.75 },
       { name: 'snowflake', id: 'snowflake', class: Snowflake, data: this.assets.obstacles.snowflake, xPercentage: 0.2619, yPercentage: 0.75 },
       { name: 'snowflake', id: 'snowflake', class: Snowflake, data: this.assets.obstacles.snowflake, xPercentage: 0.3136, yPercentage: 0.75 },
-      { name: 'owl', id: 'owl', class: Owl, data: this.assets.enemies.Owl, xPercentage: 0.3, minPosition: 0.05 },
-      { name: 'owl', id: 'owl', class: Owl, data: this.assets.enemies.Owl, xPercentage: 0.8, minPosition: 0.05 },
-      { name: 'snowman', id: 'snowman', class: Snowman, data: this.assets.enemies.Snowman, xPercentage: 0.2, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
-      { name: 'snowman', id: 'snowman', class: Snowman, data: this.assets.enemies.Snowman, xPercentage: 0.35, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
-      { name: 'snowman', id: 'snowman', class: Snowman, data: this.assets.enemies.Snowman, xPercentage: 0.5, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
+      { name: 'jellyfish', id: 'jellyfish', class: Jellyfish, data: this.assets.enemies.Jellyfish, xPercentage: 0.3, minPosition: 0.05 },
+      { name: 'jellyfish', id: 'jellyfish', class: Jellyfish, data: this.assets.enemies.Jellyfish, xPercentage: 0.8, minPosition: 0.05 },
+      { name: 'penguin', id: 'penguin', class: Penguin, data: this.assets.enemies.Penguin, xPercentage: 0.2, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
+      { name: 'penguin', id: 'penguin', class: Penguin, data: this.assets.enemies.Penguin, xPercentage: 0.35, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
+      { name: 'penguin', id: 'penguin', class: Penguin, data: this.assets.enemies.Penguin, xPercentage: 0.5, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
       { name: 'mario', id: 'player', class: PlayerWinter, data: this.assets.players.whitemario },
       { name: 'cabin', id: 'finishline', class: FinishLine, data: this.assets.obstacles.cabin, xPercentage: 0.85, yPercentage: 0.603 },
       { name: 'iceminiEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.iceminiEnd },
