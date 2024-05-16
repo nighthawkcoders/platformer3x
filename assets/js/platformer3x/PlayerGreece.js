@@ -26,6 +26,14 @@ export class PlayerGreece extends PlayerBase {
         // Goomba variables, deprecate?
         this.timer = false;
         GameEnv.invincible = false; // Player is not invincible 
+        //Hp Bar
+        this.maxHp = 99; // Maximum health points
+        this.currentHp = 99; // Current health points
+        this.hpBar = document.createElement("canvas");
+        this.hpBar.width = 100;
+        this.hpBar.height = 15;
+        document.querySelector("#canvasContainer").appendChild(this.hpBar);
+        
     }
 
     /**
@@ -44,6 +52,36 @@ export class PlayerGreece extends PlayerBase {
         this.setY(this.y - (this.bottom * jumpHeightFactor));
     }
 
+    drawHpBox() { //Hp box
+        // Position and size of the health bar
+        const hpBarWidth = this.hpBar.width; // The width of the health bar matches the boss's width
+        const hpBarHeight = this.hpBar.height; // A fixed height for the health bar
+        const hpBarX = (this.x + this.canvasWidth/2 - this.hpBar.width/2); // Position above the boss
+        const hpBarY = this.y - this.canvasHeight/40; // 20 pixels above the boss
+
+        this.hpBar.id = "hpBar";
+        // Calculate health percentage
+        const hpPercentage = this.currentHp / this.maxHp;
+      
+        // Draw the background (gray)
+        this.hpBar.getContext('2d').fillStyle = 'gray';
+        this.hpBar.getContext('2d').fillRect(0, 0, hpBarWidth, hpBarHeight);
+      
+        // Draw the health bar (green, based on current health)
+        this.hpBar.getContext('2d').fillStyle = 'green';
+        this.hpBar.getContext('2d').fillRect(0, 0, hpBarWidth * hpPercentage, hpBarHeight);
+
+        
+        this.hpBar.style.position = 'absolute';  //code from Flag.js, define the style of the Hp Bar
+        this.hpBar.style.left = `${hpBarX}px`;
+        this.hpBar.style.top = `${hpBarY}px`; 
+        this.hpBar.style.borderRadius = '5px';
+        this.hpBar.style.width = `${hpBarWidth}px`;
+        this.hpBar.style.height = `${hpBarHeight}px`;
+        this.hpBar.style.border = '2px solid black';
+
+      }
+
     /**
      * @override
      * gameLoop: Watch for Player collision events 
@@ -54,8 +92,19 @@ export class PlayerGreece extends PlayerBase {
         this.handleCollisionEvent("tubeU");
         this.handleCollisionEvent("flag");
         this.handleCollisionEvent("cerberus");
+        this.handleCollisionEvent("flyingIsland");
+        this.handleCollisionEvent("lava");
     }
    
+    update() {
+        // player methods
+        this.updateAnimation();
+        this.updateMovement();
+        this.drawHpBox();
+        // super actions need to be after; this is to preserve player order of operations
+        super.update();
+    }
+
     /**
      * @override
      * gameloop: Handles additional Player reaction / state updates to the collision for game level 
@@ -88,26 +137,8 @@ export class PlayerGreece extends PlayerBase {
                 break;
 
             case "flag":
-                // 1. Caught in tube
-                if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
-                    // Position player in the center of the tube 
-                    this.x = this.collisionData.newX;
-                    // Using natural gravity wait for player to reach floor
-                    if (Math.abs(this.y - this.bottom) <= GameEnv.gravity) {
-                        // Force end of level condition
-                        //this.x = GameEnv.innerWidth + 1;
-                        GameControl.transitionToLevel(GameEnv.levels[5])
-                        return
-                    }
-                // 2. Collision between player right and tube   
-                } else if (this.collisionData.touchPoints.this.right) {
-                    this.state.movement.right = false;
-                    this.state.movement.left = true;
-                // 3. Collision between player left and tube
-                } else if (this.collisionData.touchPoints.this.left) {
-                    this.state.movement.left = false;
-                    this.state.movement.right = true;
-                }
+                // Transition to the next level when touching the flag
+                GameControl.transitionToLevel(GameEnv.levels[6]);
                 break;
             case "cerberus": // Note: Goomba.js and Player.js could be refactored
                 // 1. Player jumps on goomba, interaction with Goomba.js
@@ -140,6 +171,50 @@ export class PlayerGreece extends PlayerBase {
                     }
                 
                 }
+                break;
+                case "lava": // Note: Goomba.js and Player.js could be refactored
+                
+                if (this.collisionData.touchPoints.other.id === "lava") {
+                    if (GameEnv.difficulty === "normal" || GameEnv.difficulty === "hard") {
+                        if (this.state.isDying == false) {
+                            if(this.currentHp == 33){
+                                this.currentHp -= 33;
+                                this.drawHpBox();
+                                this.state.isDying = true;
+                                this.canvas.style.transition = "transform 0.5s";
+                                this.canvas.style.transform = "rotate(-90deg) translate(-26px, 0%)";
+                                GameEnv.playSound("PlayerDeath");
+                                setTimeout(async() => {
+                                    await GameControl.transitionToLevel(GameEnv.levels[GameEnv.levels.indexOf(GameEnv.currentLevel)]);
+                                }, 900); 
+                            } else{
+                                this.setY(this.y - (this.bottom * 0.6));
+                                this.currentHp -= 33;
+                            }
+                        }
+                    } else if (GameEnv.difficulty === "easy" && this.collisionData.touchPoints.this.right) {
+                        this.x -= 10;
+                    } else if (GameEnv.difficulty === "easy" && this.collisionData.touchPoints.this.left) {
+                       this.x += 10;
+                    }
+                }
+                break;
+                case "flyingIsland":
+                    // Player is on top of the island
+                    if (this.collisionData.touchPoints.this.onTopofOther) {
+                        this.state.movement = { up: false, down: false, left: true, right: true, falling: false};
+                        this.gravityEnabled = false;
+    
+                    // Player is touching the wall with right side
+                    } else if (this.collisionData.touchPoints.this.right) {
+                        this.state.movement = { up: false, down: false, left: true, right: false, falling: false};
+                        this.y -= 4;
+                    
+                    // Player is touching the wall with left side
+                    } else if (this.collisionData.touchPoints.this.left) {
+                        this.state.movement = { up: false, down: false, left: false, right: true, falling: false};
+                        this.y -= 4;
+                    }
                 break;
         }
 
