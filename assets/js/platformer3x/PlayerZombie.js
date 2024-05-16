@@ -58,6 +58,7 @@ export class PlayerZombie extends PlayerBaseOneD {
         this.handleCollisionEvent("boss");
     }
 
+
     /**
  * @override
  * gameLoop: Watch for Player collision events 

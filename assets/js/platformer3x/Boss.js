@@ -3,6 +3,7 @@ import Character from './Character.js';
 import GameControl from './GameControl.js';
 import Enemy from './Enemy.js';
 import GameLevel from './GameLevel.js';
+import PlayerZombie from './PlayerZombie.js';
 
 
 export class Boss extends Enemy {
