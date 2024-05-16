@@ -273,6 +273,7 @@ const GameSetup = {
       yellowpattern: { src: "/images/platformer/platforms/yellowtowerpattern.jpg" },
       yellowredpattern: { src: "/images/platformer/platforms/yellowredpattern.jpg" },
       lionpattern: { src: "/images/platformer/platforms/lionpattern.jpg" },
+      stone: { src: "/images/platformer/platforms/stone.jpg"}, 
       turf: { src: "/images/platformer/platforms/turf.png" },
       block: { src: "/images/platformer/platforms/brick_block.png" }, //MAY need 3 new variables: sizeRatio, widthRatio, and heightRatio
       itemBlock: {
@@ -298,6 +299,7 @@ const GameSetup = {
       fish: { src: "/images/platformer/backgrounds/school-fish.png" },
       reef: { src: "/images/platformer/backgrounds/reef.png" },
       quidditch: { src: "/images/platformer/backgrounds/quidditch2.jpg" },
+      miniHogwarts: { src: "/images/platformer/backgrounds/miniHogwarts.png"}, 
       space: { src: "/images/platformer/backgrounds/planet.jpg" },
       castles: { src: "/images/platformer/backgrounds/castles.png" },
       winter: { src: "/images/platformer/backgrounds/winter.png" },
@@ -907,7 +909,22 @@ const GameSetup = {
     // Quidditch Game Level added to the GameEnv ...
     new GameLevel({ tag: "quidditch", callback: this.playerOffScreenCallBack, objects: quidditchGameObjects });
 
-    
+    const miniHogwartsObjects = [
+      // GameObject(s), the order is important to z-index...
+      { name: 'miniHogwarts', id: 'background', class: Background, data: this.assets.backgrounds.miniHogwarts },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.009, yPercentage: 0.47 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.058, yPercentage: 0.60 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.1, yPercentage: 0.81 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.14, yPercentage: 0.81 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.18, yPercentage: 0.81 },
+
+      { name: 'tubeD', id: 'tubeD', class: Tube1, data: this.assets.obstacles.tubeD},
+      { name: 'tubeU', id: 'tubeU', class: Tube, data: this.assets.obstacles.tubeU},
+    ];
+
+    // miniHogwarts Game Level added to the GameEnv ...
+    new GameLevel({ tag: "mini hogwarts", callback: this.playerOffScreenCallBack, objects: miniHogwartsObjects });
+
     const winterObjects = [
       // GameObject(s), the order is important to z-index...
       { name: 'winter', id: 'background', class: BackgroundWinter, data: this.assets.backgrounds.winter },
