@@ -35,6 +35,36 @@ import { enableDarkMode } from './darkMode.js';
  * 
 */
 
+const backgroundDim = {
+    create () {
+        this.dim = true // sets the dim to be true when settingControl is opened
+        console.log("CREATE DIM")
+        const dimDiv = document.createElement("div");
+        dimDiv.id = "dim";
+        dimDiv.style.backgroundColor = "black";
+        dimDiv.style.width = "100%";
+        dimDiv.style.height = "100%";
+        dimDiv.style.position = "absolute";
+        dimDiv.style.opacity = "0.8";
+        document.body.append(dimDiv);
+        dimDiv.style.zIndex = "9998"
+        dimDiv.addEventListener("click", this.remove)
+    },
+    remove () {
+        this.dim = false
+        console.log("REMOVE DIM");
+        const dimDiv = document.getElementById("dim");
+        dimDiv.remove();
+        isOpen = false
+        const sidebar = document.getElementById("sidebar")
+        sidebar.style.width = isOpen?"70%":"0px";
+        sidebar.style.top = isOpen?"15%":"0px";
+        sidebar.style.left = isOpen?"15%":"0px";
+    }
+}
+
+let isOpen = true
+
 // define the SettingsControl class
 export class SettingsControl extends LocalStorage{
     constructor(){ //default keys for localStorage
@@ -70,7 +100,7 @@ export class SettingsControl extends LocalStorage{
     initialize(){ 
         // Load all keys from local storage
         this.loadAll();
-
+        
         window.addEventListener("difficulty", (e) => {
             // Update the difficulty value when a difficulty event is fired
             this[this.keys.difficulty] = e.detail.difficulty();
@@ -577,12 +607,12 @@ export class SettingsControl extends LocalStorage{
         document.getElementById("sidebar").append(themeChangeControl); 
 
         // Listener, isOpen, and function for sidebar open and close
-        var isOpen = false; // default sidebar is closed
         var submenuHeight = 0; // calculated height of submenu
         function sidebarPanel(){
             // toggle isOpen
-            isOpen = !isOpen;
+            isOpen = true;
             // open and close properties for sidebar based on isOpen
+            backgroundDim.create()
             var sidebar = document.querySelector('.sidebar');
             sidebar.style.width = isOpen?"200px":"0px";
             sidebar.style.paddingLeft = isOpen?"10px":"0px";
