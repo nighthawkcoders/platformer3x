@@ -9,6 +9,7 @@ import BackgroundMountains from './BackgroundMountains.js';
 import BackgroundTransitions from './BackgroundTransitions.js';
 import BackgroundClouds from './BackgroundClouds.js';
 import BackgroundWinter from './BackgroundWinter.js';
+import BackgroundNarwhal from './BackgroundNarwhal.js';
 import BackgroundSnow from './BackgroundSnow.js';
 import BackgroundFish from './BackgroundFish.js';
 import Platform from './Platform.js';
@@ -304,6 +305,7 @@ const GameSetup = {
       castles: { src: "/images/platformer/backgrounds/castles.png" },
       winter: { src: "/images/platformer/backgrounds/winter.png" },
       snow: { src: "/images/platformer/backgrounds/snowfall.png" },
+      narwhal: { src: "/images/platformer/backgrounds/narwhal.png" },
       mini: { src: "/images/platformer/backgrounds/mini.png" },
     },
     transitions: {
@@ -921,6 +923,7 @@ const GameSetup = {
     const winterObjects = [
       // GameObject(s), the order is important to z-index...
       { name: 'winter', id: 'background', class: BackgroundWinter, data: this.assets.backgrounds.winter },
+      { name: 'narwhal', id: 'background', class: BackgroundNarwhal, data: this.assets.backgrounds.narwhal },
       { name: 'snow', id: 'background', class: BackgroundSnow, data: this.assets.backgrounds.snow },
       { name: 'snowyfloor', id: 'platform', class: Platform, data: this.assets.platforms.snowyfloor },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.2, yPercentage: 0.82 },
