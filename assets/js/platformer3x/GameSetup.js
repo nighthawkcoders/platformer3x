@@ -401,8 +401,8 @@ const GameSetup = {
         scaleSize: 60,
         speedRatio: 0.7,
         idle: {
-          left: { row: 1, frames: 1 },
-          right: { row: 2, frames: 1 },
+          left: { row: 1, frames: 0 },
+          right: { row: 2, frames: 0 },
         },
         walk: {
           left: { row: 1, frames: 5 },
@@ -413,8 +413,8 @@ const GameSetup = {
           right: { row: 2, frames: 5 },
         },
         jump: {
-          left: { row: 1, frames: 1 },
-          right: { row: 2, frames: 1 },
+          left: { row: 1, frames: 0 },
+          right: { row: 2, frames: 0 },
         },
         hitbox: { widthPercentage: 0.3, heightPercentage: 0.8 }
       },
