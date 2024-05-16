@@ -142,6 +142,11 @@ $dt-leaderboard: #B385EB;
     }
   }
 }
+
+canvas #hpBar {
+  width: 100px;
+  height: 15px;
+}
 /// Input mixin
 /// @description This mixin sets some common styles (e.g. color, height) for the input fields, avoiding duplication of common styles in each input class.
 /// @param {Number} width - The width of the input field, how wide it is.
