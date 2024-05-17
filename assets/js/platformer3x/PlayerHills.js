@@ -40,7 +40,7 @@ export class PlayerHills extends PlayerBase {
             jumpHeightFactor = 0.40;
         }
         if(GameEnv.currentLevel.tag == "boss"){
-            jumpHeightFactor = 0.70;
+            jumpHeightFactor = 0;
         }
         this.setY(this.y - (this.bottom * jumpHeightFactor));
     }
@@ -56,6 +56,7 @@ export class PlayerHills extends PlayerBase {
         this.handleCollisionEvent("goomba");
         this.handleCollisionEvent("mushroom");
         this.handleCollisionEvent("boss");
+        this.handleCollisionEvent("narwhalboss");
     }
    
     /**
