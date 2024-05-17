@@ -858,7 +858,7 @@ const GameSetup = {
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.2575, yPercentage: 0.75 },
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.5898, yPercentage: 0.900 },
       { name: 'mario', id: 'player', class: PlayerHills, data: this.assets.players.mario },
-      { name: 'Chest', id: 'finishline', class: Tube, data: this.assets.obstacles.chest },
+      { name: 'Chest', id: 'finishline', class: FinishLine, data: this.assets.obstacles.chest },
       { name: 'miniEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.miniEnd },
     ];
     let waterGameObjects = allWaterGameObjects.filter(obj => !obj.difficulties || obj.difficulties.includes(difficulty));
