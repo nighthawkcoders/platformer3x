@@ -8,7 +8,7 @@ export class MovingPlatform extends GameObject {
         this.platformY = yPercentage;
         this.direction = -1; // Move up
         this.speed = 0.5; // Reduced speed
-        this.maxTop =  300
+        this.maxTop = 300;
     
         // Add glow effect
         this.canvas.style.boxShadow = "0 0 10px 5px rgba(0, 255, 255, 0.7)";
