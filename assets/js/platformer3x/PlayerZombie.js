@@ -180,23 +180,33 @@ export class PlayerZombie extends PlayerBaseOneD {
             case 'a':
             case 'd':
                 this.state.animation = 'walk';
+                GameEnv.playerAttack = false;
+                console.log(GameEnv.playerAttack)
                 break;
             case 'w':
                 if (this.state.movement.up == false) {
                     this.state.movement.up = true;
                     this.state.animation = 'jump';
                 }
+                GameEnv.playerAttack = false;
+                console.log(GameEnv.playerAttack)
                 break;
             case 's':
                 if ("a" in this.pressedKeys || "d" in this.pressedKeys) {
                     this.state.animation = 'run';
                 }
+                GameEnv.playerAttack = false;
+                console.log(GameEnv.playerAttack)
                 break;
             case 'Shift':
                 this.state.animation = 'attack';  // Example action for Space key
+                GameEnv.playerAttack = true;
+                console.log(GameEnv.playerAttack)
                 break;
             default:
                 this.state.animation = 'idle';
+                GameEnv.playerAttack = false;
+                console.log(GameEnv.playerAttack)
                 break;
         }
     }

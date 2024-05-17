@@ -189,8 +189,11 @@ export class Boss extends Enemy {
                     GameEnv.playSound("goombaDeath");
                 }
                 else{
-                    this.currentHp -= 20;
-                    GameEnv.goombaBounce = true;
+                    console.log(GameEnv.playerAttack);
+                    if (GameEnv.playerAttack = true) {
+                        this.currentHp -= 12.5;
+                        GameEnv.goombaBounce = true;
+                    }
                 }
 
             }
