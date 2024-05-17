@@ -39,12 +39,16 @@ import Star from './Star.js';
 import Dementor from './Dementor.js';
 import Draco from './Draco.js';
 import Boss from './Boss.js';
+<<<<<<< HEAD
 import FlyingIsland from './FlyingIsland.js';
 import PlayerBaseOneD from './PlayerBaseOneD.js';
 import PlayerZombie from './PlayerZombie.js';
 import BossItem from './BossItem.js';
 import PlayerBoss from './PlayerBoss.js';
 
+=======
+import NarwhalBoss from './NarwhalBoss.js';
+>>>>>>> 3a2d3a6 (narwhal boss in progress)
 
 //test comment
 
@@ -566,6 +570,21 @@ const GameSetup = {
         attackL: { row: 13, frames: 5 },
         attackR: { row: 15, frames: 5 },
         death: { row: 20, frames: 5 },
+      },
+      narwhalboss: {
+        src: "/images/platformer/sprites/narwhal_boss.png",
+        width: 64,
+        height: 64,
+        scaleSize: 320,
+        speedRatio: 0.6,
+        animationSpeed: 6,
+        idleL: { row: 0, frames: 4, idleFrame: { column: 1, frames: 0 } },
+        idleR: { row: 1, frames: 4, idleFrame: { column: 1, frames: 0 } },
+        left: { row: 2, frames: 4, idleFrame: { column: 1, frames: 0 } },
+        right: { row: 3, frames: 4, idleFrame: { column: 1, frames: 0 } },
+        attackL: { row: 4, frames: 4 },
+        attackR: { row: 5, frames: 4 },
+        death: { row: 6, frames: 4 },
       },
     }
   },
