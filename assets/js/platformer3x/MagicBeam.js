@@ -21,6 +21,8 @@ export class MagicBeam extends Character {
         this.maxPosition = this.x + xPercentage * GameEnv.innerWidth;
 
         this.immune = 0;
+        GameEnv.destroyedMagicBeam = false;
+
     }
 
     update() {
@@ -32,7 +34,6 @@ export class MagicBeam extends Character {
         }
         this.playerBottomCollision = false;
 
-        // Update Y position in case the game environment changes
         this.y = GameEnv.bottom * this.yPercentage;
         this.canvas.style.top = `${this.y}px`;
     }
