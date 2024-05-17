@@ -1,3 +1,4 @@
+
 import GameControl from './GameControl.js';
 import GameEnv from './GameEnv.js';
 import GameObject from './GameObject.js';
@@ -8,17 +9,34 @@ export class JumpPlatform extends GameObject {
         this.platformX = xPercentage * GameEnv.innerWidth;
         this.platformY = yPercentage;
         this.data = data;
-        //integration notes:
-        //currently there are two variables each for the x and y position of the platform
-        //this is because two people fixed the same issue independently
-        //this may need to be returned to RIGHT NOW
         this.name = name;
-        this.relativeX = ""; //used for the item block's spritesheet.
+        this.relativeX = 0; //used for the item block's spritesheet.
+        this.direction = 1;
+        this.speed = 1;
+        this.minBottom = 150; // Minimum bottom position for the platform
+        this.maxBottom = 300; // Maximum bottom position for the platform
+
+
     }
 
     // Required, but no update action
     update() {
         this.collisionChecks();
+        this.movePlatform();
+    }
+
+    movePlatform() {
+        let currentPosition = parseInt(this.canvas.style.bottom) || 0;
+
+        if (currentPosition >= this.maxBottom) {
+            this.direction = -1;
+        } else if (currentPosition <= this.minBottom) {
+            this.direction = 1;
+        }
+
+        this.canvas.style.bottom = currentPosition + this.direction * this.speed + 'px';
+        this.relativeX += this.direction * this.speed;
+        this.draw();
     }
 
     collisionAction() {
@@ -26,7 +44,7 @@ export class JumpPlatform extends GameObject {
         if (this.collisionData.touchPoints.other.id === "player" && this.name === "itemBlock") {
             if (this.relativeX === 0 || this.relativeX === this.canvas.width) {
                 if (this.relativeX === 0) {
-                    GameControl.startRandomEvent("game");
+                    GameControl.startRandomEvent();
                     //console.log("randomEventtriggered", GameControl.randomEventId);
                 };
                 this.relativeX = -1 * this.canvas.width;
@@ -35,7 +53,7 @@ export class JumpPlatform extends GameObject {
             }
         }        
     }
-
+    
     // Set platform position
     size() {
         // Formula for Height should be on constant ratio, using a proportion of 832
@@ -57,14 +75,15 @@ export class JumpPlatform extends GameObject {
         this.canvas.style.height = `${scaledHeight}px`;
         this.canvas.style.position = 'absolute';
         this.canvas.style.left = `${platformX}px`;
-        this.canvas.style.top = `${platformY}px`; 
-
+        this.canvas.style.bottom = `${platformY}px`; 
     }
 
     // Draw position is always 0,0
     draw() {
-        this.ctx.drawImage(this.image, this.relativeX, 0, this.canvas.width / this.data.widthRatio, this.canvas.height / this.data.heightRatio);
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.drawImage(this.image, 0, 0, this.canvas.width / this.data.widthRatio, this.canvas.height / this.data.heightRatio);
     }
+    
 }
 
 export default JumpPlatform;

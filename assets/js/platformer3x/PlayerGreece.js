@@ -89,8 +89,8 @@ export class PlayerGreece extends PlayerBase {
     handleCollisionStart() {
         super.handleCollisionStart(); // calls the super class method
         // adds additional collision events
-        this.handleCollisionEvent("tubeU");
-        this.handleCollisionEvent("flag");
+        this.handleCollisionEvent("minifinishline");
+        this.handleCollisionEvent("finishline");
         this.handleCollisionEvent("cerberus");
         this.handleCollisionEvent("flyingIsland");
         this.handleCollisionEvent("lava");
@@ -113,10 +113,10 @@ export class PlayerGreece extends PlayerBase {
         super.handlePlayerReaction(); // calls the super class method
         // handles additional player reactions
         switch (this.state.collision) {
-            case "tubeU":
-                // 1. Caught in tube
+            case "minifinishline":
+                // 1. Caught in finishline
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
-                    // Position player in the center of the tube 
+                    // Position player in the center of the finishline 
                     this.x = this.collisionData.newX;
                     // Using natural gravity wait for player to reach floor
                     if (Math.abs(this.y - this.bottom) <= GameEnv.gravity) {
@@ -125,18 +125,18 @@ export class PlayerGreece extends PlayerBase {
                         GameControl.transitionToLevel(GameEnv.levels[4])
                         return
                     }
-                    // 2. Collision between player right and tube   
+                    // 2. Collision between player right and finishline   
                 } else if (this.collisionData.touchPoints.this.right) {
                     this.state.movement.right = false;
                     this.state.movement.left = true;
-                // 3. Collision between player left and tube
+                // 3. Collision between player left and finishline
                 } else if (this.collisionData.touchPoints.this.left) {
                     this.state.movement.left = false;
                     this.state.movement.right = true;
                 }
                 break;
 
-            case "flag":
+            case "finishline":
                 // Transition to the next level when touching the flag
                 GameControl.transitionToLevel(GameEnv.levels[6]);
                 break;
