@@ -246,7 +246,10 @@ const GameSetup = {
       },
       chest: {
         src: "/images/platformer/obstacles/Chest.png",
-        hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 }
+        hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 },
+        width: 300,
+        height: 300,
+        scaleSize: 150,
       },
       coin: { src: "/images/platformer/obstacles/coin.png" },
       snowflake: { src: "/images/platformer/obstacles/snowflake.png" },
