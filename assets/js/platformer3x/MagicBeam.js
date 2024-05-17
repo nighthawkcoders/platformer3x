@@ -4,21 +4,26 @@ import GameControl from './GameControl.js';
 
 export class MagicBeam extends Character {
     // constructors sets up Character object 
-    constructor(canvas, image, data, xPercentage, yPercentage, name, minPosition){
+    constructor(canvas, image, data, xPercentage, yPercentage, name, minPosition) {
         super(canvas, image, data);
 
-        //Unused but must be Defined
+        // Unused but must be Defined
         this.name = name;
-        this.y = yPercentage;
 
-        //Initial Position 
+        // Initial Position
         this.x = xPercentage * GameEnv.innerWidth;
-
+        this.yPercentage = yPercentage;
+        this.updateYPosition();
 
         this.minPosition = minPosition * GameEnv.innerWidth;
         this.maxPosition = this.x + xPercentage * GameEnv.innerWidth;
 
         this.immune = 0;
+    }
+
+    updateYPosition() {
+        this.y = GameEnv.bottom * this.yPercentage;
+        this.canvas.style.top = `${this.y}px`;
     }
 
     update() {
@@ -27,37 +32,30 @@ export class MagicBeam extends Character {
         // Check for boundaries
         if (this.x <= this.minPosition || (this.x + this.canvasWidth >= this.maxPosition)) {
             this.speed = -this.speed;
-        };     
+        }
         this.playerBottomCollision = false;
-    }
 
+        // Update Y position in case the game environment changes
+        this.updateYPosition();
+    }
 
     // Player action on collisions
     collisionAction() {
-      
-
         if (this.collisionData.touchPoints.other.id === "player") {
-            // Collision: Top of Goomba with Bottom of Player
-            //console.log(this.collisionData.touchPoints.other.bottom + 'bottom')
-            //console.log(this.collisionData.touchPoints.other.top + "top")
-            //console.log(this.collisionData.touchPoints.other.right + "right")
-            //console.log(this.collisionData.touchPoints.other.left + "left")
-            if (this.collisionData.touchPoints.other.bottom && this.immune == 0) {
+            if (this.collisionData.touchPoints.other.bottom && this.immune === 0) {
                 GameEnv.invincible = true;
                 GameEnv.goombaBounce1 = true;
                 this.canvas.style.transition = "transform 1.5s, opacity 1s";
-                this.canvas.style.transition = "transform 2s, opacity 1s";
                 this.canvas.style.transformOrigin = "bottom"; 
                 this.canvas.style.transform = "scaleY(0)"; 
                 this.speed = 0;
 
-                setTimeout((function() {
+                setTimeout(() => {
                     GameEnv.invincible = false;
                     this.destroy();
                     GameEnv.destroyedMagicBeam = true;
-                }).bind(this), 1500);
+                }, 1500);
             }
-
         }
         if (this.collisionData.touchPoints.other.id === "jumpPlatform") {
             if (this.collisionData.touchPoints.other.left || this.collisionData.touchPoints.other.right) {
