@@ -953,6 +953,20 @@ const GameSetup = {
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.48, yPercentage: 0.44 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.48, yPercentage: 0.34 },
       
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.6, yPercentage: 0.66 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.56, yPercentage: 0.5 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.64, yPercentage: 0.81 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.68, yPercentage: 0.47 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.72, yPercentage: 0.47 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.76, yPercentage: 0.47 },
+      
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.55, yPercentage: 0.38 },
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.636, yPercentage: 0.699 },
+
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.672, yPercentage: 0.368 },
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.71, yPercentage: 0.368 },
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.75, yPercentage: 0.368 },
+
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.056, yPercentage: 0.56 },
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.15, yPercentage: 0.24 },
       
