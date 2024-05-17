@@ -3,6 +3,7 @@ import Character from './Character.js';
 import GameControl from './GameControl.js';
 import Enemy from './Enemy.js';
 import GameLevel from './GameLevel.js';
+import PlayerZombie from './PlayerZombie.js';
 
 
 export class Boss extends Enemy {
@@ -188,8 +189,11 @@ export class Boss extends Enemy {
                     GameEnv.playSound("goombaDeath");
                 }
                 else{
-                    this.currentHp -= 20;
-                    GameEnv.goombaBounce = true;
+                    console.log(GameEnv.playerAttack);
+                    if (GameEnv.playerAttack = true) {
+                        this.currentHp -= 12.5;
+                        GameEnv.goombaBounce = true;
+                    }
                 }
 
             }

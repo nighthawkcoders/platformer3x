@@ -58,6 +58,7 @@ export class PlayerZombie extends PlayerBaseOneD {
         this.handleCollisionEvent("boss");
     }
 
+
     /**
  * @override
  * gameLoop: Watch for Player collision events 
@@ -117,6 +118,101 @@ export class PlayerZombie extends PlayerBaseOneD {
 
     /**
      * @override
+     */
+    updateAnimation() {
+        switch (this.state.animation) {
+            case 'idle':
+                if (this.state.direction == "left") {
+                    this.canvas.style.transform = 'scaleX(-1)';
+                }
+                else {
+                    this.canvas.style.transform = 'scaleX(1)';
+                }
+                this.setSpriteAnimation(this.playerData.idle);
+                break;
+            case 'walk':
+                if (this.state.direction == "left") {
+                    this.canvas.style.transform = 'scaleX(-1)';
+                }
+                else {
+                    this.canvas.style.transform = 'scaleX(1)';
+                }
+                this.setSpriteAnimation(this.playerData.walk);
+                break;
+            case 'run':
+                if (this.state.direction == "left") {
+                    this.canvas.style.transform = 'scaleX(-1)';
+                }
+                else {
+                    this.canvas.style.transform = 'scaleX(1)';
+                }
+                this.setSpriteAnimation(this.playerData.run);
+                break;
+            case 'jump':
+                if (this.state.direction == "left") {
+                    this.canvas.style.transform = 'scaleX(-1)';
+                }
+                else {
+                    this.canvas.style.transform = 'scaleX(1)';
+                }
+                this.setSpriteAnimation(this.playerData.jump);
+                break;
+            case 'attack':
+                if (this.state.direction == "left") {
+                    this.canvas.style.transform = 'scaleX(-1)';
+                }
+                else {
+                    this.canvas.style.transform = 'scaleX(1)';
+                }
+                this.setSpriteAnimation(this.playerData.attack);
+                break;
+            default:
+                console.error(`Invalid state: ${this.state.animation}`);
+        }
+    }
+
+
+    /**
+     * @override
+     */
+    updateAnimationState(key) {
+        switch (key) {
+            case 'a':
+            case 'd':
+                this.state.animation = 'walk';
+                GameEnv.playerAttack = false;
+                console.log(GameEnv.playerAttack)
+                break;
+            case 'w':
+                if (this.state.movement.up == false) {
+                    this.state.movement.up = true;
+                    this.state.animation = 'jump';
+                }
+                GameEnv.playerAttack = false;
+                console.log(GameEnv.playerAttack)
+                break;
+            case 's':
+                if ("a" in this.pressedKeys || "d" in this.pressedKeys) {
+                    this.state.animation = 'run';
+                }
+                GameEnv.playerAttack = false;
+                console.log(GameEnv.playerAttack)
+                break;
+            case 'Shift':
+                this.state.animation = 'attack';  // Example action for Space key
+                GameEnv.playerAttack = true;
+                console.log(GameEnv.playerAttack)
+                break;
+            default:
+                this.state.animation = 'idle';
+                GameEnv.playerAttack = false;
+                console.log(GameEnv.playerAttack)
+                break;
+        }
+    }
+
+    /**
+     * @override
      * gameloop: Handles additional Player reaction / state updates to the collision for game level 
      */
     handlePlayerReaction() {
@@ -133,11 +229,11 @@ export class PlayerZombie extends PlayerBaseOneD {
                         // Force end of level condition
                         this.x = GameEnv.innerWidth + 1;
                     }
-                // 2. Collision between player right and tube   
+                    // 2. Collision between player right and tube   
                 } else if (this.collisionData.touchPoints.this.right) {
                     this.state.movement.right = false;
                     this.state.movement.left = true;
-                // 3. Collision between player left and tube
+                    // 3. Collision between player left and tube
                 } else if (this.collisionData.touchPoints.this.left) {
                     this.state.movement.left = false;
                     this.state.movement.right = true;
