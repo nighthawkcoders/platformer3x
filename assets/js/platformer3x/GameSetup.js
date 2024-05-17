@@ -25,7 +25,10 @@ import Cabin from './Cabin.js';
 import Goomba from './Goomba.js';
 import FlyingGoomba from './FlyingGoomba.js';
 import BlockPlatform from './BlockPlatform.js';
+import SpawnPlatform from './SpawnPlatform.js';
+import MovingPlatform from './MovingPlatform.js'
 import Mushroom from './Mushroom.js';
+import MagicBeam from './MagicBeam.js'
 import Coin from './Coin.js';
 import Snowflake from './Snowflake.js';
 import GameControl from './GameControl.js';
@@ -45,6 +48,7 @@ import PlayerBaseOneD from './PlayerBaseOneD.js';
 import PlayerZombie from './PlayerZombie.js';
 import BossItem from './BossItem.js';
 import PlayerBoss from './PlayerBoss.js';
+
 
 //test comment
 
@@ -269,6 +273,7 @@ const GameSetup = {
       yellowpattern: { src: "/images/platformer/platforms/yellowtowerpattern.jpg" },
       yellowredpattern: { src: "/images/platformer/platforms/yellowredpattern.jpg" },
       lionpattern: { src: "/images/platformer/platforms/lionpattern.jpg" },
+      stone: { src: "/images/platformer/platforms/stone.jpg"}, 
       turf: { src: "/images/platformer/platforms/turf.png" },
       island: { src: "/images/platformer/platforms/island.png" },
       block: { src: "/images/platformer/platforms/brick_block.png" }, //MAY need 3 new variables: sizeRatio, widthRatio, and heightRatio
@@ -295,6 +300,7 @@ const GameSetup = {
       fish: { src: "/images/platformer/backgrounds/school-fish.png" },
       reef: { src: "/images/platformer/backgrounds/reef.png" },
       quidditch: { src: "/images/platformer/backgrounds/quidditch2.jpg" },
+      miniHogwarts: { src: "/images/platformer/backgrounds/miniHogwarts.png"}, 
       space: { src: "/images/platformer/backgrounds/planet.jpg" },
       castles: { src: "/images/platformer/backgrounds/castles.png" },
       winter: { src: "/images/platformer/backgrounds/winter.png" },
@@ -402,8 +408,8 @@ const GameSetup = {
         scaleSize: 60,
         speedRatio: 0.7,
         idle: {
-          left: { row: 1, frames: 1 },
-          right: { row: 2, frames: 1 },
+          left: { row: 1, frames: 0 },
+          right: { row: 2, frames: 0 },
         },
         walk: {
           left: { row: 1, frames: 5 },
@@ -414,8 +420,8 @@ const GameSetup = {
           right: { row: 2, frames: 5 },
         },
         jump: {
-          left: { row: 1, frames: 1 },
-          right: { row: 2, frames: 1 },
+          left: { row: 1, frames: 0 },
+          right: { row: 2, frames: 0 },
         },
         hitbox: { widthPercentage: 0.3, heightPercentage: 0.8 }
       },
@@ -491,6 +497,12 @@ const GameSetup = {
         width: 200,
         height: 180,
         hitbox: { widthPercentage: 0.0, heightPercentage: 0.2 }
+      },
+      magicBeam: {
+        src: "/images/platformer/platforms/magic_beam.png",
+        width: 450,
+        height: 400,
+        hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 }
       },
       alien: {
         src: "/images/platformer/sprites/alien.png",
@@ -642,10 +654,10 @@ const GameSetup = {
       { name: 'clouds', id: 'background', class: BackgroundClouds, data: this.assets.backgrounds.clouds },
       { name: 'hills', id: 'background', class: BackgroundHills, data: this.assets.backgrounds.hills },
       { name: 'grass', id: 'floor', class: Platform, data: this.assets.platforms.grass },
-      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2, yPercentage: 0.85 },
-      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2368, yPercentage: 0.85 },
-      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2736, yPercentage: 0.85 },
-      { name: 'blocks', id: 'wall', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.6, yPercentage: 1 },
+      { name: 'blocks', id: 'jumpPlatform', class: MovingPlatform, data: this.assets.platforms.block, xPercentage: 0.2, yPercentage: 0.85 },
+      { name: 'blocks', id: 'jumpPlatform', class: MovingPlatform, data: this.assets.platforms.block, xPercentage: 0.2368, yPercentage: 0.85 },
+      { name: 'blocks', id: 'jumpPlatform', class: MovingPlatform, data: this.assets.platforms.block, xPercentage: 0.2736, yPercentage: 0.85 },
+      { name: 'blocks', id: 'wall', class: SpawnPlatform, data: this.assets.platforms.block, xPercentage: 0.6, yPercentage: 1 },
       { name: 'itemBlock', id: 'jumpPlatform', class: JumpPlatform, data: this.assets.platforms.itemBlock, xPercentage: 0.4, yPercentage: 0.65 }, //item block is a platform
       { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage: 0.5, yPercentage: 1, minPosition: 0.05 },
       { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage: 0.4, yPercentage: 1, minPosition: 0.05, difficulties: ["normal", "hard", "impossible"] },
@@ -875,9 +887,9 @@ const GameSetup = {
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.38, yPercentage: 0.27 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.38, yPercentage: 0.17 },
 
-      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.536, yPercentage: 0.72 },
-      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.616, yPercentage: 0.81 },
-      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.696, yPercentage: 0.90 },
+      { name: 'blocks', id: 'jumpPlatform', class: MovingPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.626, yPercentage: 0.92 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.663, yPercentage: 0.586 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.700, yPercentage: 0.586 },
 
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.yellowpattern, xPercentage: 0.456, yPercentage: 1.08 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.yellowredpattern, xPercentage: 0.456, yPercentage: 0.985 },
@@ -901,9 +913,11 @@ const GameSetup = {
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.409, yPercentage: 0.7 },
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.295, yPercentage: 0.46 },
 
-      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.687, yPercentage: 0.79, },
-      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.611, yPercentage: 0.7 },
-      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.529, yPercentage: 0.61 },
+      { name: 'magicBeam', id: 'magicBeam', class: MagicBeam, data: this.assets.enemies.magicBeam, xPercentage: 0.623, yPercentage: 0.72 },
+
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.656, yPercentage: 0.46 },
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.611, yPercentage: 0.46 },
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.700, yPercentage: 0.46 },
 
       { name: 'harry', id: 'player', class: PlayerQuidditch, data: this.assets.players.harry },
       { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
@@ -913,6 +927,66 @@ const GameSetup = {
     // Quidditch Game Level added to the GameEnv ...
     new GameLevel({ tag: "quidditch", callback: this.playerOffScreenCallBack, objects: quidditchGameObjects });
 
+    const miniHogwartsObjects = [
+      // GameObject(s), the order is important to z-index...
+      { name: 'miniHogwarts', id: 'background', class: Background, data: this.assets.backgrounds.miniHogwarts },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.009, yPercentage: 0.47 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.058, yPercentage: 0.66 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.1, yPercentage: 0.81 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.14, yPercentage: 0.47 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.18, yPercentage: 0.47 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.22, yPercentage: 0.47 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.26, yPercentage: 0.47 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.30, yPercentage: 0.47 },
+      
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.14, yPercentage: 0.81 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.18, yPercentage: 0.81 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.22, yPercentage: 0.81 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.26, yPercentage: 0.81 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.30, yPercentage: 0.81 },
+
+      { name: 'blocks', id: 'jumpPlatform', class: MovingPlatform, data: this.assets.platforms.stone, xPercentage: 0.44, yPercentage: 0.92 },
+      { name: 'magicBeam', id: 'magicBeam', class: MagicBeam, data: this.assets.enemies.magicBeam, xPercentage: 0.37, yPercentage: 0.61 },
+
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.48, yPercentage: 0.64 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.48, yPercentage: 0.54 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.48, yPercentage: 0.44 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.48, yPercentage: 0.34 },
+      
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.6, yPercentage: 0.66 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.56, yPercentage: 0.5 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.64, yPercentage: 0.81 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.68, yPercentage: 0.47 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.72, yPercentage: 0.47 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.76, yPercentage: 0.47 },
+      
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.55, yPercentage: 0.38 },
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.636, yPercentage: 0.699 },
+
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.672, yPercentage: 0.368 },
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.71, yPercentage: 0.368 },
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.75, yPercentage: 0.368 },
+
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.056, yPercentage: 0.56 },
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.15, yPercentage: 0.24 },
+      
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.14, yPercentage: 0.7 },
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.18, yPercentage: 0.7 },
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.22, yPercentage: 0.7 },
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.26, yPercentage: 0.7 },
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.43, yPercentage: 0.82 },
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.47, yPercentage: 0.24 },
+
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.799, yPercentage: 0.81 },
+      
+
+      { name: 'harry', id: 'player', class: PlayerMini, data: this.assets.players.harry },
+      { name: 'tubeD', id: 'tubeD', class: Tube1, data: this.assets.obstacles.tubeD},
+      { name: 'tubeU', id: 'tubeU', class: Tube, data: this.assets.obstacles.tubeU},
+    ];
+
+    // miniHogwarts Game Level added to the GameEnv ...
+    new GameLevel({ tag: "mini hogwarts", callback: this.playerOffScreenCallBack, objects: miniHogwartsObjects });
 
     const winterObjects = [
       // GameObject(s), the order is important to z-index...
