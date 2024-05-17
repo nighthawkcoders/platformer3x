@@ -28,7 +28,8 @@ import BlockPlatform from './BlockPlatform.js';
 import SpawnPlatform from './SpawnPlatform.js';
 import MovingPlatform from './MovingPlatform.js'
 import Mushroom from './Mushroom.js';
-import MagicBeam from './MagicBeam.js'
+import MagicBeam from './MagicBeam.js';
+import ChocoFrog from './ChocoFrog.js';
 import Coin from './Coin.js';
 import Snowflake from './Snowflake.js';
 import GameControl from './GameControl.js';
@@ -504,6 +505,12 @@ const GameSetup = {
         height: 400,
         hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 }
       },
+      chocoFrog: {
+        src: "/images/platformer/platforms/Chocolatefrog.jpg",
+        width: 200,
+        height: 200,
+        hitbox: { widthPercentage: 0.0, heightPercentage: 0.0 }
+      },
       alien: {
         src: "/images/platformer/sprites/alien.png",
         width: 444,
@@ -878,9 +885,9 @@ const GameSetup = {
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.30, yPercentage: 0.33 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.30, yPercentage: 0.23 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.30, yPercentage: 0.13 },
-      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.34, yPercentage: 0.81 },
-      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.38, yPercentage: 0.81 },
-      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.42, yPercentage: 0.81 },
+      { name: 'blocks', id: 'jumpPlatform', class: SpawnPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.34, yPercentage: 0.81 },
+      { name: 'blocks', id: 'jumpPlatform', class: SpawnPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.38, yPercentage: 0.81 },
+      { name: 'blocks', id: 'jumpPlatform', class: SpawnPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.42, yPercentage: 0.81 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.38, yPercentage: 0.57 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.38, yPercentage: 0.47 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.38, yPercentage: 0.37 },
@@ -912,6 +919,9 @@ const GameSetup = {
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.375, yPercentage: 0.7 },
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.409, yPercentage: 0.7 },
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.295, yPercentage: 0.46 },
+
+      { name: 'magicBeam', id: 'magicBeam', class: MagicBeam, data: this.assets.enemies.magicBeam, xPercentage: 0.529, yPercentage: 0.61 },
+      { name: 'chocoFrog', id: 'chocoFrog', class: ChocoFrog, data: this.assets.enemies.chocoFrog, xPercentage: 0.25, yPercentage: 0.3 },
 
       { name: 'magicBeam', id: 'magicBeam', class: MagicBeam, data: this.assets.enemies.magicBeam, xPercentage: 0.623, yPercentage: 0.72 },
 
