@@ -40,22 +40,14 @@ import Star from './Star.js';
 import Dementor from './Dementor.js';
 import Draco from './Draco.js';
 import Boss from './Boss.js';
-<<<<<<< HEAD
 import Jellyfish from './Jellyfish.js';
 import Penguin from './Penguin.js';
 import PlayerIce from './PlayerIce.js';
-=======
-<<<<<<< HEAD
 import FlyingIsland from './FlyingIsland.js';
 import PlayerBaseOneD from './PlayerBaseOneD.js';
 import PlayerZombie from './PlayerZombie.js';
 import BossItem from './BossItem.js';
 import PlayerBoss from './PlayerBoss.js';
-
-=======
-import NarwhalBoss from './NarwhalBoss.js';
->>>>>>> 3a2d3a6 (narwhal boss in progress)
->>>>>>> 620aa0ea59d19d26376c3660b4367eacd873908b
 
 //test comment
 
@@ -273,10 +265,7 @@ const GameSetup = {
     },
     platforms: {
       grass: { src: "/images/platformer/platforms/grass.png" },
-<<<<<<< HEAD
-      narwhalfloor: { src: "/images/platformer/platforms/narwhalfloor.png"},
-=======
->>>>>>> 620aa0ea59d19d26376c3660b4367eacd873908b
+      narwhalfloor: { src: "/images/platformer/platforms/narwhalfloor.png" },
       sand: { src: "/images/platformer/platforms/sand.png" },
       snowyfloor: { src: "/images/platformer/platforms/snowyfloor.png" },
       snowywood: { src: "/images/platformer/platforms/snowywood.png" },
@@ -1074,7 +1063,6 @@ const GameSetup = {
       { name: 'cabin', id: 'finishline', class: FinishLine, data: this.assets.obstacles.cabin, xPercentage: 0.85, yPercentage: 0.603 },
       { name: 'quidditchEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.quidditchEnd },
     ];
-<<<<<<< HEAD
 
     // Winter MiniGame Level added to the GameEnv ...
     new GameLevel({ tag: "winter", callback: this.playerOffScreenCallBack, objects: winterObjects });
@@ -1117,11 +1105,12 @@ const GameSetup = {
     ];
     // Winter Game Level added to the GameEnv ...
     new GameLevel({ tag: "icemini", callback: this.playerOffScreenCallBack, objects: iceminiObjects });
-=======
+
     // Winter Game Level added to the GameEnv ...
     new GameLevel({ tag: "winter", callback: this.playerOffScreenCallBack, objects: winterObjects });
 
->>>>>>> 620aa0ea59d19d26376c3660b4367eacd873908b
+
+
 
     const bossGameObjects = [
       { name: 'bossbackground', id: 'background', class: Background, data: this.assets.backgrounds.boss },
