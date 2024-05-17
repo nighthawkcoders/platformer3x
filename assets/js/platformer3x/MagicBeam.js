@@ -1,29 +1,26 @@
 import Character from './Character.js';
 import GameEnv from './GameEnv.js';
-import GameControl from './GameControl.js';
 
 export class MagicBeam extends Character {
-    // constructors sets up Character object 
+    // Constructor sets up Character object 
     constructor(canvas, image, data, xPercentage, yPercentage, name, minPosition) {
         super(canvas, image, data);
 
-        // Unused but must be Defined
+        // Unused but must be defined
         this.name = name;
 
-        // Initial Position
+        // Initial Position 
         this.x = xPercentage * GameEnv.innerWidth;
         this.yPercentage = yPercentage;
-        this.updateYPosition();
+
+        // Calculate initial Y position
+        this.y = GameEnv.bottom * this.yPercentage;
+        this.canvas.style.top = `${this.y}px`;
 
         this.minPosition = minPosition * GameEnv.innerWidth;
         this.maxPosition = this.x + xPercentage * GameEnv.innerWidth;
 
         this.immune = 0;
-    }
-
-    updateYPosition() {
-        this.y = GameEnv.bottom * this.yPercentage;
-        this.canvas.style.top = `${this.y}px`;
     }
 
     update() {
@@ -36,7 +33,8 @@ export class MagicBeam extends Character {
         this.playerBottomCollision = false;
 
         // Update Y position in case the game environment changes
-        this.updateYPosition();
+        this.y = GameEnv.bottom * this.yPercentage;
+        this.canvas.style.top = `${this.y}px`;
     }
 
     // Player action on collisions
