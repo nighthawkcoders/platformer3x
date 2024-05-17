@@ -41,6 +41,7 @@ export class GameEnv {
      * @property {boolean} transitionHide - used to hide the transition screen
      * @property {number} gravity - localstorage key, used by platformer objects
      * @property {boolean} destroyedMushroom - to see when mushroom is destroyed
+     * @property {boolean} destroyedMagicBeam - to see when magic beam is destroyed
      * @property {boolean} playMessage
      * @property {Object} difficulty - localstorage key, used by GameControl
      * @property {number} innerWidth - used by platformer objects
@@ -63,6 +64,7 @@ export class GameEnv {
     static transitionHide = false;
     static gravity = 3;
     static destroyedMushroom = false;
+    static destroyedMagicBeam = false;
     static playMessage = false;
     static difficulty = "normal";
     static innerWidth;
@@ -82,6 +84,8 @@ export class GameEnv {
     static time = 0;
     static darkMode = true
     static playerAttack = false;
+
+    static playerChange = false;
 
     static playerChange = false;
 
