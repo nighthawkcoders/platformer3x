@@ -14,16 +14,13 @@ import BackgroundNarwhal from './BackgroundNarwhal.js';
 import BackgroundSnow from './BackgroundSnow.js';
 import Platform from './Platform.js';
 import JumpPlatform from './JumpPlatform.js';
-import Player from './Player.js';
 import PlayerHills from './PlayerHills.js';
 import PlayerWinter from './PlayerWinter.js';
 import PlayerMini from './PlayerMini.js';
 import PlayerQuidditch from './PlayerQuidditch.js';
-import PlayerBase from './PlayerBase.js';
 import Tube from './Tube.js';
 import Tube1 from './Tube1.js';
 import TubeGreece from './TubeGreece.js';
-import Tree from './Tree.js';
 import Cabin from './Cabin.js';
 import Goomba from './Goomba.js';
 import FlyingGoomba from './FlyingGoomba.js';
@@ -31,20 +28,23 @@ import BlockPlatform from './BlockPlatform.js';
 import Mushroom from './Mushroom.js';
 import Coin from './Coin.js';
 import Snowflake from './Snowflake.js';
-import FlyingUFO from './FlyingUFO.js';
-import Alien from './Alien.js';
 import GameControl from './GameControl.js';
-import Enemy from './Enemy.js';
 import Owl from './Owl.js';
 import Snowman from './Snowman.js';
 import Cerberus from './Cerberus.js';
 import PlayerGreece from './PlayerGreece.js';
 import Flag from './Flag.js';
+import Lava from './Lava.js';
 import Dragon from './Dragon.js';
 import Star from './Star.js';
 import Dementor from './Dementor.js';
 import Draco from './Draco.js';
 import Boss from './Boss.js';
+import FlyingIsland from './FlyingIsland.js';
+import PlayerBaseOneD from './PlayerBaseOneD.js';
+import PlayerZombie from './PlayerZombie.js';
+import BossItem from './BossItem.js';
+import PlayerBoss from './PlayerBoss.js';
 
 //test comment
 
@@ -270,6 +270,7 @@ const GameSetup = {
       yellowredpattern: { src: "/images/platformer/platforms/yellowredpattern.jpg" },
       lionpattern: { src: "/images/platformer/platforms/lionpattern.jpg" },
       turf: { src: "/images/platformer/platforms/turf.png" },
+      island: { src: "/images/platformer/platforms/island.png" },
       block: { src: "/images/platformer/platforms/brick_block.png" }, //MAY need 3 new variables: sizeRatio, widthRatio, and heightRatio
       itemBlock: {
         src: "/images/platformer/platforms/mario_block_spritesheet_v2.png",
@@ -432,6 +433,21 @@ const GameSetup = {
         d: { row: 2, frames: 3, idleFrame: { column: 1, frames: 0 } }, // Right Movement 
         runningLeft: { row: 5, frames: 3, idleFrame: { column: 1, frames: 0 } },
         runningRight: { row: 4, frames: 3, idleFrame: { column: 1, frames: 0 } },
+      },
+      zombie: { //one direction player
+        src: "/images/platformer/sprites/zombie.png",
+        width: 130,
+        height: 70,
+        scaleSize: 60,
+        speedRatio: 0.7,
+        idle: { row: 2, frames: 11, idleFrame: { column: 1, frames: 0 } },
+        walk: { row: 3, frames: 11 }, // default - right Movement
+        run: { row: 3, frames: 11 }, // default - right Movement
+        jump: { row: 3, frames: 11 }, // default - right Movement
+        attack: { row: 4, min: 6,frames: 11 }, 
+        jumpAttack : { row: 6, frames: 11 }, 
+        death : { row: 11, frames: 11 }, 
+        hitbox: { widthPercentage: 0.3, heightPercentage: 0.8 }
       },
     },
     enemies: {
@@ -706,14 +722,16 @@ const GameSetup = {
       //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.16 },
       //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.1 },
       //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.06 },
-      { name: 'cerberus', id: 'cerberus', class: Cerberus, data: this.assets.enemies.cerberus, xPercentage: 0.2, minPosition: 0.05, difficulties: ["normal", "hard", "impossible"] },
+      { name: 'cerberus', id: 'cerberus', class: Cerberus, data: this.assets.enemies.cerberus, xPercentage: 0.2, minPosition: 0.09, difficulties: ["normal", "hard", "impossible"] },
       { name: 'cerberus', id: 'cerberus', class: Cerberus, data: this.assets.enemies.cerberus, xPercentage: 0.5, minPosition: 0.3, difficulties: ["normal", "hard", "impossible"] },
       { name: 'cerberus', id: 'cerberus', class: Cerberus, data: this.assets.enemies.cerberus, xPercentage: 0.7, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },//this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
       { name: 'dragon', id: 'dragon', class: Dragon, data: this.assets.enemies.dragon, xPercentage: 0.5, minPosition: 0.05 },
       { name: 'knight', id: 'player', class: PlayerGreece, data: this.assets.players.knight },
       { name: 'flag', id: 'flag', class: Flag, data: this.assets.obstacles.flag },
+      { name: 'flyingIsland', id: 'flyingIsland', class: FlyingIsland, data: this.assets.platforms.island, xPercentage: 0.82, yPercentage: 0.55 },
       { name: 'tubeU', id: 'tubeU', class: TubeGreece, data: this.assets.obstacles.tubeU, xPercentage: 0.66, yPercentage: 1.13 },
       { name: 'hillsEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.hillsEnd },
+      { name: 'lava', id: 'lava', class: Lava, data: this.assets.platforms.lava, xPercentage: 0, yPercentage: 1 },
     ];
     // Greece Game Level added to the GameEnv ...
     new GameLevel({ tag: "ancient greece", callback: this.playerOffScreenCallBack, objects: greeceGameObjects });
@@ -940,7 +958,9 @@ const GameSetup = {
       { name: 'bossbackground', id: 'background', class: Background, data: this.assets.backgrounds.boss },
       { name: 'boss', id: 'boss', class: Boss, data: this.assets.enemies.boss, xPercentage: 0.5, minPosition: 0.3 },
       { name: 'boss1', id: 'boss', class: Boss, data: this.assets.enemies.boss, xPercentage: 0.3, minPosition: 0.07 },
-      { name: 'mario', id: 'player', class: PlayerHills, data: this.assets.players.mario },
+      { name: 'itemBlock', id: 'jumpPlatform', class: BossItem, data: this.assets.platforms.itemBlock, xPercentage: 0.2, yPercentage: 0.65 }, //item block is a platform
+      { name: 'mario', id: 'player', class: PlayerBoss, data: this.assets.players.mario },
+      { name: 'zombie', id: 'player', class: PlayerZombie, data: this.assets.players.zombie },
       { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
       { name: 'grass', id: 'platform', class: Platform, data: this.assets.platforms.grass }
     ];

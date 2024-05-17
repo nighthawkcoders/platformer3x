@@ -21,8 +21,8 @@ export class Flag extends GameObject {
         const scaledHeight = GameEnv.innerHeight * (480/832);
         // Formula for Width is scaled: scaledWidth/scaledHeight == this.width/this.height
         const scaledWidth = scaledHeight * this.aspect_ratio;
-        const flagX = .82 * GameEnv.innerWidth;
-        const flagY = (GameEnv.bottom - (.25 * scaledHeight));
+        const flagX = .86 * GameEnv.innerWidth;
+        const flagY = (GameEnv.bottom - (.99999 * scaledHeight));
 
         // set variables used in Display and Collision algorithms
         this.bottom = flagY;
