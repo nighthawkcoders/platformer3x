@@ -8,10 +8,10 @@ import BackgroundCoral from './BackgroundCoral.js';
 import BackgroundMountains from './BackgroundMountains.js';
 import BackgroundTransitions from './BackgroundTransitions.js';
 import BackgroundClouds from './BackgroundClouds.js';
+import BackgroundFish from './BackgroundFish.js';
 import BackgroundWinter from './BackgroundWinter.js';
 import BackgroundNarwhal from './BackgroundNarwhal.js';
 import BackgroundSnow from './BackgroundSnow.js';
-import BackgroundFish from './BackgroundFish.js';
 import Platform from './Platform.js';
 import JumpPlatform from './JumpPlatform.js';
 import PlayerHills from './PlayerHills.js';
@@ -243,6 +243,13 @@ const GameSetup = {
         width: 300,
         height: 300,
         scaleSize: 150,
+      },
+      chest: {
+        src: "/images/platformer/obstacles/Chest.png",
+        hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 },
+        width: 300,
+        height: 300,
+        scaleSize: 100,
       },
       coin: { src: "/images/platformer/obstacles/coin.png" },
       snowflake: { src: "/images/platformer/obstacles/snowflake.png" },
@@ -854,13 +861,12 @@ const GameSetup = {
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.2575, yPercentage: 0.75 },
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.5898, yPercentage: 0.900 },
       { name: 'mario', id: 'player', class: PlayerHills, data: this.assets.players.mario },
-      { name: 'tube', id: 'finishline', class: FinishLine, data: this.assets.obstacles.tube, xPercentage: 0.85, yPercentage: 0.65 },
+      { name: 'Chest', id: 'finishline', class: FinishLine, data: this.assets.obstacles.chest, xPercentage: 0.85, yPercentage: 0.65 },
       { name: 'miniEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.miniEnd },
     ];
     let waterGameObjects = allWaterGameObjects.filter(obj => !obj.difficulties || obj.difficulties.includes(difficulty));
     // Water Game Level added to the GameEnv ...
     new GameLevel({ tag: "water", callback: this.playerOffScreenCallBack, objects: waterGameObjects });
-
 
     // Quidditch Game Level definition...
     const quidditchGameObjects = [

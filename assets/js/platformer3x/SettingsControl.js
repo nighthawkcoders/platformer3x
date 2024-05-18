@@ -528,18 +528,29 @@ export class SettingsControl extends LocalStorage{
        
        var hintsButton = document.createElement("input")
        hintsButton.type = "checkbox"
-       hintsButton.checked = true
-       
-       hintsButton.addEventListener("click", () => {
-           const hints = document.getElementsByClassName("fun_facts")[0]
 
+       const hintsDiv = document.getElementsByClassName("fun_facts")[0]
+        console.log(localStorage.getItem("show_hints"))
+        if (localStorage.getItem("show_hints") == true) {
+            hintsDiv.style.display = "unset"
+            hintsButton.checked = true
+        }
+        else {
+            hintsDiv.style.display = "none"
+            hintsButton.checked = false
+        }
+
+       hintsButton.addEventListener("click", () => {
            if (!hintsButton.checked) {
-               hints.style.display = "none"
+               hintsDiv.style.display = "none"
+               localStorage.setItem("show_hints", false)
            }
            else {
-               hints.style.display = "unset"
+               hintsDiv.style.display = "unset"
+               localStorage.setItem("show_hints", true)
            }
-       })
+           console.log(localStorage.getItem("show_hints"))
+        })
 
        hintsSection.append(hintsButton)
        document.getElementById("sidebar").append(hintsSection)
