@@ -3,14 +3,8 @@ import GameEnv from './GameEnv.js';
 import GameLevel from './GameLevel.js';
 // To build GameLevels, each contains GameObjects from below imports
 import Background from './Background.js'
-import BackgroundHills from './BackgroundHills.js';
-import BackgroundCoral from './BackgroundCoral.js';
-import BackgroundMountains from './BackgroundMountains.js';
+import BackgroundParallax from './BackgroundParallax.js';
 import BackgroundTransitions from './BackgroundTransitions.js';
-import BackgroundClouds from './BackgroundClouds.js';
-import BackgroundFish from './BackgroundFish.js';
-import BackgroundWinter from './BackgroundWinter.js';
-import BackgroundNarwhal from './BackgroundNarwhal.js';
 import BackgroundSnow from './BackgroundSnow.js';
 import Platform from './Platform.js';
 import JumpPlatform from './JumpPlatform.js';
@@ -299,20 +293,20 @@ const GameSetup = {
     backgrounds: {
       boss: { src: "/images/platformer/backgrounds/BossBackground.png" },
       start: { src: "/images/platformer/backgrounds/home.png" },
-      hills: { src: "/images/platformer/backgrounds/hills.png" },
+      hills: { src: "/images/platformer/backgrounds/hills.png", parallaxSpeed: 0.4, moveOnKeyAction: true },
       greece: { src: "/images/platformer/backgrounds/greek.png" },
-      mountains: { src: "/images/platformer/backgrounds/mountains.jpg" },
-      clouds: { src: "/images/platformer/backgrounds/clouds.png" },
+      mountains: { src: "/images/platformer/backgrounds/mountains.jpg", parallaxSpeed: 0.1, moveOnKeyAction: true },
+      clouds: { src: "/images/platformer/backgrounds/clouds.png", parallaxSpeed: 0.5 },
       water: { src: "/images/platformer/backgrounds/water.png" },
-      fish: { src: "/images/platformer/backgrounds/school-fish.png" },
+      fish: { src: "/images/platformer/backgrounds/school-fish.png", parallaxSpeed: -0.5 },
       reef: { src: "/images/platformer/backgrounds/reef.png" },
       quidditch: { src: "/images/platformer/backgrounds/quidditch2.jpg" },
       miniHogwarts: { src: "/images/platformer/backgrounds/miniHogwarts.png"}, 
       space: { src: "/images/platformer/backgrounds/planet.jpg" },
       castles: { src: "/images/platformer/backgrounds/castles.png" },
-      winter: { src: "/images/platformer/backgrounds/winter.png" },
+      winter: { src: "/images/platformer/backgrounds/winter.png", parallaxSpeed: 0.4, moveOnKeyAction: true },
       snow: { src: "/images/platformer/backgrounds/snowfall.png" },
-      narwhal: { src: "/images/platformer/backgrounds/narwhal.png" },
+      narwhal: { src: "/images/platformer/backgrounds/narwhal.png", parallaxSpeed: 2 },
       mini: { src: "/images/platformer/backgrounds/mini.png" },
     },
     transitions: {
@@ -657,9 +651,9 @@ const GameSetup = {
 
     // Hills Game Level defintion...
     const allHillsGameObjects = [
-      { name: 'mountains', id: 'background', class: BackgroundMountains, data: this.assets.backgrounds.mountains },
-      { name: 'clouds', id: 'background', class: BackgroundClouds, data: this.assets.backgrounds.clouds },
-      { name: 'hills', id: 'background', class: BackgroundHills, data: this.assets.backgrounds.hills },
+      { name: 'mountains', id: 'background', class: BackgroundParallax, data: this.assets.backgrounds.mountains },
+      { name: 'clouds', id: 'background', class: BackgroundParallax, data: this.assets.backgrounds.clouds },
+      { name: 'hills', id: 'background', class: BackgroundParallax, data: this.assets.backgrounds.hills },
       { name: 'grass', id: 'floor', class: Platform, data: this.assets.platforms.grass },
       { name: 'blocks', id: 'jumpPlatform', class: MovingPlatform, data: this.assets.platforms.block, xPercentage: 0.2, yPercentage: 0.85 },
       { name: 'blocks', id: 'jumpPlatform', class: MovingPlatform, data: this.assets.platforms.block, xPercentage: 0.2368, yPercentage: 0.85 },
@@ -837,8 +831,8 @@ const GameSetup = {
     // Under Water Game Level defintion...
     const allWaterGameObjects = [
       { name: 'water', id: 'background', class: Background, data: this.assets.backgrounds.water },
-      { name: 'fish', id: 'background', class: BackgroundFish, data: this.assets.backgrounds.fish },
-      { name: 'reef', id: 'background', class: BackgroundCoral, data: this.assets.backgrounds.reef },
+      { name: 'fish', id: 'background', class: BackgroundParallax, data: this.assets.backgrounds.fish },
+      { name: 'reef', id: 'background', class: Background, data: this.assets.backgrounds.reef },
       { name: 'sand', id: 'floor', class: Platform, data: this.assets.platforms.sand },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2, yPercentage: 0.85 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2368, yPercentage: 0.85 },
@@ -996,8 +990,8 @@ const GameSetup = {
 
     const winterObjects = [
       // GameObject(s), the order is important to z-index...
-      { name: 'winter', id: 'background', class: BackgroundWinter, data: this.assets.backgrounds.winter },
-      { name: 'narwhal', id: 'background', class: BackgroundNarwhal, data: this.assets.backgrounds.narwhal },
+      { name: 'winter', id: 'background', class: BackgroundParallax, data: this.assets.backgrounds.winter },
+      { name: 'narwhal', id: 'background', class: BackgroundParallax, data: this.assets.backgrounds.narwhal },
       { name: 'snow', id: 'background', class: BackgroundSnow, data: this.assets.backgrounds.snow },
       { name: 'snowyfloor', id: 'platform', class: Platform, data: this.assets.platforms.snowyfloor },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.2, yPercentage: 0.82 },
