@@ -32,14 +32,21 @@ import Star from './Star.js';
 import Dementor from './Dementor.js';
 import Draco from './Draco.js';
 import Boss from './Boss.js';
+<<<<<<< HEAD
 import Jellyfish from './Jellyfish.js';
 import Penguin from './Penguin.js';
 import PlayerIce from './PlayerIce.js';
+=======
+>>>>>>> 4c44d94 (boss narhwal)
 import FlyingIsland from './FlyingIsland.js';
 import PlayerBaseOneD from './PlayerBaseOneD.js';
 import PlayerZombie from './PlayerZombie.js';
 import BossItem from './BossItem.js';
 import PlayerBoss from './PlayerBoss.js';
+<<<<<<< HEAD
+=======
+import NarwhalBoss from './NarwhalBoss.js';
+>>>>>>> 4c44d94 (boss narhwal)
 
 //test comment
 
@@ -617,11 +624,11 @@ const GameSetup = {
       },
       narwhalboss: {
         src: "/images/platformer/sprites/narwhal_boss.png",
-        width: 64,
-        height: 64,
-        scaleSize: 320,
+        width: 211,
+        height: 148,
+        scaleSize: 200,
         speedRatio: 0.6,
-        animationSpeed: 6,
+        animationSpeed: 3,
         idleL: { row: 0, frames: 4, idleFrame: { column: 1, frames: 0 } },
         idleR: { row: 1, frames: 4, idleFrame: { column: 1, frames: 0 } },
         left: { row: 2, frames: 4, idleFrame: { column: 1, frames: 0 } },
