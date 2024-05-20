@@ -12,7 +12,7 @@ import GameControl from './GameControl.js';
  * 
  * @extends PlayerBase 
  */
-export class PlayerWinter extends PlayerBase {
+export class PlayerIce extends PlayerBase {
 
     /** GameObject instantiation: constructor for PlayerHills object
      * @extends Character 
@@ -22,6 +22,11 @@ export class PlayerWinter extends PlayerBase {
      */
     constructor(canvas, image, data) {
         super(canvas, image, data);
+        const scaledHeight = GameEnv.innerHeight * (100 / 832);
+        const finishlineX = .01 * GameEnv.innerWidth;
+        this.setX(finishlineX);
+        this.hillsStart = true;
+
 
         // Goomba variables, deprecate?
         this.timer = false;
@@ -42,6 +47,13 @@ export class PlayerWinter extends PlayerBase {
             jumpHeightFactor = 0.30;
         }
         this.setY(this.y - (this.bottom * jumpHeightFactor));
+    }    
+    update(){
+            super.update();
+        if (this.hillsStart) {
+                this.setY(0);
+                this.hillsStart = false;
+            }
     }
 
     /**
@@ -51,9 +63,8 @@ export class PlayerWinter extends PlayerBase {
     handleCollisionStart() {
         super.handleCollisionStart(); // calls the super class method
         // adds additional collision events
-        this.handleCollisionEvent("minifinishline");
         this.handleCollisionEvent("finishline");
-        this.handleCollisionEvent("snowman");
+        this.handleCollisionEvent("penguin");
     }
    
     /**
@@ -64,28 +75,6 @@ export class PlayerWinter extends PlayerBase {
         super.handlePlayerReaction(); // calls the super class method
         // handles additional player reactions
         switch (this.state.collision) {
-            case "minifinishline":
-                // 1. Caught in finishline
-                if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
-                    // Position player in the center of the finishline 
-                    this.x = this.collisionData.newX;
-                    // Using natural gravity wait for player to reach floor
-                    if (Math.abs(this.y - this.bottom) <= GameEnv.gravity) {
-                        // Force end of level condition
-                        // this.x = GameEnv.innerWidth + 1;
-                        GameControl.transitionToLevel(GameEnv.levels[9])
-                        return
-                    }
-                    // 2. Collision between player right and finishline   
-                } else if (this.collisionData.touchPoints.this.right) {
-                    this.state.movement.right = false;
-                    this.state.movement.left = true;
-                // 3. Collision between player left and finishline
-                } else if (this.collisionData.touchPoints.this.left) {
-                    this.state.movement.left = false;
-                    this.state.movement.right = true;
-                }
-                break;
             case "finishline":
                 // 1. Caught in finishline
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
@@ -94,7 +83,8 @@ export class PlayerWinter extends PlayerBase {
                     // Using natural gravity wait for player to reach floor
                     if (Math.abs(this.y - this.bottom) <= GameEnv.gravity) {
                         // Force end of level condition
-                        GameControl.transitionToLevel(GameEnv.levels[10])
+                        //this.x = GameEnv.innerWidth + 1;
+                        GameControl.transitionToLevel(GameEnv.levels[8])
                     }
                 // 2. Collision between player right and finishline   
                 } else if (this.collisionData.touchPoints.this.right) {
@@ -106,7 +96,7 @@ export class PlayerWinter extends PlayerBase {
                     this.state.movement.right = true;
                 }
                 break;
-            case "snowman": // Note: Goomba.js and Player.js could be refactored
+            case "penguin": // Note: Goomba.js and Player.js could be refactored
                 // 1. Player jumps on goomba, interaction with Goomba.js
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom && this.state.isDying == false) {
                     // GoombaBounce deals with player.js and goomba.js
@@ -144,4 +134,4 @@ export class PlayerWinter extends PlayerBase {
 
 }
 
-export default PlayerWinter;
+export default PlayerIce;
