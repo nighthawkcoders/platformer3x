@@ -36,7 +36,7 @@ export class PlayerBoss extends PlayerBase {
             jumpHeightFactor = 0.40;
         }
         if (GameEnv.currentLevel.tag == "boss") {
-            jumpHeightFactor = 0;
+            jumpHeightFactor = 0.50;
         }
         this.setY(this.y - (this.bottom * jumpHeightFactor));
     }
