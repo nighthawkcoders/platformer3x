@@ -985,7 +985,6 @@ const GameSetup = {
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.409, yPercentage: 0.7 },
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.295, yPercentage: 0.46 },
 
-      { name: 'magicBeam', id: 'magicBeam', class: MagicBeam, data: this.assets.enemies.magicBeam, xPercentage: 0.529, yPercentage: 0.61 },
       { name: 'chocoFrog', id: 'chocoFrog', class: ChocoFrog, data: this.assets.enemies.chocoFrog, xPercentage: 0.25, yPercentage: 0.3 },
 
       { name: 'magicBeam', id: 'magicBeam', class: MagicBeam, data: this.assets.enemies.magicBeam, xPercentage: 0.623, yPercentage: 0.72 },
