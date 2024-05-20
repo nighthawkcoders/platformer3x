@@ -35,7 +35,12 @@ export class BossItem extends JumpPlatform {
 
     // Draw position is always 0,0
     draw() {
-        super.draw();
+        if(!GameEnv.playerChange){
+            this.ctx.drawImage(this.image, this.relativeX, 0, this.canvas.width / this.data.widthRatio, this.canvas.height / this.data.heightRatio);
+        }
+        else{
+            this.destroy();
+        }
     }
 }
 
