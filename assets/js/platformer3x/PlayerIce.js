@@ -42,6 +42,13 @@ export class PlayerIce extends PlayerBase {
             jumpHeightFactor = 0.30;
         }
         this.setY(this.y - (this.bottom * jumpHeightFactor));
+    }    
+    update(){
+        super.update();
+        if (this.winterStart) {
+            this.setY(0);
+            this.winterStart = false;
+        }
     }
 
     /**
@@ -71,7 +78,8 @@ export class PlayerIce extends PlayerBase {
                     // Using natural gravity wait for player to reach floor
                     if (Math.abs(this.y - this.bottom) <= GameEnv.gravity) {
                         // Force end of level condition
-                        this.x = GameEnv.innerWidth + 1;
+                        //this.x = GameEnv.innerWidth + 1;
+                        GameControl.transitionToLevel(GameEnv.levels[8])
                     }
                 // 2. Collision between player right and finishline   
                 } else if (this.collisionData.touchPoints.this.right) {
