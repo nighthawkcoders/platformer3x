@@ -32,21 +32,15 @@ import Star from './Star.js';
 import Dementor from './Dementor.js';
 import Draco from './Draco.js';
 import Boss from './Boss.js';
-<<<<<<< HEAD
 import Jellyfish from './Jellyfish.js';
 import Penguin from './Penguin.js';
 import PlayerIce from './PlayerIce.js';
-=======
->>>>>>> 4c44d94 (boss narhwal)
 import FlyingIsland from './FlyingIsland.js';
 import PlayerBaseOneD from './PlayerBaseOneD.js';
 import PlayerZombie from './PlayerZombie.js';
 import BossItem from './BossItem.js';
 import PlayerBoss from './PlayerBoss.js';
-<<<<<<< HEAD
-=======
-import NarwhalBoss from './NarwhalBoss.js';
->>>>>>> 4c44d94 (boss narhwal)
+import narwhalboss from './NarwhalBoss.js';
 
 //test comment
 
@@ -337,6 +331,7 @@ const GameSetup = {
       quidditchEnd: { src: "/images/platformer/transitions/quidditchEnd.png" },
       miniEnd: { src: "/images/platformer/transitions/miniEnd.png" },
       iceminiEnd: { src: "/images/platformer/transitions/IceMinigameEnd.png"},
+      hogwartsminiEnd: { src: "/images/platformer/transitions/HogwartsminiEnd.png"},
     },
     players: {
       mario: {
@@ -1055,6 +1050,7 @@ const GameSetup = {
       { name: 'harry', id: 'player', class: PlayerMini, data: this.assets.players.harry },
       { name: 'tubeD', id: 'finishline', class: FinishLine, data: this.assets.obstacles.tubeD, xPercentage: 0, yPercentage: 0.052 },
       { name: 'tubeU', id: 'finishline', class: FinishLine, data: this.assets.obstacles.tubeU, xPercentage: 0.85, yPercentage: 0.646 },
+      { name: 'minihogwartsEnd', id: 'background', class: BackgroundTransitions,  data: this.assets.transitions.minihogwartsEnd },
     ];
 
     // miniHogwarts Game Level added to the GameEnv ...
@@ -1096,7 +1092,7 @@ const GameSetup = {
       { name: 'mario', id: 'player', class: PlayerWinter, data: this.assets.players.whitemario },
       { name: 'cabin', id: 'finishline', class: FinishLine, data: this.assets.obstacles.cabin, xPercentage: 0.85, yPercentage: 0.603 },
       { name: 'tubeU', id: 'minifinishline', class: FinishLine, data: this.assets.obstacles.tubeU, xPercentage: 0.69, yPercentage: 0.71 },
-      { name: 'quidditchEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.quidditchEnd },
+      { name: 'minihogwartsEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.minihogwartsEnd },
     ];
 
     // Winter MiniGame Level added to the GameEnv ...
@@ -1140,7 +1136,7 @@ const GameSetup = {
       { name: 'mario', id: 'player', class: PlayerIce, data: this.assets.players.whitemario },
       { name: 'tubeD', id: 'finishline', class: FinishLine, data: this.assets.obstacles.tubeD, xPercentage: 0, yPercentage: 0.052 },
       { name: 'iceberg', id: 'finishline', class: FinishLine, data: this.assets.obstacles.iceberg, xPercentage: 0.85, yPercentage: 0.603 },
-      { name: 'winterEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.winterEnd },
+      { name: 'iceminiEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.iceminiEnd },
     ];
     // IceMiniGame Game Level added to the GameEnv ...
     new GameLevel({ tag: "icemini", callback: this.playerOffScreenCallBack, objects: iceminiObjects });
@@ -1158,7 +1154,7 @@ const GameSetup = {
       { name: 'mario', id: 'player', class: PlayerBoss, data: this.assets.players.mario },
       { name: 'zombie', id: 'player', class: PlayerZombie, data: this.assets.players.zombie },
       { name: 'grass', id: 'platform', class: Platform, data: this.assets.platforms.grass },
-      { name: 'iceminiEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.iceminiEnd },
+      { name: 'winterEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.winterEnd },
     ];
 
     new GameLevel({ tag: "boss", callback: this.playerOffScreenCallBack, objects: bossGameObjects });
