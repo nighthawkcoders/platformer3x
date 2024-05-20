@@ -10,8 +10,6 @@ import BackgroundTransitions from './BackgroundTransitions.js';
 import BackgroundClouds from './BackgroundClouds.js';
 import BackgroundWinter from './BackgroundWinter.js';
 import BackgroundNarwhal from './BackgroundNarwhal.js';
-import BackgroundDevil from './BackgroundDevil.js';
-import BackgroundBoss from './BackgroundBoss.js';
 import BackgroundSnow from './BackgroundSnow.js';
 import BackgroundFish from './BackgroundFish.js';
 import Platform from './Platform.js';
@@ -310,7 +308,6 @@ const GameSetup = {
       snow: { src: "/images/platformer/backgrounds/snowfall.png" },
       narwhal: { src: "/images/platformer/backgrounds/narwhal.png" },
       mini: { src: "/images/platformer/backgrounds/mini.png" },
-      devil: {src: "/images/platformer/backgrounds/devil.png" },
     },
     transitions: {
       loading: { src: "/images/platformer/transitions/greenscreen.png" },
@@ -1051,8 +1048,7 @@ const GameSetup = {
 
 
     const bossGameObjects = [
-      { name: 'bossbackground', id: 'background', class: BackgroundBoss, data: this.assets.backgrounds.boss },
-      { name: 'devil', id: 'devil', class: BackgroundDevil, data: this.assets.backgrounds.devil },
+      { name: 'bossbackground', id: 'background', class: Background, data: this.assets.backgrounds.boss },
       { name: 'boss', id: 'boss', class: Boss, data: this.assets.enemies.boss, xPercentage: 0.5, minPosition: 0.3 },
       { name: 'boss1', id: 'boss', class: Boss, data: this.assets.enemies.boss, xPercentage: 0.3, minPosition: 0.07 },
       { name: 'itemBlock', id: 'jumpPlatform', class: BossItem, data: this.assets.platforms.itemBlock, xPercentage: 0.2, yPercentage: 0.65 }, //item block is a platform
