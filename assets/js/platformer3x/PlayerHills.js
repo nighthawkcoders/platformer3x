@@ -56,6 +56,7 @@ export class PlayerHills extends PlayerBase {
         this.handleCollisionEvent("goomba");
         this.handleCollisionEvent("mushroom");
         this.handleCollisionEvent("boss");
+        this.handleCollisionEvent("narwhalboss");
     }
    
     /**
