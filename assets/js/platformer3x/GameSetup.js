@@ -27,7 +27,6 @@ import MovingPlatform from './MovingPlatform.js'
 import Mushroom from './Mushroom.js';
 import MagicBeam from './MagicBeam.js'
 import Coin from './Coin.js';
-import Snowflake from './Snowflake.js';
 import GameControl from './GameControl.js';
 import Owl from './Owl.js';
 import Snowman from './Snowman.js';
@@ -1058,9 +1057,9 @@ const GameSetup = {
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.755, yPercentage: 1 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.755, yPercentage: 0.92 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.755, yPercentage: 0.84 },
-      { name: 'snowflake', id: 'snowflake', class: Snowflake, data: this.assets.obstacles.snowflake, xPercentage: 0.2100, yPercentage: 0.75 },
-      { name: 'snowflake', id: 'snowflake', class: Snowflake, data: this.assets.obstacles.snowflake, xPercentage: 0.2619, yPercentage: 0.75 },
-      { name: 'snowflake', id: 'snowflake', class: Snowflake, data: this.assets.obstacles.snowflake, xPercentage: 0.3136, yPercentage: 0.75 },
+      { name: 'snowflake', id: 'coin', class: Coin, data: this.assets.obstacles.snowflake, xPercentage: 0.2100, yPercentage: 0.72 },
+      { name: 'snowflake', id: 'coin', class: Coin, data: this.assets.obstacles.snowflake, xPercentage: 0.2619, yPercentage: 0.72 },
+      { name: 'snowflake', id: 'coin', class: Coin, data: this.assets.obstacles.snowflake, xPercentage: 0.3136, yPercentage: 0.72 },
       { name: 'owl', id: 'owl', class: Owl, data: this.assets.enemies.Owl, xPercentage: 0.3, minPosition: 0.05 },
       { name: 'owl', id: 'owl', class: Owl, data: this.assets.enemies.Owl, xPercentage: 0.8, minPosition: 0.05 },
       { name: 'snowman', id: 'snowman', class: Snowman, data: this.assets.enemies.Snowman, xPercentage: 0.2, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
@@ -1094,23 +1093,24 @@ const GameSetup = {
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.484, yPercentage: 0.6 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.5208, yPercentage: 0.6 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.5576, yPercentage: 0.6 },
-      { name: 'Snowflake', id: 'Snowflake', class: Snowflake, data: this.assets.obstacles.snowflake, xPercentage: 0.32, yPercentage: 0.25 },
-      { name: 'Snowflake', id: 'Snowflake', class: Snowflake, data: this.assets.obstacles.snowflake, xPercentage: 0.40, yPercentage: 0.5 },
-      { name: 'Snowflake', id: 'Snowflake', class: Snowflake, data: this.assets.obstacles.snowflake, xPercentage: 0.42, yPercentage: 0.5 },
-      { name: 'Snowflake', id: 'Snowflake', class: Snowflake, data: this.assets.obstacles.snowflake, xPercentage: 0.44, yPercentage: 0.5 },
-      { name: 'Snowflake', id: 'Snowflake', class: Snowflake, data: this.assets.obstacles.snowflake, xPercentage: 0.46, yPercentage: 0.5 },
-      { name: 'Snowflake', id: 'Snowflake', class: Snowflake, data: this.assets.obstacles.snowflake, xPercentage: 0.48, yPercentage: 0.5 },
-      { name: 'Snowflake', id: 'Snowflake', class: Snowflake, data: this.assets.obstacles.snowflake, xPercentage: 0.5, yPercentage: 0.5 },
-      { name: 'Snowflake', id: 'Snowflake', class: Snowflake, data: this.assets.obstacles.snowflake, xPercentage: 0.58, yPercentage: 0.25 },
-      { name: 'Snowflake', id: 'Snowflake', class: Snowflake, data: this.assets.obstacles.snowflake, xPercentage: 0.62, yPercentage: 0.25 },
-      { name: 'jellyfish', id: 'jellyfish', class: Jellyfish, data: this.assets.enemies.Jellyfish, xPercentage: 0.3, minPosition: 0.05 },
+      { name: 'Snowflake', id: 'coin', class: Coin, data: this.assets.obstacles.snowflake, xPercentage: 0.325, yPercentage: 0.25 },
+      { name: 'Snowflake', id: 'coin', class: Coin, data: this.assets.obstacles.snowflake, xPercentage: 0.29, yPercentage: 0.25 },
+      { name: 'Snowflake', id: 'coin', class: Coin, data: this.assets.obstacles.snowflake, xPercentage: 0.40, yPercentage: 0.5 },
+      { name: 'Snowflake', id: 'coin', class: Coin, data: this.assets.obstacles.snowflake, xPercentage: 0.42, yPercentage: 0.5 },
+      { name: 'Snowflake', id: 'coin', class: Coin, data: this.assets.obstacles.snowflake, xPercentage: 0.44, yPercentage: 0.5 },
+      { name: 'Snowflake', id: 'coin', class: Coin, data: this.assets.obstacles.snowflake, xPercentage: 0.46, yPercentage: 0.5 },
+      { name: 'Snowflake', id: 'coin', class: Coin, data: this.assets.obstacles.snowflake, xPercentage: 0.48, yPercentage: 0.5 },
+      { name: 'Snowflake', id: 'coin', class: Coin, data: this.assets.obstacles.snowflake, xPercentage: 0.5, yPercentage: 0.5 },
+      { name: 'Snowflake', id: 'coin', class: Coin, data: this.assets.obstacles.snowflake, xPercentage: 0.58, yPercentage: 0.25 },
+      { name: 'Snowflake', id: 'coin', class: Coin, data: this.assets.obstacles.snowflake, xPercentage: 0.62, yPercentage: 0.25 },
+      { name: 'jellyfish', id: 'jellyfish', class: Jellyfish, data: this.assets.enemies.Jellyfish, xPercentage: 0.2, minPosition: 0.05 },
       { name: 'jellyfish', id: 'jellyfish', class: Jellyfish, data: this.assets.enemies.Jellyfish, xPercentage: 0.8, minPosition: 0.05 },
       { name: 'penguin', id: 'penguin', class: Penguin, data: this.assets.enemies.Penguin, xPercentage: 0.2, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
       { name: 'penguin', id: 'penguin', class: Penguin, data: this.assets.enemies.Penguin, xPercentage: 0.35, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
       { name: 'penguin', id: 'penguin', class: Penguin, data: this.assets.enemies.Penguin, xPercentage: 0.5, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
       { name: 'mario', id: 'player', class: PlayerIce, data: this.assets.players.whitemario },
       { name: 'iceberg', id: 'finishline', class: FinishLine, data: this.assets.obstacles.iceberg, xPercentage: 0.85, yPercentage: 0.603 },
-      { name: 'iceminiEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.iceminiEnd },
+      { name: 'winterEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.winterEnd },
     ];
     // IceMiniGame Game Level added to the GameEnv ...
     new GameLevel({ tag: "icemini", callback: this.playerOffScreenCallBack, objects: iceminiObjects });
@@ -1123,7 +1123,8 @@ const GameSetup = {
       { name: 'mario', id: 'player', class: PlayerBoss, data: this.assets.players.mario },
       { name: 'zombie', id: 'player', class: PlayerZombie, data: this.assets.players.zombie },
       { name: 'tube', id: 'finishline', class: FinishLine, data: this.assets.obstacles.tube, xPercentage: 0.85, yPercentage: 0.65 },
-      { name: 'grass', id: 'platform', class: Platform, data: this.assets.platforms.grass }
+      { name: 'grass', id: 'platform', class: Platform, data: this.assets.platforms.grass },
+      { name: 'iceminiEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.iceminiEnd },
     ];
 
     new GameLevel({ tag: "boss", callback: this.playerOffScreenCallBack, objects: bossGameObjects });
