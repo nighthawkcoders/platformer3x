@@ -277,6 +277,7 @@ const GameSetup = {
       stone: { src: "/images/platformer/platforms/stone.jpg"}, 
       turf: { src: "/images/platformer/platforms/turf.png" },
       island: { src: "/images/platformer/platforms/island.png" },
+      island: { src: "/images/platformer/platforms/island.png" },
       block: { src: "/images/platformer/platforms/brick_block.png" }, //MAY need 3 new variables: sizeRatio, widthRatio, and heightRatio
       itemBlock: {
         src: "/images/platformer/platforms/mario_block_spritesheet_v2.png",
@@ -291,7 +292,7 @@ const GameSetup = {
       }
     },
     backgrounds: {
-      boss: { src: "/images/platformer/backgrounds/BossBackground.png" },
+      boss: { src: "/images/platformer/backgrounds/BossBackground.png", parallaxSpeed: 0.4, moveOnKeyAction: true },
       start: { src: "/images/platformer/backgrounds/home.png" },
       hills: { src: "/images/platformer/backgrounds/hills.png", parallaxSpeed: 0.4, moveOnKeyAction: true },
       greece: { src: "/images/platformer/backgrounds/greek.png" },
@@ -308,6 +309,7 @@ const GameSetup = {
       snow: { src: "/images/platformer/backgrounds/snowfall.png" },
       narwhal: { src: "/images/platformer/backgrounds/narwhal.png", parallaxSpeed: 2 },
       mini: { src: "/images/platformer/backgrounds/mini.png" },
+      devil: {src: "/images/platformer/backgrounds/devil.png", parallaxSpeed: 2 },
     },
     transitions: {
       loading: { src: "/images/platformer/transitions/greenscreen.png" },
@@ -440,6 +442,21 @@ const GameSetup = {
         d: { row: 2, frames: 3, idleFrame: { column: 1, frames: 0 } }, // Right Movement 
         runningLeft: { row: 5, frames: 3, idleFrame: { column: 1, frames: 0 } },
         runningRight: { row: 4, frames: 3, idleFrame: { column: 1, frames: 0 } },
+      },
+      zombie: { //one direction player
+        src: "/images/platformer/sprites/zombie.png",
+        width: 130,
+        height: 70,
+        scaleSize: 60,
+        speedRatio: 0.7,
+        idle: { row: 2, frames: 11, idleFrame: { column: 1, frames: 0 } },
+        walk: { row: 3, frames: 11 }, // default - right Movement
+        run: { row: 3, frames: 11 }, // default - right Movement
+        jump: { row: 3, frames: 11 }, // default - right Movement
+        attack: { row: 4, min: 6,frames: 11 }, 
+        jumpAttack : { row: 6, frames: 11 }, 
+        death : { row: 11, frames: 11 }, 
+        hitbox: { widthPercentage: 0.3, heightPercentage: 0.8 }
       },
       zombie: { //one direction player
         src: "/images/platformer/sprites/zombie.png",
@@ -736,6 +753,7 @@ const GameSetup = {
       //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.1 },
       //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.06 },
       { name: 'cerberus', id: 'cerberus', class: Cerberus, data: this.assets.enemies.cerberus, xPercentage: 0.2, minPosition: 0.09, difficulties: ["normal", "hard", "impossible"] },
+      { name: 'cerberus', id: 'cerberus', class: Cerberus, data: this.assets.enemies.cerberus, xPercentage: 0.2, minPosition: 0.09, difficulties: ["normal", "hard", "impossible"] },
       { name: 'cerberus', id: 'cerberus', class: Cerberus, data: this.assets.enemies.cerberus, xPercentage: 0.5, minPosition: 0.3, difficulties: ["normal", "hard", "impossible"] },
       { name: 'cerberus', id: 'cerberus', class: Cerberus, data: this.assets.enemies.cerberus, xPercentage: 0.7, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },//this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
       { name: 'dragon', id: 'dragon', class: Dragon, data: this.assets.enemies.dragon, xPercentage: 0.5, minPosition: 0.05 },
@@ -743,7 +761,9 @@ const GameSetup = {
       { name: 'flyingIsland', id: 'flyingIsland', class: FlyingIsland, data: this.assets.platforms.island, xPercentage: 0.82, yPercentage: 0.55 },
       { name: 'tubeU', id: 'minifinishline', class: FinishLine, data: this.assets.obstacles.tubeU, xPercentage: 0.66, yPercentage: 0.71 },
       { name: 'flag', id: 'finishline', class: FinishLine, data: this.assets.obstacles.flag, xPercentage: 0.875, yPercentage: 0.21 },
+      { name: 'flyingIsland', id: 'flyingIsland', class: FlyingIsland, data: this.assets.platforms.island, xPercentage: 0.82, yPercentage: 0.55 },
       { name: 'hillsEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.hillsEnd },
+      { name: 'lava', id: 'lava', class: Lava, data: this.assets.platforms.lava, xPercentage: 0, yPercentage: 1 },
       { name: 'lava', id: 'lava', class: Lava, data: this.assets.platforms.lava, xPercentage: 0, yPercentage: 1 },
     ];
     // Greece Game Level added to the GameEnv ...
@@ -1029,13 +1049,17 @@ const GameSetup = {
 
 
     const bossGameObjects = [
-      { name: 'bossbackground', id: 'background', class: Background, data: this.assets.backgrounds.boss },
+      { name: 'bossbackground', id: 'background', class: BackgroundParallax, data: this.assets.backgrounds.boss },
+      { name: 'devil', id: 'devil', class:BackgroundParallax, data: this.assets.backgrounds.devil},
       { name: 'boss', id: 'boss', class: Boss, data: this.assets.enemies.boss, xPercentage: 0.5, minPosition: 0.3 },
       { name: 'boss1', id: 'boss', class: Boss, data: this.assets.enemies.boss, xPercentage: 0.3, minPosition: 0.07 },
       { name: 'itemBlock', id: 'jumpPlatform', class: BossItem, data: this.assets.platforms.itemBlock, xPercentage: 0.2, yPercentage: 0.65 }, //item block is a platform
       { name: 'mario', id: 'player', class: PlayerBoss, data: this.assets.players.mario },
       { name: 'zombie', id: 'player', class: PlayerZombie, data: this.assets.players.zombie },
       { name: 'tube', id: 'finishline', class: FinishLine, data: this.assets.obstacles.tube, xPercentage: 0.85, yPercentage: 0.65 },
+      { name: 'itemBlock', id: 'jumpPlatform', class: BossItem, data: this.assets.platforms.itemBlock, xPercentage: 0.2, yPercentage: 0.65 }, //item block is a platform
+      { name: 'mario', id: 'player', class: PlayerBoss, data: this.assets.players.mario },
+      { name: 'zombie', id: 'player', class: PlayerZombie, data: this.assets.players.zombie },
       { name: 'grass', id: 'platform', class: Platform, data: this.assets.platforms.grass }
     ];
 

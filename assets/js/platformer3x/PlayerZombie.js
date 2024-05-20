@@ -1,35 +1,30 @@
 import GameEnv from './GameEnv.js';
 import PlayerBaseOneD from './PlayerBaseOneD.js';
 import GameControl from './GameControl.js';
-
 /**
  * @class PlayerHills class
- * @description PlayerHills.js key objective is to eent the user-controlled character in the game.   
- * 
+ * @description PlayerHills.js key objective is to eent the user-controlled character in the game.
+ *
  * The Player class extends the Character class, which in turn extends the GameObject class.
  * Animations and events are activated by key presses, collisions, and gravity.
- * WASD keys are used by user to control The Player object.  
- * 
- * @extends PlayerBase 
+ * WASD keys are used by user to control The Player object.
+ *
+ * @extends PlayerBase
  */
 export class PlayerZombie extends PlayerBaseOneD {
-
     /** GameObject instantiation: constructor for PlayerHills object
-     * @extends Character 
+     * @extends Character
      * @param {HTMLCanvasElement} canvas - The canvas element to draw the player on.
      * @param {HTMLImageElement} image - The image to draw the player with.
      * @param {Object} data - The data object containing the player's properties.
      */
     constructor(canvas, image, data) {
         super(canvas, image, data);
-
         this.invisible = true;
-
         // Goomba variables, deprecate?
         this.timer = false;
-        GameEnv.invincible = false; // Player is not invincible 
+        GameEnv.invincible = false; // Player is not invincible
     }
-
     /**
      * @override
      * gameLoop helper: Update Player jump height, replaces PlayerBase updateJump using settings from GameEnv
@@ -42,14 +37,13 @@ export class PlayerZombie extends PlayerBaseOneD {
             jumpHeightFactor = 0.40;
         }
         if (GameEnv.currentLevel.tag == "boss") {
-            jumpHeightFactor = 0.70;
+            jumpHeightFactor = 0;
         }
         this.setY(this.y - (this.bottom * jumpHeightFactor));
     }
-
     /**
      * @override
-     * gameLoop: Watch for Player collision events 
+     * gameLoop: Watch for Player collision events
      */
     handleCollisionStart() {
         super.handleCollisionStart(); // calls the super class method
@@ -57,36 +51,29 @@ export class PlayerZombie extends PlayerBaseOneD {
         this.handleCollisionEvent("finishline");
         this.handleCollisionEvent("boss");
     }
-
     /**
  * @override
- * gameLoop: Watch for Player collision events 
+ * gameLoop: Watch for Player collision events
  */
     update() {
         // Update the y position of the character based on gravity
         this.updateY();
-
         // Update animation frameX of the object
         this.updateFrameX();
-
         // Check for collisions, defined in GameObject which calls the collisionAction method
         this.collisionChecks();
-
         // player methods
         this.updateMovement();
-
         if (GameEnv.playerChange) {
             this.invisible = false;
         }
-
         if (!this.invisible) {
             this.updateAnimation();
         }
     }
-
     /**
  * @override
- * gameLoop: Watch for Player collision events 
+ * gameLoop: Watch for Player collision events
  */
     draw() {
         // Set fixed dimensions and position for the Character
@@ -114,30 +101,138 @@ export class PlayerZombie extends PlayerBaseOneD {
             );
         }
     }
-
     /**
      * @override
-     * gameloop: Handles additional Player reaction / state updates to the collision for game level 
+     */
+    updateAnimation() {
+        switch (this.state.animation) {
+            case 'idle':
+                if (this.state.direction == "left") {
+                    this.canvas.style.transform = 'scaleX(-1)';
+                }
+                else {
+                    this.canvas.style.transform = 'scaleX(1)';
+                }
+                this.setSpriteAnimation(this.playerData.idle);
+                break;
+            case 'walk':
+                if (this.state.direction == "left") {
+                    this.canvas.style.transform = 'scaleX(-1)';
+                }
+                else {
+                    this.canvas.style.transform = 'scaleX(1)';
+                }
+                this.setSpriteAnimation(this.playerData.walk);
+                break;
+            case 'run':
+                if (this.state.direction == "left") {
+                    this.canvas.style.transform = 'scaleX(-1)';
+                }
+                else {
+                    this.canvas.style.transform = 'scaleX(1)';
+                }
+                this.setSpriteAnimation(this.playerData.run);
+                break;
+            case 'jump':
+                if (this.state.direction == "left") {
+                    this.canvas.style.transform = 'scaleX(-1)';
+                }
+                else {
+                    this.canvas.style.transform = 'scaleX(1)';
+                }
+                this.setSpriteAnimation(this.playerData.jump);
+                break;
+            case 'attack':
+                if (this.state.direction == "left") {
+                    this.canvas.style.transform = 'scaleX(-1)';
+                }
+                else {
+                    this.canvas.style.transform = 'scaleX(1)';
+                }
+                this.setSpriteAnimation(this.playerData.attack);
+                break;
+            default:
+                console.error(`Invalid state: ${this.state.animation}`);
+        }
+    }
+    /**
+     * @override
+     */
+    handleKeyUp(event) {
+        const key = event.key;
+        if (key in this.pressedKeys) {
+            delete this.pressedKeys[key];
+            if (Object.keys(this.pressedKeys).length > 0) {
+                // If there are still keys in pressedKeys, update the state to the last one
+                const lastKey = Object.keys(this.pressedKeys)[Object.keys(this.pressedKeys).length - 1];
+                this.updateAnimationState(lastKey);
+                GameEnv.updateParallaxDirection(lastKey)
+            } else {
+                // If there are no more keys in pressedKeys, update the state to null
+                GameEnv.playerAttack = false;
+                this.updateAnimationState(null);
+                GameEnv.updateParallaxDirection(null)
+            }
+        }
+    }
+    /**
+     * @override
+     */
+    updateAnimationState(key) {
+        switch (key) {
+            case 'a':
+            case 'd':
+                this.state.animation = 'walk';
+                GameEnv.playerAttack = false;
+                break;
+            case 'w':
+                if (this.state.movement.up == false) {
+                    this.state.movement.up = true;
+                    this.state.animation = 'jump';
+                }
+                GameEnv.playerAttack = false;
+                break;
+            case 's':
+                if ("a" in this.pressedKeys || "d" in this.pressedKeys) {
+                    this.state.animation = 'run';
+                }
+                GameEnv.playerAttack = false;
+                break;
+            case 'Shift':
+                this.state.animation = 'attack';  // Example action for Space key
+                if(GameEnv.playerChange){
+                    GameEnv.playerAttack = true;
+                }
+                break;
+            default:
+                this.state.animation = 'idle';
+                GameEnv.playerAttack = false;
+                break;
+        }
+    }
+    /**
+     * @override
+     * gameloop: Handles additional Player reaction / state updates to the collision for game level
      */
     handlePlayerReaction() {
         super.handlePlayerReaction(); // calls the super class method
         // handles additional player reactions
         switch (this.state.collision) {
             case "finishline":
-                // 1. Caught in finishline
+                // 1. Caught in tube
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
-                    // Position player in the center of the finishline 
+                    // Position player in the center of the tube
                     this.x = this.collisionData.newX;
                     // Using natural gravity wait for player to reach floor
                     if (Math.abs(this.y - this.bottom) <= GameEnv.gravity) {
                         // Force end of level condition
                         this.x = GameEnv.innerWidth + 1;
                     }
-                // 2. Collision between player right and finishline   
+                    // 2. Collision between player right and tube
                 } else if (this.collisionData.touchPoints.this.right) {
                     this.state.movement.right = false;
                     this.state.movement.left = true;
-                // 3. Collision between player left and finishline
+                    // 3. Collision between player left and tube
                 } else if (this.collisionData.touchPoints.this.left) {
                     this.state.movement.left = false;
                     this.state.movement.right = true;
@@ -155,7 +250,7 @@ export class PlayerZombie extends PlayerBaseOneD {
                         GameEnv.goombaBounce1 = false;
                         this.y = this.y - 250
                     }
-                    // 2. Player touches goomba sides of goomba 
+                    // 2. Player touches goomba sides of goomba
                 } else if (this.collisionData.touchPoints.this.right || this.collisionData.touchPoints.this.left) {
                     if (GameEnv.difficulty === "normal" || GameEnv.difficulty === "hard") {
                         if (this.state.isDying == false) {
@@ -172,14 +267,9 @@ export class PlayerZombie extends PlayerBaseOneD {
                     } else if (GameEnv.difficulty === "easy" && this.collisionData.touchPoints.this.left) {
                         this.x += 10;
                     }
-
                 }
                 break;
         }
-
     }
-
-
 }
-
 export default PlayerZombie;

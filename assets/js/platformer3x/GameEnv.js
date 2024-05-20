@@ -83,6 +83,9 @@ export class GameEnv {
     static coinScore = 0;
     static time = 0;
     static darkMode = true
+    static playerAttack = false;
+
+    static playerChange = false;
 
     static playerChange = false;
 
