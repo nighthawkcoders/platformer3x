@@ -10,7 +10,7 @@ export class JumpPlatform extends GameObject {
         this.platformY = yPercentage;
         this.data = data;
         this.name = name;
-        this.relativeX = 0; //used for the item block's spritesheet.
+        this.relativeX = ""; //used for the item block's spritesheet.
         this.direction = 1;
         this.speed = 1;
         this.minBottom = 150; // Minimum bottom position for the platform
@@ -22,7 +22,7 @@ export class JumpPlatform extends GameObject {
     // Required, but no update action
     update() {
         this.collisionChecks();
-        this.movePlatform();
+        //this.movePlatform(); it break the collision event, so I suggest to move this function to BlockPlaform
     }
 
     movePlatform() {
@@ -36,7 +36,6 @@ export class JumpPlatform extends GameObject {
 
         this.canvas.style.bottom = currentPosition + this.direction * this.speed + 'px';
         this.relativeX += this.direction * this.speed;
-        this.draw();
     }
 
     collisionAction() {
@@ -44,7 +43,7 @@ export class JumpPlatform extends GameObject {
         if (this.collisionData.touchPoints.other.id === "player" && this.name === "itemBlock") {
             if (this.relativeX === 0 || this.relativeX === this.canvas.width) {
                 if (this.relativeX === 0) {
-                    GameControl.startRandomEvent();
+                    GameControl.startRandomEvent("game");
                     //console.log("randomEventtriggered", GameControl.randomEventId);
                 };
                 this.relativeX = -1 * this.canvas.width;
