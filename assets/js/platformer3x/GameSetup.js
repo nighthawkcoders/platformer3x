@@ -11,6 +11,7 @@ import JumpPlatform from './JumpPlatform.js';
 import PlayerHills from './PlayerHills.js';
 import PlayerWinter from './PlayerWinter.js';
 import PlayerMini from './PlayerMini.js';
+import PlayerMiniHogwarts from './PlayerMiniHogwarts.js';
 import PlayerQuidditch from './PlayerQuidditch.js';
 import Goomba from './Goomba.js';
 import FlyingGoomba from './FlyingGoomba.js';
@@ -995,6 +996,7 @@ const GameSetup = {
 
       { name: 'harry', id: 'player', class: PlayerQuidditch, data: this.assets.players.harry },
       { name: 'tube', id: 'finishline', class: FinishLine, data: this.assets.obstacles.tube, xPercentage: 0.85, yPercentage: 0.65 },
+      { name: 'tubeU', id: 'minifinishline', class: FinishLine, data: this.assets.obstacles.tubeU, xPercentage: .75, yPercentage: 0.65 },
       { name: 'waterEnd', id: 'background', class: BackgroundTransitions,  data: this.assets.transitions.waterEnd },
     ];
 
@@ -1054,7 +1056,7 @@ const GameSetup = {
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.799, yPercentage: 0.81 },
       
 
-      { name: 'harry', id: 'player', class: PlayerMini, data: this.assets.players.harry },
+      { name: 'harry', id: 'player', class: PlayerMiniHogwarts, data: this.assets.players.harry },
       { name: 'tubeD', id: 'finishline', class: FinishLine, data: this.assets.obstacles.tubeD, xPercentage: 0, yPercentage: 0.052 },
       { name: 'tubeU', id: 'finishline', class: FinishLine, data: this.assets.obstacles.tubeU, xPercentage: 0.85, yPercentage: 0.646 },
     ];
