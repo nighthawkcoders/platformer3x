@@ -22,6 +22,11 @@ export class PlayerIce extends PlayerBase {
      */
     constructor(canvas, image, data) {
         super(canvas, image, data);
+        const scaledHeight = GameEnv.innerHeight * (100 / 832);
+        const finishlineX = .01 * GameEnv.innerWidth;
+        this.setX(finishlineX);
+        this.hillsStart = true;
+
 
         // Goomba variables, deprecate?
         this.timer = false;
@@ -44,11 +49,11 @@ export class PlayerIce extends PlayerBase {
         this.setY(this.y - (this.bottom * jumpHeightFactor));
     }    
     update(){
-        super.update();
-        if (this.winterStart) {
-            this.setY(0);
-            this.winterStart = false;
-        }
+            super.update();
+        if (this.hillsStart) {
+                this.setY(0);
+                this.hillsStart = false;
+            }
     }
 
     /**
