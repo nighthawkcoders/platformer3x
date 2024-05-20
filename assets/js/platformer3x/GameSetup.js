@@ -245,6 +245,7 @@ const GameSetup = {
         width: 300,
         height: 300,
         scaleSize: 150,
+      },
       chest: {
         src: "/images/platformer/obstacles/Chest.png",
         hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 },
@@ -313,8 +314,8 @@ const GameSetup = {
       space: { src: "/images/platformer/backgrounds/planet.jpg" },
       castles: { src: "/images/platformer/backgrounds/castles.png" },
       winter: { src: "/images/platformer/backgrounds/winter.png", parallaxSpeed: 0.4, moveOnKeyAction: true },
-      snow: { src: "/images/platformer/backgrounds/snowfall.png" },\
-      icewater: { src: "/images/platformer/backgrounds/icewater.png" },
+      snow: { src: "/images/platformer/backgrounds/snowfall.png" },
+      icewater: { src: "/images/platformer/backgrounds/icewater.png", parallaxSpeed: 0.4, moveOnKeyAction: true},
       narwhal: { src: "/images/platformer/backgrounds/narwhal.png", parallaxSpeed: 2 },
       mini: { src: "/images/platformer/backgrounds/mini.png" },
     },
@@ -1035,7 +1036,6 @@ const GameSetup = {
     const winterObjects = [
       // GameObject(s), the order is important to z-index...
       { name: 'winter', id: 'background', class: BackgroundParallax, data: this.assets.backgrounds.winter },
-      { name: 'narwhal', id: 'background', class: BackgroundParallax, data: this.assets.backgrounds.narwhal },
       { name: 'snow', id: 'background', class: BackgroundSnow, data: this.assets.backgrounds.snow },
       { name: 'snowyfloor', id: 'platform', class: Platform, data: this.assets.platforms.snowyfloor },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.2, yPercentage: 0.82 },
@@ -1077,8 +1077,8 @@ const GameSetup = {
     
     const iceminiObjects = [
       // GameObject(s), the order is important to z-index...
-      { name: 'icewater', id: 'background', class: BackgroundIcewater, data: this.assets.backgrounds.icewater },
-      { name: 'narwhal', id: 'background', class: BackgroundNarwhal, data: this.assets.backgrounds.narwhal },
+      { name: 'icewater', id: 'background', class: BackgroundParallax, data: this.assets.backgrounds.icewater },
+      { name: 'narwhal', id: 'background', class: BackgroundParallax, data: this.assets.backgrounds.narwhal },
       { name: 'narwhalfloor', id: 'platform', class: Platform, data: this.assets.platforms.narwhalfloor },
       { name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.2, yPercentage: 0.82 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.snowywood, xPercentage: 0.2368, yPercentage: 0.82 },
