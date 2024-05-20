@@ -1,16 +1,17 @@
 import GameEnv from './GameEnv.js';
 import Background from './Background.js';
 
-export class BackgroundNarwhal extends Background {
+export class BackgroundParallax extends Background  {
     constructor(canvas, image, data) {
         super(canvas, image, data);
 
-        this.parallaxSpeed = 2; 
+        this.parallaxSpeed = data.parallaxSpeed || 1; 
+        this.moveOnKeyAction = data.moveOnKeyAction || false;
     }
 
     // speed is used to background parallax behavior
     update() {
-        this.speed = this.parallaxSpeed;
+        this.speed = this.moveOnKeyAction ? this.parallaxSpeed * GameEnv.backgroundDirection : this.parallaxSpeed;
         super.update();
     }
 
@@ -21,4 +22,4 @@ export class BackgroundNarwhal extends Background {
 
 }
 
-export default BackgroundNarwhal;
+export default BackgroundParallax;
