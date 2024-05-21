@@ -7,7 +7,7 @@ import BackgroundParallax from './BackgroundParallax.js';
 import BackgroundTransitions from './BackgroundTransitions.js';
 import BackgroundSnow from './BackgroundSnow.js';
 import Platform from './Platform.js';
-import JumpPlatform from './PlatformJump.js';
+import JumpPlatform from './JumpPlatform.js';
 import PlayerHills from './PlayerHills.js';
 import PlayerWinter from './PlayerWinter.js';
 import PlayerMini from './PlayerMini.js';
