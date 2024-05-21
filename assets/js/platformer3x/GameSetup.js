@@ -40,7 +40,7 @@ import PlayerBaseOneD from './PlayerBaseOneD.js';
 import PlayerZombie from './PlayerZombie.js';
 import BossItem from './BossItem.js';
 import PlayerBoss from './PlayerBoss.js';
-import narwhalboss from './NarwhalBoss.js';
+import NarwhalBoss from './NarwhalBoss.js';
 
 //test comment
 
