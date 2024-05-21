@@ -51,6 +51,7 @@ export class PlayerQuidditch extends PlayerBase {
     handleCollisionStart() {
         super.handleCollisionStart(); // calls the super class method
         // adds additional collision events
+        this.handleCollisionEvent("minifinishline");
         this.handleCollisionEvent("finishline");
         this.handleCollisionEvent("draco");
     }
