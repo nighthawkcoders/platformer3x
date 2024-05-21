@@ -89,8 +89,6 @@ export class GameEnv {
 
     static playerChange = false;
 
-    static playerChange = false;
-
     static claimedCoinIds = []
 
     
