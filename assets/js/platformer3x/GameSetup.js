@@ -11,31 +11,33 @@ import JumpPlatform from './JumpPlatform.js';
 import PlayerHills from './PlayerHills.js';
 import PlayerWinter from './PlayerWinter.js';
 import PlayerMini from './PlayerMini.js';
+import PlayerMiniHogwarts from './PlayerMiniHogwarts.js';
 import PlayerQuidditch from './PlayerQuidditch.js';
-import Goomba from './Goomba.js';
+import Goomba from './EnemyGoomba.js';
 import FlyingGoomba from './FlyingGoomba.js';
 import BlockPlatform from './BlockPlatform.js';
-import SpawnPlatform from './SpawnPlatform.js';
-import MovingPlatform from './MovingPlatform.js'
+import SpawnPlatform from './PlatformSpawn.js';
+import MovingPlatform from './PlatformMoving.js'
 import Mushroom from './Mushroom.js';
-import MagicBeam from './MagicBeam.js'
+import MagicBeam from './MagicBeam.js';
+import ChocoFrog from './ChocoFrog.js';
 import Coin from './Coin.js';
 import GameControl from './GameControl.js';
-import Owl from './Owl.js';
-import Snowman from './Snowman.js';
-import Cerberus from './Cerberus.js';
+import Owl from './FlyingOwl.js';
+import Snowman from './EnemySnowman.js';
+import Cerberus from './EnemyCerberus.js';
 import PlayerGreece from './PlayerGreece.js';
 import FinishLine from './FinishLine.js';
 import Lava from './Lava.js';
-import Dragon from './Dragon.js';
+import Dragon from './FlyingDragon.js';
 import Star from './Star.js';
-import Dementor from './Dementor.js';
-import Draco from './Draco.js';
+import Dementor from './FlyingDementor.js';
+import Draco from './EnemyDraco.js';
 import Boss from './Boss.js';
-import Jellyfish from './Jellyfish.js';
-import Penguin from './Penguin.js';
+import Jellyfish from './FlyingJellyfish.js';
+import Penguin from './EnemyPenguin.js';
 import PlayerIce from './PlayerIce.js';
-import FlyingIsland from './FlyingIsland.js';
+import FlyingIsland from './PlatformFlyingIsland.js';
 import PlayerBaseOneD from './PlayerBaseOneD.js';
 import PlayerZombie from './PlayerZombie.js';
 import BossItem from './BossItem.js';
@@ -552,6 +554,12 @@ const GameSetup = {
         height: 400,
         hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 }
       },
+      chocoFrog: {
+        src: "/images/platformer/platforms/Chocolatefrog.jpg",
+        width: 200,
+        height: 200,
+        hitbox: { widthPercentage: 0.0, heightPercentage: 0.0 }
+      },
       alien: {
         src: "/images/platformer/sprites/alien.png",
         width: 444,
@@ -943,9 +951,9 @@ const GameSetup = {
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.30, yPercentage: 0.33 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.30, yPercentage: 0.23 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.30, yPercentage: 0.13 },
-      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.34, yPercentage: 0.81 },
-      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.38, yPercentage: 0.81 },
-      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.42, yPercentage: 0.81 },
+      { name: 'blocks', id: 'jumpPlatform', class: SpawnPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.34, yPercentage: 0.81 },
+      { name: 'blocks', id: 'jumpPlatform', class: SpawnPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.38, yPercentage: 0.81 },
+      { name: 'blocks', id: 'jumpPlatform', class: SpawnPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.42, yPercentage: 0.81 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.38, yPercentage: 0.57 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.38, yPercentage: 0.47 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.cobblestone, xPercentage: 0.38, yPercentage: 0.37 },
@@ -967,7 +975,7 @@ const GameSetup = {
 
       { name: 'draco', id: 'draco', class: Draco, data: this.assets.enemies.draco, xPercentage: 0.3, minPosition: 0.05, difficulties: ["normal", "hard", "impossible"] },
       { name: 'draco', id: 'draco', class: Draco, data: this.assets.enemies.draco, xPercentage: 0.5, minPosition: 0.3, difficulties: ["normal", "hard", "impossible"] },
-      { name: 'draco', id: 'draco', class: Draco, data: this.assets.enemies.draco, xPercentage: 0.75, minPosition: 0.5, difficulties: ["normal", "hard", "impossible"] }, //this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
+      /**{ name: 'draco', id: 'draco', class: Draco, data: this.assets.enemies.draco, xPercentage: 0.75, minPosition: 0.5, difficulties: ["normal", "hard", "impossible"] }, //this special name is used for random event 2 to make sure that only one of the Goombas ends the random event */
       { name: 'dementor', id: 'dementor', class: Dementor, data: this.assets.enemies.dementor, xPercentage: 0.5, minPosition: 0.05 },
       { name: 'dementor', id: 'dementor', class: Dementor, data: this.assets.enemies.dementor, xPercentage: 0.9, minPosition: 0.5 },
 
@@ -978,6 +986,8 @@ const GameSetup = {
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.409, yPercentage: 0.7 },
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.295, yPercentage: 0.46 },
 
+      { name: 'chocoFrog', id: 'chocoFrog', class: ChocoFrog, data: this.assets.enemies.chocoFrog, xPercentage: 0.25, yPercentage: 0.3 },
+
       { name: 'magicBeam', id: 'magicBeam', class: MagicBeam, data: this.assets.enemies.magicBeam, xPercentage: 0.623, yPercentage: 0.72 },
 
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.656, yPercentage: 0.46 },
@@ -985,7 +995,8 @@ const GameSetup = {
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.700, yPercentage: 0.46 },
 
       { name: 'harry', id: 'player', class: PlayerQuidditch, data: this.assets.players.harry },
-      { name: 'tube', id: 'finishline', class: FinishLine, data: this.assets.obstacles.tube, xPercentage: 0.85, yPercentage: 0.65 },
+      { name: 'tube', id: 'finishline', class: FinishLine, data: this.assets.obstacles.tube, xPercentage: 0.85, yPercentage: 0.7 },
+      { name: 'tubeU', id: 'minifinishline', class: FinishLine, data: this.assets.obstacles.tubeU, xPercentage: 0.69, yPercentage: 0.71 },
       { name: 'waterEnd', id: 'background', class: BackgroundTransitions,  data: this.assets.transitions.waterEnd },
     ];
 
@@ -1042,12 +1053,12 @@ const GameSetup = {
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.43, yPercentage: 0.82 },
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.47, yPercentage: 0.24 },
 
-      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.799, yPercentage: 0.81 },
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.85, yPercentage: 0.81 },
       
 
-      { name: 'harry', id: 'player', class: PlayerMini, data: this.assets.players.harry },
+      { name: 'harry', id: 'player', class: PlayerMiniHogwarts, data: this.assets.players.harry },
       { name: 'tubeD', id: 'finishline', class: FinishLine, data: this.assets.obstacles.tubeD, xPercentage: 0, yPercentage: 0.052 },
-      { name: 'tubeU', id: 'finishline', class: FinishLine, data: this.assets.obstacles.tubeU, xPercentage: 0.85, yPercentage: 0.646 },
+      { name: 'tubeU', id: 'minifinishline', class: FinishLine, data: this.assets.obstacles.tubeU, xPercentage: 0.85, yPercentage: 0.7 },
     ];
 
     // miniHogwarts Game Level added to the GameEnv ...

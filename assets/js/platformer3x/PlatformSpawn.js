@@ -19,7 +19,7 @@ export class SpawnPlatform extends GameObject {
     update() {
         // .log(this.platformY);
         this.canvas.style.visibility = 'hidden';
-        if (GameEnv.destroyedMushroom === true) {
+        if (GameEnv.destroyedChocoFrog === true) {
             this.canvas.style.visibility = 'visible';
         }
           }
