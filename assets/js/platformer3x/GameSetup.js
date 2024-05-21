@@ -619,11 +619,11 @@ const GameSetup = {
       },
       narwhalboss: {
         src: "/images/platformer/sprites/narwhal_boss.png",
-        width: 211,
+        width: 221, //211 230
         height: 148,
         scaleSize: 200,
-        speedRatio: 0.6,
-        animationSpeed: 3,
+        speedRatio: 0.2,
+        animationSpeed: 8,
         idleL: { row: 0, frames: 4, idleFrame: { column: 1, frames: 0 } },
         idleR: { row: 1, frames: 4, idleFrame: { column: 1, frames: 0 } },
         left: { row: 2, frames: 4, idleFrame: { column: 1, frames: 0 } },
@@ -1133,6 +1133,7 @@ const GameSetup = {
       { name: 'penguin', id: 'penguin', class: Penguin, data: this.assets.enemies.Penguin, xPercentage: 0.2, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
       { name: 'penguin', id: 'penguin', class: Penguin, data: this.assets.enemies.Penguin, xPercentage: 0.35, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
       { name: 'penguin', id: 'penguin', class: Penguin, data: this.assets.enemies.Penguin, xPercentage: 0.5, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
+      { name: 'narwhal boss', id: 'narwhalboss', class: NarwhalBoss, data: this.assets.enemies.narwhalboss, xPercentage: 0.5, yPercentage: -3, difficulties: ["normal", "hard", "impossible"] },
       { name: 'mario', id: 'player', class: PlayerIce, data: this.assets.players.whitemario },
       { name: 'tubeD', id: 'finishline', class: FinishLine, data: this.assets.obstacles.tubeD, xPercentage: 0, yPercentage: 0.052 },
       { name: 'iceberg', id: 'finishline', class: FinishLine, data: this.assets.obstacles.iceberg, xPercentage: 0.85, yPercentage: 0.603 },

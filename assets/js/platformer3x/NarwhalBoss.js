@@ -11,7 +11,7 @@ export class NarwhalBoss extends Enemy {
 
         this.storeSpeed = this.speed;
 
-        this.animationSpeed = data?.animationSpeed || 1; //higher "animationSpeed" means slower animation
+        this.animationSpeed = data?.animationSpeed || 8; //higher "animationSpeed" means slower animation
         this.counter = data?.animationSpeed; 
 
         this.enemySpeed();
