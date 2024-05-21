@@ -1,8 +1,9 @@
 import GameControl from './GameControl.js';
 import GameEnv from './GameEnv.js';
+import GameSetup from './GameSetup.js';
 import PlatformBase from './PlatformBase.js';
 
-export class JumpPlatform extends PlatformBase {
+export class JumpPlatform extends GameObject {
     constructor(canvas, image, data, xPercentage, yPercentage, name) {
         super(canvas, image, data);
         this.platformX = xPercentage * GameEnv.innerWidth;
