@@ -12,7 +12,7 @@ import GameControl from './GameControl.js';
  * 
  * @extends PlayerBase 
  */
-export class PlayerQuidditch extends PlayerBase {
+export class PlayerMiniHogwarts extends PlayerBase {
 
     /** GameObject instantiation: constructor for PlayerHills object
      * @extends Character 
@@ -22,6 +22,10 @@ export class PlayerQuidditch extends PlayerBase {
      */
     constructor(canvas, image, data) {
         super(canvas, image, data);
+        const scaledHeight = GameEnv.innerHeight * (100 / 832);
+        const finishlineX = .01 * GameEnv.innerWidth;
+        this.setX(finishlineX);
+        this.hillsStart = true;
 
         // Goomba variables, deprecate?
         this.timer = false;
@@ -43,7 +47,13 @@ export class PlayerQuidditch extends PlayerBase {
         }
         this.setY(this.y - (this.bottom * jumpHeightFactor));
     }
-
+    update(){
+            super.update();
+        if (this.hillsStart) {
+                this.setY(0);
+                this.hillsStart = false;
+            }
+        }
     /**
      * @override
      * gameLoop: Watch for Player collision events 
@@ -52,7 +62,9 @@ export class PlayerQuidditch extends PlayerBase {
         super.handleCollisionStart(); // calls the super class method
         // adds additional collision events
         this.handleCollisionEvent("finishline");
-        this.handleCollisionEvent("draco");
+        this.handleCollisionEvent("goomba");
+        this.handleCollisionEvent("mushroom");
+
     }
    
     /**
@@ -63,19 +75,21 @@ export class PlayerQuidditch extends PlayerBase {
         super.handlePlayerReaction(); // calls the super class method
         // handles additional player reactions
         switch (this.state.collision) {
-            case "minifinishline":
+            case "finishline":
                 // 1. Caught in finishline
+
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
-                    // Position player in the center of the finishline 
+                    // Position player in the center of the tube 
                     this.x = this.collisionData.newX;
                     // Using natural gravity wait for player to reach floor
                     if (Math.abs(this.y - this.bottom) <= GameEnv.gravity) {
                         // Force end of level condition
-                        // this.x = GameEnv.innerWidth + 1;
-                        GameControl.transitionToLevel(GameEnv.levels[7])
-                        return
+                        //this.x = GameEnv.innerWidth + 1;
+                        GameControl.transitionToLevel(GameEnv.levels[6])
+                        return                    
                     }
-                    // 2. Collision between player right and finishline   
+
+                // 2. Collision between player right and finishline   
                 } else if (this.collisionData.touchPoints.this.right) {
                     this.state.movement.right = false;
                     this.state.movement.left = true;
@@ -84,30 +98,9 @@ export class PlayerQuidditch extends PlayerBase {
                     this.state.movement.left = false;
                     this.state.movement.right = true;
                 }
+
                 break;
-            case "finishline":
-                    // 1. Caught in finishline
-                    if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
-                        // Position player in the center of the finishline 
-                        this.x = this.collisionData.newX;
-                        // Using natural gravity wait for player to reach floor
-                        if (Math.abs(this.y - this.bottom) <= GameEnv.gravity) {
-                            // Force end of level condition
-                            //this.x = GameEnv.innerWidth + 1;
-                            GameControl.transitionToLevel(GameEnv.levels[8])
-                        }
-                    // 2. Collision between player right and finishline   
-                    } else if (this.collisionData.touchPoints.this.right) {
-                        this.state.movement.right = false;
-                        this.state.movement.left = true;
-                    // 3. Collision between player left and finishline
-                    } else if (this.collisionData.touchPoints.this.left) {
-                        this.state.movement.left = false;
-                        this.state.movement.right = true;
-                    }
-                break;
-        
-            case "draco": // Note: Goomba.js and Player.js could be refactored
+            case "goomba": // Note: Goomba.js and Player.js could be refactored
                 // 1. Player jumps on goomba, interaction with Goomba.js
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom && this.state.isDying == false) {
                     // GoombaBounce deals with player.js and goomba.js
@@ -117,7 +110,7 @@ export class PlayerQuidditch extends PlayerBase {
                     }
                     if (GameEnv.goombaBounce1 === true) {
                         GameEnv.goombaBounce1 = false; 
-                        this.y = this.y - 250;
+                        this.y = this.y - 250
                     }
                 // 2. Player touches goomba sides of goomba 
                 } else if (this.collisionData.touchPoints.this.right || this.collisionData.touchPoints.this.left) {
@@ -134,15 +127,26 @@ export class PlayerQuidditch extends PlayerBase {
                     } else if (GameEnv.difficulty === "easy" && this.collisionData.touchPoints.this.right) {
                         this.x -= 10;
                     } else if (GameEnv.difficulty === "easy" && this.collisionData.touchPoints.this.left) {
-                        this.x += 10;
+                       this.x += 10;
                     }
+                
                 }
                 break;
+            case "mushroom": // 
+                // Player touches mushroom   
+                if (GameEnv.destroyedMushroom === false) {
+                    GameEnv.destroyedMushroom = true;
+                    this.canvas.style.filter = 'invert(1)';
+                    // Invert state lasts for 2 seconds
+                    setTimeout(() => {
+                        this.canvas.style.filter = 'invert(0)';
+                    }, 2000); // 2000 milliseconds = 2 seconds
+                }
+                break;  
         }
-        
 
     }
 
 }
 
-export default PlayerQuidditch;
+export default PlayerMiniHogwarts;

@@ -42,6 +42,7 @@ export class GameEnv {
      * @property {number} gravity - localstorage key, used by platformer objects
      * @property {boolean} destroyedMushroom - to see when mushroom is destroyed
      * @property {boolean} destroyedMagicBeam - to see when magic beam is destroyed
+     * @property {boolean} destroyedChocoFrog - to see when chocofrog is destroyed
      * @property {boolean} playMessage
      * @property {Object} difficulty - localstorage key, used by GameControl
      * @property {number} innerWidth - used by platformer objects
@@ -65,6 +66,7 @@ export class GameEnv {
     static gravity = 3;
     static destroyedMushroom = false;
     static destroyedMagicBeam = false;
+    static destroyedChocoFrog = false;
     static playMessage = false;
     static difficulty = "normal";
     static innerWidth;
