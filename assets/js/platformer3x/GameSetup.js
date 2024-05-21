@@ -1146,7 +1146,6 @@ const GameSetup = {
       { name: 'devil', id: 'devil', class:BackgroundParallax, data: this.assets.backgrounds.devil},
       { name: 'boss', id: 'boss', class: Boss, data: this.assets.enemies.boss, xPercentage: 0.5, minPosition: 0.3 },
       { name: 'boss1', id: 'boss', class: Boss, data: this.assets.enemies.boss, xPercentage: 0.3, minPosition: 0.07 },
-      { name: 'itemBlock', id: 'jumpPlatform', class: BossItem, data: this.assets.platforms.itemBlock, xPercentage: 0.2, yPercentage: 0.65 }, //item block is a platform
       { name: 'mario', id: 'player', class: PlayerBoss, data: this.assets.players.mario },
       { name: 'zombie', id: 'player', class: PlayerZombie, data: this.assets.players.zombie },
       { name: 'tube', id: 'finishline', class: FinishLine, data: this.assets.obstacles.tube, xPercentage: 0.85, yPercentage: 0.65 },
