@@ -995,8 +995,8 @@ const GameSetup = {
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.700, yPercentage: 0.46 },
 
       { name: 'harry', id: 'player', class: PlayerQuidditch, data: this.assets.players.harry },
-      { name: 'tube', id: 'finishline', class: FinishLine, data: this.assets.obstacles.tube, xPercentage: 0.85, yPercentage: 0.65 },
-      { name: 'tubeU', id: 'minifinishline', class: FinishLine, data: this.assets.obstacles.tubeU, xPercentage: .75, yPercentage: 0.65 },
+      { name: 'tube', id: 'finishline', class: FinishLine, data: this.assets.obstacles.tube, xPercentage: 0.85, yPercentage: 0.7 },
+      { name: 'tubeU', id: 'minifinishline', class: FinishLine, data: this.assets.obstacles.tubeU, xPercentage: .75, yPercentage: 0.7 },
       { name: 'waterEnd', id: 'background', class: BackgroundTransitions,  data: this.assets.transitions.waterEnd },
     ];
 
@@ -1058,7 +1058,7 @@ const GameSetup = {
 
       { name: 'harry', id: 'player', class: PlayerMiniHogwarts, data: this.assets.players.harry },
       { name: 'tubeD', id: 'finishline', class: FinishLine, data: this.assets.obstacles.tubeD, xPercentage: 0, yPercentage: 0.052 },
-      { name: 'tubeU', id: 'finishline', class: FinishLine, data: this.assets.obstacles.tubeU, xPercentage: 0.85, yPercentage: 0.646 },
+      { name: 'tubeU', id: 'finishline', class: FinishLine, data: this.assets.obstacles.tubeU, xPercentage: 0.85, yPercentage: 0.7 },
     ];
 
     // miniHogwarts Game Level added to the GameEnv ...
