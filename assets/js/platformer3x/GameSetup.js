@@ -314,7 +314,7 @@ const GameSetup = {
       fish: { src: "/images/platformer/backgrounds/school-fish.png", parallaxSpeed: -0.5 },
       reef: { src: "/images/platformer/backgrounds/reef.png" },
       quidditch: { src: "/images/platformer/backgrounds/quidditch2.jpg" },
-      miniHogwarts: { src: "/images/platformer/backgrounds/miniHogwarts.png"}, 
+      miniHogwarts: { src: "/images/platformer/backgrounds/miniHogwarts.png", parallaxSpeed: 0.5, moveOnKeyAction: true },
       space: { src: "/images/platformer/backgrounds/planet.jpg" },
       castles: { src: "/images/platformer/backgrounds/castles.png" },
       winter: { src: "/images/platformer/backgrounds/winter.png", parallaxSpeed: 0.4, moveOnKeyAction: true },
@@ -1006,7 +1006,7 @@ const GameSetup = {
 
     const miniHogwartsObjects = [
       // GameObject(s), the order is important to z-index...
-      { name: 'miniHogwarts', id: 'background', class: Background, data: this.assets.backgrounds.miniHogwarts },
+      { name: 'miniHogwarts', id: 'background', class: BackgroundParallax, data: this.assets.backgrounds.miniHogwarts },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.009, yPercentage: 0.47 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.058, yPercentage: 0.66 },
       { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.stone, xPercentage: 0.1, yPercentage: 0.81 },
