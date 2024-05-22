@@ -42,6 +42,7 @@ import PlayerBaseOneD from './PlayerBaseOneD.js';
 import PlayerZombie from './PlayerZombie.js';
 import BossItem from './BossItem.js';
 import PlayerBoss from './PlayerBoss.js';
+import PlatformFilter from './PlatfomFilter.js';
 
 //test comment
 
