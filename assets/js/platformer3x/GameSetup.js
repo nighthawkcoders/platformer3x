@@ -315,7 +315,7 @@ const GameSetup = {
       reef: { src: "/images/platformer/backgrounds/reef.png" },
       quidditch: { src: "/images/platformer/backgrounds/quidditch2.jpg" },
       miniHogwarts: { src: "/images/platformer/backgrounds/miniHogwarts.png", parallaxSpeed: 0.5, moveOnKeyAction: true },
-      bat: {src: "/images/platformer/backgrounds/bat.png" }, 
+      bat: {src: "/images/platformer/backgrounds/bat.png" , parallaxSpeed: -0.5 }, 
       space: { src: "/images/platformer/backgrounds/planet.jpg" },
       castles: { src: "/images/platformer/backgrounds/castles.png" },
       winter: { src: "/images/platformer/backgrounds/winter.png", parallaxSpeed: 0.4, moveOnKeyAction: true },
