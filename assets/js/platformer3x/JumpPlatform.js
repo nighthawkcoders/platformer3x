@@ -10,10 +10,7 @@ export class JumpPlatform extends GameObject {
         this.data = data;
         this.name = name;
         this.relativeX = ""; //used for the item block's spritesheet.
-        this.direction = 1;
-        this.speed = 1;
-        this.minBottom = 150; // Minimum bottom position for the platform
-        this.maxBottom = 300; // Maximum bottom position for the platform
+
 
 
     }
@@ -24,18 +21,7 @@ export class JumpPlatform extends GameObject {
         //this.movePlatform(); it break the collision event, so I suggest to move this function to BlockPlaform
     }
 
-    movePlatform() {
-        let currentPosition = parseInt(this.canvas.style.bottom) || 0;
-
-        if (currentPosition >= this.maxBottom) {
-            this.direction = -1;
-        } else if (currentPosition <= this.minBottom) {
-            this.direction = 1;
-        }
-
-        this.canvas.style.bottom = currentPosition + this.direction * this.speed + 'px';
-        this.relativeX += this.direction * this.speed;
-    }
+   
 
     collisionAction() {
         //collision only detects mario and it only applies to the item block
