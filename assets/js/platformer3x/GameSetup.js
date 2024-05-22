@@ -34,6 +34,11 @@ import Star from './Star.js';
 import Dementor from './FlyingDementor.js';
 import Draco from './EnemyDraco.js';
 import Boss from './Boss.js';
+import skibidiTitan from './SkibidiTitan.js';
+import Laser from './Laser.js';
+import SkibidiToilet from './SkibidiToilet.js';
+import PlayerSkibidi from './PlayerSkibidi.js';
+import Tree from './Tree.js';
 import Jellyfish from './FlyingJellyfish.js';
 import Penguin from './EnemyPenguin.js';
 import PlayerIce from './PlayerIce.js';
@@ -216,23 +221,34 @@ const GameSetup = {
 
   assets: {
     obstacles: {
-      tube: { src: "/images/platformer/obstacles/tube.png",
-      hitbox: { widthPercentage: 0.5, heightPercentage: 0.5},
-      width: 300,
-      height: 300,
-      scaleSize: 100,
+      tube: { 
+        src: "/images/platformer/obstacles/tube.png",
+        hitbox: { widthPercentage: 0.5, heightPercentage: 0.5},
+        width: 300,
+        height: 300,
+        scaleSize: 100,
       },
-      tubeU: { src: "/images/platformer/obstacles/blue-tube-up.png",
-      hitbox: { widthPercentage: 0.5, heightPercentage: 0.5},
-      width: 300,
-      height: 300,
-      scaleSize: 100,
+      tubeU: { 
+        src: "/images/platformer/obstacles/blue-tube-up.png",
+        hitbox: { widthPercentage: 0.5, heightPercentage: 0.5},
+        width: 300,
+        height: 300,
+        scaleSize: 100,
       },
-      tubeD: { src: "/images/platformer/obstacles/blue-tube.png",
-      hitbox: { widthPercentage: 0.5, heightPercentage: 0.5},
-      width: 300,
-      height: 300,
-      scaleSize: 100,
+      tubeD: { 
+        src: "/images/platformer/obstacles/blue-tube.png",
+        hitbox: { widthPercentage: 0.5, heightPercentage: 0.5},
+        width: 300,
+        height: 300,
+        scaleSize: 100,
+      },
+      toilet: { 
+        src: "/images/platformer/obstacles/toilet.png",
+        hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
+      },
+      laser: {
+        src: "/images/platformer/obstacles/laser.png",
+        hitbox: { widthPercentage: 0.1, heightPercentage: 0.5}
       },
       cabin: {
         src: "/images/platformer/obstacles/cabin.png",
@@ -262,6 +278,7 @@ const GameSetup = {
         height: 300,
         scaleSize: 120,
       },
+      vbucks: { src: "/images/platformer/obstacles/vbucks.png"},
       coin: { src: "/images/platformer/obstacles/coin.png" },
       snowflake: { src: "/images/platformer/obstacles/snowflake.png" },
       star: { src: "/images/platformer/obstacles/star.png" },
@@ -311,6 +328,8 @@ const GameSetup = {
       clouds: { src: "/images/platformer/backgrounds/clouds.png", parallaxSpeed: 0.5 },
       water: { src: "/images/platformer/backgrounds/water.png" },
       fish: { src: "/images/platformer/backgrounds/school-fish.png", parallaxSpeed: -0.5 },
+      complete3: { src: "/images/platformer/backgrounds/skibidiCompletion.png" },
+      desert: {src: "/images/platformer/backgrounds/desertbg.png"},
       reef: { src: "/images/platformer/backgrounds/reef.png" },
       quidditch: { src: "/images/platformer/backgrounds/quidditch2.jpg" },
       miniHogwarts: { src: "/images/platformer/backgrounds/miniHogwarts.png"}, 
@@ -355,6 +374,32 @@ const GameSetup = {
         jump: {
           left: { row: 11, frames: 15 },
           right: { row: 10, frames: 15 },
+        },
+        hitbox: { widthPercentage: 0.3, heightPercentage: 0.8 }
+      },
+      escaper: {
+        src: "/images/platformer/sprites/escaper.png",
+        width: 130,
+        height: 140,
+        scaleSize: 150,
+        speedRatio: 0.7,
+        animationSpeed: 8,
+        ///animationspeed:6
+        idle: {
+            left: { row: 0, frames: 5 },
+            right: { row: 0, frames: 5},
+        },
+        walk: {
+            left: { row: 1, frames: 6 },
+            right: { row: 1, frames: 6 },
+        },
+        run: {
+            left: { row: 2, frames: 7 },
+            right: { row: 2, frames: 7 },
+        },
+        jump: {
+            left: { row: 3, frames: 8 },
+            right: { row: 3, frames: 8 },
         },
         hitbox: { widthPercentage: 0.3, heightPercentage: 0.8 }
       },
@@ -583,6 +628,20 @@ const GameSetup = {
         left: { row: 0, frames: 0, idleFrame: { column: 0, frames: 0 } }, // Left Movement
         idle: { row: 0, frames: 0 }, // Stop the movement 
         right: { row: 0, frames: 0, idleFrame: { column: 0, frames: 0 } }, // Right Movement 
+      },
+      skibidiToilet: {
+        src: "/images/platformer/sprites/skibidiEnemy.png",
+        width: 529,
+        height: 884,
+        scaleSize: 60,
+        speedRatio: 0.85,
+      },
+      skibidiTitan: {
+        src: "/images/platformer/sprites/skibidiTItan.png",
+        width: 529,
+        height: 884,
+        scaleSize: 1500,
+        speedRatio: 0.85,
       },
       dragon: {
         src: "/images/platformer/sprites/dragon.png",
@@ -1148,6 +1207,39 @@ const GameSetup = {
     ];
     // IceMiniGame Game Level added to the GameEnv ...
     new GameLevel({ tag: "icemini", callback: this.playerOffScreenCallBack, objects: iceminiObjects });
+
+    //Skibidi Toilet Level
+    const skibidiGameObjects = [
+      // GameObject(s), the order is important to z-index...
+      { name: 'desert', id: 'background', class: Background, data: this.assets.backgrounds.desert },
+      //{ name: 'clouds', id: 'background', class: BackgroundClouds, data: this.assets.backgrounds.clouds },
+      { name: 'skibidiTitan', id: 'skibidiTitan', class: skibidiTitan, data: this.assets.enemies.skibidiTitan, xPercentage:  0.35, yPercentage: 0.5, minPosition: 0.5 }, 
+      { name: 'sand', id: 'platform', class: Platform, data: this.assets.platforms.sand },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sand, xPercentage: 0.2, yPercentage: 1 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sand, xPercentage: 0.4, yPercentage: 0.6 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sand, xPercentage: 0.325, yPercentage: 0.8 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sand, xPercentage: 0.2, yPercentage: 0.5 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sand, xPercentage: 0.225, yPercentage: 0.5 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sand, xPercentage: 0.0, yPercentage: 0.5 } ,
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sand, xPercentage: 0.025, yPercentage: 0.5 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sand, xPercentage: 0.025, yPercentage: 0.5 },
+      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sand, xPercentage: 0.5, yPercentage: 0.5 },
+      ///{ name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.vbucks, xPercentage: 0.475, yPercentage: 0.5 },
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.vbucks, xPercentage: 0.325, yPercentage: 0.7 },
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.vbucks, xPercentage: -0.0125, yPercentage: 0.4 },
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.vbucks, xPercentage: 0.0125, yPercentage: 0.4 },
+      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.vbucks, xPercentage: 0.0325, yPercentage: 0.4 },
+      { name: 'SkibidiToilet', id: 'SkibidiToilet', class: SkibidiToilet, data: this.assets.enemies.skibidiToilet, xPercentage:  0.3, minPosition: 0.07 },
+      { name: 'SkibidiToilet', id: 'SkibidiToilet', class: SkibidiToilet, data: this.assets.enemies.skibidiToilet, xPercentage:  0.5, minPosition: 0.3 },
+      { name: 'SkibidiToilet', id: 'SkibidiToilet', class: SkibidiToilet, data: this.assets.enemies.skibidiToilet, xPercentage:  0.75, minPosition: 0.5 }, //this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
+      { name: 'escaper', id: 'player', class: PlayerSkibidi, data: this.assets.players.escaper  },
+      { name: 'laser', id: 'Laser', class: Laser, data: this.assets.obstacles.laser, xPercentage:  0.75, yPercentage: 0.5 },
+      { name: 'toiletTube', id: 'toiletEnd', class: Tree, data: this.assets.obstacles.toilet },
+      { name: 'complete3', id: 'background', class: BackgroundTransitions,  data: this.assets.backgrounds.complete3 },
+    ];
+
+    new GameLevel( {tag: "skibidi", callback: this.playerOffScreenCallBack, objects: skibidiGameObjects} );
+
 
     const bossGameObjects = [
       { name: 'bossbackground', id: 'background', class: BackgroundParallax, data: this.assets.backgrounds.boss },
