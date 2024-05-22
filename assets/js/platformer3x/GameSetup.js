@@ -268,7 +268,8 @@ const GameSetup = {
       snitch: { src: "/images/platformer/obstacles/snitch.png" },
       whompingwillow: {
         src: "/images/platformer/obstacles/whompingwillowtree.png",
-        hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 }
+        hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 },
+        scaleSize: 250,
       },
     },
     platforms: {
@@ -995,8 +996,8 @@ const GameSetup = {
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.snitch, xPercentage: 0.700, yPercentage: 0.46 },
 
       { name: 'harry', id: 'player', class: PlayerQuidditch, data: this.assets.players.harry },
-      { name: 'tube', id: 'finishline', class: FinishLine, data: this.assets.obstacles.tube, xPercentage: 0.85, yPercentage: 0.7 },
-      { name: 'tubeU', id: 'minifinishline', class: FinishLine, data: this.assets.obstacles.tubeU, xPercentage: 0.69, yPercentage: 0.71 },
+      { name: 'tube', id: 'finishline', class: FinishLine, data: this.assets.obstacles.whompingwillow, xPercentage: 0.80, yPercentage: 0.50 },
+      { name: 'tubeU', id: 'minifinishline', class: FinishLine, data: this.assets.obstacles.tubeU, xPercentage: 0.50, yPercentage: 0.71 },
       { name: 'waterEnd', id: 'background', class: BackgroundTransitions,  data: this.assets.transitions.waterEnd },
     ];
 
