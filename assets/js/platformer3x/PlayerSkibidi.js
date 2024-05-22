@@ -84,7 +84,7 @@ export class PlayerSkibidi extends PlayerBase {
                     this.state.movement.right = true;
                 }
                 break;
-            case "goomba": // Note: Goomba.js and Player.js could be refactored
+            case "SkibidiToilet": // Note: Goomba.js and Player.js could be refactored
                 // 1. Player jumps on goomba, interaction with Goomba.js
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom && this.state.isDying == false) {
                     // GoombaBounce deals with player.js and goomba.js
