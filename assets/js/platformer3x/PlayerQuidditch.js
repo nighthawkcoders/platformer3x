@@ -51,6 +51,7 @@ export class PlayerQuidditch extends PlayerBase {
     handleCollisionStart() {
         super.handleCollisionStart(); // calls the super class method
         // adds additional collision events
+        this.handleCollisionEvent("minifinishline");
         this.handleCollisionEvent("finishline");
         this.handleCollisionEvent("draco");
     }
@@ -63,7 +64,7 @@ export class PlayerQuidditch extends PlayerBase {
         super.handlePlayerReaction(); // calls the super class method
         // handles additional player reactions
         switch (this.state.collision) {
-            case "finishline":
+            case "minifinishline":
                 // 1. Caught in finishline
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
                     // Position player in the center of the finishline 
@@ -71,9 +72,11 @@ export class PlayerQuidditch extends PlayerBase {
                     // Using natural gravity wait for player to reach floor
                     if (Math.abs(this.y - this.bottom) <= GameEnv.gravity) {
                         // Force end of level condition
-                        this.x = GameEnv.innerWidth + 1;
+                        // this.x = GameEnv.innerWidth + 1;
+                        GameControl.transitionToLevel(GameEnv.levels[7])
+                        return
                     }
-                // 2. Collision between player right and finishline   
+                    // 2. Collision between player right and finishline   
                 } else if (this.collisionData.touchPoints.this.right) {
                     this.state.movement.right = false;
                     this.state.movement.left = true;
@@ -83,6 +86,28 @@ export class PlayerQuidditch extends PlayerBase {
                     this.state.movement.right = true;
                 }
                 break;
+            case "finishline":
+                    // 1. Caught in finishline
+                    if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
+                        // Position player in the center of the finishline 
+                        this.x = this.collisionData.newX;
+                        // Using natural gravity wait for player to reach floor
+                        if (Math.abs(this.y - this.bottom) <= GameEnv.gravity) {
+                            // Force end of level condition
+                            //this.x = GameEnv.innerWidth + 1;
+                            GameControl.transitionToLevel(GameEnv.levels[8])
+                        }
+                    // 2. Collision between player right and finishline   
+                    } else if (this.collisionData.touchPoints.this.right) {
+                        this.state.movement.right = false;
+                        this.state.movement.left = true;
+                    // 3. Collision between player left and finishline
+                    } else if (this.collisionData.touchPoints.this.left) {
+                        this.state.movement.left = false;
+                        this.state.movement.right = true;
+                    }
+                break;
+        
             case "draco": // Note: Goomba.js and Player.js could be refactored
                 // 1. Player jumps on goomba, interaction with Goomba.js
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom && this.state.isDying == false) {
@@ -93,7 +118,7 @@ export class PlayerQuidditch extends PlayerBase {
                     }
                     if (GameEnv.goombaBounce1 === true) {
                         GameEnv.goombaBounce1 = false; 
-                        this.y = this.y - 250
+                        this.y = this.y - 250;
                     }
                 // 2. Player touches goomba sides of goomba 
                 } else if (this.collisionData.touchPoints.this.right || this.collisionData.touchPoints.this.left) {
@@ -110,12 +135,12 @@ export class PlayerQuidditch extends PlayerBase {
                     } else if (GameEnv.difficulty === "easy" && this.collisionData.touchPoints.this.right) {
                         this.x -= 10;
                     } else if (GameEnv.difficulty === "easy" && this.collisionData.touchPoints.this.left) {
-                       this.x += 10;
+                        this.x += 10;
                     }
-                
                 }
                 break;
         }
+        
 
     }
 

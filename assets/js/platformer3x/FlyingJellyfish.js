@@ -2,7 +2,7 @@ import Character from './Character.js';
 import FlyingGoomba from './FlyingGoomba.js';
 import GameEnv from './GameEnv.js';
 
-export class Snowman extends FlyingGoomba {
+export class Jellyfish extends FlyingGoomba {
   
     // constructors sets up Character object 
     constructor(canvas, image, data, xPercentage, yPercentage, name, minPosition){
@@ -81,4 +81,4 @@ export class Snowman extends FlyingGoomba {
 }
 
 
-export default Snowman;
+export default Jellyfish;
