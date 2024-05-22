@@ -187,15 +187,6 @@ const GameSetup = {
    * * * 3rd level: property (src, width, height, scaleSize, speedRatio, w, wa, wd, a, s, d)
   */
 
-  assets: {
-    backgrounds: {
-      start: { src: "/images/platformer/backgrounds/home.png" },
-    },
-    transitions: {
-      miniEnd: { src: "/images/platformer/transitions/miniEnd.png" },
-    },
-  },
-
   /*  ==========================================
    *  ========== Game Level init ===============
    *  ==========================================
@@ -278,7 +269,6 @@ const GameSetup = {
     var greeceMiniGameObjects = new GameSet(GameSetterGreeceMini.assets, GameSetterGreeceMini.objects, path);
     new GameLevel({ tag: "mini greece", callback: this.playerOffScreenCallBack, objects: greeceMiniGameObjects.getGameObjects() });
 
-    // Under Water Game Level defintion...
     // Hills Game Level added to the GameEnv ...
     var waterGameObjects = new GameSet(GameSetterWater.assets, GameSetterWater.objects, path);
     new GameLevel({ tag: "water", callback: this.playerOffScreenCallBack, objects: waterGameObjects.getGameObjects() });
