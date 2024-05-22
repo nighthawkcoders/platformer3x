@@ -239,7 +239,7 @@ const GameSetup = {
         hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 },
         width: 300,
         height: 300,
-        scaleSize: 150,
+        scaleSize: 100,
       },
       iceberg: {
         src: "/images/platformer/obstacles/iceberg.png",
@@ -253,7 +253,7 @@ const GameSetup = {
         hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 },
         width: 300,
         height: 300,
-        scaleSize: 100,
+        scaleSize: 150,
       },
       flag: {
         src: "/images/platformer/obstacles/flag.png",
@@ -275,6 +275,7 @@ const GameSetup = {
       grass: { src: "/images/platformer/platforms/grass.png" },
       narwhalfloor: { src: "/images/platformer/platforms/narwhalfloor.png" },
       sand: { src: "/images/platformer/platforms/sand.png" },
+      sandblock: {src:"/images/platformer/platforms/sandblock.png"},
       snowyfloor: { src: "/images/platformer/platforms/snowyfloor.png" },
       snowywood: { src: "/images/platformer/platforms/snowywood.png" },
       alien: { src: "/images/platformer/platforms/alien.png" },
@@ -907,10 +908,10 @@ const GameSetup = {
       { name: 'fish', id: 'background', class: BackgroundParallax, data: this.assets.backgrounds.fish },
       { name: 'reef', id: 'background', class: Background, data: this.assets.backgrounds.reef },
       { name: 'sand', id: 'floor', class: Platform, data: this.assets.platforms.sand },
-      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2, yPercentage: 0.85 },
-      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2368, yPercentage: 0.85 },
-      { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.2736, yPercentage: 0.85 },
-      { name: 'blocks', id: 'wall', class: BlockPlatform, data: this.assets.platforms.block, xPercentage: 0.6, yPercentage: 1 },
+      { name: 'sandblock', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandblock, xPercentage: 0.2, yPercentage: 0.85 },
+      { name: 'sandblock', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandblock, xPercentage: 0.2368, yPercentage: 0.85 },
+      { name: 'sandblock', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandblock, xPercentage: 0.2736, yPercentage: 0.85 },
+      { name: 'sandblock', id: 'wall', class: BlockPlatform, data: this.assets.platforms.sandblock, xPercentage: 0.6, yPercentage: 1 },
       { name: 'itemBlock', id: 'jumpPlatform', class: JumpPlatform, data: this.assets.platforms.itemBlock, xPercentage: 0.4, yPercentage: 0.65 }, //item block is a platform
       { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage: 0.5, yPercentage: 1, minPosition: 0.05 },
       { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage: 0.4, yPercentage: 1, minPosition: 0.05, difficulties: ["normal", "hard", "impossible"] },
@@ -928,7 +929,7 @@ const GameSetup = {
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.2575, yPercentage: 0.75 },
       { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.5898, yPercentage: 0.900 },
       { name: 'mario', id: 'player', class: PlayerHills, data: this.assets.players.mario },
-      { name: 'Chest', id: 'finishline', class: FinishLine, data: this.assets.obstacles.chest, xPercentage: 0.85, yPercentage: 0.65 },
+      { name: 'Chest', id: 'finishline', class: FinishLine, data: this.assets.obstacles.chest, xPercentage: 0.85, yPercentage: 0.68 },
       { name: 'miniEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.miniEnd },
     ];
     let waterGameObjects = allWaterGameObjects.filter(obj => !obj.difficulties || obj.difficulties.includes(difficulty));
