@@ -86,7 +86,10 @@ export class Goomba extends Character {
 
         // Move the enemy
         this.x -= this.speed;
-
+        // Randomly trigger a jump (increased probability)
+        if (Math.random() < 0.1) { // Adjust the probability as needed
+            this.jump();
+        }
         this.playerBottomCollision = false;
     }
     
@@ -100,18 +103,10 @@ export class Goomba extends Character {
 
         if (this.collisionData.touchPoints.other.id === "player") {
             // Collision: Top of Goomba with Bottom of Player
-            //console.log(this.collisionData.touchPoints.other.bottom + 'bottom')
-            //console.log(this.collisionData.touchPoints.other.top + "top")
-            //console.log(this.collisionData.touchPoints.other.right + "right")
-            //console.log(this.collisionData.touchPoints.other.left + "left")
             if (this.collisionData.touchPoints.other.bottom && this.immune == 0) {
                 GameEnv.invincible = true;
                 GameEnv.goombaBounce = true;
-                this.canvas.style.transition = "transform 1.5s, opacity 1s";
-                this.canvas.style.transition = "transform 2s, opacity 1s";
-                this.canvas.style.transformOrigin = "bottom"; // Set the transform origin to the bottom
-                this.canvas.style.transform = "scaleY(0)"; // Make the Goomba flat
-                this.speed = 0;
+                this.explode()
                 GameEnv.playSound("goombaDeath");
 
                 setTimeout((function() {
@@ -138,6 +133,46 @@ export class Goomba extends Character {
                 this.speed = -this.speed;            
             }
         }
+    }
+     // Define the explosion action
+     explode() {
+        const shards = 10; // number of shards
+        for (let i = 0; i < shards; i++) {
+            const shard = document.createElement('div');
+            shard.style.position = 'absolute';
+            shard.style.width = '5px';
+            shard.style.height = '5px';
+            shard.style.backgroundColor = 'brown'; // color of the shards
+            shard.style.left = `${this.x}px`;
+            shard.style.top = `${this.y}px`;
+            this.canvas.parentElement.appendChild(shard); // add shard to the canvas container
+
+            const angle = Math.random() * 2 * Math.PI;
+            const speed = Math.random() * 5 + 2;
+
+            const shardX = Math.cos(angle) * speed;
+            const shardY = Math.sin(angle) * speed;
+
+            shard.animate([
+                { transform: 'translate(0, 0)', opacity: 1 },
+                { transform: `translate(${shardX * 20}px, ${shardY * 20}px)`, opacity: 0 }
+            ], {
+                duration: 1000,
+                easing: 'ease-out',
+                fill: 'forwards'
+            });
+
+            setTimeout(() => {
+                shard.remove();
+            }, 1000);
+        }
+        this.canvas.style.opacity = 0;
+    }
+
+    // Define the jump action
+    jump() {
+        // Implement your jump logic here
+        // For example, change the y position or apply a vertical velocity
     }
 }
 
