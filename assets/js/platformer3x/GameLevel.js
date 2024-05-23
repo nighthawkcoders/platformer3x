@@ -41,9 +41,12 @@ class GameLevel {
         // Socket.createListener("stateUpdate",this.handleStateUpdates)
         Socket.createListener("disconnection",this.handleSocketDisconnect)
         try {
+            var objFile = null;
             for (const obj of this.gameObjects) {
                 if (obj.data.file) {
                     // Load the image for the game object.
+                    objFile = obj.data.file; 
+                    console.log(objFile);
                     obj.image = await this.loadImage(obj.data.file);
                     // Create a new canvas for the game object.
                     const canvas = document.createElement("canvas");
@@ -54,7 +57,7 @@ class GameLevel {
                 }
             }
         } catch (error) {
-            console.error('Failed to load one or more GameLevel objects:', error);
+            console.error('Failed to load one or more GameLevel objects: ' + objFile, error);
         }
     }
 
