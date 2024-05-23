@@ -137,7 +137,8 @@ const assets = {
     fish: { src: "/images/platformer/backgrounds/school-fish.png", parallaxSpeed: -0.5 },
     reef: { src: "/images/platformer/backgrounds/reef.png" },
     quidditch: { src: "/images/platformer/backgrounds/quidditch2.jpg" },
-    miniHogwarts: { src: "/images/platformer/backgrounds/miniHogwarts.png"}, 
+    miniHogwarts: { src: "/images/platformer/backgrounds/miniHogwarts.png", parallaxSpeed: 0.5, moveOnKeyAction: true }, 
+    bat: {src: "/images/platformer/backgrounds/bat.png", parallaxSpeed: -0.5 },
     space: { src: "/images/platformer/backgrounds/planet.jpg" },
     castles: { src: "/images/platformer/backgrounds/castles.png" },
     winter: { src: "/images/platformer/backgrounds/winter.png", parallaxSpeed: 0.4, moveOnKeyAction: true },
@@ -465,9 +466,10 @@ const assets = {
   }
   };
 
-  // Hills Game Level defintion...
+  //  Game Level defintion...
   const objects = [
-    { name: 'miniHogwarts', id: 'background', class: Background, data: assets.backgrounds.miniHogwarts },
+    { name: 'miniHogwarts', id: 'background', class: BackgroundParallax, data: assets.backgrounds.miniHogwarts },
+    { name: 'bat', id: 'background', class: BackgroundParallax, data: assets.backgrounds.bat },
     { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: assets.platforms.stone, xPercentage: 0.009, yPercentage: 0.47 },
     { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: assets.platforms.stone, xPercentage: 0.058, yPercentage: 0.66 },
     { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: assets.platforms.stone, xPercentage: 0.1, yPercentage: 0.81 },
