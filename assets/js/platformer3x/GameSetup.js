@@ -45,6 +45,7 @@ import GameSetterQuidditch from './GameSetterQuidditch.js';
 import GameSetterHogwarts from './GameSetterHogwarts.js';
 import GameSetterWinter from './GameSetterWinter.js';
 import GameSetterWinterIce from './GameSetterWinterIce.js';
+import GameSetterBoss from './GameSetterBoss.js';
 
 //test comment
 
@@ -754,22 +755,10 @@ const GameSetup = {
     var winterIceGameObjects = new GameSet(GameSetterWinterIce.assets, GameSetterWinterIce.objects, path);
     new GameLevel({ tag: "icemini", callback: this.playerOffScreenCallBack, objects: winterIceGameObjects.getGameObjects() });
 
-    const bossGameObjects = [
-      { name: 'bossbackground', id: 'background', class: BackgroundParallax, data: this.assets.backgrounds.boss },
-      { name: 'devil', id: 'devil', class:BackgroundParallax, data: this.assets.backgrounds.devil},
-      { name: 'boss', id: 'boss', class: Boss, data: this.assets.enemies.boss, xPercentage: 0.5, minPosition: 0.3 },
-      { name: 'boss1', id: 'boss', class: Boss, data: this.assets.enemies.boss, xPercentage: 0.3, minPosition: 0.07 },
-      { name: 'mario', id: 'player', class: PlayerBoss, data: this.assets.players.mario },
-      { name: 'zombie', id: 'player', class: PlayerZombie, data: this.assets.players.zombie },
-      { name: 'tube', id: 'finishline', class: FinishLine, data: this.assets.obstacles.tube, xPercentage: 0.85, yPercentage: 0.65 },
-      { name: 'itemBlock', id: 'jumpPlatform', class: BossItem, data: this.assets.platforms.itemBlock, xPercentage: 0.2, yPercentage: 0.65 }, //item block is a platform
-      { name: 'mario', id: 'player', class: PlayerBoss, data: this.assets.players.mario },
-      { name: 'zombie', id: 'player', class: PlayerZombie, data: this.assets.players.zombie },
-      { name: 'grass', id: 'platform', class: Platform, data: this.assets.platforms.grass },
-      { name: 'iceminiEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.iceminiEnd },
-    ];
 
-    new GameLevel({ tag: "boss", callback: this.playerOffScreenCallBack, objects: bossGameObjects });
+    // Boss Game Level added to the GameEnv ...
+    var bossGameObjects = new GameSet(GameSetterBoss.assets, GameSetterBoss.objects, path);
+    new GameLevel({ tag: "boss", callback: this.playerOffScreenCallBack, objects: bossGameObjects.getGameObjects() });
 
     // Game Over Level definition...
     const endGameObjects = [
