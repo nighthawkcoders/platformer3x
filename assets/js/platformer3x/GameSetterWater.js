@@ -102,6 +102,12 @@ const assets = {
         height: 180,
         hitbox: { widthPercentage: 0.0, heightPercentage: 0.2 }
       },
+      bubbles: {
+        src: "/images/platformer/platforms/bubbles.png",
+        width: 200,
+        height: 180,
+        hitbox: { widthPercentage: 0.0, heightPercentage: 0.2 }
+      },
     }
   };
 
@@ -125,7 +131,7 @@ const assets = {
     { name: 'flyingGoomba', id: 'flyingGoomba', class: FlyingGoomba, data: assets.enemies.flyingGoomba, xPercentage: 0.9, minPosition: 0.5, difficulties: ["normal", "hard", "impossible"] },
     { name: 'flyingGoomba', id: 'flyingGoomba', class: FlyingGoomba, data: assets.enemies.flyingGoomba, xPercentage: 0.9, minPosition: 0.5, difficulties: ["hard", "impossible"] },
     { name: 'flyingGoomba', id: 'flyingGoomba', class: FlyingGoomba, data: assets.enemies.flyingGoomba, xPercentage: 0.9, minPosition: 0.5, difficulties: ["impossible"] },
-    { name: 'mushroom', id: 'mushroom', class: Mushroom, data: assets.enemies.mushroom, xPercentage: 0.49 },
+    { name: 'bubbles', id: 'mushroom', class: Mushroom, data: assets.enemies.bubbles, xPercentage: 0.49 },
     { name: 'dimonds', id: 'coin', class: Coin, data: assets.obstacles.dimonds, xPercentage: 0.1908, yPercentage: 0.75 },
     { name: 'dimonds', id: 'coin', class: Coin, data: assets.obstacles.dimonds, xPercentage: 0.2242, yPercentage: 0.75 },
     { name: 'dimonds', id: 'coin', class: Coin, data: assets.obstacles.dimonds, xPercentage: 0.2575, yPercentage: 0.75 },
