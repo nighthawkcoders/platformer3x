@@ -24,7 +24,7 @@ export class PlatformFilter extends GameObject {
     
     // Apply CSS filter
     //this.canvas.style.filter = 'blur(5px)';
-    this.canvas.style.filter = 'hue-rotate(120deg)';
+    this.canvas.style.filter = 'hue-rotate(150deg)';
     //this.canvas.style.filter = 'sepia(0.9)';
     //this.canvas.style.filter = 'drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5))';
 
