@@ -279,6 +279,7 @@ const GameSetup = {
     var greeceMiniGameObjects = new GameSet(GameSetterGreeceMini.assets, GameSetterGreeceMini.objects, path);
     new GameLevel({ tag: "mini greece", callback: this.playerOffScreenCallBack, objects: greeceMiniGameObjects.getGameObjects() });
 
+    // Under Water Game Level defintion...
     // Hills Game Level added to the GameEnv ...
     var waterGameObjects = new GameSet(GameSetterWater.assets, GameSetterWater.objects, path);
     new GameLevel({ tag: "water", callback: this.playerOffScreenCallBack, objects: waterGameObjects.getGameObjects() });
