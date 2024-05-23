@@ -219,12 +219,10 @@ const GameSetup = {
 
   initLevels: function (path) {  // ensure valid {{site.baseurl}} for path
 
-    GameEnv.path = path;
-    
     // Add File location in assets relative to the root of the site
     Object.keys(this.assets).forEach(category => {
       Object.keys(this.assets[category]).forEach(item => {
-        this.assets[category][item]['file'] = GameEnv.path + this.assets[category][item].src;
+        this.assets[category][item]['file'] = path + this.assets[category][item].src;
       });
     });
 
@@ -266,9 +264,6 @@ const GameSetup = {
     ];
     // Home Screen Background added to the GameEnv, "passive" means complementary, not an interactive level..
     new GameLevel({ tag: "home", callback: this.homeScreenCallback, objects: homeGameObjects, passive: true });
-
-    // Check local storage for the difficulty mode set
-    let difficulty = localStorage.getItem("difficulty") || "easy";
 
     // Hills Game Level added to the GameEnv ...
     var hillsGameObjects = new GameSet(GameSetterHills.assets, GameSetterHills.objects, path);
