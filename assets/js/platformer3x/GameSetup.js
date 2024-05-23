@@ -212,12 +212,10 @@ const GameSetup = {
 
   initLevels: function (path) {  // ensure valid {{site.baseurl}} for path
 
-    GameEnv.path = path;
-    
     // Add File location in assets relative to the root of the site
     Object.keys(this.assets).forEach(category => {
       Object.keys(this.assets[category]).forEach(item => {
-        this.assets[category][item]['file'] = GameEnv.path + this.assets[category][item].src;
+        this.assets[category][item]['file'] = path + this.assets[category][item].src;
       });
     });
 
