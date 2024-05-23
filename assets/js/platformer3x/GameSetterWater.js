@@ -104,8 +104,8 @@ const assets = {
       },
       bubbles: {
         src: "/images/platformer/platforms/bubbles.png",
-        width: 200,
-        height: 180,
+        width: 448,
+        height: 452,
         scaleSize: 60,
         speedRatio: 0.7,
         xPercentage: 0.6,
