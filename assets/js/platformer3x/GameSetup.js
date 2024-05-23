@@ -188,6 +188,15 @@ const GameSetup = {
    * * * 3rd level: property (src, width, height, scaleSize, speedRatio, w, wa, wd, a, s, d)
   */
 
+  assets: {
+    backgrounds: {
+      start: { src: "/images/platformer/backgrounds/home.png" },
+    },
+    transitions: {
+      miniEnd: { src: "/images/platformer/transitions/miniEnd.png" },
+    },
+  },
+
   /*  ==========================================
    *  ========== Game Level init ===============
    *  ==========================================
