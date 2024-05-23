@@ -8,6 +8,7 @@ import MovingPlatform from './PlatformMoving.js'
 import MagicBeam from './MagicBeam.js';
 import Coin from './Coin.js';
 import FinishLine from './FinishLine.js';
+import PlatformFilter from './PlatformFilter.js';
 // Define the GameSetup object literal
 const assets = {  
   obstacles: {
@@ -95,8 +96,8 @@ const assets = {
   const objects = [
     { name: 'miniHogwarts', id: 'background', class: BackgroundParallax, data: assets.backgrounds.miniHogwarts },
     { name: 'bat', id: 'background', class: BackgroundParallax, data: assets.backgrounds.bat },
-    { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: assets.platforms.stone, xPercentage: 0.009, yPercentage: 0.47 },
-    { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: assets.platforms.stone, xPercentage: 0.058, yPercentage: 0.66 },
+    { name: 'blocks', id: 'jumpPlatform', class: PlatformFilter, data: assets.platforms.stone, xPercentage: 0.009, yPercentage: 0.47 },
+    { name: 'blocks', id: 'jumpPlatform', class: PlatformFilter, data: assets.platforms.stone, xPercentage: 0.058, yPercentage: 0.66 },
     { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: assets.platforms.stone, xPercentage: 0.1, yPercentage: 0.81 },
     { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: assets.platforms.stone, xPercentage: 0.14, yPercentage: 0.47 },
     { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: assets.platforms.stone, xPercentage: 0.18, yPercentage: 0.47 },
