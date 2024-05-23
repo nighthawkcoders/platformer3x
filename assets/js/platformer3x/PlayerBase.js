@@ -134,6 +134,9 @@ export class PlayerBase extends Character {
                     this.setX(this.x + (this.state.animation === 'run' ? this.runSpeed : this.speed));
                 }
         }
+        GameEnv.PlayerPosition.playerX = this.x
+        GameEnv.PlayerPosition.playerY = this.y
+        
     }
 
     /**
