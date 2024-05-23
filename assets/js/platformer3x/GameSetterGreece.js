@@ -1,6 +1,3 @@
-// GameSetHills.js Key objective is to define objects for a GameLevel
-import GameSet from './GameSet.js';
-// To build GameLevels, each contains GameObjects from below imports
 import Background from './Background.js'
 import BackgroundTransitions from './BackgroundTransitions.js';
 import Platform from './Platform.js';
@@ -21,32 +18,31 @@ const assets = {
     height: 300,
     scaleSize: 100,
     },
+    tubeD: { src: "/images/platformer/obstacles/blue-tube.png",
+    hitbox: { widthPercentage: 0.5, heightPercentage: 0.5},
+    width: 300,
+    height: 300,
+    scaleSize: 100,
+    },
     flag: {
       src: "/images/platformer/obstacles/flag.png",
       hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 },
       width: 300,
       height: 300,
       scaleSize: 120,
-    },
+    }
   },
   platforms: {
     grass: { src: "/images/platformer/platforms/grass.png" },
     lava: { src: "/images/platformer/platforms/lava.jpg" },
     sandstone: { src: "/images/platformer/platforms/sandstone.png" },
-    island: { src: "/images/platformer/platforms/island.png" },
+    island: { src: "/images/platformer/platforms/island.png" }
   },
   backgrounds: {
-    greece: { src: "/images/platformer/backgrounds/greek.png" },
+    greece: { src: "/images/platformer/backgrounds/greek.png" }
   },
   transitions: {
-    loading: { src: "/images/platformer/transitions/greenscreen.png" },
-    hillsEnd: { src: "/images/platformer/transitions/hillsEnd.png" },
-    winterEnd: { src: "/images/platformer/transitions/winterEnd.png" },
-    greeceEnd: { src: "/images/platformer/transitions/greeceEnd.png" },
-    waterEnd: { src: "/images/platformer/transitions/waterEnd.png" },
-    quidditchEnd: { src: "/images/platformer/transitions/quidditchEnd.png" },
-    miniEnd: { src: "/images/platformer/transitions/miniEnd.png" },
-    iceminiEnd: { src: "/images/platformer/transitions/IceMinigameEnd.png"},
+    greeceEnd: { src: "/images/platformer/transitions/greeceEnd.png" }
   },
   players: {
     knight: {
@@ -72,7 +68,7 @@ const assets = {
         right: { row: 2, frames: 23 },
       },
       hitbox: { widthPercentage: 0.3, heightPercentage: 0.8 }
-    },
+    }
   },
   enemies: {
     cerberus: {
@@ -91,7 +87,7 @@ const assets = {
       height: 119,
       scaleSize: 60,
       speedRatio: 0.7,
-    },
+    }
   }
   };
 
@@ -146,10 +142,10 @@ const assets = {
     //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.16 },
     //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.1 },
     //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.06 },
-    { name: 'cerberus', id: 'cerberus', class: Cerberus, data: assets.enemies.cerberus, xPercentage: 0.2, minPosition: 0.09, difficulties: ["normal", "hard", "impossible"] },
-    { name: 'cerberus', id: 'cerberus', class: Cerberus, data: assets.enemies.cerberus, xPercentage: 0.2, minPosition: 0.09, difficulties: ["normal", "hard", "impossible"] },
-    { name: 'cerberus', id: 'cerberus', class: Cerberus, data: assets.enemies.cerberus, xPercentage: 0.5, minPosition: 0.3, difficulties: ["normal", "hard", "impossible"] },
-    { name: 'cerberus', id: 'cerberus', class: Cerberus, data: assets.enemies.cerberus, xPercentage: 0.7, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },//this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
+    { name: 'cerberus', id: 'cerberus', class: Cerberus, data: assets.enemies.cerberus, xPercentage: 0.2, minPosition: 0.09},
+    { name: 'cerberus', id: 'cerberus', class: Cerberus, data: assets.enemies.cerberus, xPercentage: 0.2, minPosition: 0.09,},
+    { name: 'cerberus', id: 'cerberus', class: Cerberus, data: assets.enemies.cerberus, xPercentage: 0.5, minPosition: 0.3,},
+    { name: 'cerberus', id: 'cerberus', class: Cerberus, data: assets.enemies.cerberus, xPercentage: 0.7, minPosition: 0.1,},//this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
     { name: 'dragon', id: 'dragon', class: Dragon, data: assets.enemies.dragon, xPercentage: 0.5, minPosition: 0.05 },
     { name: 'knight', id: 'player', class: PlayerGreece, data: assets.players.knight },
     { name: 'flyingIsland', id: 'flyingIsland', class: FlyingIsland, data: assets.platforms.island, xPercentage: 0.82, yPercentage: 0.55 },
