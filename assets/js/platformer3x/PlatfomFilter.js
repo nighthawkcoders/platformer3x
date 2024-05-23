@@ -13,13 +13,12 @@ export class PlatformFilter extends GameObject {
         this.canvas.style.filter = 'blur(5px)'; //blur
         this.canvas.style.filter = 'hue-rotate(90deg)'; //change colour
         this.canvas.style.filter = 'sepia(0.9)'; //old
-        this.canvas.style.filter = 'drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5))';
+        this.canvas.style.filter = 'drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5))'; //adds shadow
     }
 
     update() {
         this.changeAppearance();
     }
-
 
     changeAppearance() {
        
