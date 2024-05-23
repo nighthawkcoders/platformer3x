@@ -304,7 +304,7 @@ const GameSetup = {
     new GameLevel({ tag: "boss", callback: this.playerOffScreenCallBack, objects: bossGameObjects.getGameObjects() });
 
     const skibidiGameObjects = new GameSet(GameSetterSkibidi.assets, GameSetterSkibidi.objects, path)
-    new GameLevel({ tag: "skibdi", callback: this.playerOffScreenCallBack, objects: skibidiGameObjects.getGameObjects() })
+    new GameLevel({ tag: "skibidi", callback: this.playerOffScreenCallBack, objects: skibidiGameObjects.getGameObjects() })
 
     // Game Over Level definition...
     const endGameObjects = [
