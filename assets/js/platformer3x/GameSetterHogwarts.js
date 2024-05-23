@@ -114,10 +114,10 @@ const assets = {
     { name: 'blocks', id: 'jumpPlatform', class: MovingPlatform, data: assets.platforms.stone, xPercentage: 0.44, yPercentage: 0.92 },
     { name: 'magicBeam', id: 'magicBeam', class: MagicBeam, data: assets.enemies.magicBeam, xPercentage: 0.37, yPercentage: 0.61 },
 
-    { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: assets.platforms.stone, xPercentage: 0.48, yPercentage: 0.64 },
-    { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: assets.platforms.stone, xPercentage: 0.48, yPercentage: 0.54 },
-    { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: assets.platforms.stone, xPercentage: 0.48, yPercentage: 0.44 },
-    { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: assets.platforms.stone, xPercentage: 0.48, yPercentage: 0.34 },
+    { name: 'blocks', id: 'jumpPlatform', class: PlatformFilter, data: assets.platforms.stone, xPercentage: 0.48, yPercentage: 0.64 },
+    { name: 'blocks', id: 'jumpPlatform', class: PlatformFilter, data: assets.platforms.stone, xPercentage: 0.48, yPercentage: 0.54 },
+    { name: 'blocks', id: 'jumpPlatform', class: PlatformFilter, data: assets.platforms.stone, xPercentage: 0.48, yPercentage: 0.44 },
+    { name: 'blocks', id: 'jumpPlatform', class: PlatformFilter, data: assets.platforms.stone, xPercentage: 0.48, yPercentage: 0.34 },
     
     { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: assets.platforms.stone, xPercentage: 0.6, yPercentage: 0.66 },
     { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: assets.platforms.stone, xPercentage: 0.56, yPercentage: 0.5 },
