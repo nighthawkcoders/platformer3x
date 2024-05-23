@@ -7,18 +7,13 @@ import BackgroundParallax from './BackgroundParallax.js';
 import BackgroundTransitions from './BackgroundTransitions.js';
 import BackgroundSnow from './BackgroundSnow.js';
 import Platform from './Platform.js';
-import JumpPlatform from './JumpPlatform.js';
-import PlayerHills from './PlayerHills.js';
 import PlayerWinter from './PlayerWinter.js';
 import PlayerMini from './PlayerMini.js';
 import PlayerMiniHogwarts from './PlayerMiniHogwarts.js';
 import PlayerQuidditch from './PlayerQuidditch.js';
-import Goomba from './EnemyGoomba.js';
-import FlyingGoomba from './FlyingGoomba.js';
 import BlockPlatform from './BlockPlatform.js';
 import SpawnPlatform from './PlatformSpawn.js';
 import MovingPlatform from './PlatformMoving.js'
-import Mushroom from './Mushroom.js';
 import MagicBeam from './MagicBeam.js';
 import ChocoFrog from './ChocoFrog.js';
 import Coin from './Coin.js';
@@ -42,7 +37,8 @@ import PlayerZombie from './PlayerZombie.js';
 import BossItem from './BossItem.js';
 import PlayerBoss from './PlayerBoss.js';
 import GameSet from './GameSet.js';
-import GameSetHills from './GameSetHills.js';
+import GameSetterHills from './GameSetterHills.js';
+import GameSetterWater from './GameSetterWater.js';
 
 //test comment
 
@@ -719,7 +715,7 @@ const GameSetup = {
     let difficulty = localStorage.getItem("difficulty") || "easy";
 
     // Hills Game Level added to the GameEnv ...
-    var hillsGameObjects = new GameSet(GameSetHills.assets, GameSetHills.objects, path);
+    var hillsGameObjects = new GameSet(GameSetterHills.assets, GameSetterHills.objects, path);
     new GameLevel({ tag: "hills", callback: this.playerOffScreenCallBack, objects: hillsGameObjects.getGameObjects() });
 
 
@@ -871,38 +867,9 @@ const GameSetup = {
 
 
     // Under Water Game Level defintion...
-    const allWaterGameObjects = [
-      { name: 'water', id: 'background', class: Background, data: this.assets.backgrounds.water },
-      { name: 'fish', id: 'background', class: BackgroundParallax, data: this.assets.backgrounds.fish },
-      { name: 'reef', id: 'background', class: Background, data: this.assets.backgrounds.reef },
-      { name: 'sand', id: 'floor', class: Platform, data: this.assets.platforms.sand },
-      { name: 'sandblock', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandblock, xPercentage: 0.2, yPercentage: 0.85 },
-      { name: 'sandblock', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandblock, xPercentage: 0.2368, yPercentage: 0.85 },
-      { name: 'sandblock', id: 'jumpPlatform', class: BlockPlatform, data: this.assets.platforms.sandblock, xPercentage: 0.2736, yPercentage: 0.85 },
-      { name: 'sandblock', id: 'wall', class: BlockPlatform, data: this.assets.platforms.sandblock, xPercentage: 0.6, yPercentage: 1 },
-      { name: 'itemBlock', id: 'jumpPlatform', class: JumpPlatform, data: this.assets.platforms.itemBlock, xPercentage: 0.4, yPercentage: 0.65 }, //item block is a platform
-      { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage: 0.5, yPercentage: 1, minPosition: 0.05 },
-      { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage: 0.4, yPercentage: 1, minPosition: 0.05, difficulties: ["normal", "hard", "impossible"] },
-      { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage: 0.3, yPercentage: 1, minPosition: 0.05, difficulties: ["normal", "hard", "impossible"] },
-      { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage: 0.2, yPercentage: 1, minPosition: 0.05, difficulties: ["hard", "impossible"] },
-      { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage: 0.1, yPercentage: 1, minPosition: 0.05, difficulties: ["impossible"] },
-      { name: 'goombaSpecial', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage: 0.75, yPercentage: 1, minPosition: 0.5 }, //this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
-      { name: 'goombaSpecial', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba, xPercentage: 0.95, yPercentage: 1, minPosition: 0.5, difficulties: ["hard", "impossible"] }, //this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
-      { name: 'flyingGoomba', id: 'flyingGoomba', class: FlyingGoomba, data: this.assets.enemies.flyingGoomba, xPercentage: 0.9, minPosition: 0.5, difficulties: ["normal", "hard", "impossible"] },
-      { name: 'flyingGoomba', id: 'flyingGoomba', class: FlyingGoomba, data: this.assets.enemies.flyingGoomba, xPercentage: 0.9, minPosition: 0.5, difficulties: ["hard", "impossible"] },
-      { name: 'flyingGoomba', id: 'flyingGoomba', class: FlyingGoomba, data: this.assets.enemies.flyingGoomba, xPercentage: 0.9, minPosition: 0.5, difficulties: ["impossible"] },
-      { name: 'mushroom', id: 'mushroom', class: Mushroom, data: this.assets.enemies.mushroom, xPercentage: 0.49 },
-      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.1908, yPercentage: 0.75 },
-      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.2242, yPercentage: 0.75 },
-      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.2575, yPercentage: 0.75 },
-      { name: 'coin', id: 'coin', class: Coin, data: this.assets.obstacles.coin, xPercentage: 0.5898, yPercentage: 0.900 },
-      { name: 'mario', id: 'player', class: PlayerHills, data: this.assets.players.mario },
-      { name: 'Chest', id: 'finishline', class: FinishLine, data: this.assets.obstacles.chest, xPercentage: 0.85, yPercentage: 0.68 },
-      { name: 'miniEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.miniEnd },
-    ];
-    let waterGameObjects = allWaterGameObjects.filter(obj => !obj.difficulties || obj.difficulties.includes(difficulty));
-    // Water Game Level added to the GameEnv ...
-    new GameLevel({ tag: "water", callback: this.playerOffScreenCallBack, objects: waterGameObjects });
+    // Hills Game Level added to the GameEnv ...
+    var waterGameObjects = new GameSet(GameSetterWater.assets, GameSetterWater.objects, path);
+    new GameLevel({ tag: "water", callback: this.playerOffScreenCallBack, objects: waterGameObjects.getGameObjects() });
 
     // Quidditch Game Level definition...
     const quidditchGameObjects = [
