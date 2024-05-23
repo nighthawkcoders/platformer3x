@@ -74,7 +74,7 @@ image: /images/platformer/backgrounds/home.png
   <div id="container">
       <header class="fun_facts">
       <p id="num">Fun Fact #0</p>
-      <h3 id="fun_fact">Mario is named after frustrated landlord, Mario Segale, of the Nintendo of America building.</h3> <!-- want to access later so have id-->
+      <h3 id="fun_fact">Mario is named after the frustrated landlord, Mario Segale, of the Nintendo of America building.</h3> <!-- want to access later so have id-->
       </header>
     </div>
   
@@ -102,8 +102,7 @@ image: /images/platformer/backgrounds/home.png
       */
   
       // Setup game data, the objects and levels
-      GameSetup.initLevels("{{site.baseurl}}"); 
-  
+      GameSetup.initLevels("{{site.baseurl}}");   
       /* 
        * ==========================================
        * ========== Game Control ==================
