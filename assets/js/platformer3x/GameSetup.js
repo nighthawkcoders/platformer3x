@@ -1,3 +1,4 @@
+
 // GameSehup.js Key objective is to define GameLevel objects and their assets.
 import GameEnv from './GameEnv.js';
 import GameLevel from './GameLevel.js';
@@ -14,6 +15,7 @@ import GameSetterHogwarts from './GameSetterHogwarts.js';
 import GameSetterWinter from './GameSetterWinter.js';
 import GameSetterWinterIce from './GameSetterWinterIce.js';
 import GameSetterBoss from './GameSetterBoss.js';
+import GameSetterSkibidi from './GameSetterSkibidi.js';
 
 //test comment
 
@@ -301,6 +303,9 @@ const GameSetup = {
     // Boss Game Level added to the GameEnv ...
     var bossGameObjects = new GameSet(GameSetterBoss.assets, GameSetterBoss.objects, path);
     new GameLevel({ tag: "boss", callback: this.playerOffScreenCallBack, objects: bossGameObjects.getGameObjects() });
+
+    const skibidiGameObjects = new GameSet(GameSetterSkibidi.assets, GameSetterSkibidi.objects, path)
+    new GameLevel({ tag: "skibidi", callback: this.playerOffScreenCallBack, objects: skibidiGameObjects.getGameObjects() })
 
     // Game Over Level definition...
     const endGameObjects = [
