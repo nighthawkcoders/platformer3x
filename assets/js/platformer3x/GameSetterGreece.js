@@ -142,10 +142,9 @@ const assets = {
     //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.16 },
     //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.1 },
     //{ name: 'sandstone', id: 'jumpPlatform', class: BlockPlatform, data: assets.platforms.sandstone, xPercentage: 0.75, yPercentage: 0.06 },
-    { name: 'cerberus', id: 'cerberus', class: Cerberus, data: assets.enemies.cerberus, xPercentage: 0.2, minPosition: 0.09},
-    { name: 'cerberus', id: 'cerberus', class: Cerberus, data: assets.enemies.cerberus, xPercentage: 0.2, minPosition: 0.09,},
-    { name: 'cerberus', id: 'cerberus', class: Cerberus, data: assets.enemies.cerberus, xPercentage: 0.5, minPosition: 0.3,},
-    { name: 'cerberus', id: 'cerberus', class: Cerberus, data: assets.enemies.cerberus, xPercentage: 0.7, minPosition: 0.1,},//this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
+    { name: 'cerberus', id: 'cerberus', class: Cerberus, data: assets.enemies.cerberus, xPercentage: 0.2, minPosition: 0.09, difficulties: ["normal", "hard", "impossible"]},
+    { name: 'cerberus', id: 'cerberus', class: Cerberus, data: assets.enemies.cerberus, xPercentage: 0.5, minPosition: 0.3, difficulties: ["normal", "hard", "impossible"]  },
+    { name: 'cerberus', id: 'cerberus', class: Cerberus, data: assets.enemies.cerberus, xPercentage: 0.7, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"]  },//this special name is used for random event 2 to make sure that only one of the Goombas ends the random event
     { name: 'dragon', id: 'dragon', class: Dragon, data: assets.enemies.dragon, xPercentage: 0.5, minPosition: 0.05 },
     { name: 'knight', id: 'player', class: PlayerGreece, data: assets.players.knight },
     { name: 'flyingIsland', id: 'flyingIsland', class: FlyingIsland, data: assets.platforms.island, xPercentage: 0.82, yPercentage: 0.55 },

@@ -11,7 +11,7 @@ class GameSet {
       this.assets = assets;
      
       // Filter gameObjects based on difficulty
-      this.difficulty = localStorage.getItem("difficulty") || "easy";
+      this.difficulty = localStorage.getItem("difficulty") || "normal";
       this.gameObjects = gameObjects.filter(obj => !obj.difficulties || obj.difficulties.includes(this.difficulty));
     }
 
