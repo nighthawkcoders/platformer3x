@@ -622,6 +622,10 @@ export class SettingsControl extends LocalStorage{
        hintsSection.append(hintsButton)
        document.getElementById("sidebar").append(hintsSection)
 
+       // Get/Construct HTML input and event update fo game speed
+       var userID = settingsControl.userIDInput;
+       document.getElementById("sidebar").append(userID);
+
        // Get/Construct HTML input and event update for game speed 
        var gameSpeed = settingsControl.gameSpeedInput;
        document.getElementById("sidebar").append(gameSpeed);
@@ -669,8 +673,6 @@ export class SettingsControl extends LocalStorage{
         }
         // settings-button and event listener opens sidebar
         document.getElementById("settings-button").addEventListener("click",sidebarPanel);
-        // sidebar-header and event listener closes sidebar
-        document.getElementById("sidebar-header").addEventListener("click",sidebarPanel);
 
         window.addEventListener('load', function() {
             var submenu = document.querySelector('.submenu');
