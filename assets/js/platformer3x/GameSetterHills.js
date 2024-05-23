@@ -128,7 +128,7 @@ const assets = {
     { name: 'coin', id: 'coin', class: Coin, data: assets.obstacles.coin, xPercentage: 0.2575, yPercentage: 0.75 },
     { name: 'coin', id: 'coin', class: Coin, data: assets.obstacles.coin, xPercentage: 0.5898, yPercentage: 0.900 },
     { name: 'mario', id: 'player', class: PlayerHills, data: assets.players.mario },
-    { name: 'tube', id: 'finishline', class: FinishLine, data: assets.obstacles.tube, xPercentage: 0.85, yPercentage: 0.65 },
+    { name: 'tube', id: 'finishline', class: FinishLine, data: assets.obstacles.tube, xPercentage: 0.85, yPercentage: 0.855 },
     { name: 'loading', id: 'background', class: BackgroundTransitions, data: assets.transitions.loading },
   ];
 

@@ -5,28 +5,6 @@ import GameLevel from './GameLevel.js';
 // To build GameLevels, each contains GameObjects from below imports
 import Background from './Background.js'
 import GameControl from './GameControl.js';
-<<<<<<< HEAD
-import Owl from './Owl.js';
-import Snowman from './Snowman.js';
-import Cerberus from './Cerberus.js';
-import PlayerGreece from './PlayerGreece.js';
-import FinishLine from './FinishLine.js';
-import Lava from './Lava.js';
-import Dragon from './Dragon.js';
-import Star from './Star.js';
-import Dementor from './Dementor.js';
-import Draco from './Draco.js';
-import Boss from './Boss.js';
-import Jellyfish from './Jellyfish.js';
-import Penguin from './Penguin.js';
-import PlayerIce from './PlayerIce.js';
-import FlyingIsland from './FlyingIsland.js';
-import PlayerBaseOneD from './PlayerBaseOneD.js';
-import PlayerZombie from './PlayerZombie.js';
-import BossItem from './BossItem.js';
-import PlayerBoss from './PlayerBoss.js';
-import NarwhalBoss from './NarwhalBoss.js';
-=======
 import GameSet from './GameSet.js';
 import GameSetterHills from './GameSetterHills.js';
 import GameSetterWater from './GameSetterWater.js';
@@ -241,7 +219,7 @@ const GameSetup = {
    * * J* SON "data" contains assets and properties for the GameObject
   */
 
-  'initLevels: function (path) {  // ensure valid {{site.baseurl}} for path
+  initLevels: function (path) {  // ensure valid {{site.baseurl}} for path
 
     // Add File location in assets relative to the root of the site
     Object.keys(this.assets).forEach(category => {

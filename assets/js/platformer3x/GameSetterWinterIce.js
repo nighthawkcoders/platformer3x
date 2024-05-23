@@ -1,40 +1,15 @@
 // GameSetHills.js Key objective is to define objects for a GameLevel
 import GameSet from './GameSet.js';
 // To build GameLevels, each contains GameObjects from below imports
-import Background from './Background.js'
 import BackgroundParallax from './BackgroundParallax.js';
 import BackgroundTransitions from './BackgroundTransitions.js';
-import BackgroundSnow from './BackgroundSnow.js';
 import Platform from './Platform.js';
-import PlayerWinter from './PlayerWinter.js';
-import PlayerMini from './PlayerMini.js';
-import PlayerMiniHogwarts from './PlayerMiniHogwarts.js';
-import PlayerQuidditch from './PlayerQuidditch.js';
 import BlockPlatform from './BlockPlatform.js';
-import SpawnPlatform from './PlatformSpawn.js';
-import MovingPlatform from './PlatformMoving.js'
-import MagicBeam from './MagicBeam.js';
-import ChocoFrog from './ChocoFrog.js';
 import Coin from './Coin.js';
-import GameControl from './GameControl.js';
-import Owl from './FlyingOwl.js';
-import Snowman from './EnemySnowman.js';
-import Cerberus from './EnemyCerberus.js';
-import PlayerGreece from './PlayerGreece.js';
 import FinishLine from './FinishLine.js';
-import Lava from './Lava.js';
-import Dragon from './FlyingDragon.js';
-import Star from './Star.js';
-import Dementor from './FlyingDementor.js';
-import Draco from './EnemyDraco.js';
-import Boss from './Boss.js';
 import Jellyfish from './FlyingJellyfish.js';
 import Penguin from './EnemyPenguin.js';
 import PlayerIce from './PlayerIce.js';
-import FlyingIsland from './PlatformFlyingIsland.js';
-import PlayerZombie from './PlayerZombie.js';
-import BossItem from './BossItem.js';
-import PlayerBoss from './PlayerBoss.js';
 
 // Define the GameSetup object literal
 const assets = {  
@@ -498,9 +473,9 @@ const assets = {
     { name: 'Snowflake', id: 'coin', class: Coin, data: assets.obstacles.snowflake, xPercentage: 0.62, yPercentage: 0.25 },
     { name: 'jellyfish', id: 'jellyfish', class: Jellyfish, data: assets.enemies.Jellyfish, xPercentage: 0.2, minPosition: 0.05 },
     { name: 'jellyfish', id: 'jellyfish', class: Jellyfish, data: assets.enemies.Jellyfish, xPercentage: 0.8, minPosition: 0.05 },
-    { name: 'penguin', id: 'penguin', class: Penguin, data: assets.enemies.Penguin, xPercentage: 0.2, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
-    { name: 'penguin', id: 'penguin', class: Penguin, data: assets.enemies.Penguin, xPercentage: 0.35, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
-    { name: 'penguin', id: 'penguin', class: Penguin, data: assets.enemies.Penguin, xPercentage: 0.5, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
+    { name: 'penguin', id: 'penguin', class: Penguin, data: assets.enemies.Penguin, xPercentage: 0.2, minPosition: 0.1},
+    { name: 'penguin', id: 'penguin', class: Penguin, data: assets.enemies.Penguin, xPercentage: 0.35, minPosition: 0.1},
+    { name: 'penguin', id: 'penguin', class: Penguin, data: assets.enemies.Penguin, xPercentage: 0.5, minPosition: 0.1},
     { name: 'mario', id: 'player', class: PlayerIce, data: assets.players.whitemario },
     { name: 'tubeD', id: 'finishline', class: FinishLine, data: assets.obstacles.tubeD, xPercentage: 0, yPercentage: 0.052 },
     { name: 'iceberg', id: 'finishline', class: FinishLine, data: assets.obstacles.iceberg, xPercentage: 0.85, yPercentage: 0.603 },
