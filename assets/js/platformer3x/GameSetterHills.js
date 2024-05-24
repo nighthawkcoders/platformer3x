@@ -4,7 +4,7 @@ import GameSet from './GameSet.js';
 import BackgroundParallax from './BackgroundParallax.js';
 import BackgroundTransitions from './BackgroundTransitions.js';
 import Platform from './Platform.js';
-import JumpPlatform from './JumpPlatform.js';
+import PlatformJump from './PlatformJump.js';
 import PlayerHills from './PlayerHills.js';
 import Goomba from './EnemyGoomba.js';
 import FlyingGoomba from './FlyingGoomba.js';
