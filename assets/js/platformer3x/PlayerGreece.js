@@ -100,17 +100,18 @@ export class PlayerGreece extends PlayerBase {
         switch (this.state.collision) {
             case "minifinishline":
                 // 1. Caught in finishline
-                if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
-                    // Position player in the center of the finishline
+                if (this.collisionData.touchPoints.this.onTopofOther  || this.state.isFinishing ) {
+                    // Position player in the center of the finishline 
                     this.x = this.collisionData.newX;
+                    this.state.movement = { up: false, down: false, left: false, right: false, falling: false};
+                    this.state.isFinishing = true;
+                    this.gravityEnabled = true;
                     // Using natural gravity wait for player to reach floor
                     if (Math.abs(this.y - this.bottom) <= GameEnv.gravity) {
                         // Force end of level condition
-                        // this.x = GameEnv.innerWidth + 1;
                         GameControl.transitionToLevel(GameEnv.levels[4])
-                        return
                     }
-                    // 2. Collision between player right and finishline
+                // 2. Collision between player right and finishline   
                 } else if (this.collisionData.touchPoints.this.right) {
                     this.state.movement.right = false;
                     this.state.movement.left = true;
@@ -122,7 +123,7 @@ export class PlayerGreece extends PlayerBase {
                 break;
             case "finishline":
                 // Transition to the next level when touching the flag
-                GameControl.transitionToLevel(GameEnv.levels[6]);
+                GameControl.transitionToLevel(GameEnv.levels[5]);
                 break;
             case "cerberus": // Note: Goomba.js and Player.js could be refactored
                 // 1. Player jumps on goomba, interaction with Goomba.js
