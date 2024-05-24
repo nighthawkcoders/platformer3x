@@ -21,6 +21,8 @@ export class ChocoFrog extends Character {
         this.maxPosition = this.x + xPercentage * GameEnv.innerWidth;
 
         this.immune = 0;
+        GameEnv.destroyedChocoFrog = false;
+
 
     }
 
