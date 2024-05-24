@@ -2,7 +2,7 @@ import GameControl from './GameControl.js';
 import GameEnv from './GameEnv.js';
 import GameObject from './GameObject.js';
 
-export class PlatformJump extends GameObject {
+export class JumpPlatform extends GameObject {
     constructor(canvas, image, data, xPercentage, yPercentage, name) {
         super(canvas, image, data);
         this.platformX = xPercentage * GameEnv.innerWidth;
@@ -70,4 +70,4 @@ export class PlatformJump extends GameObject {
     
 }
 
-export default PlatformJump;
+export default JumpPlatform;

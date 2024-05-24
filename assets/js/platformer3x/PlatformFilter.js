@@ -1,5 +1,8 @@
+
 import GameEnv from './GameEnv.js';
 import GameObject from './GameObject.js';
+//import PlatformBase from '.PlatformBase.js'
+
 export class PlatformFilter extends GameObject {
     constructor(canvas, image, data, xPercentage, yPercentage, name) {
         super(canvas, image, data);
@@ -24,7 +27,7 @@ export class PlatformFilter extends GameObject {
     
     // Apply CSS filter
     //this.canvas.style.filter = 'blur(5px)';
-    this.canvas.style.filter = 'hue-rotate(150deg)';
+    this.canvas.style.filter = 'hue-rotate(90deg)';
     //this.canvas.style.filter = 'sepia(0.9)';
     //this.canvas.style.filter = 'drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5))';
 
