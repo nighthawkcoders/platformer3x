@@ -1,6 +1,7 @@
 import GameEnv from './GameEnv.js';
 import PlayerBase from './PlayerBase.js';
 import GameControl from './GameControl.js';
+import PlayerBaseOneD from './PlayerBaseOneD.js'; ///With this you can change the direction of the sprite sheet with just the sprite rows.
 
 /**
  * @class PlayerSkibidi class
@@ -12,7 +13,7 @@ import GameControl from './GameControl.js';
  * 
  * @extends PlayerBase 
  */
-export class PlayerSkibidi extends PlayerBase {
+export class PlayerSkibidi extends PlayerBaseOneD { /// Using PlayerBaseOneD added the sprite mirror but deleted the sprite not showing the animations
 
     /** GameObject instantiation: constructor for PlayerSkibidi object
      * @extends Character 

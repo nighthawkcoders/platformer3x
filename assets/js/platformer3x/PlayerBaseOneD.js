@@ -143,6 +143,7 @@ export class PlayerBaseOneD extends Character {
     updateAnimation() {
         switch (this.state.animation) {
             case 'idle':
+                console.log(this.playerData.idle)
                 if(this.state.direction == "left"){
                     this.canvas.style.transform = 'scaleX(-1)';
                 }

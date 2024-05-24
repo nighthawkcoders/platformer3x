@@ -295,21 +295,6 @@ const assets = {
       death : { row: 11, frames: 11 }, 
       hitbox: { widthPercentage: 0.3, heightPercentage: 0.8 }
     },
-    zombie: { //one direction player
-      src: "/images/platformer/sprites/zombie.png",
-      width: 130,
-      height: 70,
-      scaleSize: 60,
-      speedRatio: 0.7,
-      idle: { row: 2, frames: 11, idleFrame: { column: 1, frames: 0 } },
-      walk: { row: 3, frames: 11 }, // default - right Movement
-      run: { row: 3, frames: 11 }, // default - right Movement
-      jump: { row: 3, frames: 11 }, // default - right Movement
-      attack: { row: 4, min: 6,frames: 11 }, 
-      jumpAttack : { row: 6, frames: 11 }, 
-      death : { row: 11, frames: 11 }, 
-      hitbox: { widthPercentage: 0.3, heightPercentage: 0.8 }
-    },
   },
   enemies: {
     goomba: {
