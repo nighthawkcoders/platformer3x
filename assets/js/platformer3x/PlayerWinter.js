@@ -73,7 +73,8 @@ export class PlayerWinter extends PlayerBase {
                     if (Math.abs(this.y - this.bottom) <= GameEnv.gravity) {
                         // Force end of level condition
                         // this.x = GameEnv.innerWidth + 1;
-                        GameControl.transitionToLevel(GameEnv.levels[9])
+                        const indexMini = GameEnv.levels.findIndex(level => level.tag === "Winter Ice")
+                        GameControl.transitionToLevel(GameEnv.levels[indexMini]);
                         return
                     }
                     // 2. Collision between player right and finishline   
@@ -94,7 +95,8 @@ export class PlayerWinter extends PlayerBase {
                     // Using natural gravity wait for player to reach floor
                     if (Math.abs(this.y - this.bottom) <= GameEnv.gravity) {
                         // Force end of level condition
-                        GameControl.transitionToLevel(GameEnv.levels[10])
+                        const index = GameEnv.levels.findIndex(level => level.tag === "Skibidi")
+                        GameControl.transitionToLevel(GameEnv.levels[index]);
                     }
                 // 2. Collision between player right and finishline   
                 } else if (this.collisionData.touchPoints.this.right) {

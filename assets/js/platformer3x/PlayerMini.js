@@ -85,8 +85,8 @@ export class PlayerMini extends PlayerBase {
                     if (Math.abs(this.y - this.bottom) <= GameEnv.gravity) {
                         // Force end of level condition
                         //this.x = GameEnv.innerWidth + 1;
-                        GameControl.transitionToLevel(GameEnv.levels[3])
-                        return                    
+                        const index = GameEnv.levels.findIndex(level => level.tag === "Greece")
+                        GameControl.transitionToLevel(GameEnv.levels[index]);
                     }
 
                 // 2. Collision between player right and finishline   

@@ -85,7 +85,8 @@ export class PlayerMiniHogwarts extends PlayerBase {
                     if (Math.abs(this.y - this.bottom) <= GameEnv.gravity) {
                         // Force end of level condition
                         //this.x = GameEnv.innerWidth + 1;
-                        GameControl.transitionToLevel(GameEnv.levels[6])
+                        const index = GameEnv.levels.findIndex(level => level.tag === "Quidditch")
+                        GameControl.transitionToLevel(GameEnv.levels[index]);
                         return                    
                     }
 

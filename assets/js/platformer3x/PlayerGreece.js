@@ -105,9 +105,11 @@ export class PlayerGreece extends PlayerBase {
                     this.x = this.collisionData.newX;
                     // Using natural gravity wait for player to reach floor
                     if (Math.abs(this.y - this.bottom) <= GameEnv.gravity) {
+                        const indexMini = GameEnv.levels.findIndex(level => level.tag === "Greece Lava")
+                        GameControl.transitionToLevel(GameEnv.levels[indexMini]);
+                        console.log(indexMini)  
                         // Force end of level condition
                         // this.x = GameEnv.innerWidth + 1;
-                        GameControl.transitionToLevel(GameEnv.levels[4])
                         return
                     }
                     // 2. Collision between player right and finishline
@@ -122,7 +124,8 @@ export class PlayerGreece extends PlayerBase {
                 break;
             case "finishline":
                 // Transition to the next level when touching the flag
-                GameControl.transitionToLevel(GameEnv.levels[6]);
+                const index = GameEnv.levels.findIndex(level => level.tag === "Water")
+                GameControl.transitionToLevel(GameEnv.levels[index]);
                 break;
             case "cerberus": // Note: Goomba.js and Player.js could be refactored
                 // 1. Player jumps on goomba, interaction with Goomba.js

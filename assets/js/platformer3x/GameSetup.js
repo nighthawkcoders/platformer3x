@@ -235,8 +235,8 @@ const GameSetup = {
     GameLevelSetup(GameSetterHogwarts, this.path, this.playerOffScreenCallBack);
     GameLevelSetup(GameSetterWinter, this.path, this.playerOffScreenCallBack);
     GameLevelSetup(GameSetterWinterIce, this.path, this.playerOffScreenCallBack);
-    GameLevelSetup(GameSetterBoss, this.path, this.playerOffScreenCallBack);
     GameLevelSetup(GameSetterSkibidi, this.path, this.playerOffScreenCallBack);
+    GameLevelSetup(GameSetterBoss, this.path, this.playerOffScreenCallBack);
     // End Game
     GameLevelSetup(GameSetterEnd, this.path, this.gameOverCallBack, true);
 
