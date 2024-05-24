@@ -182,6 +182,7 @@ const assets = {
   ];
 
   const GameQuidditch = {
+    tag: 'Quidditch',
     assets: assets,
     objects: objects
   };

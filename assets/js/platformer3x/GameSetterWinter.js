@@ -506,6 +506,7 @@ const assets = {
   ];
 
   const GameSetterWinter = {
+    tag: 'Winter',
     assets: assets,
     objects: objects
   };
