@@ -58,7 +58,7 @@ export class ChocoFrog extends Character {
                     GameEnv.invincible = false;
                     this.destroy();
                     GameEnv.destroyedChocoFrog = true;
-                }).bind(this), 1500);
+                }).bind(this), 500);
             }
 
         }
