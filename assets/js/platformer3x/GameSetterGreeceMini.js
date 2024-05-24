@@ -4,6 +4,7 @@ import Background from './Background.js'
 import BackgroundTransitions from './BackgroundTransitions.js';
 import PlayerMini from './PlayerMini.js';
 import BlockPlatform from './BlockPlatform.js';
+import Platform from './Platform.js';
 import Coin from './Coin.js';
 import FinishLine from './FinishLine.js';
 import Star from './Star.js';
@@ -28,7 +29,8 @@ const assets = {
     snitch: { src: "/images/platformer/obstacles/snitch.png" }
   },
   platforms: {
-    lava: { src: "/images/platformer/platforms/lava.jpg" }
+    lava: { src: "/images/platformer/platforms/lava.jpg" },
+    rockslava: { src: "/images/platformer/platforms/rockslava.png" }
   },
   backgrounds: {
     mini: { src: "/images/platformer/backgrounds/mini.png" }
@@ -67,6 +69,7 @@ const assets = {
   // Hills Game Level defintion...
   const objects = [
     { name: 'mini', id: 'background', class: Background, data: assets.backgrounds.mini },
+    { name: 'rockslava', id: 'platform', class: Platform, data: assets.platforms.rockslava },
     // { name: 'rock', id: 'platform', class: Platform, data: assets.platforms.rock },
     { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: assets.platforms.lava, xPercentage: 0.59, yPercentage: 0.35 },
     { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: assets.platforms.lava, xPercentage: 0.6268, yPercentage: 0.35 },
