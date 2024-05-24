@@ -6,6 +6,7 @@ import GameLevel from './GameLevel.js';
 import Background from './Background.js'
 import GameControl from './GameControl.js';
 import GameSet from './GameSet.js';
+import GameSetterStart from './GameSetterStart.js';
 import GameSetterHills from './GameSetterHills.js';
 import GameSetterWater from './GameSetterWater.js';
 import GameSetterGreece from './GameSetterGreece.js';
@@ -16,7 +17,7 @@ import GameSetterWinter from './GameSetterWinter.js';
 import GameSetterWinterIce from './GameSetterWinterIce.js';
 import GameSetterBoss from './GameSetterBoss.js';
 import GameSetterSkibidi from './GameSetterSkibidi.js';
-
+import GameSetterEnd from './GameSetterEnd.js';
 //test comment
 
 /* Coding Style Notes
@@ -178,55 +179,12 @@ const GameSetup = {
   },
 
   /*  ==========================================
-   *  ======= Data Definitions =================
+   *  ========== Game Level Init ===============
    *  ==========================================
-   * Assets for the Game Objects defined in nested JSON key/value pairs
-   *
-   * * assets: contains definitions for all game objects, images, and properties
-   * * * 1st level: category (obstacles, platforms, backgrounds, players, enemies)
-   * * * 2nd level: item (tube, grass, mario, goomba)
-   * * * 3rd level: property (src, width, height, scaleSize, speedRatio, w, wa, wd, a, s, d)
   */
-
-  assets: {
-    backgrounds: {
-      start: { src: "/images/platformer/backgrounds/home.png" },
-    },
-    transitions: {
-      miniEnd: { src: "/images/platformer/transitions/miniEnd.png" },
-    },
-  },
-
-  /*  ==========================================
-   *  ========== Game Level init ===============
-   *  ==========================================
-   * 
-   * Game Level sequence as defined in code below
-   * * a.) tag: "start" level defines button selection and cycles to the home screen
-   * * b.) tag: "home" defines background and awaits "start" button selection and cycles to 1st game level
-   * * c.) tag: "hills" and other levels before the tag: "end" define key gameplay levels
-   * * d.) tag: "end"  concludes levels with game-over-screen background and replay selections
-   * 
-   * Definitions of new Object creations and JSON text
-   * * 1.) "new GameLevel" adds game objects to the game environment.
-   * * * JSON key/value "tag" is for readability
-   * * * JSON "callback" contains function references defined above that terminate a GameLevel
-   * * * JSON "objects" contain zero to many "GameObject"(s)
-   * * 2.) "GameObject"(s) are defined using JSON text and include name, id, class, and data.  
-   * * * JSON key/value "name" is for readability
-   * * * JSON "id" is a GameObject classification and may have program significance
-   * * * JSON "class" is the JavaScript class that defines the GameObject
-   * * J* SON "data" contains assets and properties for the GameObject
-  */
-
-  initLevels: function (path) {  // ensure valid {{site.baseurl}} for path
-
-    // Add File location in assets relative to the root of the site
-    Object.keys(this.assets).forEach(category => {
-      Object.keys(this.assets[category]).forEach(item => {
-        this.assets[category][item]['file'] = path + this.assets[category][item].src;
-      });
-    });
+  initLevels: function (path) {  
+    // ensure valid {{site.baseurl}} for path
+    this.path = path;
 
     var fun_facts = {
       //data structure
@@ -259,60 +217,29 @@ const GameSetup = {
       }
     }, 3000);
 
-    // Home screen added to the GameEnv ...
-    new GameLevel({ tag: "start", callback: this.startGameCallback });
-    const homeGameObjects = [
-      { name: 'background', id: 'background', class: Background, data: this.assets.backgrounds.start }
-    ];
-    // Home Screen Background added to the GameEnv, "passive" means complementary, not an interactive level..
-    new GameLevel({ tag: "home", callback: this.homeScreenCallback, objects: homeGameObjects, passive: true });
 
-    // Hills Game Level added to the GameEnv ...
-    var hillsGameObjects = new GameSet(GameSetterHills.assets, GameSetterHills.objects, path);
-    new GameLevel({ tag: "hills", callback: this.playerOffScreenCallBack, objects: hillsGameObjects.getGameObjects() });
+    // Initialize Game Levels
+    function GameLevelSetup(GameSetter, path, callback, passive = false) {
+      var gameObjects = new GameSet(GameSetter.assets, GameSetter.objects, path);
+      return new GameLevel({ tag: GameSetter.tag, callback: callback, objects: gameObjects.getGameObjects(), passive: passive });
+    }
 
-    // Greece Game Level added to the GameEnv ...
-    var greeceGameObjects = new GameSet(GameSetterGreece.assets, GameSetterGreece.objects, path);
-    new GameLevel({ tag: "ancient greece", callback: this.playerOffScreenCallBack, objects: greeceGameObjects.getGameObjects() });
+    // Start Game
+    GameLevelSetup(GameSetterStart, this.path, this.homeScreenCallback, true);
+    // Game Levels added to the Game ...
+    GameLevelSetup(GameSetterHills, this.path, this.playerOffScreenCallBack);
+    GameLevelSetup(GameSetterGreece, this.path, this.playerOffScreenCallBack);
+    GameLevelSetup(GameSetterGreeceMini, this.path, this.playerOffScreenCallBack);
+    GameLevelSetup(GameSetterWater, this.path, this.playerOffScreenCallBack);
+    GameLevelSetup(GameSetterQuidditch, this.path, this.playerOffScreenCallBack);
+    GameLevelSetup(GameSetterHogwarts, this.path, this.playerOffScreenCallBack);
+    GameLevelSetup(GameSetterWinter, this.path, this.playerOffScreenCallBack);
+    GameLevelSetup(GameSetterWinterIce, this.path, this.playerOffScreenCallBack);
+    GameLevelSetup(GameSetterBoss, this.path, this.playerOffScreenCallBack);
+    GameLevelSetup(GameSetterSkibidi, this.path, this.playerOffScreenCallBack);
+    // End Game
+    GameLevelSetup(GameSetterEnd, this.path, this.gameOverCallBack, true);
 
-    // Space Game Level added to the GameEnv ...
-    var greeceMiniGameObjects = new GameSet(GameSetterGreeceMini.assets, GameSetterGreeceMini.objects, path);
-    new GameLevel({ tag: "mini greece", callback: this.playerOffScreenCallBack, objects: greeceMiniGameObjects.getGameObjects() });
-
-    // Under Water Game Level defintion...
-    // Hills Game Level added to the GameEnv ...
-    var waterGameObjects = new GameSet(GameSetterWater.assets, GameSetterWater.objects, path);
-    new GameLevel({ tag: "water", callback: this.playerOffScreenCallBack, objects: waterGameObjects.getGameObjects() });
-
-    // Quidditch Game Level added to the GameEnv ...
-    var quidditchGameObjects = new GameSet(GameSetterQuidditch.assets, GameSetterQuidditch.objects, path);
-    new GameLevel({ tag: "quidditch", callback: this.playerOffScreenCallBack, objects: quidditchGameObjects.getGameObjects() });
-
-    // miniHogwarts Game Level added to the GameEnv ...
-    var miniHogwartsGameObjects = new GameSet(GameSetterHogwarts.assets, GameSetterHogwarts.objects, path);
-    new GameLevel({ tag: "mini hogwarts", callback: this.playerOffScreenCallBack, objects: miniHogwartsGameObjects.getGameObjects() });
-
-    // Winter MiniGame Level added to the GameEnv ...
-    var winterGameObjects = new GameSet(GameSetterWinter.assets, GameSetterWinter.objects, path);
-    new GameLevel({ tag: "winter", callback: this.playerOffScreenCallBack, objects: winterGameObjects.getGameObjects() });
-    
-    // IceMiniGame Game Level added to the GameEnv ...
-    var winterIceGameObjects = new GameSet(GameSetterWinterIce.assets, GameSetterWinterIce.objects, path);
-    new GameLevel({ tag: "icemini", callback: this.playerOffScreenCallBack, objects: winterIceGameObjects.getGameObjects() });
-
-    // Boss Game Level added to the GameEnv ...
-    var bossGameObjects = new GameSet(GameSetterBoss.assets, GameSetterBoss.objects, path);
-    new GameLevel({ tag: "boss", callback: this.playerOffScreenCallBack, objects: bossGameObjects.getGameObjects() });
-
-    const skibidiGameObjects = new GameSet(GameSetterSkibidi.assets, GameSetterSkibidi.objects, path)
-    new GameLevel({ tag: "skibidi", callback: this.playerOffScreenCallBack, objects: skibidiGameObjects.getGameObjects() })
-
-    // Game Over Level definition...
-    const endGameObjects = [
-      { name: 'background', class: Background, id: 'background', data: this.assets.transitions.miniEnd }
-    ];
-    // Game Over screen added to the GameEnv ...
-    new GameLevel({ tag: "end", callback: this.gameOverCallBack, objects: endGameObjects });
   }
 }
 // Bind the methods to the GameSetup object, ensures "this" inside of methods binds to "GameSetup"
