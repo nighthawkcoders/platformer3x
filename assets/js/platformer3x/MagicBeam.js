@@ -53,7 +53,7 @@ export class MagicBeam extends Character {
                     GameEnv.invincible = false;
                     this.destroy();
                     GameEnv.destroyedMagicBeam = true;
-                }, 1500);
+                }, 500);
             }
         }
         if (this.collisionData.touchPoints.other.id === "jumpPlatform") {
