@@ -1,8 +1,8 @@
 import GameControl from './GameControl.js';
 import GameEnv from './GameEnv.js';
-import PlatformJump from './PlatformJump.js';
+import JumpPlatform from './PlatformJump.js';
 
-export class BossItem extends PlatformJump {
+export class BossItem extends JumpPlatform {
     constructor(canvas, image, data, xPercentage, yPercentage, name) {
         super(canvas, image, data, xPercentage, yPercentage, name);
     }
