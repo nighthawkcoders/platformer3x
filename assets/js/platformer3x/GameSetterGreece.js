@@ -532,6 +532,7 @@ const assets = {
   ];
 
   const GameSetterGreece = {
+    tag: 'Greece',
     assets: assets,
     objects: objects
   };
