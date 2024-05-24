@@ -4,8 +4,8 @@ import GameEnv from "./GameEnv.js";
 import GameControl from "./GameControl.js";
 import Socket from "./Multiplayer.js";
 import Chat from "./Chat.js"
-import { enableLightMode } from './lightMode.js';
-import { enableDarkMode } from './darkMode.js';
+import { enableLightMode, enableDarkMode } from './Document.js';
+
 
 /* Coding Style Notes
  *
@@ -34,6 +34,36 @@ import { enableDarkMode } from './darkMode.js';
  * * * the remainder of SettingsControl supports the sidebar and MVC design for settings keys/values. 
  * 
 */
+
+const backgroundDim = {
+    create () {
+        this.dim = true // sets the dim to be true when settingControl is opened
+        console.log("CREATE DIM")
+        const dimDiv = document.createElement("div");
+        dimDiv.id = "dim";
+        dimDiv.style.backgroundColor = "black";
+        dimDiv.style.width = "100%";
+        dimDiv.style.height = "100%";
+        dimDiv.style.position = "absolute";
+        dimDiv.style.opacity = "0.8";
+        document.body.append(dimDiv);
+        dimDiv.style.zIndex = "9998"
+        dimDiv.addEventListener("click", this.remove)
+    },
+    remove () {
+        this.dim = false
+        console.log("REMOVE DIM");
+        const dimDiv = document.getElementById("dim");
+        dimDiv.remove();
+        isOpen = false
+        const sidebar = document.getElementById("sidebar")
+        sidebar.style.width = isOpen?"70%":"0px";
+        sidebar.style.top = isOpen?"15%":"0px";
+        sidebar.style.left = isOpen?"15%":"0px";
+    }
+}
+
+let isOpen = true
 
 // define the SettingsControl class
 export class SettingsControl extends LocalStorage{
@@ -70,7 +100,7 @@ export class SettingsControl extends LocalStorage{
     initialize(){ 
         // Load all keys from local storage
         this.loadAll();
-
+        
         window.addEventListener("difficulty", (e) => {
             // Update the difficulty value when a difficulty event is fired
             this[this.keys.difficulty] = e.detail.difficulty();
@@ -292,19 +322,39 @@ export class SettingsControl extends LocalStorage{
     }
 
     get isThemeInput() {
+        const localstorage = window.localStorage
+        const lightmodekey = "islightMode"
         const div = document.createElement("div");
         div.innerHTML = "Theme Change:"; // label
-    
+        const localStorageLightModeToggle = localstorage.getItem(lightmodekey)
+        
+        if (localStorageLightModeToggle) {
+            GameEnv.isLightMode = localStorageLightModeToggle.toLowerCase() === "true"
+        }
+
+
         const islightMode = document.createElement("input");  // get user defined lightmode boolean
         islightMode.type = "checkbox";
-        islightMode.checked = GameEnv.lightMode; // GameEnv contains latest is lightMode state
+        if (GameEnv.isLightMode) {
+            enableLightMode();
+            islightMode.checked = true;
+        } else {
+            enableDarkMode();
+            islightMode.checked = false;
+        }
         islightMode.addEventListener('change', () => {
             if (islightMode.checked) {
                 enableLightMode();
+                GameEnv.isLightMode = true;
+                localstorage.setItem(lightmodekey, GameEnv.isLightMode)
             } else {
                 enableDarkMode();
+                GameEnv.isLightMode = false;
+                localstorage.setItem(lightmodekey, GameEnv.isLightMode)
             }
+        console.log(GameEnv.isLightMode)
         });
+
 
         // Append elements to the DOM or wherever appropriate
         div.appendChild(islightMode); 
@@ -525,33 +575,50 @@ export class SettingsControl extends LocalStorage{
 
        var hintsSection = document.createElement("div")
        hintsSection.innerHTML = "Toggle fun facts: "
+       // Store the updated toggle state in local storage
+    // Create the hints button (checkbox)
+        var hintsButton = document.createElement("input");
+        hintsButton.type = "checkbox";
+
+        // Reference the hints section
+        const hints = document.getElementsByClassName("fun_facts")[0];
+
+        // Check localStorage for existing funFact state and set the initial state
+        const localStorageFunFact = localStorage.getItem('funFact');
+        if (localStorageFunFact !== null) {
+            GameEnv.funFact = localStorageFunFact.toLowerCase() === "true";
+        } else {
+            // Default value if nothing is found in localStorage
+            GameEnv.funFact = true;
+        }
+
+        // Set the initial state of hints and the checkbox based on GameEnv.funFact
+        if (GameEnv.funFact) {
+            hints.style.display = "unset";
+            hintsButton.checked = true;
+        } else {
+            hints.style.display = "none";
+            hintsButton.checked = false;
+        }
+
+        // Add the button to the DOM (assuming there is an element to append it to)
+        document.body.appendChild(hintsButton);
+
+        // Add event listener to the button to update display and localStorage
+        hintsButton.addEventListener("click", () => {
+            if (!hintsButton.checked) {
+                hints.style.display = "none";
+                GameEnv.funFact = false;
+            } else {
+                hints.style.display = "unset";
+                GameEnv.funFact = true;
+            }
+            localStorage.setItem('funFact', GameEnv.funFact);
+            console.log(GameEnv.funFact);
+        });
+
        
-       var hintsButton = document.createElement("input")
-       hintsButton.type = "checkbox"
-
-       const hintsDiv = document.getElementsByClassName("fun_facts")[0]
-        console.log(localStorage.getItem("show_hints"))
-        if (localStorage.getItem("show_hints") == true) {
-            hintsDiv.style.display = "unset"
-            hintsButton.checked = true
-        }
-        else {
-            hintsDiv.style.display = "none"
-            hintsButton.checked = false
-        }
-
-       hintsButton.addEventListener("click", () => {
-           if (!hintsButton.checked) {
-               hintsDiv.style.display = "none"
-               localStorage.setItem("show_hints", false)
-           }
-           else {
-               hintsDiv.style.display = "unset"
-               localStorage.setItem("show_hints", true)
-           }
-           console.log(localStorage.getItem("show_hints"))
-        })
-
+    
        hintsSection.append(hintsButton)
        document.getElementById("sidebar").append(hintsSection)
 
@@ -588,12 +655,12 @@ export class SettingsControl extends LocalStorage{
         document.getElementById("sidebar").append(themeChangeControl); 
 
         // Listener, isOpen, and function for sidebar open and close
-        var isOpen = false; // default sidebar is closed
         var submenuHeight = 0; // calculated height of submenu
         function sidebarPanel(){
             // toggle isOpen
-            isOpen = !isOpen;
+            isOpen = true;
             // open and close properties for sidebar based on isOpen
+            backgroundDim.create()
             var sidebar = document.querySelector('.sidebar');
             sidebar.style.width = isOpen?"200px":"0px";
             sidebar.style.paddingLeft = isOpen?"10px":"0px";
