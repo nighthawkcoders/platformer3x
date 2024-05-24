@@ -69,7 +69,7 @@ const assets = {
       hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 },
       width: 300,
       height: 300,
-      scaleSize: 150,
+      scaleSize: 120,
     },
     chest: {
       src: "/images/platformer/obstacles/Chest.png",
@@ -502,8 +502,8 @@ const assets = {
     { name: 'penguin', id: 'penguin', class: Penguin, data: assets.enemies.Penguin, xPercentage: 0.35, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
     { name: 'penguin', id: 'penguin', class: Penguin, data: assets.enemies.Penguin, xPercentage: 0.5, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
     { name: 'mario', id: 'player', class: PlayerIce, data: assets.players.whitemario },
-    { name: 'tubeD', id: 'finishline', class: FinishLine, data: assets.obstacles.tubeD, xPercentage: 0, yPercentage: 0.052 },
-    { name: 'iceberg', id: 'finishline', class: FinishLine, data: assets.obstacles.iceberg, xPercentage: 0.85, yPercentage: 0.603 },
+    { name: 'tubeD', id: 'finishline', class: FinishLine, data: assets.obstacles.tubeD, xPercentage: 0, yPercentage: 0.0685 },
+    { name: 'iceberg', id: 'finishline', class: FinishLine, data: assets.obstacles.iceberg, xPercentage: 0.85, yPercentage: 0.82 },
     { name: 'winterEnd', id: 'background', class: BackgroundTransitions, data: assets.transitions.winterEnd },
   ];
 

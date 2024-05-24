@@ -137,8 +137,8 @@ const assets = {
     { name: 'coin', id: 'coin', class: Coin, data: assets.obstacles.coin, xPercentage: 0.7875, yPercentage: 0.5 },
     { name: 'coin', id: 'coin', class: Coin, data: assets.obstacles.coin, xPercentage: 0.8075, yPercentage: 0.5 },
     { name: 'knight', id: 'player', class: PlayerMini, data: assets.players.knight },
-    { name: 'tubeD', id: 'finishline', class: FinishLine, data: assets.obstacles.tubeD, xPercentage: 0, yPercentage: 0.052 },
-    { name: 'tubeU', id: 'finishline', class: FinishLine, data: assets.obstacles.tubeU, xPercentage: 0.85, yPercentage: 0.646 },
+    { name: 'tubeD', id: 'finishline', class: FinishLine, data: assets.obstacles.tubeD, xPercentage: 0, yPercentage: 0.0685 },
+    { name: 'tubeU', id: 'finishline', class: FinishLine, data: assets.obstacles.tubeU, xPercentage: 0.85, yPercentage: 0.85 },
     { name: 'greeceEnd', id: 'background', class: BackgroundTransitions,  data: assets.transitions.greeceEnd },
   ];
 
