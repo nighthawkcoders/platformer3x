@@ -25,6 +25,7 @@ const assets = {
         scaleSize: 150,
       },
       coin: { src: "/images/platformer/obstacles/coin.png" },
+      dimonds: { src: "/images/platformer/obstacles/dimonds.png" },
     },
     platforms: {
       sand: { src: "/images/platformer/platforms/sand.png" },
@@ -101,6 +102,12 @@ const assets = {
         height: 180,
         hitbox: { widthPercentage: 0.0, heightPercentage: 0.2 }
       },
+      bubbles: {
+        src: "/images/platformer/platforms/bubbles.png",
+        width: 200,
+        height: 180,
+        hitbox: { widthPercentage: 0.0, heightPercentage: 0.2 }
+      },
     }
   };
 
@@ -124,17 +131,18 @@ const assets = {
     { name: 'flyingGoomba', id: 'flyingGoomba', class: FlyingGoomba, data: assets.enemies.flyingGoomba, xPercentage: 0.9, minPosition: 0.5, difficulties: ["normal", "hard", "impossible"] },
     { name: 'flyingGoomba', id: 'flyingGoomba', class: FlyingGoomba, data: assets.enemies.flyingGoomba, xPercentage: 0.9, minPosition: 0.5, difficulties: ["hard", "impossible"] },
     { name: 'flyingGoomba', id: 'flyingGoomba', class: FlyingGoomba, data: assets.enemies.flyingGoomba, xPercentage: 0.9, minPosition: 0.5, difficulties: ["impossible"] },
-    { name: 'mushroom', id: 'mushroom', class: Mushroom, data: assets.enemies.mushroom, xPercentage: 0.49 },
-    { name: 'coin', id: 'coin', class: Coin, data: assets.obstacles.coin, xPercentage: 0.1908, yPercentage: 0.75 },
-    { name: 'coin', id: 'coin', class: Coin, data: assets.obstacles.coin, xPercentage: 0.2242, yPercentage: 0.75 },
-    { name: 'coin', id: 'coin', class: Coin, data: assets.obstacles.coin, xPercentage: 0.2575, yPercentage: 0.75 },
-    { name: 'coin', id: 'coin', class: Coin, data: assets.obstacles.coin, xPercentage: 0.5898, yPercentage: 0.900 },
+    { name: 'bubbles', id: 'mushroom', class: Mushroom, data: assets.enemies.bubbles, xPercentage: 0.49 },
+    { name: 'dimonds', id: 'coin', class: Coin, data: assets.obstacles.dimonds, xPercentage: 0.1908, yPercentage: 0.75 },
+    { name: 'dimonds', id: 'coin', class: Coin, data: assets.obstacles.dimonds, xPercentage: 0.2242, yPercentage: 0.75 },
+    { name: 'dimonds', id: 'coin', class: Coin, data: assets.obstacles.dimonds, xPercentage: 0.2575, yPercentage: 0.75 },
+    { name: 'dimonds', id: 'coin', class: Coin, data: assets.obstacles.dimonds, xPercentage: 0.5898, yPercentage: 0.900 },
     { name: 'mario', id: 'player', class: PlayerHills, data: assets.players.mario },
     { name: 'Chest', id: 'finishline', class: FinishLine, data: assets.obstacles.chest, xPercentage: 0.85, yPercentage: 0.68 },
     { name: 'miniEnd', id: 'background', class: BackgroundTransitions, data: assets.transitions.miniEnd },
   ];
 
   const GameSetterWater = {
+    tag: 'Water',
     assets: assets,
     objects: objects
   };
