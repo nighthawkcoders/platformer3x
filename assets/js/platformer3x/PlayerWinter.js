@@ -32,14 +32,15 @@ export class PlayerWinter extends PlayerBase {
      * @override
      * gameLoop helper: Update Player jump height, replaces PlayerBase updateJump using settings from GameEnv
      */
-    updateJump() {  
+    updateJump() {
         let jumpHeightFactor;
         if (GameEnv.difficulty === "easy") {
             jumpHeightFactor = 0.50;
         } else if (GameEnv.difficulty === "normal") {
             jumpHeightFactor = 0.40;
-        } else {
-            jumpHeightFactor = 0.30;
+        }
+        if (GameEnv.currentLevel.tag == "narwhalboss") {
+            jumpHeightFactor = 0.50;
         }
         this.setY(this.y - (this.bottom * jumpHeightFactor));
     }
@@ -54,6 +55,7 @@ export class PlayerWinter extends PlayerBase {
         this.handleCollisionEvent("minifinishline");
         this.handleCollisionEvent("finishline");
         this.handleCollisionEvent("snowman");
+        this.handleCollisionEvent("boss");
     }
    
     /**
@@ -120,6 +122,37 @@ export class PlayerWinter extends PlayerBase {
                        this.x += 10;
                     }
                 
+                }
+                break;
+                case "narwhalboss": // Note: Goomba.js and Player.js could be refactored
+                // 1. Player jumps on goomba, interaction with Goomba.js
+                if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom && this.state.isDying == false) {
+                    // GoombaBounce deals with player.js and goomba.js
+                    if (GameEnv.goombaBounce === true) {
+                        GameEnv.goombaBounce = false;
+                        this.y = this.y - 100;
+                    }
+                    if (GameEnv.goombaBounce1 === true) {
+                        GameEnv.goombaBounce1 = false;
+                        this.y = this.y - 250
+                    }
+                    // 2. Player touches goomba sides of goomba
+                } else if (this.collisionData.touchPoints.this.right || this.collisionData.touchPoints.this.left) {
+                    if (GameEnv.difficulty === "normal" || GameEnv.difficulty === "hard") {
+                        if (this.state.isDying == false) {
+                            this.state.isDying = true;
+                            this.canvas.style.transition = "transform 0.5s";
+                            this.canvas.style.transform = "rotate(-90deg) translate(-26px, 0%)";
+                            GameEnv.playSound("PlayerDeath");
+                            setTimeout(async () => {
+                                await GameControl.transitionToLevel(GameEnv.levels[GameEnv.levels.indexOf(GameEnv.currentLevel)]);
+                            }, 900);
+                        }
+                    } else if (GameEnv.difficulty === "easy" && this.collisionData.touchPoints.this.right) {
+                        this.x -= 10;
+                    } else if (GameEnv.difficulty === "easy" && this.collisionData.touchPoints.this.left) {
+                        this.x += 10;
+                    }
                 }
                 break;
         }
