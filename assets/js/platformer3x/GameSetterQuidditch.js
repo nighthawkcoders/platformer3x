@@ -167,7 +167,7 @@ const assets = {
     { name: 'coin', id: 'coin', class: Coin, data: assets.obstacles.snitch, xPercentage: 0.409, yPercentage: 0.7 },
     { name: 'coin', id: 'coin', class: Coin, data: assets.obstacles.snitch, xPercentage: 0.295, yPercentage: 0.46 },
 
-    { name: 'chocoFrog', id: 'chocoFrog', class: ChocoFrog, data: assets.enemies.chocoFrog, xPercentage: 0.25, yPercentage: 0.3 },
+    { name: 'chocoFrog', id: 'chocoFrog', class: ChocoFrog, data: assets.enemies.chocoFrog, xPercentage: 0.30, yPercentage: 0.45},
 
     { name: 'magicBeam', id: 'magicBeam', class: MagicBeam, data: assets.enemies.magicBeam, xPercentage: 0.623, yPercentage: 0.72 },
 
