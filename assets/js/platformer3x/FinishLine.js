@@ -6,7 +6,7 @@ export class FinishLine extends GameObject {
         super(canvas, image, data);
         this.aspect_ratio = image.width / image.height;
         this.x = xPercentage * GameEnv.innerWidth;
-        this.y = yPercentage * GameEnv.bottom;
+        this.y = yPercentage * GameEnv.innerHeight;
         this.scaleSize = data?.scaleSize || 80;
     }
 

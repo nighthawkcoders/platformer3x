@@ -122,7 +122,7 @@ export class PlayerGreece extends PlayerBase {
                 break;
             case "finishline":
                 // Transition to the next level when touching the flag
-                GameControl.transitionToLevel(GameEnv.levels[5]);
+                GameControl.transitionToLevel(GameEnv.levels[6]);
                 break;
             case "cerberus": // Note: Goomba.js and Player.js could be refactored
                 // 1. Player jumps on goomba, interaction with Goomba.js

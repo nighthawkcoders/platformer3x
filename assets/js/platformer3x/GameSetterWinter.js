@@ -7,11 +7,34 @@ import BackgroundTransitions from './BackgroundTransitions.js';
 import BackgroundSnow from './BackgroundSnow.js';
 import Platform from './Platform.js';
 import PlayerWinter from './PlayerWinter.js';
+import PlayerMini from './PlayerMini.js';
+import PlayerMiniHogwarts from './PlayerMiniHogwarts.js';
+import PlayerQuidditch from './PlayerQuidditch.js';
 import BlockPlatform from './BlockPlatform.js';
+import SpawnPlatform from './PlatformSpawn.js';
+import MovingPlatform from './PlatformMoving.js'
+import MagicBeam from './MagicBeam.js';
+import ChocoFrog from './ChocoFrog.js';
 import Coin from './Coin.js';
+import GameControl from './GameControl.js';
 import Owl from './FlyingOwl.js';
 import Snowman from './EnemySnowman.js';
+import Cerberus from './EnemyCerberus.js';
+import PlayerGreece from './PlayerGreece.js';
 import FinishLine from './FinishLine.js';
+import Lava from './Lava.js';
+import Dragon from './FlyingDragon.js';
+import Star from './Star.js';
+import Dementor from './FlyingDementor.js';
+import Draco from './EnemyDraco.js';
+import Boss from './Boss.js';
+import Jellyfish from './FlyingJellyfish.js';
+import Penguin from './EnemyPenguin.js';
+import PlayerIce from './PlayerIce.js';
+import FlyingIsland from './PlatformFlyingIsland.js';
+import PlayerZombie from './PlayerZombie.js';
+import BossItem from './BossItem.js';
+import PlayerBoss from './PlayerBoss.js';
 
 // Define the GameSetup object literal
 const assets = {  
@@ -473,9 +496,9 @@ const assets = {
     { name: 'snowflake', id: 'coin', class: Coin, data: assets.obstacles.snowflake, xPercentage: 0.3136, yPercentage: 0.72 },
     { name: 'owl', id: 'owl', class: Owl, data: assets.enemies.Owl, xPercentage: 0.3, minPosition: 0.05 },
     { name: 'owl', id: 'owl', class: Owl, data: assets.enemies.Owl, xPercentage: 0.8, minPosition: 0.05 },
-    { name: 'snowman', id: 'snowman', class: Snowman, data: assets.enemies.Snowman, xPercentage: 0.2, minPosition: 0.1},
-    { name: 'snowman', id: 'snowman', class: Snowman, data: assets.enemies.Snowman, xPercentage: 0.35, minPosition: 0.1},
-    { name: 'snowman', id: 'snowman', class: Snowman, data: assets.enemies.Snowman, xPercentage: 0.5, minPosition: 0.1},
+    { name: 'snowman', id: 'snowman', class: Snowman, data: assets.enemies.Snowman, xPercentage: 0.2, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
+    { name: 'snowman', id: 'snowman', class: Snowman, data: assets.enemies.Snowman, xPercentage: 0.35, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
+    { name: 'snowman', id: 'snowman', class: Snowman, data: assets.enemies.Snowman, xPercentage: 0.5, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
     { name: 'mario', id: 'player', class: PlayerWinter, data: assets.players.whitemario },
     { name: 'cabin', id: 'finishline', class: FinishLine, data: assets.obstacles.cabin, xPercentage: 0.85, yPercentage: 0.603 },
     { name: 'tubeU', id: 'minifinishline', class: FinishLine, data: assets.obstacles.tubeU, xPercentage: 0.69, yPercentage: 0.71 },
