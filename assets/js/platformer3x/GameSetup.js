@@ -179,27 +179,9 @@ const GameSetup = {
   },
 
   /*  ==========================================
-   *  ========== Game Level init ===============
+   *  ========== Game Level Init ===============
    *  ==========================================
-   * 
-   * Game Level sequence as defined in code below
-   * * a.) tag: "start" level defines button selection and cycles to the home screen
-   * * b.) tag: "home" defines background and awaits "start" button selection and cycles to 1st game level
-   * * c.) tag: "hills" and other levels before the tag: "end" define key gameplay levels
-   * * d.) tag: "end"  concludes levels with game-over-screen background and replay selections
-   * 
-   * Definitions of new Object creations and JSON text
-   * * 1.) "new GameLevel" adds game objects to the game environment.
-   * * * JSON key/value "tag" is for readability
-   * * * JSON "callback" contains function references defined above that terminate a GameLevel
-   * * * JSON "objects" contain zero to many "GameObject"(s)
-   * * 2.) "GameObject"(s) are defined using JSON text and include name, id, class, and data.  
-   * * * JSON key/value "name" is for readability
-   * * * JSON "id" is a GameObject classification and may have program significance
-   * * * JSON "class" is the JavaScript class that defines the GameObject
-   * * J* SON "data" contains assets and properties for the GameObject
   */
-
   initLevels: function (path) {  
     // ensure valid {{site.baseurl}} for path
     this.path = path;
