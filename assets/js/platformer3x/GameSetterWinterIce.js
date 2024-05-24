@@ -156,9 +156,15 @@ const assets = {
     { name: 'iceberg', id: 'finishline', class: FinishLine, data: this.assets.obstacles.iceberg, xPercentage: 0.85, yPercentage: 0.603 },
     { name: 'iceminiEnd', id: 'background', class: BackgroundTransitions, data: this.assets.transitions.iceminiEnd },
   ];
+<<<<<<< HEAD
   // IceMiniGame Game Level added to the GameEnv ...
   new GameLevel({ tag: "icemini", callback: this.playerOffScreenCallBack, objects: iceminiObjects });
   const GameSetterNarwhalBoss = {
+=======
+
+  const GameSetterWinterIce = {
+    tag: 'Winter Ice',
+>>>>>>> 3cb1a45fb64af4842c9355e53f79b1b6a695a006
     assets: assets,
     objects: objects
   };

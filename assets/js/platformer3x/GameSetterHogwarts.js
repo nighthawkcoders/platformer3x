@@ -497,6 +497,7 @@ const assets = {
   ];
 
   const GameHogwarts = {
+    tag: 'Hogwarts',
     assets: assets,
     objects: objects
   };

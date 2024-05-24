@@ -520,6 +520,7 @@ const assets = {
   ];
 
   const GameSetterSkibidi = {
+    tag: 'Skibidi',
     assets: assets,
     objects: skibidiGameObjects
   }
