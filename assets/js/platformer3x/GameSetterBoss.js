@@ -483,6 +483,7 @@ const assets = {
   ];
 
   const GameSetterBoss = {
+    tag: 'Boss',
     assets: assets,
     objects: objects
   };

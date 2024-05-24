@@ -142,6 +142,7 @@ const assets = {
   ];
 
   const GameSetterWater = {
+    tag: 'Water',
     assets: assets,
     objects: objects
   };

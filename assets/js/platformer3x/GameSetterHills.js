@@ -133,6 +133,7 @@ const assets = {
   ];
 
   const GameSetHills = {
+    tag: 'Hills',
     assets: assets,
     objects: objects
   };
