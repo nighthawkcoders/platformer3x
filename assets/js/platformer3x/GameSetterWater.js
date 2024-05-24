@@ -6,7 +6,7 @@ import BackgroundParallax from './BackgroundParallax.js';
 import BackgroundTransitions from './BackgroundTransitions.js';
 import Platform from './Platform.js';
 import BlockPlatform from './BlockPlatform.js';
-import JumpPlatform from './JumpPlatform.js';
+import PlatformJump from './PlatformJump.js';
 import PlayerHills from './PlayerHills.js';
 import Goomba from './EnemyGoomba.js';
 import FlyingGoomba from './FlyingGoomba.js';
@@ -120,7 +120,7 @@ const assets = {
     { name: 'sandblock', id: 'jumpPlatform', class: BlockPlatform, data: assets.platforms.sandblock, xPercentage: 0.2368, yPercentage: 0.85 },
     { name: 'sandblock', id: 'jumpPlatform', class: BlockPlatform, data: assets.platforms.sandblock, xPercentage: 0.2736, yPercentage: 0.85 },
     { name: 'sandblock', id: 'wall', class: BlockPlatform, data: assets.platforms.sandblock, xPercentage: 0.6, yPercentage: 1 },
-    { name: 'itemBlock', id: 'jumpPlatform', class: JumpPlatform, data: assets.platforms.itemBlock, xPercentage: 0.4, yPercentage: 0.65 }, //item block is a platform
+    { name: 'itemBlock', id: 'PlatformJump', class: PlatformJump, data: assets.platforms.itemBlock, xPercentage: 0.4, yPercentage: 0.65 }, //item block is a platform
     { name: 'goomba', id: 'goomba', class: Goomba, data: assets.enemies.goomba, xPercentage: 0.5, yPercentage: 1, minPosition: 0.05 },
     { name: 'goomba', id: 'goomba', class: Goomba, data: assets.enemies.goomba, xPercentage: 0.4, yPercentage: 1, minPosition: 0.05, difficulties: ["normal", "hard", "impossible"] },
     { name: 'goomba', id: 'goomba', class: Goomba, data: assets.enemies.goomba, xPercentage: 0.3, yPercentage: 1, minPosition: 0.05, difficulties: ["normal", "hard", "impossible"] },
