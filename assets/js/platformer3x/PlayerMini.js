@@ -77,18 +77,17 @@ export class PlayerMini extends PlayerBase {
         switch (this.state.collision) {
             case "finishline":
                 // 1. Caught in finishline
-
-                if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
+                if (this.collisionData.touchPoints.this.onTopofOther  || this.state.isFinishing ) {
                     // Position player in the center of the finishline 
                     this.x = this.collisionData.newX;
+                    this.state.movement = { up: false, down: false, left: false, right: false, falling: false};
+                    this.state.isFinishing = true;
+                    this.gravityEnabled = true;
                     // Using natural gravity wait for player to reach floor
                     if (Math.abs(this.y - this.bottom) <= GameEnv.gravity) {
                         // Force end of level condition
-                        //this.x = GameEnv.innerWidth + 1;
-                        GameControl.transitionToLevel(GameEnv.levels[3])
-                        return                    
+                        this.x = GameEnv.innerWidth + 1;
                     }
-
                 // 2. Collision between player right and finishline   
                 } else if (this.collisionData.touchPoints.this.right) {
                     this.state.movement.right = false;
@@ -98,7 +97,6 @@ export class PlayerMini extends PlayerBase {
                     this.state.movement.left = false;
                     this.state.movement.right = true;
                 }
-
                 break;
             case "goomba": // Note: Goomba.js and Player.js could be refactored
                 // 1. Player jumps on goomba, interaction with Goomba.js

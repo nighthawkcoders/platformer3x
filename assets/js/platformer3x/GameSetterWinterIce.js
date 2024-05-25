@@ -31,6 +31,7 @@ import Boss from './Boss.js';
 import Jellyfish from './FlyingJellyfish.js';
 import Penguin from './EnemyPenguin.js';
 import PlayerIce from './PlayerIce.js';
+import NarwhalBoss from './NarwhalBoss.js';
 import FlyingIsland from './PlatformFlyingIsland.js';
 import PlayerZombie from './PlayerZombie.js';
 import BossItem from './BossItem.js';
@@ -69,7 +70,7 @@ const assets = {
       hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 },
       width: 300,
       height: 300,
-      scaleSize: 150,
+      scaleSize: 120,
     },
     chest: {
       src: "/images/platformer/obstacles/Chest.png",
@@ -449,11 +450,11 @@ const assets = {
     },
     narwhalboss: {
       src: "/images/platformer/sprites/narwhal_boss.png",
-      width: 64,
-      height: 64,
-      scaleSize: 320,
-      speedRatio: 0.6,
-      animationSpeed: 6,
+      width: 221, //211 230
+      height: 148,
+      scaleSize: 200,
+      speedRatio: 0.2,
+      animationSpeed: 8,
       idleL: { row: 0, frames: 4, idleFrame: { column: 1, frames: 0 } },
       idleR: { row: 1, frames: 4, idleFrame: { column: 1, frames: 0 } },
       left: { row: 2, frames: 4, idleFrame: { column: 1, frames: 0 } },
@@ -501,9 +502,10 @@ const assets = {
     { name: 'penguin', id: 'penguin', class: Penguin, data: assets.enemies.Penguin, xPercentage: 0.2, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
     { name: 'penguin', id: 'penguin', class: Penguin, data: assets.enemies.Penguin, xPercentage: 0.35, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
     { name: 'penguin', id: 'penguin', class: Penguin, data: assets.enemies.Penguin, xPercentage: 0.5, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
+    { name: 'narwhalboss', id: 'narwhalboss', class: NarwhalBoss, data: assets.enemies.narwhalboss, xPercentage: 0.5, minPosition: 0.3 },
     { name: 'mario', id: 'player', class: PlayerIce, data: assets.players.whitemario },
-    { name: 'tubeD', id: 'finishline', class: FinishLine, data: assets.obstacles.tubeD, xPercentage: 0, yPercentage: 0.052 },
-    { name: 'iceberg', id: 'finishline', class: FinishLine, data: assets.obstacles.iceberg, xPercentage: 0.85, yPercentage: 0.603 },
+    { name: 'tubeD', id: 'finishline', class: FinishLine, data: assets.obstacles.tubeD, xPercentage: 0, yPercentage: 0.0685 },
+    { name: 'iceberg', id: 'finishline', class: FinishLine, data: assets.obstacles.iceberg, xPercentage: 0.85, yPercentage: 0.82 },
     { name: 'winterEnd', id: 'background', class: BackgroundTransitions, data: assets.transitions.winterEnd },
   ];
 
