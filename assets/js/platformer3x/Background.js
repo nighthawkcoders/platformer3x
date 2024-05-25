@@ -7,6 +7,10 @@ export class Background extends GameObject {
     constructor(canvas, image, data) {
         super(canvas, image, data);
 
+        if (isNaN(GameEnv.innerWidth) || isNaN(GameEnv.innerHeight)) {
+            GameEnv.initialize();
+        }
+
         this.canvasWidth = GameEnv.innerWidth;
         
         if (this.canvasWidth > GameEnv.innerHeight) {
@@ -60,24 +64,16 @@ export class Background extends GameObject {
     
     
 
-    /* Background camvas is set to screen
-     * the ADJUST contant elements portions of image that don't wrap well
-     * the GameEnv.top is a getter used to set canvas under Menu
-     * the GameEnv.bottom is setter used to establish game bottom at offsetHeight of canvas 
+    /* Background camvas is set to screen sizes
     */ 
     size() {
         // Update canvas size
-        const ADJUST = 1 // visual layer adjust; alien_planet.jpg: 1.42, try 1 for others
-
-        // const canvasHeight = canvasWidth / this.aspect_ratio
-        const canvasHeight = this.canvasHeight;
-        const canvasWidth = this.canvasWidth;
-        GameEnv.backgroundHeight = canvasHeight;
         const canvasLeft = 0;
+        GameEnv.backgroundHeight = this.canvasHeight;
 
         this.canvas.width = this.width;
         this.canvas.height = this.height;
-        this.canvas.style.width = `${canvasWidth}px`;
+        this.canvas.style.width = `${this.canvasWidth}px`;
         this.canvas.style.height = `${GameEnv.backgroundHeight}px`;
         this.canvas.style.position = 'absolute';
         this.canvas.style.left = `${canvasLeft}px`;
