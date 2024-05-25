@@ -62,14 +62,14 @@ const assets = {
       hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 },
       width: 300,
       height: 300,
-      scaleSize: 100,
+      scaleSize: 150,
     },
     iceberg: {
       src: "/images/platformer/obstacles/iceberg.png",
       hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 },
       width: 300,
       height: 300,
-      scaleSize: 150,
+      scaleSize: 120,
     },
     chest: {
       src: "/images/platformer/obstacles/Chest.png",
@@ -500,8 +500,8 @@ const assets = {
     { name: 'snowman', id: 'snowman', class: Snowman, data: assets.enemies.Snowman, xPercentage: 0.35, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
     { name: 'snowman', id: 'snowman', class: Snowman, data: assets.enemies.Snowman, xPercentage: 0.5, minPosition: 0.1, difficulties: ["normal", "hard", "impossible"] },
     { name: 'mario', id: 'player', class: PlayerWinter, data: assets.players.whitemario },
-    { name: 'cabin', id: 'finishline', class: FinishLine, data: assets.obstacles.cabin, xPercentage: 0.85, yPercentage: 0.603 },
-    { name: 'tubeU', id: 'minifinishline', class: FinishLine, data: assets.obstacles.tubeU, xPercentage: 0.69, yPercentage: 0.71 },
+    { name: 'cabin', id: 'finishline', class: FinishLine, data: assets.obstacles.cabin, xPercentage: 0.85, yPercentage: 0.795 },
+    { name: 'tubeU', id: 'minifinishline', class: FinishLine, data: assets.obstacles.tubeU, xPercentage: 0.675, yPercentage: 0.9 },
     { name: 'quidditchEnd', id: 'background', class: BackgroundTransitions, data: assets.transitions.quidditchEnd },
   ];
 

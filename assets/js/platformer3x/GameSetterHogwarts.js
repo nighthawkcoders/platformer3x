@@ -519,8 +519,8 @@ const assets = {
     
 
     { name: 'harry', id: 'player', class: PlayerMiniHogwarts, data: assets.players.harry },
-    { name: 'tubeD', id: 'finishline', class: FinishLine, data: assets.obstacles.tubeD, xPercentage: 0, yPercentage: 0.052 },
-    { name: 'tubeU', id: 'minifinishline', class: FinishLine, data: assets.obstacles.tubeU, xPercentage: 0.85, yPercentage: 0.7 },
+    { name: 'tubeD', id: 'finishline', class: FinishLine, data: assets.obstacles.tubeD, xPercentage: 0, yPercentage: 0.0685 },
+    { name: 'tubeU', id: 'minifinishline', class: FinishLine, data: assets.obstacles.tubeU, xPercentage: 0.85, yPercentage: 0.85 },
   ];
 
   const GameHogwarts = {
