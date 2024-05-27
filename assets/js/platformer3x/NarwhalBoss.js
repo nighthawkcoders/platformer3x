@@ -34,7 +34,7 @@ export class NarwhalBoss extends Enemy {
             }
         }
         else if(this.state.isDying && this.state.animation == "death"){
-            this.animationSpeed = 50;
+            this.animationSpeed = 20;
             if (this.frameX < this.maxFrame) {
                 if(this.counter > 0){
                     this.frameX = this.frameX; 
