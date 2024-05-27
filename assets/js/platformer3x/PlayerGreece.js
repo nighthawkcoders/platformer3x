@@ -1,6 +1,7 @@
 import GameEnv from './GameEnv.js';
 import PlayerBase from './PlayerBase.js';
 import GameControl from './GameControl.js';
+import hpBar from './hpBar.js';
 /**
  * @class PlayerHills class
  * @description PlayerHills.js key objective is to eent the user-controlled character in the game.
@@ -26,10 +27,7 @@ export class PlayerGreece extends PlayerBase {
         //Hp Bar
         this.maxHp = 99; // Maximum health points
         this.currentHp = 99; // Current health points
-        this.hpBar = document.createElement("canvas");
-        this.hpBar.width = 100;
-        this.hpBar.height = 15;
-        document.querySelector("#canvasContainer").appendChild(this.hpBar);
+        this.hpBar = new hpBar(100, 15, this.canvasWidth, this.canvasHeight, this.maxHp, this.currentHp, this.x, this.y)
     }
     /**
      * @override
@@ -46,29 +44,7 @@ export class PlayerGreece extends PlayerBase {
         }
         this.setY(this.y - (this.bottom * jumpHeightFactor));
     }
-    drawHpBox() { //Hp box
-        // Position and size of the health bar
-        const hpBarWidth = this.hpBar.width; // The width of the health bar matches the boss's width
-        const hpBarHeight = this.hpBar.height; // A fixed height for the health bar
-        const hpBarX = (this.x + this.canvasWidth/2 - this.hpBar.width/2); // Position above the boss
-        const hpBarY = this.y - this.canvasHeight/40; // 20 pixels above the boss
-        this.hpBar.id = "hpBar";
-        // Calculate health percentage
-        const hpPercentage = this.currentHp / this.maxHp;
-        // Draw the background (gray)
-        this.hpBar.getContext('2d').fillStyle = 'gray';
-        this.hpBar.getContext('2d').fillRect(0, 0, hpBarWidth, hpBarHeight);
-        // Draw the health bar (green, based on current health)
-        this.hpBar.getContext('2d').fillStyle = 'green';
-        this.hpBar.getContext('2d').fillRect(0, 0, hpBarWidth * hpPercentage, hpBarHeight);
-        this.hpBar.style.position = 'absolute';  //code from Flag.js, define the style of the Hp Bar
-        this.hpBar.style.left = `${hpBarX}px`;
-        this.hpBar.style.top = `${hpBarY}px`;
-        this.hpBar.style.borderRadius = '5px';
-        this.hpBar.style.width = `${hpBarWidth}px`;
-        this.hpBar.style.height = `${hpBarHeight}px`;
-        this.hpBar.style.border = '2px solid black';
-      }
+
     /**
      * @override
      * gameLoop: Watch for Player collision events
@@ -86,7 +62,7 @@ export class PlayerGreece extends PlayerBase {
         // player methods
         this.updateAnimation();
         this.updateMovement();
-        this.drawHpBox();
+        this.hpBar.updateHpBar(this.currentHp, this.x, this.y, this.canvasWidth, this.canvasHeight)
         // super actions need to be after; this is to preserve player order of operations
         super.update();
     }
@@ -159,9 +135,11 @@ export class PlayerGreece extends PlayerBase {
                 if (this.collisionData.touchPoints.other.id === "lava") {
                     if (GameEnv.difficulty === "normal" || GameEnv.difficulty === "hard") {
                         if (this.state.isDying == false) {
-                            if(this.currentHp == 33){
-                                this.currentHp -= 33;
-                                this.drawHpBox();
+                            this.setY(this.y - (this.bottom * 0.6));
+                            this.currentHp -= 33;
+                            this.hpBar.updateHpBar(this.currentHp, this.x, this.y, this.canvasWidth, this.canvasHeight)
+                            if(this.currentHp == 0){
+                                this.hpBar.updateHpBar(this.currentHp, this.x, this.y, this.canvasWidth, this.canvasHeight)
                                 this.state.isDying = true;
                                 this.canvas.style.transition = "transform 0.5s";
                                 this.canvas.style.transform = "rotate(-90deg) translate(-26px, 0%)";
@@ -169,9 +147,6 @@ export class PlayerGreece extends PlayerBase {
                                 setTimeout(async() => {
                                     await GameControl.transitionToLevel(GameEnv.levels[GameEnv.levels.indexOf(GameEnv.currentLevel)]);
                                 }, 900);
-                            } else{
-                                this.setY(this.y - (this.bottom * 0.6));
-                                this.currentHp -= 33;
                             }
                         }
                     } else if (GameEnv.difficulty === "easy" && this.collisionData.touchPoints.this.right) {
