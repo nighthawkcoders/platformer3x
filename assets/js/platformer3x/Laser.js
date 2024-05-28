@@ -33,7 +33,7 @@ export class Laser extends Character {
     size() {
         // Update canvas size
        
-        this.canvas.width = this.width*2;
+        this.canvas.width = this.width;
         this.canvas.height = this.height;
         this.canvas.style.position = 'absolute';
         this.canvas.style.left = `20px`;
