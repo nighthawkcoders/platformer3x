@@ -22,7 +22,7 @@ export class Laser extends Character {
     */
     draw() {
         this.ctx.drawImage(this.image, this.x, this.y);
-        this.ctx.drawImage(this.image, this.x + this.width, this.y);
+        this.ctx.drawImage(this.image, this.x + this.width*GameEnv.innerWidth, this.y);
     }
 
     /* Background camvas is set to screen

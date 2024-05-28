@@ -38,7 +38,10 @@ const assets = {
       },
       laser: {
         src: "/images/platformer/obstacles/laser.png",
-        hitbox: { widthPercentage: 0.06, heightPercentage: 0.5}
+        hitbox: { widthPercentage: 0.06, heightPercentage: 0.5},
+        width: 60,
+        height: 500,
+        scaleSize: 100
       },
       cabin: {
         src: "/images/platformer/obstacles/cabin.png",
