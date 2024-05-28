@@ -67,6 +67,10 @@ export class PlayerBase extends Character {
         // Add event listeners
         document.addEventListener('keydown', this.keydownListener);
         document.addEventListener('keyup', this.keyupListener);
+
+        // Velocity
+        this.xv = 0;
+        this.yv = 0;
     }
 
     /**
@@ -101,11 +105,6 @@ export class PlayerBase extends Character {
     /**
      * gameLoop helper: Udate Player jump height
      */
-    updateJump() {
-        // Jump height is 35% of the screen bottom, same as screen height
-        this.setY(this.y - (this.bottom * 0.35)); 
-    }
-
     /**
      * gameLoop: updates the player's movement based on the player's animation (idle, walk, run, jump, etc.)
      */ 
@@ -118,7 +117,7 @@ export class PlayerBase extends Character {
                 if (this.state.movement.up && !this.state.movement.falling) {
                     // jump
                     GameEnv.playSound("PlayerJump");
-                    this.updateJump();
+                    this.yv = GameEnv.bottom * -0.06;
                     // start falling
                     this.state.movement.falling = true;
                 }
@@ -127,15 +126,33 @@ export class PlayerBase extends Character {
                 // Player is moving left
                 if (this.state.direction === 'left' && this.state.movement.left && 'a' in this.pressedKeys) {
                     // Decrease the player's x position according to run or walk animation and related speed
-                    this.setX(this.x - (this.state.animation === 'run' ? this.runSpeed : this.speed));
+                    if (this.state.animation === 'run') {
+                        this.xv -= this.runSpeed;
+                    } else {
+                        this.xv -= this.speed;
+                    }
                 // Player is moving right
                 } else if (this.state.direction === 'right' && this.state.movement.right && 'd' in this.pressedKeys){
                     // Increase the player's x position according to run or walk animation and related speed
-                    this.setX(this.x + (this.state.animation === 'run' ? this.runSpeed : this.speed));
+                    if (this.state.animation === 'run') {
+                        this.xv += this.runSpeed;
+                    } else {
+                        this.xv += this.speed;
+                    }
                 }
         }
-        GameEnv.PlayerPosition.playerX = this.x
-        GameEnv.PlayerPosition.playerY = this.y
+
+        // Update X
+        this.xv *= 0.8;
+        this.x += this.xv;
+        this.setX(this.x);
+        
+        // Update Y
+        this.y += this.yv;
+        this.setY(this.y);
+
+        GameEnv.PlayerPosition.playerX = this.x;
+        GameEnv.PlayerPosition.playerY = this.y;
         
     }
 
@@ -333,16 +350,20 @@ export class PlayerBase extends Character {
                 if (this.collisionData.touchPoints.this.onTopofOther) {
                     this.state.movement = { up: false, down: false, left: true, right: true, falling: false};
                     this.gravityEnabled = false;
+                    this.yv = 0;
+                    this.y -= 1;
 
                 // Player is touching the wall with right side
                 } else if (this.collisionData.touchPoints.this.right) {
                     this.state.movement = { up: false, down: false, left: true, right: false, falling: false};
-                    this.y -= 4;
+                    this.x -= this.xv;
+                    this.xv *= -1;
                 
                 // Player is touching the wall with left side
                 } else if (this.collisionData.touchPoints.this.left) {
                     this.state.movement = { up: false, down: false, left: false, right: true, falling: false};
-                    this.y -= 4;
+                    this.x -= this.xv;
+                    this.xv *= -1.5;
                 }
                 break;
                
@@ -352,12 +373,18 @@ export class PlayerBase extends Character {
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
                     this.state.movement = { up: false, down: false, left: true, right: true, falling: false};
                     this.gravityEnabled = false;
+                    this.yv = 0;
+                    this.y -= 1;
                 // Player is touching the wall with right side
                 } else if (this.collisionData.touchPoints.this.right) {
                     this.state.movement = { up: false, down: false, left: true, right: false, falling: false};
+                    this.x -= this.xv;
+                    this.xv *= -1;
                 // Player is touching the wall with left side
                 } else if (this.collisionData.touchPoints.this.left) {
                     this.state.movement = { up: false, down: false, left: false, right: true, falling: false};
+                    this.x -= this.xv;
+                    this.xv *= -1;
                 }
                 break;
 

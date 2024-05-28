@@ -21,6 +21,9 @@ class Character extends GameObject {
         // gravity for character enabled by default
         this.gravityEnabled = true;
         this.onTop = false;
+
+        // Velocity
+        this.yv = 0;
     }
 
     setSpriteAnimation(animation) {
@@ -133,12 +136,20 @@ class Character extends GameObject {
     /**
      * Update the y posiion and update y related states
      */
+    colY() {
+        while(!this.bottom > this.y && this.gravityEnabled) {
+            this.y += 1;
+        }
+    }
+
     updateY() {
         if (this.bottom > this.y && this.gravityEnabled) {
-            this.y += GameEnv.gravity;
+            this.yv += GameEnv.gravity;
             this.onTop = false;
         } else {
             this.onTop = true;
+            this.yv = 0;
+            this.colY();
         }
     }
 
