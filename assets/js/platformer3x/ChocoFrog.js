@@ -1,6 +1,5 @@
 import Character from './Character.js';
 import GameEnv from './GameEnv.js';
-import GameControl from './GameControl.js';
 
 export class ChocoFrog extends Character {
     // constructors sets up Character object 
@@ -9,16 +8,22 @@ export class ChocoFrog extends Character {
 
         //Unused but must be Defined
         this.name = name;
-        this.y = yPercentage;
 
         //Initial Position 
         this.x = xPercentage * GameEnv.innerWidth;
+        this.yPercentage = yPercentage;
 
+        // Calculate initial Y position
+        this.y = GameEnv.bottom * this.yPercentage;
+        this.canvas.style.top = `${this.y}px`;
 
         this.minPosition = minPosition * GameEnv.innerWidth;
         this.maxPosition = this.x + xPercentage * GameEnv.innerWidth;
 
         this.immune = 0;
+        GameEnv.destroyedChocoFrog = false;
+
+
     }
 
     update() {
@@ -27,78 +32,61 @@ export class ChocoFrog extends Character {
         // Check for boundaries
         if (this.x <= this.minPosition || (this.x + this.canvasWidth >= this.maxPosition)) {
             this.speed = -this.speed;
-        };
-
-        // Random Event 2
-        if (GameControl.randomEventId === 2 && GameControl.randomEventState === 1) {
-            this.speed = 0;
-            if (this.name === "goombaSpecial") {
-                GameControl.endRandomEvent();
-            };
-        };
-
-
-
-        if (GameControl.randomEventId === 3 && GameControl.randomEventState === 1) {
-            this.destroy();
-            GameControl.endRandomEvent();
-        };
-
-
-        // Chance for Mushroom to turn Gold
-        if (["normal", "hard"].includes(GameEnv.difficulty)) {
-            if (Math.random() < 0.00001) {
-                this.canvas.style.filter = 'brightness(1000%)';
-                this.immune = 1;
-            }
         }
-
-        // Immunize & Texture It
-        if (GameEnv.difficulty === "hard") {
-            this.canvas.style.filter = "invert(100%)";
-            this.canvas.style.scale = 1.25;
-            this.immune = 1;
-        } else if (GameEnv.difficulty === "impossible") {
-            this.canvas.style.filter = 'brightness(1000%)';
-            this.immune = 1;
-        }
-
-        // Remove the line that updates the x position based on speed
-        // this.x -= this.speed;
-
         this.playerBottomCollision = false;
+
+        this.y = GameEnv.bottom * this.yPercentage;
+        this.canvas.style.top = `${this.y}px`;
     }
 
+    explode() {
+        const shards = 3; // reduced number of shards
+        for (let i = 0; i < shards; i++) {
+            const shard = document.createElement('div');
+            shard.style.position = 'absolute';
+            shard.style.width = '5px';
+            shard.style.height = '5px';
+            shard.style.backgroundColor = '#8B4513'; 
+            shard.style.left = `${this.x}px`;
+            shard.style.top = `${this.y}px`;
+            this.canvas.parentElement.appendChild(shard); 
+    
+            const angle = Math.random() * 2 * Math.PI;
+            const speed = Math.random() * 5 + 2;
+    
+            const shardX = Math.cos(angle) * speed;
+            const shardY = Math.sin(angle) * speed;
+    
+            shard.animate([
+                { transform: 'translate(0, 0)', opacity: 1 },
+                { transform: `translate(${shardX * 20}px, ${shardY * 20}px)`, opacity: 0 }
+            ], {
+                duration: 1000,
+                easing: 'ease-out',
+                fill: 'forwards'
+            });
+    
+            setTimeout(() => {
+                shard.remove();
+            }, 1000);
+        }
+        this.canvas.style.opacity = 0;
+    }
+    
 
     // Player action on collisions
     collisionAction() {
-        if (this.collisionData.touchPoints.other.id === "tube") {
-            if (this.collisionData.touchPoints.other.left || this.collisionData.touchPoints.other.right) {
-                this.speed = -this.speed;            
-            }
-        }
-
         if (this.collisionData.touchPoints.other.id === "player") {
-            // Collision: Top of Goomba with Bottom of Player
-            //console.log(this.collisionData.touchPoints.other.bottom + 'bottom')
-            //console.log(this.collisionData.touchPoints.other.top + "top")
-            //console.log(this.collisionData.touchPoints.other.right + "right")
-            //console.log(this.collisionData.touchPoints.other.left + "left")
             if (this.collisionData.touchPoints.other.bottom && this.immune == 0) {
                 GameEnv.invincible = true;
                 GameEnv.goombaBounce1 = true;
-                this.canvas.style.transition = "transform 1.5s, opacity 1s";
-                this.canvas.style.transition = "transform 2s, opacity 1s";
-                this.canvas.style.transformOrigin = "bottom"; 
-                this.canvas.style.transform = "scaleY(0)"; 
-                this.speed = 0;
-                GameEnv.playSound("Mushroom");
-
+                this.explode()
+               
                 setTimeout((function() {
                     GameEnv.invincible = false;
                     this.destroy();
                     GameEnv.destroyedChocoFrog = true;
-                }).bind(this), 1500);
+                }).bind(this), 500);
             }
 
         }

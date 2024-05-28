@@ -6,7 +6,7 @@ import BackgroundParallax from './BackgroundParallax.js';
 import BackgroundTransitions from './BackgroundTransitions.js';
 import Platform from './Platform.js';
 import BlockPlatform from './BlockPlatform.js';
-import JumpPlatform from './JumpPlatform.js';
+import JumpPlatform from './PlatformJump.js';
 import PlayerHills from './PlayerHills.js';
 import Goomba from './EnemyGoomba.js';
 import FlyingGoomba from './FlyingGoomba.js';
