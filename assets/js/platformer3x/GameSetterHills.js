@@ -4,15 +4,15 @@ import GameSet from './GameSet.js';
 import BackgroundParallax from './BackgroundParallax.js';
 import BackgroundTransitions from './BackgroundTransitions.js';
 import Platform from './Platform.js';
-import JumpPlatform from './JumpPlatform.js';
+import JumpPlatform from './PlatformJump.js';
 import PlayerHills from './PlayerHills.js';
 import Goomba from './EnemyGoomba.js';
 import FlyingGoomba from './FlyingGoomba.js';
-import SpawnPlatform from './PlatformSpawn.js';
 import MovingPlatform from './PlatformMoving.js'
 import Mushroom from './Mushroom.js';
 import Coin from './Coin.js';
 import FinishLine from './FinishLine.js';
+import BlockPlatform from './BlockPlatform.js';
 
 // Define the GameSetup object literal
 const assets = {  
@@ -107,10 +107,10 @@ const assets = {
     { name: 'clouds', id: 'background', class: BackgroundParallax, data: assets.backgrounds.clouds },
     { name: 'hills', id: 'background', class: BackgroundParallax, data: assets.backgrounds.hills },
     { name: 'grass', id: 'floor', class: Platform, data: assets.platforms.grass },
-    { name: 'blocks', id: 'jumpPlatform', class: MovingPlatform, data: assets.platforms.block, xPercentage: 0.2, yPercentage: 0.85 },
-    { name: 'blocks', id: 'jumpPlatform', class: MovingPlatform, data: assets.platforms.block, xPercentage: 0.2368, yPercentage: 0.85 },
-    { name: 'blocks', id: 'jumpPlatform', class: MovingPlatform, data: assets.platforms.block, xPercentage: 0.2736, yPercentage: 0.85 },
-    { name: 'blocks', id: 'wall', class: SpawnPlatform, data: assets.platforms.block, xPercentage: 0.6, yPercentage: 1 },
+    { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: assets.platforms.block, xPercentage: 0.2, yPercentage: 0.85 },
+    { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: assets.platforms.block, xPercentage: 0.2368, yPercentage: 0.85 },
+    { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: assets.platforms.block, xPercentage: 0.2736, yPercentage: 0.85 },
+    { name: 'blocks', id: 'wall', class: BlockPlatform, data: assets.platforms.block, xPercentage: 0.6, yPercentage: 1 },
     { name: 'itemBlock', id: 'jumpPlatform', class: JumpPlatform, data: assets.platforms.itemBlock, xPercentage: 0.4, yPercentage: 0.65 }, //item block is a platform
     { name: 'goomba', id: 'goomba', class: Goomba, data: assets.enemies.goomba, xPercentage: 0.5, yPercentage: 1, minPosition: 0.05 },
     { name: 'goomba', id: 'goomba', class: Goomba, data: assets.enemies.goomba, xPercentage: 0.4, yPercentage: 1, minPosition: 0.05, difficulties: ["normal", "hard", "impossible"] },
