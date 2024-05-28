@@ -57,8 +57,6 @@ export class PlayerBoss extends PlayerBase {
  */
     update() {
         super.update(); // calls the super class method
-        GameEnv.x = this.x;
-        GameEnv.y = this.y;
     }
     /**
 * @override
