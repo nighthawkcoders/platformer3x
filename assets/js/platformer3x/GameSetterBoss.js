@@ -109,6 +109,7 @@ const assets = {
       attackL: { row: 13, frames: 5 },
       attackR: { row: 15, frames: 5 },
       death: { row: 20, frames: 5 },
+      hitbox: { widthPercentage: 0.3, heightPercentage: 0.8 }
     },
   }
   };
