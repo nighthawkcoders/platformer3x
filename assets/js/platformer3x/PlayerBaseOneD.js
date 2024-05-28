@@ -134,6 +134,8 @@ export class PlayerBaseOneD extends Character {
                     // Increase the player's x position according to run or walk animation and related speed
                     this.setX(this.x + (this.state.animation === 'run' ? this.runSpeed : this.speed));
                 }
+                GameEnv.PlayerPosition.playerX = this.x
+                GameEnv.PlayerPosition.playerY = this.y
         }
     }
 
