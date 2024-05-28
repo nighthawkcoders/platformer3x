@@ -8,6 +8,7 @@ import Laser from './Laser.js';
 import SkibidiToilet from './SkibidiToilet.js';
 import PlayerSkibidi from './PlayerSkibidi.js';
 import FinishLine from './FinishLine.js';
+import PlayerBaseOneD from './PlayerBaseOneD.js';
 
 const assets = {
     obstacles: {
@@ -176,24 +177,12 @@ const assets = {
         height: 140,
         scaleSize: 150,
         speedRatio: 0.7,
-        animationSpeed: 8,
+        animationSpeed: 4,
         ///animationspeed:6
-        idle: {
-            left: { row: 0, frames: 5 },
-            right: { row: 0, frames: 5},
-        },
-        walk: {
-            left: { row: 1, frames: 6 },
-            right: { row: 1, frames: 6 },
-        },
-        run: {
-            left: { row: 2, frames: 7 },
-            right: { row: 2, frames: 7 },
-        },
-        jump: {
-            left: { row: 3, frames: 8 },
-            right: { row: 3, frames: 8 },
-        },
+        idle: {row: 0, frames: 5 },
+        walk: {  row: 1, frames: 6 },
+        run: {  row: 2, frames: 7 },
+        jump: {row: 3, frames: 8 },
         hitbox: { widthPercentage: 0.3, heightPercentage: 0.8 }
       },
       whitemario: {

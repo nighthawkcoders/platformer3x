@@ -9,7 +9,6 @@ image: /images/platformer/backgrounds/home.png
 
 <!-- DOM Settings Panel (sidebar id and div), managed by SettingsContro.js -->
 <div id="sidebar" class="sidebar" style="z-index: 9999">
-    <a href="javascript:void(0)" id="sidebar-header">&times; Settings</a>
   </div>
   <div id="leaderboardDropDown" class="leaderboardDropDown" style="z-index: 9999">
     <!-- <a href="javascript:void(0)" id="leaderboard-header">&times; Leaderboard</a> -->
@@ -130,7 +129,7 @@ image: /images/platformer/backgrounds/home.png
       */
   
       // Construct settings sidebar, MVC variable paradigm, and async events to trigger user interaction
-      SettingsControl.sidebar();
+      SettingsControl.initialize();
       Leaderboard.initializeLeaderboard();
       startCutstory();
       RandomEvent();
