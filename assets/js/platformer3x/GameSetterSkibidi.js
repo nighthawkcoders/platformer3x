@@ -177,7 +177,7 @@ const assets = {
         height: 140,
         scaleSize: 150,
         speedRatio: 0.7,
-        animationSpeed: 3,
+        animationSpeed: 4,
         ///animationspeed:6
         idle: {row: 0, frames: 5 },
         walk: {  row: 1, frames: 6 },
