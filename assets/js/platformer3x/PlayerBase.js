@@ -26,6 +26,7 @@ export class PlayerBase extends Character {
      * @property {boolean} movement.right - Whether the player can move right.
      * @property {boolean} movement.falling - Whether the player is falling.
      * @property {boolean} isDying - Whether the player is dying.
+     * @property {boolean} isFinishing - Whether the player is on the finishline.
      */
 
     // This object represents the initial state of the player when the game starts.
@@ -38,6 +39,7 @@ export class PlayerBase extends Character {
         direction: 'right',
         movement: {up: false, down: false, left: true, right: true, falling: false},
         isDying: false,
+        isFinishing: false,
     };
 
     /** GameObject: Constructor for Player object

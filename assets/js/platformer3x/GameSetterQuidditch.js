@@ -525,8 +525,8 @@ const assets = {
     { name: 'coin', id: 'coin', class: Coin, data: assets.obstacles.snitch, xPercentage: 0.700, yPercentage: 0.46 },
 
     { name: 'harry', id: 'player', class: PlayerQuidditch, data: assets.players.harry },
-    { name: 'tube', id: 'finishline', class: FinishLine, data: assets.obstacles.tube, xPercentage: 0.85, yPercentage: 0.7 },
-    { name: 'tubeU', id: 'minifinishline', class: FinishLine, data: assets.obstacles.tubeU, xPercentage: 0.69, yPercentage: 0.71 },
+    { name: 'tube', id: 'finishline', class: FinishLine, data: assets.obstacles.tube, xPercentage: 0.85, yPercentage: 0.855 },
+    { name: 'tubeU', id: 'minifinishline', class: FinishLine, data: assets.obstacles.tubeU, xPercentage: 0.69, yPercentage: 0.9 },
     { name: 'waterEnd', id: 'background', class: BackgroundTransitions,  data: assets.transitions.waterEnd },
   ];
 
