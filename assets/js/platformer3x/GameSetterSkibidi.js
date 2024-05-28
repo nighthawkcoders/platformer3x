@@ -9,8 +9,6 @@ import SkibidiToilet from './SkibidiToilet.js';
 import PlayerSkibidi from './PlayerSkibidi.js';
 import FinishLine from './FinishLine.js';
 import PlayerBaseOneD from './PlayerBaseOneD.js';
-import Tree from './Tree.js';
-
 
 const assets = {
     obstacles: {
