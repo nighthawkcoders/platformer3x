@@ -24,6 +24,8 @@ export class PlayerSkibidi extends PlayerBaseOneD { /// Using PlayerBaseOneD add
     constructor(canvas, image, data) {
         super(canvas, image, data);
 
+        this.animationSpeed = data?.animationSpeed;
+        this.counter = this.animationSpeed;
         // Goomba variables, deprecate?
         this.timer = false;
         GameEnv.invincible = false; // Player is not invincible 
@@ -45,6 +47,21 @@ export class PlayerSkibidi extends PlayerBaseOneD { /// Using PlayerBaseOneD add
         this.setY(this.y - (this.bottom * jumpHeightFactor));
     }
 
+    updateFrameX(){
+        if (this.frameX < this.maxFrame) {
+            if(this.counter > 0){
+                this.frameX = this.frameX;
+                this.counter--;
+            }
+            else{
+                this.frameX++;
+                this.counter = this.animationSpeed;
+            }
+        } else {
+            this.frameX = this.minFrame;
+        }
+    }
+
     /**
      * @override
      * gameLoop: Watch for Player collision events 
@@ -57,6 +74,7 @@ export class PlayerSkibidi extends PlayerBaseOneD { /// Using PlayerBaseOneD add
         this.handleCollisionEvent("laser");
     }
    
+    
     /**
      * @override
      * gameloop: Handles additional Player reaction / state updates to the collision for game level 

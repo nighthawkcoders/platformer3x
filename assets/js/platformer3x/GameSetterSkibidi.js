@@ -10,6 +10,7 @@ import PlayerSkibidi from './PlayerSkibidi.js';
 import PlayerBaseOneD from './PlayerBaseOneD.js';
 import Tree from './Tree.js';
 
+
 const assets = {
     obstacles: {
       tube: { 
