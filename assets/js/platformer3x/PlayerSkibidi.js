@@ -1,6 +1,7 @@
 import GameEnv from './GameEnv.js';
 import PlayerBase from './PlayerBase.js';
 import GameControl from './GameControl.js';
+import PlayerBaseOneD from './PlayerBaseOneD.js'; ///With this you can change the direction of the sprite sheet with just the sprite rows.
 
 /**
  * @class PlayerSkibidi class
@@ -12,7 +13,7 @@ import GameControl from './GameControl.js';
  * 
  * @extends PlayerBase 
  */
-export class PlayerSkibidi extends PlayerBase {
+export class PlayerSkibidi extends PlayerBaseOneD { /// Using PlayerBaseOneD added the sprite mirror but deleted the sprite not showing the animations
 
     /** GameObject instantiation: constructor for PlayerSkibidi object
      * @extends Character 
@@ -23,6 +24,8 @@ export class PlayerSkibidi extends PlayerBase {
     constructor(canvas, image, data) {
         super(canvas, image, data);
 
+        this.animationSpeed = data?.animationSpeed;
+        this.counter = this.animationSpeed;
         // Goomba variables, deprecate?
         this.timer = false;
         GameEnv.invincible = false; // Player is not invincible 
@@ -44,6 +47,21 @@ export class PlayerSkibidi extends PlayerBase {
         this.setY(this.y - (this.bottom * jumpHeightFactor));
     }
 
+    updateFrameX(){
+        if (this.frameX < this.maxFrame) {
+            if(this.counter > 0){
+                this.frameX = this.frameX;
+                this.counter--;
+            }
+            else{
+                this.frameX++;
+                this.counter = this.animationSpeed;
+            }
+        } else {
+            this.frameX = this.minFrame;
+        }
+    }
+
     /**
      * @override
      * gameLoop: Watch for Player collision events 
@@ -56,6 +74,7 @@ export class PlayerSkibidi extends PlayerBase {
         this.handleCollisionEvent("laser");
     }
    
+    
     /**
      * @override
      * gameloop: Handles additional Player reaction / state updates to the collision for game level 
