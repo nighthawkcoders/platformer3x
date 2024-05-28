@@ -56,7 +56,6 @@ export class PlayerHills extends PlayerBase {
         this.handleCollisionEvent("goomba");
         this.handleCollisionEvent("mushroom");
         this.handleCollisionEvent("boss");
-        this.handleCollisionEvent("narwhalboss");
     }
    
     /**
@@ -69,9 +68,12 @@ export class PlayerHills extends PlayerBase {
         switch (this.state.collision) {
             case "finishline":
                 // 1. Caught in finishline
-                if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
+                if (this.collisionData.touchPoints.this.onTopofOther  || this.state.isFinishing ) {
                     // Position player in the center of the finishline 
                     this.x = this.collisionData.newX;
+                    this.state.movement = { up: false, down: false, left: false, right: false, falling: false};
+                    this.state.isFinishing = true;
+                    this.gravityEnabled = true;
                     // Using natural gravity wait for player to reach floor
                     if (Math.abs(this.y - this.bottom) <= GameEnv.gravity) {
                         // Force end of level condition

@@ -7,6 +7,7 @@ import skibidiTitan from './SkibidiTitan.js';
 import Laser from './Laser.js';
 import SkibidiToilet from './SkibidiToilet.js';
 import PlayerSkibidi from './PlayerSkibidi.js';
+import FinishLine from './FinishLine.js';
 import PlayerBaseOneD from './PlayerBaseOneD.js';
 import Tree from './Tree.js';
 
@@ -34,9 +35,12 @@ const assets = {
         height: 300,
         scaleSize: 100,
       },
-      toilet: { 
+      toiletfinish: {
         src: "/images/platformer/obstacles/toilet.png",
-        hitbox: { widthPercentage: 0.5, heightPercentage: 0.5}
+        hitbox: { widthPercentage: 0.5, heightPercentage: 0.5 },
+        width: 500,
+        height: 500,
+        scaleSize: 150,
       },
       laser: {
         src: "/images/platformer/obstacles/laser.png",
@@ -505,7 +509,7 @@ const assets = {
     { name: 'SkibidiToilet', id: 'SkibidiToilet', class: SkibidiToilet, data: assets.enemies.skibidiToilet, xPercentage:  0.75, minPosition: 0.5 },
     { name: 'escaper', id: 'player', class: PlayerSkibidi, data: assets.players.escaper  },
     { name: 'laser', id: 'Laser', class: Laser, data: assets.obstacles.laser, xPercentage:  0.75, yPercentage: 0.5 },
-    { name: 'toiletTube', id: 'toiletEnd', class: Tree, data: assets.obstacles.toilet },
+    { name: 'tolietfinish', id: 'finishline', class: FinishLine, data: assets.obstacles.toiletfinish, xPercentage: 0.85, yPercentage: 0.77 },
     { name: 'complete3', id: 'background', class: BackgroundTransitions,  data: assets.backgrounds.complete3 },
   ];
 
