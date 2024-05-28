@@ -136,6 +136,8 @@ export class PlayerBaseOneD extends Character {
                     // Increase the player's x position according to run or walk animation and related speed
                     this.setX(this.x + (this.state.animation === 'run' ? this.runSpeed : this.speed));
                 }
+                GameEnv.PlayerPosition.playerX = this.x
+                GameEnv.PlayerPosition.playerY = this.y
         }
     }
 
@@ -145,6 +147,7 @@ export class PlayerBaseOneD extends Character {
     updateAnimation() {
         switch (this.state.animation) {
             case 'idle':
+                console.log(this.playerData.idle)
                 if(this.state.direction == "left"){
                     this.canvas.style.transform = 'scaleX(-1)';
                 }
