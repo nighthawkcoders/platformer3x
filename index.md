@@ -129,7 +129,7 @@ image: /images/platformer/backgrounds/home.png
       */
   
       // Construct settings sidebar, MVC variable paradigm, and async events to trigger user interaction
-      SettingsControl.sidebar();
+      SettingsControl.initialize();
       Leaderboard.initializeLeaderboard();
       startCutstory();
       RandomEvent();
