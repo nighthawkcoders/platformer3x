@@ -19,7 +19,7 @@ export class Boss extends Enemy {
         this.currentHp = 100; // Current health points
         this.hpBar = new hpBar(100, 15, this.canvasWidth, this.canvasHeight, this.maxHp, this.currentHp, this.x, this.y)
 
-        this.attackRange = 10;
+        this.attackRange = 50;
     }
 
     //overwrite the method
@@ -52,7 +52,7 @@ export class Boss extends Enemy {
                 }
             } else {
                 this.destroy();
-                this.hpBar.remove();
+                this.hpBar.destroy();
             }
         }
     }
@@ -144,7 +144,8 @@ export class Boss extends Enemy {
                 GameEnv.playSound("goombaDeath");
             }
             else{
-                if (GameEnv.playerAttack && (Math.abs((this.x + this.canvasWidth)/2-GameEnv.x) < (this.canvasWidth/2 + this.attackRange))) {
+                console.log(GameEnv.canvasWidth)
+                if (GameEnv.playerAttack && (Math.abs((this.x + this.canvasWidth)/2-(GameEnv.x + GameEnv.canvasWidth)/2) < (this.canvasWidth/2 + this.attackRange))) {
                     this.currentHp -= 1;
                 }
             }
