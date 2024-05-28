@@ -155,7 +155,6 @@ export class PlayerBase extends Character {
 
         GameEnv.PlayerPosition.playerX = this.x;
         GameEnv.PlayerPosition.playerY = this.y;
-        
     }
 
     /**
@@ -375,8 +374,8 @@ export class PlayerBase extends Character {
                 if (this.collisionData.touchPoints.this.top && this.collisionData.touchPoints.other.bottom) {
                     this.state.movement = { up: false, down: false, left: true, right: true, falling: false};
                     this.gravityEnabled = false;
+                    this.y -= this.yv;
                     this.yv = 0;
-                    this.y -= 1;
                 // Player is touching the wall with right side
                 } else if (this.collisionData.touchPoints.this.right) {
                     this.state.movement = { up: false, down: false, left: true, right: false, falling: false};
@@ -396,6 +395,8 @@ export class PlayerBase extends Character {
                 // Player is on the floor
                 if (this.onTop) {
                     this.state.movement = { up: false, down: false, left: true, right: true, falling: false};
+                    this.y -= this.yv;
+                    this.yv = 0;
                 // Player is falling, there are no collisions, but is in default state 
                 } else { 
                     this.state.movement = { up: false, down: false, left: true, right: true, falling: true};
