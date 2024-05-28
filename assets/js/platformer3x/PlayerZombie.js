@@ -56,12 +56,17 @@ export class PlayerZombie extends PlayerBaseOneD {
  * gameLoop: Watch for Player collision events
  */
     update() {
+        GameEnv.x = this.x;
+        GameEnv.y = this.y;
+        GameEnv.canvasWidth = this.canvasWidth;
+
         // Update the y position of the character based on gravity
         this.updateY();
         // Update animation frameX of the object
         this.updateFrameX();
         // Check for collisions, defined in GameObject which calls the collisionAction method
         this.collisionChecks();
+        
         // player methods
         this.updateMovement();
         if (GameEnv.playerChange) {
