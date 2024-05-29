@@ -61,7 +61,7 @@ export class PlayerMiniHogwarts extends PlayerBase {
     handleCollisionStart() {
         super.handleCollisionStart(); // calls the super class method
         // adds additional collision events
-        this.handleCollisionEvent("finishline");
+        this.handleCollisionEvent("minifinishline");
         this.handleCollisionEvent("goomba");
         this.handleCollisionEvent("mushroom");
 
@@ -75,7 +75,7 @@ export class PlayerMiniHogwarts extends PlayerBase {
         super.handlePlayerReaction(); // calls the super class method
         // handles additional player reactions
         switch (this.state.collision) {
-            case "finishline":
+            case "minifinishline":
                 // 1. Caught in finishline
                 if (this.collisionData.touchPoints.this.onTopofOther  || this.state.isFinishing ) {
                     // Position player in the center of the finishline 
@@ -86,7 +86,10 @@ export class PlayerMiniHogwarts extends PlayerBase {
                     // Using natural gravity wait for player to reach floor
                     if (Math.abs(this.y - this.bottom) <= GameEnv.gravity) {
                         // Force end of level condition
-                        GameControl.transitionToLevel(GameEnv.levels[6])
+                        //this.x = GameEnv.innerWidth + 1;
+                        const index = GameEnv.levels.findIndex(level => level.tag === "Quidditch")
+                        GameControl.transitionToLevel(GameEnv.levels[index]);
+                        return                    
                     }
                 // 2. Collision between player right and finishline   
                 } else if (this.collisionData.touchPoints.this.right) {
