@@ -109,6 +109,7 @@ const assets = {
       attackL: { row: 13, frames: 5 },
       attackR: { row: 15, frames: 5 },
       death: { row: 20, frames: 5 },
+      hitbox: { widthPercentage: 0.3, heightPercentage: 0.8 }
     },
   }
   };
@@ -120,13 +121,11 @@ const assets = {
     { name: 'devil', id: 'devil', class:BackgroundParallax, data: assets.backgrounds.devil},
     { name: 'boss', id: 'boss', class: Boss, data: assets.enemies.boss, xPercentage: 0.5, minPosition: 0.3 },
     { name: 'boss1', id: 'boss', class: Boss, data: assets.enemies.boss, xPercentage: 0.3, minPosition: 0.07 },
-    { name: 'mario', id: 'player', class: PlayerBoss, data: assets.players.mario },
-    { name: 'zombie', id: 'player', class: PlayerZombie, data: assets.players.zombie },
-    { name: 'tube', id: 'finishline', class: FinishLine, data: assets.obstacles.tube, xPercentage: 0.85, yPercentage: 0.855 },
     { name: 'itemBlock', id: 'jumpPlatform', class: BossItem, data: assets.platforms.itemBlock, xPercentage: 0.2, yPercentage: 0.65 }, //item block is a platform
     { name: 'mario', id: 'player', class: PlayerBoss, data: assets.players.mario },
     { name: 'zombie', id: 'player', class: PlayerZombie, data: assets.players.zombie },
     { name: 'grass', id: 'platform', class: Platform, data: assets.platforms.grass },
+    { name: 'tube', id: 'finishline', class: FinishLine, data: assets.obstacles.tube, xPercentage: 0.85, yPercentage: 0.855 },
     { name: 'iceminiEnd', id: 'background', class: BackgroundTransitions, data: assets.transitions.iceminiEnd },
   ];
 
