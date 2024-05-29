@@ -63,7 +63,7 @@ export class PlayerMiniHogwarts extends PlayerBase {
     handleCollisionStart() {
         super.handleCollisionStart(); // calls the super class method
         // adds additional collision events
-        this.handleCollisionEvent("finishline");
+        this.handleCollisionEvent("minifinishline");
         this.handleCollisionEvent("goomba");
         this.handleCollisionEvent("mushroom");
 
@@ -77,7 +77,7 @@ export class PlayerMiniHogwarts extends PlayerBase {
         super.handlePlayerReaction(); // calls the super class method
         // handles additional player reactions
         switch (this.state.collision) {
-            case "finishline":
+            case "minifinishline":
                 // 1. Caught in finishline
                 if (this.collisionData.touchPoints.this.onTopofOther  || this.state.isFinishing ) {
                     // Position player in the center of the finishline 
