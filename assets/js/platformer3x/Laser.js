@@ -1,8 +1,9 @@
-import Character from './Character.js';
+//import Character from './Character.js';
+import GameObject from './GameObject.js';
 import GameEnv from './GameEnv.js';
 import GameControl from './GameControl.js';
 
-export class Laser extends Character {
+export class Laser extends GameObject {
     constructor(canvas, image, data) {
         super(canvas, image, data);
     }
@@ -38,6 +39,7 @@ export class Laser extends Character {
         this.canvas.style.position = 'absolute';
         this.canvas.style.left = `20px`;
         this.canvas.style.top = `${GameEnv.innerHeight*0.25}px`; 
+        this.canvas.style.zIndex = '999';
     }
 }
 

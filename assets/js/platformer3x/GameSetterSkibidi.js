@@ -497,6 +497,7 @@ const assets = {
     // GameObject(s), the order is important to z-index...
     { name: 'desert', id: 'background', class: Background, data: assets.backgrounds.desert },
     //{ name: 'clouds', id: 'background', class: BackgroundClouds, data: assets.backgrounds.clouds },
+    { name: 'laser', id: 'Laser', class: Laser, data: assets.obstacles.laser, xPercentage:  0.75, yPercentage: 0.5 },
     { name: 'skibidiTitan', id: 'skibidiTitan', class: skibidiTitan, data: assets.enemies.skibidiTitan, xPercentage:  0.35, yPercentage: 0.5, minPosition: 0.5 }, 
     { name: 'sand', id: 'platform', class: Platform, data: assets.platforms.sand },
     { name: 'blocks', id: 'jumpPlatform', class: BlockPlatform, data: assets.platforms.sand, xPercentage: 0.2, yPercentage: 1 },
@@ -517,7 +518,6 @@ const assets = {
     { name: 'SkibidiToilet', id: 'SkibidiToilet', class: SkibidiToilet, data: assets.enemies.skibidiToilet, xPercentage:  0.5, minPosition: 0.3 },
     { name: 'SkibidiToilet', id: 'SkibidiToilet', class: SkibidiToilet, data: assets.enemies.skibidiToilet, xPercentage:  0.75, minPosition: 0.5 },
     { name: 'escaper', id: 'player', class: PlayerSkibidi, data: assets.players.escaper  },
-    { name: 'laser', id: 'Laser', class: Laser, data: assets.obstacles.laser, xPercentage:  0.75, yPercentage: 0.5 },
     { name: 'toiletTube', id: 'toiletEnd', class: Tree, data: assets.obstacles.toilet },
     { name: 'complete3', id: 'background', class: BackgroundTransitions,  data: assets.backgrounds.complete3 },
   ];
