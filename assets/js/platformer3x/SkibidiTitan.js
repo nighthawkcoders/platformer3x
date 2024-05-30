@@ -2,7 +2,7 @@ import Character from './Character.js';
 import GameEnv from './GameEnv.js';
 import GameControl from './GameControl.js';
 import Laser from './Laser.js';
-var debounce = 0;
+
 
 export class skibidiTitan extends Character {
     // constructors sets up Character object 
@@ -21,7 +21,9 @@ export class skibidiTitan extends Character {
         this.maxPosition = this.x + xPercentage * GameEnv.innerWidth;
 
         this.immune = 0;
-
+        this.debounce = 0;
+        this.laser = document.getElementById("Laser");
+        this.laserHeight = this.laser.innerHeight
 
     }
     
@@ -50,35 +52,37 @@ export class skibidiTitan extends Character {
     update() {
         super.update();
         this.immune = 1;
-        var laser = document.getElementById("Laser")
-        if(debounce < 240 && debounce > -1){
-            laser.style.left = `-2000px`;
+        if(this.debounce < 240 && this.debounce > -1){
+            this.laser.style.left = `-2000px`;
             this.x = GameEnv.PlayerPosition.playerX - 0.14*GameEnv.innerWidth;
-            debounce += 1;
+            this.debounce += 1;
         }
-        if(debounce < -120){
-            debounce += 1;
-            if(debounce == -235){GameEnv.playSound("laserCharge");}
-            this.canvas.style.filter = `invert(${debounce+240}%)`
-        }else if(debounce < 0 && debounce >= -120){
-            debounce += 1;
-            this.canvas.style.filter = `invert(0%)`
-            laser.style.left = `${this.x + 0.14*GameEnv.innerWidth}px`;
-            if(debounce == -115){GameEnv.playSound("laserSound");}
-
-            var plrPos = GameEnv.PlayerPosition.playerX
-           
+        if(this.debounce < -120){
+            this.debounce += 1;
+            if(this.debounce == -235){GameEnv.playSound("laserCharge");this.laser.style.transform = `scaleY(${0})`;}
+            this.canvas.style.filter = `invert(${this.debounce+240}%)`
+        }else if(this.debounce < 0 && this.debounce >= -120){
+            this.debounce += 1;
+            this.canvas.style.filter = `invert(0%)`;
+            this.laser.style.left = `${this.x + 0.14*GameEnv.innerWidth}px`;
             
+            
+            this.laser.style.transform = `scaleY(${(this.debounce+120)/40})`;
+            this.laser.style.top = `${(this.debounce+120)*6}px`;
+            if(this.debounce == -115){GameEnv.playSound("laserSound");}
+
+            var plrPos = GameEnv.PlayerPosition.playerX;
+           
             if (this.x >= plrPos - 250 && this.x <= plrPos - 150) {
                 //setTimeout(Plr.goombaCollision.bind(this), 50);
                 this.killBeam(GameEnv.player);
-                debounce = 0;
-                laser.style.left = `${this.x+0.14*GameEnv.innerWidth}px`;
+                this.debounce = 0;
+                this.laser.style.left = `${this.x + 0.14*GameEnv.innerWidth}px`;
             }
         }
 
-        if(debounce == 240){
-            debounce = -240;
+        if(this.debounce == 240){
+            this.debounce = -240;
         }
         //console.log((GameEnv.PlayerPosition.playerX - 200) + " " + this.x);
         
@@ -101,45 +105,6 @@ export class skibidiTitan extends Character {
 
 
         
-    }
-    
-    // Player action on collisions
-    collisionAction() {
-        if (this.collisionData.touchPoints.other.id === "tube") {
-            if (this.collisionData.touchPoints.other.left || this.collisionData.touchPoints.other.right) {
-                this.speed = -this.speed;            
-            }
-        }
-
-        if (this.collisionData.touchPoints.other.id === "player") {
-            // Collision: Top of Goomba with Bottom of Player
-            //console.log(this.collisionData.touchPoints.other.bottom + 'bottom')
-            //console.log(this.collisionData.touchPoints.other.top + "top")
-            //console.log(this.collisionData.touchPoints.other.right + "right")
-            //console.log(this.collisionData.touchPoints.other.left + "left")
-            if (this.collisionData.touchPoints.other.bottom && this.immune == 0) {
-                GameEnv.invincible = true;
-                GameEnv.goombaBounce = true;
-                this.canvas.style.transition = "transform 1.5s, opacity 1s";
-                this.canvas.style.transition = "transform 2s, opacity 1s";
-                this.canvas.style.transformOrigin = "bottom"; // Set the transform origin to the bottom
-                this.canvas.style.transform = "scaleY(0)"; // Make the Goomba flat
-                this.speed = 0;
-                GameEnv.playSound("goombaDeath");
-
-                setTimeout((function() {
-                    GameEnv.invincible = false;
-                    this.destroy();
-                }).bind(this), 1500);
-
-    
-                // Set a timeout to make GameEnv.invincible false after 2000 milliseconds (2 seconds)
-                setTimeout(function () {
-                this.destroy();
-                GameEnv.invincible = false;
-                }, 2000);
-            }
-        }
     }
 }
 

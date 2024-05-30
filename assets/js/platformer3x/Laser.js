@@ -1,8 +1,9 @@
-import Character from './Character.js';
+//import Character from './Character.js';
+import GameObject from './GameObject.js';
 import GameEnv from './GameEnv.js';
 import GameControl from './GameControl.js';
 
-export class Laser extends Character {
+export class Laser extends GameObject {
     constructor(canvas, image, data) {
         super(canvas, image, data);
     }
@@ -22,7 +23,7 @@ export class Laser extends Character {
     */
     draw() {
         this.ctx.drawImage(this.image, this.x, this.y);
-        this.ctx.drawImage(this.image, this.x + this.width, this.y);
+        this.ctx.drawImage(this.image, this.x + this.width*GameEnv.innerWidth, this.y);
     }
 
     /* Background camvas is set to screen
@@ -33,11 +34,12 @@ export class Laser extends Character {
     size() {
         // Update canvas size
        
-        this.canvas.width = this.width*2;
+        this.canvas.width = this.width;
         this.canvas.height = this.height;
         this.canvas.style.position = 'absolute';
         this.canvas.style.left = `20px`;
         this.canvas.style.top = `${GameEnv.innerHeight*0.25}px`; 
+        this.canvas.style.zIndex = '999';
     }
 }
 
