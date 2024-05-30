@@ -35,14 +35,16 @@ export class PlayerHills extends PlayerBase {
     updateJump() {  
         let jumpHeightFactor;
         if (GameEnv.difficulty === "easy") {
-            jumpHeightFactor = 0.50;
+            jumpHeightFactor = 0.05;
         } else if (GameEnv.difficulty === "normal") {
-            jumpHeightFactor = 0.40;
+            jumpHeightFactor = 0.04;
         }
         if(GameEnv.currentLevel.tag == "boss"){
             jumpHeightFactor = 0;
         }
-        this.setY(this.y - (this.bottom * jumpHeightFactor));
+        this.yv = -this.bottom * jumpHeightFactor
+        this.y += this.yv;
+        this.setY(this.y);
     }
 
     /**
@@ -95,11 +97,11 @@ export class PlayerHills extends PlayerBase {
                     // GoombaBounce deals with player.js and goomba.js
                     if (GameEnv.goombaBounce === true) {
                         GameEnv.goombaBounce = false;
-                        this.y = this.y - 100;
+                        this.yv = -10;
                     }
                     if (GameEnv.goombaBounce1 === true) {
                         GameEnv.goombaBounce1 = false; 
-                        this.y = this.y - 250
+                        this.yv = -25;
                     }
                 // 2. Player touches goomba sides of goomba 
                 } else if (this.collisionData.touchPoints.this.right || this.collisionData.touchPoints.this.left) {
@@ -127,11 +129,11 @@ export class PlayerHills extends PlayerBase {
                     // GoombaBounce deals with player.js and goomba.js
                     if (GameEnv.goombaBounce === true) {
                         GameEnv.goombaBounce = false;
-                        this.y = this.y - 100;
+                        this.y = -10;
                     }
                     if (GameEnv.goombaBounce1 === true) {
                         GameEnv.goombaBounce1 = false; 
-                        this.y = this.y - 250
+                        this.y = -25;
                     }
                 // 2. Player touches goomba sides of goomba 
                 } else if (this.collisionData.touchPoints.this.right || this.collisionData.touchPoints.this.left) {

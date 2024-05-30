@@ -33,16 +33,19 @@ export class PlayerGreece extends PlayerBase {
      * @override
      * gameLoop helper: Update Player jump height, replaces PlayerBase updateJump using settings from GameEnv
      */
-    updateJump() {
+    updateJump() {  
         let jumpHeightFactor;
         if (GameEnv.difficulty === "easy") {
-            jumpHeightFactor = 0.50;
+            jumpHeightFactor = 0.05;
         } else if (GameEnv.difficulty === "normal") {
-            jumpHeightFactor = 0.40;
-        } else {
-            jumpHeightFactor = 0.30;
+            jumpHeightFactor = 0.04;
         }
-        this.setY(this.y - (this.bottom * jumpHeightFactor));
+        if(GameEnv.currentLevel.tag == "boss"){
+            jumpHeightFactor = 0;
+        }
+        this.yv = -this.bottom * jumpHeightFactor
+        this.y += this.yv;
+        this.setY(this.y);
     }
 
     /**

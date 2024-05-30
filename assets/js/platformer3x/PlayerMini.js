@@ -39,13 +39,15 @@ export class PlayerMini extends PlayerBase {
     updateJump() {  
         let jumpHeightFactor;
         if (GameEnv.difficulty === "easy") {
-            jumpHeightFactor = 0.50;
+            jumpHeightFactor = 0.05;
         } else if (GameEnv.difficulty === "normal") {
-            jumpHeightFactor = 0.40;
+            jumpHeightFactor = 0.04;
         } else {
-            jumpHeightFactor = 0.30;
+            jumpHeightFactor = 0.03;
         }
-        this.setY(this.y - (this.bottom * jumpHeightFactor));
+        this.yv = -this.bottom * jumpHeightFactor;
+        this.y += this.yv;
+        this.setY(this.y);
     }
     update(){
             super.update();
@@ -106,11 +108,11 @@ export class PlayerMini extends PlayerBase {
                     // GoombaBounce deals with player.js and goomba.js
                     if (GameEnv.goombaBounce === true) {
                         GameEnv.goombaBounce = false;
-                        this.y = this.y - 100;
+                        this.y = -10;
                     }
                     if (GameEnv.goombaBounce1 === true) {
                         GameEnv.goombaBounce1 = false; 
-                        this.y = this.y - 250
+                        this.y = -25;
                     }
                 // 2. Player touches goomba sides of goomba 
                 } else if (this.collisionData.touchPoints.this.right || this.collisionData.touchPoints.this.left) {
