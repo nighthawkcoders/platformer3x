@@ -28,34 +28,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
       - name: Setup Pages
         uses: actions/configure-pages@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'  # Ensure you are using the latest version of Python
-
       - name: Install dependencies
         run: |
-          python -m venv .venv                # Create a virtual environment
-          source .venv/bin/activate           # Activate the virtual environment
-          pip install --upgrade pip           # Upgrade pip in the virtual environment
-          pip install nbconvert pyyaml        # Install nbconvert and PyYAML (yaml module)
+          pip install nbconvert
           # Add any other necessary package installations here
-
       - name: Execute conversion script
-        run: |
-          source .venv/bin/activate           # Ensure the virtual environment is activated
-          python scripts/convert_notebooks.py
-
+        run: python scripts/convert_notebooks.py
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
           source: ./
           destination: ./_site
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
 
