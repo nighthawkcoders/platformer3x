@@ -29,17 +29,18 @@ export class PlayerZombie extends PlayerBaseOneD {
      * @override
      * gameLoop helper: Update Player jump height, replaces PlayerBase updateJump using settings from GameEnv
      */
-    updateJump() {
+    updateJump() {  
         let jumpHeightFactor;
         if (GameEnv.difficulty === "easy") {
-            jumpHeightFactor = 0.50;
+            jumpHeightFactor = 0.05;
         } else if (GameEnv.difficulty === "normal") {
-            jumpHeightFactor = 0.40;
+            jumpHeightFactor = 0.04;
+        } else {
+            jumpHeightFactor = 0.05;
         }
-        if (GameEnv.currentLevel.tag == "boss") {
-            jumpHeightFactor = 0.50;
-        }
-        this.setY(this.y - (this.bottom * jumpHeightFactor));
+        this.yv = -this.bottom * jumpHeightFactor;
+        this.y += this.yv;
+        this.setY(this.y);
     }
     /**
      * @override
@@ -252,11 +253,11 @@ export class PlayerZombie extends PlayerBaseOneD {
                     // GoombaBounce deals with player.js and goomba.js
                     if (GameEnv.goombaBounce === true) {
                         GameEnv.goombaBounce = false;
-                        this.y = this.y - 100;
+                        this.y = -10;
                     }
                     if (GameEnv.goombaBounce1 === true) {
                         GameEnv.goombaBounce1 = false;
-                        this.y = this.y - 250
+                        this.y = -25;
                     }
                     // 2. Player touches goomba sides of goomba
                 } else if (this.collisionData.touchPoints.this.right || this.collisionData.touchPoints.this.left) {
